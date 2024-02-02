@@ -1,7 +1,9 @@
 import {HashRouter, Route, Routes} from 'react-router-dom';
 import {ContentContainer} from "@navikt/ds-react";
 import './App.css'
+import './index.css'
 import Home from "./pages/Home";
+import {Footer, Nav, ScrollToTop} from "./components/theme";
 
 
 const routes = [
@@ -12,7 +14,7 @@ function App() {
 
   return (
      <div>
-
+        <Nav/>
          <main style={{maxWidth: "600px", marginLeft: "auto", marginRight: "auto"}}>
              <ContentContainer>
                  <HashRouter>
@@ -23,9 +25,9 @@ function App() {
                      </Routes>
                  </HashRouter>
              </ContentContainer>
+             <ScrollToTop/>
          </main>
-
-
+         <Footer/>
      </div>
   )
 }
