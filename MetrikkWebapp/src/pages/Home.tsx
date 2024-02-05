@@ -16,6 +16,7 @@ export default function Home() {
                 flexWrap: 'wrap' // This ensures responsiveness
             }}>
                 <AreaChartCustomAccessibility/>
+                <AreaChartCustomAccessibility/>
             </div>
         </div>
     );
