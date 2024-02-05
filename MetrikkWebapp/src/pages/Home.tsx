@@ -1,24 +1,8 @@
 import { useState } from 'react';
 import "@navikt/ds-css";
+import AreaChartCustomAccessibility
+    from "../components/charts/AreaChartCustomAccessibility/AreaChartCustomAccessibility";
 
-// Simple Chart Placeholder Component
-const ChartPlaceholder = () => {
-    return (
-        <div style={{
-            width: '100%',
-            height: '300px',
-            backgroundColor: '#f0f0f0',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            color: '#333',
-            margin: '10px',
-            borderRadius: '8px'
-        }}>
-            Chart Placeholder
-        </div>
-    );
-};
 
 export default function Home() {
     return(
@@ -31,8 +15,7 @@ export default function Home() {
                 alignItems: 'center',
                 flexWrap: 'wrap' // This ensures responsiveness
             }}>
-                <ChartPlaceholder />
-                <ChartPlaceholder />
+                <AreaChartCustomAccessibility/>
             </div>
         </div>
     );
