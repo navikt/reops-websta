@@ -2,6 +2,9 @@ import { useState } from 'react';
 import "@navikt/ds-css";
 import AreaChartCustomAccessibility
     from "../components/charts/AreaChartCustomAccessibility/AreaChartCustomAccessibility";
+import {
+    VerticalBarChartCustomAccessibilityExample
+} from "../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartCustomAccessibility";
 
 
 export default function Home() {
@@ -16,6 +19,7 @@ export default function Home() {
                 flexWrap: 'wrap' // This ensures responsiveness
             }}>
                 <AreaChartCustomAccessibility/>
+                <VerticalBarChartCustomAccessibilityExample/>
             </div>
         </div>
     );
