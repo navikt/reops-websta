@@ -31,23 +31,19 @@ const HorizontalBarChartCustomAccessibility: React.FunctionComponent<{}> = () =>
             const yValue = 100; // Placeholder for demonstration
 
             return {
-                chartData: [{
-                    legend: legendString, // Correctly using the string value
-                    data: xValueNum,
-                    color: getColorFromToken(DataVizPalette.color10),
-                    horizontalBarChartdata: {
-                        x: xValueNum, // Correctly using the number value, ensuring it's treated as a number
-                        y: yValue,
+                chartTitle: legendString,
+                chartTitleAccessibilityData: { ariaLabel: 'Bar chart depicting about one' },
+                chartDataAccessibilityData: { ariaLabel: `Data ${xValueNum} of ${yValue}` },
+                chartData: [
+                    {
+                        legend: 'one',
+                        horizontalBarChartdata: { x: xValueNum, y: yValue },
+                        color: getColorFromToken(DataVizPalette.color9),
+                        xAxisCalloutData: '2021/06/10',
+                        yAxisCalloutData: '10%',
+                        callOutAccessibilityData: { ariaLabel: 'Bar series 1 of chart one 2021/06/10 41%' },
                     },
-                    xAxisCalloutData: xValueNum.toString(), // Correctly calling .toString() to convert to string
-                    yAxisCalloutData: yValue.toString(), // Correctly calling .toString() to convert to string
-                    callOutAccessibilityData: {
-                        ariaLabel: `Data point for ${xValueNum} with value ${yValue}`,
-                        ariaLabelledBy: 'check',
-                        ariaDescribedBy: 'check',
-                    },
-                }],
-                chartTitle: legendString, // Using the string directly, no need to call .toString() here
+                ],
             };
         });
 
