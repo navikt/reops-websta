@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+#Other files and folders
+/__tests__/pages/__snapshots__/
+/coverage/
+/html/
