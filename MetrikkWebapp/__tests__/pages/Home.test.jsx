@@ -68,8 +68,6 @@ describe('Homepage', () => {
             expect(getByText('This is the homepage')).toBeInTheDocument();
         });
     });
-
-    // Add more tests as necessary
 });
 
 afterEach(() => {
