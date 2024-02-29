@@ -1,33 +1,29 @@
 import AreaChartCustomAccessibility from './AreaChartCustomAccessibility';
 import { fetchAmplitudeData } from "../../../service/AmplitudeApi";
-import { DataVizPalette } from '@fluentui/react-charting';
+import { selectDataProcessingFunction } from "./chartDataService";
 import {useEffect, useState} from "react";
-import {processAreaChartData} from "./chartDataService";
 
-const AreaChartContainer = () => {
-    const [chartData, setChartData] = useState({
-        chartTitle: 'Area chart Custom Accessibility example',
-        lineChartData: [],
-    });
+const AreaChartContainer = ({ chartType }) => {
+    const [chartData, setChartData] = useState(null); // Start with null to easily check if data is loaded
     const dimensions = { width: 500, height: 300 };
 
     useEffect(() => {
         const fetchData = async () => {
-            try{
+            try {
                 const response = await fetchAmplitudeData(`/3/chart/e-xwordsgk/query`);
-                // Process response to match chartData structure expected by AreaChartCustomAccessibility
-                const processedChartData = processAreaChartData(response);
+                // Dynamically select the processing function based on chartType
+                const processData = selectDataProcessingFunction(chartType);
+                const processedChartData = processData(response);
                 setChartData(processedChartData);
-            }catch (e){
-                console.error(e);
+            } catch (error) {
+                console.error("Failed to fetch and process data:", error);
             }
         };
 
         fetchData();
-    }, []);
+    }, [chartType]); // Re-fetch and process data if chartType changes
 
-    return <AreaChartCustomAccessibility chartData={chartData} dimensions={dimensions} />;
+    return chartData ? <AreaChartCustomAccessibility chartData={chartData} dimensions={dimensions} /> : <div>Loading...</div>;
 };
-
 
 export default AreaChartContainer;

@@ -21,3 +21,17 @@ export const processAreaChartData = (apiResponse)=> {
         }]
     };
 }
+
+export const processDataForChartWithSeriesLabels = (response) => {
+    // Processing logic here
+};
+
+// Example mapping or logic to select the processing function
+const dataProcessingFunctionMap = {
+    'areaChart': processAreaChartData,
+    'seriesLabels': processDataForChartWithSeriesLabels,
+};
+
+export function selectDataProcessingFunction(chartType) {
+    return dataProcessingFunctionMap[chartType] || processAreaChartData;
+}
