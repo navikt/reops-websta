@@ -1,8 +1,8 @@
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-  sans-serif;
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -10,7 +10,7 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-  monospace;
+    monospace;
 }
 
 .bg-deepblue-800 {
@@ -21,7 +21,9 @@ Footer a {
   color: #fff !important;
 }
 
-.navds-accordion--indent > :where(.navds-accordion__item) > :where(.navds-accordion__content) {
+.navds-accordion--indent
+  > :where(.navds-accordion__item)
+  > :where(.navds-accordion__content) {
   padding: var(--a-spacing-3) var(--a-spacing-3) 18px;
 }
 
@@ -65,7 +67,7 @@ Footer a {
 }
 
 .navds-guide-panel .navds-guide {
-    border: 2px solid #40c1ac;
+    border: 2px solid #40c1ac; s
 }*/
 
 /*.navds-guide__illustration {
@@ -113,7 +115,6 @@ Footer a {
   margin-right: calc((100vw - 100%) / -2);
   margin-bottom: 10px;
   padding-top: 35px !important;
-
 }
 
 .mobilvisning-label {
@@ -133,7 +134,7 @@ Footer a {
   }
 
   .mobilvisning-label {
-    padding-bottom: 0.0rem;
+    padding-bottom: 0rem;
   }
 
   .mobilvisning-container {
@@ -141,7 +142,6 @@ Footer a {
     display: flex;
     margin-top: -12px;
     margin-bottom: -4px;
-
   }
 }
 
@@ -154,7 +154,7 @@ Footer a {
 .ProseMirror {
   border: 1px solid gray;
   min-height: 170px;
-  transition: height .1s ease-out;
+  transition: height 0.1s ease-out;
   padding-right: 10px;
   padding-left: 10px;
   padding-top: 15px;
