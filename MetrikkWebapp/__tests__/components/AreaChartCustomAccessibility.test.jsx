@@ -54,8 +54,8 @@ describe('AreaChartCustomAccessibilityExample', () => {
     });
 
     it('passes correct data to AreaChart', async () => {
-
-        render(<AreaChartCustomAccessibilityExample />);
+        const mockDimensions = { width: 500, height: 300 };
+        render(<AreaChartCustomAccessibilityExample dimensions={mockDimensions} chartData={mockApiResponse} />);
 
         await waitFor(() => {
             console.log(vi.mocked(AreaChart).mock.calls);

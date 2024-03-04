@@ -14,7 +14,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16' # might change based on base node version, after running some tests
+          node-version: '18' # might change based on base node version, after running some tests
       - name: Change to client directory
         run: cd MetrikkWebapp
       - name: Install dependencies
