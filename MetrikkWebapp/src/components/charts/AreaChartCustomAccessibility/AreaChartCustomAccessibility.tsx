@@ -4,6 +4,7 @@ import * as d3 from 'd3-format';
 import {fetchAmplitudeData} from "../../../service/AmplitudeApi";
 
 const AreaChartCustomAccessibilityExample = () => {
+
     const [chartData, setChartData] = useState({
         chartTitle: 'Area chart Custom Accessibility example',
         lineChartData: [],
@@ -18,8 +19,8 @@ const AreaChartCustomAccessibilityExample = () => {
             const response = await fetchAmplitudeData(`/3/chart/e-xwordsgk/query`);
             setData(response);
 
-            const seriesData = response.data.series[0];
-            const xValues = response.data.xValues;
+      const seriesData = response.data.series[0];
+      const xValues = response.data.xValues;
 
             const chartPoints = seriesData.map((item, index) => ({
                 x: new Date(xValues[index]),
@@ -28,41 +29,45 @@ const AreaChartCustomAccessibilityExample = () => {
                 callOutAccessibilityData: { ariaLabel: `Value: ${item.value} on ${xValues[index]}` },
             }));
 
-            setChartData({
-                ...chartData,
-                lineChartData: [
-                    {
-                        legend: 'Metric Values',
-                        data: chartPoints,
-                        color: DataVizPalette.color8,
-                    }
-                ],
-            });
-        };
 
-        fetchData();
-    }, []);
+      setChartData({
+        ...chartData,
+        lineChartData: [
+          {
+            legend: 'Metric Values',
+            data: chartPoints,
+            color: DataVizPalette.color8,
+          },
+        ],
+      });
+    };
 
-    const rootStyle = { width: `${dimensions.width}px`, height: `${dimensions.height}px` };
+    fetchData();
+  }, []);
 
-    return (
-        <div style={rootStyle}>
-            <AreaChart
-                height={dimensions.height}
-                width={dimensions.width}
-                data={chartData}
-                legendsOverflowText={'Overflow Items'}
-                yAxisTickFormat={d3.format('')}
-                enablePerfOptimization={true}
-                legendProps={{
-                    allowFocusOnLegends: true,
-                }}
-                enableReflow={true}
-                xAxisTitle="Dato" // Title for the X-axis
-                yAxisTitle="Antall besøk" // Title for the Y-axis
-            />
-        </div>
-    );
+  const rootStyle = {
+    width: `${dimensions.width}px`,
+    height: `${dimensions.height}px`,
+  };
+
+  return (
+    <div style={rootStyle}>
+      <AreaChart
+        height={dimensions.height}
+        width={dimensions.width}
+        data={chartData}
+        legendsOverflowText={'Overflow Items'}
+        yAxisTickFormat={d3.format('')}
+        enablePerfOptimization={true}
+        legendProps={{
+          allowFocusOnLegends: true,
+        }}
+        enableReflow={true}
+        xAxisTitle="Dato" // Title for the X-axis
+        yAxisTitle="Antall besøk" // Title for the Y-axis
+      />
+    </div>
+  );
 };
 
 export default AreaChartCustomAccessibilityExample;
