@@ -1,17 +1,17 @@
-import {useEffect, useState} from 'react';
-import "@navikt/ds-css";
-import AreaChartCustomAccessibility
-    from "../components/charts/AreaChartCustomAccessibility/AreaChartCustomAccessibility";
-import HorizontalBarChartCustomAccessibility
-    from "../components/charts/HorizontalBarChart/HorizontalBarChartCustomAccessibility";
-import {
-    VerticalBarChartCustomAccessibilityExample
-} from "../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartCustomAccessibility";
+import '@navikt/ds-css';
+import AreaChartCustomAccessibility from '../components/charts/AreaChartCustomAccessibility/AreaChartCustomAccessibility';
+import HorizontalBarChartCustomAccessibility from '../components/charts/HorizontalBarChart/HorizontalBarChartCustomAccessibility';
+import { Search } from '@navikt/ds-react';
+import { Heading, VStack } from '@navikt/ds-react';
+import { Link } from 'react-router-dom';
+import {VerticalBarChartCustomAccessibilityExample} from "../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartCustomAccessibility";
 import {fetchAmplitudeData} from "../service/AmplitudeApi";
+import {useEffect, useState} from 'react';
 
-
-export default function Home(){
-
+const Home = () => {
+  const simpleGuide = 'Trykk her for en enkel guide';
+    
+  
     const [data, setData] = useState(null);
 
     useEffect(()=>{
@@ -26,47 +26,42 @@ export default function Home(){
         };
 
         loadData();
-    },[])
-
-
-    return (
-        <div>
-
-            <h1 className="text-2xl font-bold mb-4 text-center">This is the homepage</h1>
-            {/*TODO: Charts er lenger til høyre når de er centered fordi centrering starter på y-axis */}
-            <div className="flex flex-row justify-between items-center flex-wrap">
-                {/* Displaying the fetched data */}
-                <div>
-                    <h2 className="text-xl font-semibold mb-2">Fetched Data:</h2>
-                    {data && (
-                        <div>
-                            <h2>Series Data</h2>
-                            <ul>
-                                {/* Assuming we're interested in the first array of the series data */}
-                                {data.data.series[0].map((item, index) => (
-                                    <li key={index}>Value: {item.value}</li>
-                                ))}
-                            </ul>
-                            <h2>Other Data</h2>
-                            {/* Display another piece of data from the response to test */}
-                            <p>Time Computed: {data.timeComputed}</p>
-                        </div>
-                    )}
-                </div>
-                <div className="">
-                    <AreaChartCustomAccessibility />
-                </div>
-                <div className="">
-                    <AreaChartCustomAccessibility />
-                </div>
-                <div className="">
-                    <HorizontalBarChartCustomAccessibility />
-                </div>
-                <div className="">
-                    <VerticalBarChartCustomAccessibilityExample />
-                </div>
-            </div>
+    },[])  
+    
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <VStack className="items-center mb-3">
+        <Link to="/guide" className="text-center hover:underline">
+          <Heading size="medium">{simpleGuide}</Heading>
+        </Link>
+        <h2 className="text-xl font-bold mb-3 text-center">Søk her:</h2>
+      </VStack>
+      <form className="w-full max-w-lg px-4">
+        <Search
+          label="Søk alle NAV sine sider"
+          variant="primary"
+          className="w-full"
+        />
+      </form>
+       <div className="flex flex-wrap -mx-2"> 
+        <div className="w-1/2 px-2">
+          <AreaChartCustomAccessibility />
         </div>
-    );
-}
+        <div className="w-1/2 px-2">
+          <AreaChartCustomAccessibility />
+        </div>
+        <div className="w-1/2 px-2">
+          <HorizontalBarChartCustomAccessibility />
+        </div>
+        <div className="w-1/2 px-2">
+          <HorizontalBarChartCustomAccessibility />
+        </div>
+        <div className="">
+          <VerticalBarChartCustomAccessibilityExample />
+         </div>
+      </div> 
+    </div>
+  );
+};
 
+export default Home;
