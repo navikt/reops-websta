@@ -1,0 +1,25 @@
+name: TestRunner
+
+on:
+  push:
+    branches: [ main, test, modudularchartanddata ]
+  pull_request:
+    branches: [ main, test, modudularchartanddata ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18' # might change based on base node version, after running some tests
+      - name: Change to client directory
+        run: cd MetrikkWebapp
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./MetrikkWebapp # Specify the working directory for this step
+      - name: Run tests
+        run: npm run test
+        working-directory: ./MetrikkWebapp # Specify the working directory for this step

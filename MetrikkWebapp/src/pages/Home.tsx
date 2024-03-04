@@ -6,27 +6,11 @@ import { Heading, VStack } from '@navikt/ds-react';
 import { Link } from 'react-router-dom';
 import {VerticalBarChartCustomAccessibilityExample} from "../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartCustomAccessibility";
 import {fetchAmplitudeData} from "../service/AmplitudeApi";
-import {useEffect, useState} from 'react';
+
+import AreaChartContainer from "../components/charts/AreaChartCustomAccessibility/AreaChartContainer";
 
 const Home = () => {
   const simpleGuide = 'Trykk her for en enkel guide';
-    
-  
-    const [data, setData] = useState(null);
-
-    useEffect(()=>{
-        const loadData = async () => {
-            try{
-                const result = await fetchAmplitudeData(`/3/chart/e-xwordsgk/query`);
-                setData(result);
-            }catch (error){
-                console.error("Failed to fetch data: ", error);
-                setData(null);
-            }
-        };
-
-        loadData();
-    },[])  
     
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
@@ -43,23 +27,22 @@ const Home = () => {
           className="w-full"
         />
       </form>
-       <div className="flex flex-wrap -mx-2"> 
-        <div className="w-1/2 px-2">
-          <AreaChartCustomAccessibility />
-        </div>
-        <div className="w-1/2 px-2">
-          <AreaChartCustomAccessibility />
-        </div>
-        <div className="w-1/2 px-2">
-          <HorizontalBarChartCustomAccessibility />
-        </div>
-        <div className="w-1/2 px-2">
-          <HorizontalBarChartCustomAccessibility />
-        </div>
-        <div className="">
-          <VerticalBarChartCustomAccessibilityExample />
-         </div>
-      </div> 
+        <h1 className="text-2xl font-bold mb-4 text-center">This is the homepage</h1>
+            {/*TODO: Charts er lenger til høyre når de er centered fordi centrering starter på y-axis */}
+            <div className="flex flex-row justify-between items-center flex-wrap">
+                <div className="">
+                    <AreaChartContainer />
+                </div>
+                <div className="">
+                    <AreaChartContainer />
+                </div>
+                <div className="">
+                    <HorizontalBarChartCustomAccessibility />
+                </div>
+                <div className="">
+                    <VerticalBarChartCustomAccessibilityExample />
+                </div> 
+    
     </div>
   );
 };
