@@ -42,7 +42,7 @@ const Home = () => {
                 <div className="">
                     <VerticalBarChartCustomAccessibilityExample />
                 </div> 
-    
+        </div>
     </div>
   );
 };
