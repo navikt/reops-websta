@@ -4,7 +4,6 @@ import '@testing-library/jest-dom';
 import Home from '../../src/pages/Home';
 import * as AmplitudeApi from '../../src/service/AmplitudeApi.tsx'; // Adjust the import path as needed
 import { initializeIcons } from '@fluentui/react/lib/Icons';
-import canvas from 'canvas'
 
 initializeIcons();
 
