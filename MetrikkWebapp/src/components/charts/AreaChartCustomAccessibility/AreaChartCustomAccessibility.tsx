@@ -21,6 +21,7 @@ const AreaChartCustomAccessibility = ({ chartData, dimensions }) => {
             />
         </div>
     );
+
 };
 
 export default AreaChartCustomAccessibility;
