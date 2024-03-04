@@ -1,3 +1,11 @@
+name: TestRunner
+
+on:
+  push:
+    branches: [ main, test, modudularchartanddata ]
+  pull_request:
+    branches: [ main, test, modudularchartanddata ]
+
 jobs:
   test:
     runs-on: ubuntu-latest
