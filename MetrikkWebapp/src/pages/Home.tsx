@@ -8,6 +8,7 @@ import { VerticalBarChartCustomAccessibilityExample } from '../components/charts
 import { fetchAmplitudeData } from '../service/AmplitudeApi';
 
 import AreaChartContainer from '../components/charts/AreaChartCustomAccessibility/AreaChartContainer';
+import {eventTypeMappings} from "../components/charts/fetchUrlConstructor";
 
 const Home = () => {
   const simpleGuide = 'Trykk her for en enkel guide';
@@ -33,10 +34,26 @@ const Home = () => {
       {/*TODO: Charts er lenger til høyre når de er centered fordi centrering starter på y-axis */}
       <div className="flex flex-row justify-between items-center flex-wrap">
         <div className="">
-          <AreaChartContainer />
+            <AreaChartContainer
+                chartType="areaChart"
+                endpointType="segmentation"
+                urlParams={{
+                    startDate: "20240101",
+                    endDate: "20240130",
+                    eventType: eventTypeMappings.pageViewed
+                }}
+            />
         </div>
         <div className="">
-          <AreaChartContainer />
+            <AreaChartContainer
+                chartType="areaChart"
+                endpointType="segmentation"
+                urlParams={{
+                    startDate: "20240101",
+                    endDate: "20240130",
+                    eventType: eventTypeMappings.pageViewed
+                }}
+            />
         </div>
         <div className="">
           <HorizontalBarChartCustomAccessibility />
