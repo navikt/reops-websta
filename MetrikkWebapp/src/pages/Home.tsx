@@ -1,12 +1,9 @@
 import '@navikt/ds-css';
-import AreaChartCustomAccessibility from '../components/charts/AreaChartCustomAccessibility/AreaChartCustomAccessibility';
 import HorizontalBarChartCustomAccessibility from '../components/charts/HorizontalBarChart/HorizontalBarChartCustomAccessibility';
 import { Search } from '@navikt/ds-react';
 import { Heading, VStack } from '@navikt/ds-react';
 import { Link } from 'react-router-dom';
 import { VerticalBarChartCustomAccessibilityExample } from '../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartCustomAccessibility';
-import { fetchAmplitudeData } from '../service/AmplitudeApi';
-
 import AreaChartContainer from '../components/charts/AreaChartCustomAccessibility/AreaChartContainer';
 
 const Home = () => {
@@ -19,7 +16,7 @@ const Home = () => {
       </h1>
       <VStack className="items-center mb-3">
         <Link to="/guide" className="text-center hover:underline">
-          <Heading size="medium">{simpleGuide}</Heading>
+         <Heading size="medium">{simpleGuide}</Heading>
         </Link>
         <h2 className="text-xl font-bold mb-3 text-center">Søk her:</h2>
       </VStack>
@@ -33,10 +30,10 @@ const Home = () => {
       {/*TODO: Charts er lenger til høyre når de er centered fordi centrering starter på y-axis */}
       <div className="flex flex-row justify-between items-center flex-wrap">
         <div className="">
-          <AreaChartContainer />
+          <AreaChartContainer chartType={undefined} />
         </div>
         <div className="">
-          <AreaChartContainer />
+          <AreaChartContainer chartType={undefined} />
         </div>
         <div className="">
           <HorizontalBarChartCustomAccessibility />

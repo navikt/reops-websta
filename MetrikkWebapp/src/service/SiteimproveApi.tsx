@@ -1,6 +1,6 @@
-const BASE_URL = 'http://localhost:8085/amplitude/100004455/api';
+const BASE_URL = 'http://localhost:8085/siteimprove/sites';
 
-export const fetchAmplitudeData = async (endpoint: string) => {
+export const fetchSiteimproveData = async (endpoint: string) => {
     try {
         const response = await fetch(`${BASE_URL}${endpoint}`);
         if (!response.ok) {
@@ -8,7 +8,6 @@ export const fetchAmplitudeData = async (endpoint: string) => {
         }
         return await response.json();
     } catch (error) {
-        // Handle or throw the error
         console.error("Error during fetch: ", error);
         throw error;
     }
