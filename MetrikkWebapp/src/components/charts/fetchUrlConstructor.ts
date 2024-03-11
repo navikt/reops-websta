@@ -2,8 +2,20 @@
 
 export const eventTypeMappings = {
     pageViewed: `{"event_type":"[Amplitude] Page Viewed"}`,
-    userSignedUp: `{"event_type":"[Amplitude] User Signed Up"}`,
+    pageViewedGroupByReferringDomain: `{"event_type":"[Amplitude] Page Viewed","group_by":[{"type":"user","value":"gp:referring_domain"}]}`,
+    pageViewedGroupByReferrer: `{"event_type":"[Amplitude] Page Viewed","group_by":[{"type":"event","value":"referrer"}]}`,
+    pageViewedGroupByPagePath:`{"event_type":"[Amplitude] Page Viewed","group_by":[{"type":"event","value":"[Amplitude] Page Path"}]}`,
+    pageViewedGroupByCity: `{"event_type":"[Amplitude] Page Viewed","group_by":[{"type":"user","value":"city"}]}`,
+    pageViewedGroupByLanguage: `{"event_type":"[Amplitude] Page Viewed","group_by":[{"type":"user","value":"language"}]}`,
+    pageViewedGroupByCountry: `{"event_type":"[Amplitude] Page Viewed","group_by":[{"type":"user","value":"country"}]}`,
+    //Filter below, not working properly at the moment
+    pageViewedFilterByDomainsAndPagePath:`{"event_type":"[Amplitude] Page Viewed"}&start=20240101&end=20240130&filters=[,{"prop":"gp:referrer","op":"contains","values":["github.com%2Fnavikt", "navikt.github.io"]},{"prop":"[Amplitude] Page Path","op":"is","values":["%2Fjobbsoknad%2F"]}]&group_by=[{"type":"user", "value":"gp:referrer"}]`,
+    pageViewedGroupByHourOfDay:`{"event_type":"[Amplitude] Page Viewed","group_by":[{"type":"day_time_prop","value":"amplitude_hour_of_day","group_type":"User"}]}`,
+    pageViewedGroupByDayOfWeek: `{"event_type":"[Amplitude] Page Viewed","group_by":[{"type":"day_time_prop","value":"amplitude_day_of_week","group_type":"User"}]}`,
     // Add more predefined event types as needed
+    pageViewedGroupByOS:``,
+    pageViewedGroupByDeviceFamily:`{"event_type":"[Amplitude] Page Viewed","group_by":[{"type":"user","value":"country"}]}`,
+    pageViewedGroupByDeviceType:``,
 };
 
 const endpointMappings = {
@@ -14,6 +26,13 @@ const endpointMappings = {
     chart: {
         url: `/3/chart/e-xwordsgk/query`, // Static, no placeholders
     },
+    retention:{
+        url:`/2/retention?se={"event_type":"[Amplitude] Page Viewed"}&re={"event_type":"[Amplitude] Page Viewed"}&start=20240101&end=20240130`,
+        defaultEventType: eventTypeMappings.pageViewed, //Default retention for reoccurring users
+    },
+    filter:{
+        //implementation for filter
+    }
     // Add more endpoint mappings as needed
 };
 
@@ -30,10 +49,7 @@ export function constructEndpointUrl(type: string, params: EndpointParams = {}) 
     let endpointTemplate = mapping.url;
     const defaultEventType = mapping.defaultEventType;
 
-    console.log('Before setting eventType:', params);
     params.eventType = params.eventType || defaultEventType;
-    console.log('After setting eventType:', params);
-    console.log('Default eventType:', defaultEventType);
 
     // Replace placeholders with actual parameter values
     Object.keys(params).forEach(key => {
@@ -43,4 +59,3 @@ export function constructEndpointUrl(type: string, params: EndpointParams = {}) 
 
     return endpointTemplate;
 }
-
