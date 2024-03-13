@@ -11,10 +11,10 @@ const AreaChartCustomAccessibility = ({ chartData, dimensions }) => {
                 height={dimensions.height}
                 width={dimensions.width}
                 data={chartData}
-                legendsOverflowText="Overflow Items"
+                legendsOverflowText={'Overflow Items'}
                 yAxisTickFormat={d3.format('')}
                 enablePerfOptimization={true}
-                legendProps={{ allowFocusOnLegends: true }}
+                legendProps={{ allowFocusOnLegends: true,}}
                 enableReflow={true}
                 xAxisTitle="Dato" // Title for the X-axis
                 yAxisTitle="Antall besøk" // Title for the Y-axis

@@ -46,6 +46,8 @@ export const processAreaChartData = (apiResponse) => {
     };
 };
 
+
+//TODO:Sjekke for hvorfor 4more på hover ikke viser resten av legends.
 export const processAreaChartDataMultiple = (apiResponse) => {
     const { xValues, series, seriesLabels } = apiResponse.data;
 
@@ -70,7 +72,7 @@ export const processAreaChartDataMultiple = (apiResponse) => {
 
         // Generate chart points for the current series
         const points = currentSeries.map((value, index) => ({
-            x: new Date(xValues[index]), // Converting date to timestamp for x value
+            x: new Date(xValues[index]), // making new date for xValues
             y: value,
             xAxisCalloutAccessibilityData: { ariaLabel: `Date: ${xValues[index]}` },
             callOutAccessibilityData: { ariaLabel: `${seriesLabel}: Value ${value} on ${xValues[index]}` },
