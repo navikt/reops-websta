@@ -33,6 +33,7 @@ const Home = () => {
       </form>
       {/*TODO: Charts er lenger til høyre når de er centered fordi centrering starter på y-axis */}
       <div className="flex flex-row justify-between items-center flex-wrap">
+        {/*
         <div className="">
             <AreaChartContainer
                 chartType="areaChart"
@@ -51,10 +52,112 @@ const Home = () => {
                 urlParams={{
                     startDate: "20240101",
                     endDate: "20240130",
-                    eventType: eventTypeMappings.pageViewed
+                    eventType: eventTypeMappings.pageViewedGroupByReferringDomain
                 }}
             />
         </div>
+          <div className="">
+              <AreaChartContainer
+                  chartType="areaChart"
+                  endpointType="segmentation"
+                  urlParams={{
+                      startDate: "20240101",
+                      endDate: "20240130",
+                      eventType: eventTypeMappings.pageViewedGroupByReferrer
+                  }}
+              />
+          </div>
+          <div className="">
+              <AreaChartContainer
+                  chartType="areaChart"
+                  endpointType="segmentation"
+                  urlParams={{
+                      startDate: "20240101",
+                      endDate: "20240130",
+                      eventType: eventTypeMappings.pageViewedGroupByPagePath
+                  }}
+              />
+          </div>
+          <div className="">
+              <AreaChartContainer
+                  chartType="areaChart"
+                  endpointType="segmentation"
+                  urlParams={{
+                      startDate: "20240101",
+                      endDate: "20240130",
+                      eventType: eventTypeMappings.pageViewedGroupByCity
+                  }}
+              />
+          </div>
+          <div className="">
+              <AreaChartContainer
+                  chartType="areaChart"
+                  endpointType="segmentation"
+                  urlParams={{
+                      startDate: "20240101",
+                      endDate: "20240130",
+                      eventType: eventTypeMappings.pageViewedGroupByLanguage
+                  }}
+              />
+          </div>
+          <div className="">
+              <AreaChartContainer
+                  chartType="areaChart"
+                  endpointType="segmentation"
+                  urlParams={{
+                      startDate: "20240101",
+                      endDate: "20240130",
+                      eventType: eventTypeMappings.pageViewedGroupByCountry
+                  }}
+              />
+          </div>
+          <div className="">
+              <AreaChartContainer
+                  chartType="areaChart"
+                  endpointType="segmentation"
+                  urlParams={{
+                      startDate: "20240101",
+                      endDate: "20240130",
+                      eventType: eventTypeMappings.pageViewedGroupByHourOfDay
+                  }}
+              />
+          </div>
+          <div className="">
+              <AreaChartContainer
+                  chartType="areaChart"
+                  endpointType="segmentation"
+                  urlParams={{
+                      startDate: "20240101",
+                      endDate: "20240130",
+                      eventType: eventTypeMappings.pageViewedGroupByDayOfWeek
+                  }}
+              />
+          </div>*/}
+
+
+          <div className="">
+              <AreaChartContainer
+                  chartType="areaChartMulti"
+                  endpointType="segmentation"
+                  urlParams={{
+                      startDate: "20240101",
+                      endDate: "20240130",
+                      eventType: eventTypeMappings.pageViewedGroupByCountry
+                  }}
+              />
+          </div>
+
+          <div className="">
+              <AreaChartContainer
+                  chartType="areaChart"
+                  endpointType="segmentation"
+                  urlParams={{
+                      startDate: "20240101",
+                      endDate: "20240130",
+                      eventType: eventTypeMappings.pageViewed
+                  }}
+              />
+          </div>
         <div className="">
           <HorizontalBarChartCustomAccessibility />
         </div>
