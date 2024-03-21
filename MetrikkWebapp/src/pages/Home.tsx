@@ -1,5 +1,4 @@
 import '@navikt/ds-css';
-import AreaChartCustomAccessibility from '../components/charts/AreaChartCustomAccessibility/AreaChartCustomAccessibility';
 import HorizontalBarChartCustomAccessibility from '../components/charts/HorizontalBarChart/HorizontalBarChartCustomAccessibility';
 import { Search } from '@navikt/ds-react';
 import { Heading, VStack } from '@navikt/ds-react';
@@ -36,6 +35,7 @@ const Home = () => {
           <AreaChartContainer chartType={undefined} />
         </div>
         <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
+
           <AreaChartContainer chartType={undefined} />
         </div>
         <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
