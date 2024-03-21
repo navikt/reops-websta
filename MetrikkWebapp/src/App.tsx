@@ -4,7 +4,7 @@ import './App.css';
 import './index.css';
 import Home from './pages/Home';
 import Guide from './pages/Guide';
-import { Footer, Nav, ScrollToTop } from './components/theme/'
+import { Footer, Nav, ScrollToTop } from './components/theme';
 
 const routes = [
   { path: '/', component: <Home /> },
@@ -28,7 +28,6 @@ function App() {
         <ScrollToTop />
       </main>
       <Footer />
-
     </div>
   );
 }

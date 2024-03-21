@@ -4,7 +4,6 @@ import { Search } from '@navikt/ds-react';
 import { Heading, VStack } from '@navikt/ds-react';
 import { Link } from 'react-router-dom';
 import { VerticalBarChartCustomAccessibilityExample } from '../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartCustomAccessibility';
-import { fetchAmplitudeData } from '../service/AmplitudeApi';
 import AreaChartContainer from '../components/charts/AreaChartCustomAccessibility/AreaChartContainer';
 
 const Home = () => {
@@ -35,7 +34,6 @@ const Home = () => {
           <AreaChartContainer chartType={undefined} />
         </div>
         <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
-
           <AreaChartContainer chartType={undefined} />
         </div>
         <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
