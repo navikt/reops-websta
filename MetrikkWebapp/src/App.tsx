@@ -1,4 +1,4 @@
-import { HashRouter, Route, Routes, Link } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import { ContentContainer } from '@navikt/ds-react';
 import './App.css';
 import './index.css';
@@ -27,7 +27,8 @@ function App() {
         </ContentContainer>
         <ScrollToTop />
       </main>
-     <Footer/>
+      <Footer />
+
     </div>
   );
 }

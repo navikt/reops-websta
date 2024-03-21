@@ -12,4 +12,10 @@ export const fetchAmplitudeData = async (endpoint: string) => {
         console.error("Error during fetch: ", error);
         throw error;
     }
+    return await response.json();
+  } catch (error) {
+    // Handle or throw the error
+    console.error('Error during fetch: ', error);
+    throw error;
+  }
 };
