@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:8085/siteimprove/sites';
+const BASE_URL = 'http://localhost:8085/siteimprove';
 
 export const fetchSiteimproveData = async (endpoint: string) => {
     try {
