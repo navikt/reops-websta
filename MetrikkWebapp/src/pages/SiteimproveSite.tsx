@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { fetchSiteimproveData } from '../service/SiteimproveApi';
 import { Search } from '@navikt/ds-react';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+
 
 interface SiteItem {
   id: number;
@@ -67,7 +70,7 @@ const SiteimproveSite = () => {
     try {
       const response = await fetchSiteimproveData(`/sites/${siteId}/dci/history`);
       if (response && response.items && response.items.length > 0) {
-        const latestScores = response.items[0];
+        const latestScores = response.items[response.items.length - 1];
         setScores({
           accessibility_score: latestScores.accessibility_score,
           dci_score: latestScores.dci_score,
@@ -119,12 +122,47 @@ const SiteimproveSite = () => {
       {scores && (
         <div className="mt-4 bg-white p-4 shadow-lg rounded-lg">
           <h2 className="text-xl font-semibold mb-2">Scores</h2>
-          <ul className="list-disc list-inside">
-            <li>Accessibility Score: {scores.accessibility_score}</li>
-            <li>DCI Score: {scores.dci_score}</li>
-            <li>QA Score: {scores.qa_score}</li>
-            <li>SEO Score: {scores.seo_score}</li>
-          </ul>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {/* Accessibility Score */}
+            <div className="score-container">
+              <CircularProgressbar
+                value={scores.accessibility_score}
+                text={`${scores.accessibility_score}%`}
+                /* Other styles and attributes can be added here */
+              />
+              <p className="text-center mt-2">Accessibility Score</p>
+            </div>
+  
+            {/* DCI Score */}
+            <div className="score-container">
+              <CircularProgressbar
+                value={scores.dci_score}
+                text={`${scores.dci_score}%`}
+                /* Other styles and attributes can be added here */
+              />
+              <p className="text-center mt-2">DCI Score</p>
+            </div>
+  
+            {/* QA Score */}
+            <div className="score-container">
+              <CircularProgressbar
+                value={scores.qa_score}
+                text={`${scores.qa_score}%`}
+                /* Other styles and attributes can be added here */
+              />
+              <p className="text-center mt-2">QA Score</p>
+            </div>
+  
+            {/* SEO Score */}
+            <div className="score-container">
+              <CircularProgressbar
+                value={scores.seo_score}
+                text={`${scores.seo_score}%`}
+                /* Other styles and attributes can be added here */
+              />
+              <p className="text-center mt-2">SEO Score</p>
+            </div>
+          </div>
         </div>
       )}
     </div>
