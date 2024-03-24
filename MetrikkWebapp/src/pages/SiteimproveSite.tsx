@@ -128,7 +128,6 @@ const SiteimproveSite = () => {
               <CircularProgressbar
                 value={scores.accessibility_score}
                 text={`${scores.accessibility_score}%`}
-                /* Other styles and attributes can be added here */
               />
               <p className="text-center mt-2">Accessibility Score</p>
             </div>
@@ -148,7 +147,6 @@ const SiteimproveSite = () => {
               <CircularProgressbar
                 value={scores.qa_score}
                 text={`${scores.qa_score}%`}
-                /* Other styles and attributes can be added here */
               />
               <p className="text-center mt-2">QA Score</p>
             </div>
@@ -158,7 +156,6 @@ const SiteimproveSite = () => {
               <CircularProgressbar
                 value={scores.seo_score}
                 text={`${scores.seo_score}%`}
-                /* Other styles and attributes can be added here */
               />
               <p className="text-center mt-2">SEO Score</p>
             </div>
