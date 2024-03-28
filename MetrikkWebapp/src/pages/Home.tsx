@@ -1,14 +1,14 @@
 import '@navikt/ds-css';
-import AreaChartCustomAccessibility from '../components/charts/AreaChartCustomAccessibility/AreaChartCustomAccessibility';
 import HorizontalBarChartCustomAccessibility from '../components/charts/HorizontalBarChart/HorizontalBarChartCustomAccessibility';
 import { Search } from '@navikt/ds-react';
 import { Heading, VStack } from '@navikt/ds-react';
 import { Link } from 'react-router-dom';
 import { VerticalBarChartCustomAccessibilityExample } from '../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartCustomAccessibility';
-import { fetchAmplitudeData } from '../service/AmplitudeApi';
 
 import AreaChartContainer from '../components/charts/AreaChartCustomAccessibility/AreaChartContainer';
 import {eventTypeMappings} from "../components/charts/fetchUrlConstructor";
+import TableChart from "../components/charts/TableChart/TableChart.tsx";
+
 
 const Home = () => {
   const simpleGuide = 'Trykk her for en enkel guide';
@@ -33,8 +33,12 @@ const Home = () => {
       </form>
       {/*TODO: Charts er lenger til høyre når de er centered fordi centrering starter på y-axis */}
       <div className="flex flex-row justify-between items-center flex-wrap">
-        {/*
-        <div className="">
+
+          <div>
+              <TableChart
+              />
+          </div>{/*
+       <div className="">
             <AreaChartContainer
                 chartType="areaChart"
                 endpointType="segmentation"
@@ -44,7 +48,7 @@ const Home = () => {
                     eventType: eventTypeMappings.pageViewed
                 }}
             />
-        </div>
+        </div>{/*
         <div className="">
             <AreaChartContainer
                 chartType="areaChart"

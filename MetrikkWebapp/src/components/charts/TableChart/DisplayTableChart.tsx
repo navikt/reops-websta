@@ -11,7 +11,7 @@ const DisplayTableChart = ({ endpointType, urlParams }) => {
     useEffect( () => {
         try {
             const fetchURL = constructEndpointUrl(endpointType, urlParams);
-            const response = await fetchAmplitudeData(fetchURL);
+            const response = fetchAmplitudeData(fetchURL);
             setChartData(response);
 
         } catch (error) {
