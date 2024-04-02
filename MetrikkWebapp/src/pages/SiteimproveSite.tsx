@@ -33,9 +33,10 @@ const SiteimproveSite = () => {
   const [isFocused, setIsFocused] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [scores, setScores] = useState<SiteScores | null>(null);
+  const [activeIndex, setActiveIndex] = useState(-1) // This is for tracking the focused item
 
   useEffect(() => {
-    fetchSiteimproveData('/sites').then(response => {
+    fetchSiteimproveData('/sites?page=1&page_size=100').then(response => {
       setSites(response?.items || []);
       setFilteredSites(response?.items || []);
     });
@@ -46,6 +47,25 @@ const SiteimproveSite = () => {
     setFilteredSites(sites.filter(site =>
       site.site_name.toLowerCase().includes(value.toLowerCase())
     ));
+    setActiveIndex(-1);
+  };
+
+  const handleSuggestionClick = (siteId: number) => {
+    console.log(`Site selected: ${siteId}`);
+    const siteName = sites.find(site => site.id === siteId)?.site_name || '';
+    setSearchTerm(siteName)
+    setIsFocused(false);
+    fetchScores(siteId);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Arrowdown') {
+        setActiveIndex(prev => (prev < filteredSites.length - 1 ? prev + 1 : prev));
+    } else if (e.key === 'ArrowUp') {
+        setActiveIndex(prev => (prev > 0 ? prev - 1 : 0));
+    } else if (e.key === 'Enter' && activeIndex >= 0) {
+        handleSuggestionClick(filteredSites[activeIndex].id)
+    }
   };
 
   const handleFocus = () => {
@@ -87,12 +107,6 @@ const SiteimproveSite = () => {
     }
   };
 
-  const handleSuggestionClick = (siteId: number) => {
-    console.log(`Site selected: ${siteId}`);
-    fetchScores(siteId);
-    setIsFocused(false);
-  };
-
   return (
     <div ref={wrapperRef} className="siteimprove-container relative">
       <h1>Siteimprove Sites</h1>
@@ -106,7 +120,7 @@ const SiteimproveSite = () => {
         onBlur={handleBlur}
       />
       {isFocused && filteredSites.length > 0 && (
-        <ul className="suggestions-dropdown absolute z-10 w-full bg-white shadow-md mt-1 max-h-60 overflow-auto">
+        <ul className="suggestions-dropdown relative fixed z-50 w-full bg-white shadow-md mt-1 max-h-60 overflow-auto">
           {filteredSites.map((site) => (
             <li
               key={site.id}
