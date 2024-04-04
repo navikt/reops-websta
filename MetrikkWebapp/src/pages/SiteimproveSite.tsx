@@ -131,7 +131,7 @@ const SiteimproveSite = () => {
         />
       </form>
       {isFocused && filteredSites.length > 0 && (
-        <ul className="suggestions-dropdown absolute z-50 w-full bg-white shadow-md mt-1 max-h-60 overflow-auto">
+        <ul className="suggestions-dropdown relative z-50 w-full bg-white shadow-md mt-1 max-h-60 overflow-auto">
           {filteredSites.map((site, index) => (
             <li
               key={site.id}
