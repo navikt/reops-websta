@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { fetchSiteimproveData } from '../service/SiteimproveApi';
-import { Search } from '@navikt/ds-react';
+import { Search, Dropdown } from '@navikt/ds-react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
@@ -34,6 +34,8 @@ const SiteimproveSite = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [scores, setScores] = useState<SiteScores | null>(null);
   const [activeIndex, setActiveIndex] = useState(-1) // This is for tracking the focused item
+  const [selectedSiteId, setSelectedSiteId] = useState<number | null>(null); // New state for selected site ID
+
 
   useEffect(() => {
     fetchSiteimproveData('/sites?page=1&page_size=100').then(response => {
@@ -51,22 +53,29 @@ const SiteimproveSite = () => {
   };
 
   const handleSuggestionClick = (siteId: number) => {
-    console.log(`Site selected: ${siteId}`);
-    const siteName = sites.find(site => site.id === siteId)?.site_name || '';
-    setSearchTerm(siteName)
+    const site = sites.find(site => site.id === siteId)
+    if (site) { 
+    setSearchTerm(site.site_name)
     setIsFocused(false);
-    fetchScores(siteId);
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === 'Arrowdown') {
-        setActiveIndex(prev => (prev < filteredSites.length - 1 ? prev + 1 : prev));
-    } else if (e.key === 'ArrowUp') {
-        setActiveIndex(prev => (prev > 0 ? prev - 1 : 0));
-    } else if (e.key === 'Enter' && activeIndex >= 0) {
-        handleSuggestionClick(filteredSites[activeIndex].id)
+    setSelectedSiteId(siteId)
     }
   };
+
+  const handleFormSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    if (selectedSiteId) {
+        fetchScores(selectedSiteId);
+    } else {
+
+    }
+  }
+
+  useEffect(() => {
+    if (activeIndex >= 0 && activeIndex < filteredSites.length) {
+        const siteName = filteredSites[activeIndex].site_name;
+        setSearchTerm(siteName);
+    }
+  }, [activeIndex, filteredSites]);
 
   const handleFocus = () => {
     setIsFocused(true);
@@ -110,22 +119,25 @@ const SiteimproveSite = () => {
   return (
     <div ref={wrapperRef} className="siteimprove-container relative">
       <h1>Siteimprove Sites</h1>
-      <Search
-        label="Search sites"
-        variant="primary"
-        className="search-bar mb-4 w-full"
-        value={searchTerm}
-        onChange={(value) => handleSearchChange(value)}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-      />
+      <form role="search" onSubmit={handleFormSubmit}>
+        <Search
+          label="Search sites"
+          variant="primary"
+          className="search-bar mb-4 w-full"
+          value={searchTerm}
+          onChange={(value) => handleSearchChange(value)}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+        />
+      </form>
       {isFocused && filteredSites.length > 0 && (
-        <ul className="suggestions-dropdown relative fixed z-50 w-full bg-white shadow-md mt-1 max-h-60 overflow-auto">
-          {filteredSites.map((site) => (
+        <ul className="suggestions-dropdown absolute z-50 w-full bg-white shadow-md mt-1 max-h-60 overflow-auto">
+          {filteredSites.map((site, index) => (
             <li
               key={site.id}
               onClick={() => handleSuggestionClick(site.id)}
-              className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              onMouseEnter={() => setActiveIndex(index)}
+              className={`px-4 py-2 hover:bg-gray-100 cursor-pointer ${index === activeIndex ? 'bg-gray-100' : ''}`}
             >
               {site.site_name}
             </li>
