@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:8085/amplitude/100004455/api';
+const BASE_URL = 'http://localhost:8085/amplitude/100002286/api';
 
 export const fetchAmplitudeData = async (endpoint) => {
     try {

@@ -13,6 +13,7 @@ const AreaChartContainer = ({ chartType, endpointType, urlParams }) => {
 
 
     useEffect(() => {
+        console.log('Fetching data...');
         const fetchData = async () => {
             try {
                 const fetchURL = constructEndpointUrl(endpointType, urlParams);
@@ -27,6 +28,7 @@ const AreaChartContainer = ({ chartType, endpointType, urlParams }) => {
         };
 
         fetchData();
+        //Charttype trengs kanskje ikke, kan hende [] deps holder
     }, [chartType]); // Re-fetch and process data if chartType changes
 
     return chartData ? <AreaChartCustomAccessibility chartData={chartData} dimensions={dimensions} /> : <div>Loading...</div>;

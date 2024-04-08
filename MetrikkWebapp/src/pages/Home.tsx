@@ -9,6 +9,9 @@ import { fetchAmplitudeData } from '../service/AmplitudeApi';
 
 import AreaChartContainer from '../components/charts/AreaChartCustomAccessibility/AreaChartContainer';
 import {eventTypeMappings} from "../components/charts/fetchUrlConstructor";
+import {Test} from "../components/charts/AreaChartCustomAccessibility/test";
+import DisplayTableChart from "../components/charts/TableChart/DisplayTableChart.tsx";
+import TableChart from "../components/charts/TableChart/TableChart.tsx";
 
 const Home = () => {
   const simpleGuide = 'Trykk her for en enkel guide';
@@ -32,139 +35,142 @@ const Home = () => {
         />
       </form>
       {/*TODO: Charts er lenger til høyre når de er centered fordi centrering starter på y-axis */}
-      <div className="flex flex-row justify-between items-center flex-wrap">
-        {/*
-        <div className="">
-            <AreaChartContainer
-                chartType="areaChart"
-                endpointType="segmentation"
-                urlParams={{
-                    startDate: "20240101",
-                    endDate: "20240130",
-                    eventType: eventTypeMappings.pageViewed
-                }}
-            />
-        </div>
-        <div className="">
-            <AreaChartContainer
-                chartType="areaChart"
-                endpointType="segmentation"
-                urlParams={{
-                    startDate: "20240101",
-                    endDate: "20240130",
-                    eventType: eventTypeMappings.pageViewedGroupByReferringDomain
-                }}
-            />
-        </div>
-          <div className="">
-              <AreaChartContainer
-                  chartType="areaChart"
-                  endpointType="segmentation"
-                  urlParams={{
-                      startDate: "20240101",
-                      endDate: "20240130",
-                      eventType: eventTypeMappings.pageViewedGroupByReferrer
-                  }}
-              />
-          </div>
-          <div className="">
-              <AreaChartContainer
-                  chartType="areaChart"
-                  endpointType="segmentation"
-                  urlParams={{
-                      startDate: "20240101",
-                      endDate: "20240130",
-                      eventType: eventTypeMappings.pageViewedGroupByPagePath
-                  }}
-              />
-          </div>
-          <div className="">
-              <AreaChartContainer
-                  chartType="areaChart"
-                  endpointType="segmentation"
-                  urlParams={{
-                      startDate: "20240101",
-                      endDate: "20240130",
-                      eventType: eventTypeMappings.pageViewedGroupByCity
-                  }}
-              />
-          </div>
-          <div className="">
-              <AreaChartContainer
-                  chartType="areaChart"
-                  endpointType="segmentation"
-                  urlParams={{
-                      startDate: "20240101",
-                      endDate: "20240130",
-                      eventType: eventTypeMappings.pageViewedGroupByLanguage
-                  }}
-              />
-          </div>
-          <div className="">
-              <AreaChartContainer
-                  chartType="areaChart"
-                  endpointType="segmentation"
-                  urlParams={{
-                      startDate: "20240101",
-                      endDate: "20240130",
-                      eventType: eventTypeMappings.pageViewedGroupByCountry
-                  }}
-              />
-          </div>
-          <div className="">
-              <AreaChartContainer
-                  chartType="areaChart"
-                  endpointType="segmentation"
-                  urlParams={{
-                      startDate: "20240101",
-                      endDate: "20240130",
-                      eventType: eventTypeMappings.pageViewedGroupByHourOfDay
-                  }}
-              />
-          </div>
-          <div className="">
-              <AreaChartContainer
-                  chartType="areaChart"
-                  endpointType="segmentation"
-                  urlParams={{
-                      startDate: "20240101",
-                      endDate: "20240130",
-                      eventType: eventTypeMappings.pageViewedGroupByDayOfWeek
-                  }}
-              />
-          </div>*/}
+        <div className="flex flex-row justify-between items-center flex-wrap">
+
+            {/*
+            <div className="">
+                <AreaChartContainer
+                    chartType="areaChartMulti"
+                    endpointType="segmentation"
+                    urlParams={{
+                        startDate: "20240101",
+                        endDate: "20240130",
+                        eventType: eventTypeMappings.pageViewed
+                    }}
+                />
+            </div>
 
 
-          <div className="">
-              <AreaChartContainer
-                  chartType="areaChartMulti"
-                  endpointType="segmentation"
-                  urlParams={{
-                      startDate: "20240101",
-                      endDate: "20240130",
-                      eventType: eventTypeMappings.pageViewedGroupByCountry
-                  }}
-              />
-          </div>
+            <div className="">
+                <AreaChartContainer
+                    chartType="areaChartMulti"
+                    endpointType="segmentation"
+                    urlParams={{
+                        startDate: "20240101",
+                        endDate: "20240130",
+                        eventType: eventTypeMappings.pageViewedGroupByReferrer
+                    }}
+                />
+            </div>
+            <div className="">
+                <AreaChartContainer
+                    chartType="areaChartMulti"
+                    endpointType="segmentation"
+                    urlParams={{
+                        startDate: "20240101",
+                        endDate: "20240130",
+                        eventType: eventTypeMappings.pageViewedGroupByPagePath
+                    }}
+                />
+            </div>
+            <div className="">
+                <AreaChartContainer
+                    chartType="areaChartMulti"
+                    endpointType="segmentation"
+                    urlParams={{
+                        startDate: "20240101",
+                        endDate: "20240130",
+                        eventType: eventTypeMappings.pageViewedGroupByCity
+                    }}
+                />
+            </div>
+            <div className="">
+                <AreaChartContainer
+                    chartType="areaChartMulti"
+                    endpointType="segmentation"
+                    urlParams={{
+                        startDate: "20240101",
+                        endDate: "20240130",
+                        eventType: eventTypeMappings.pageViewedGroupByLanguage
+                    }}
+                />
+            </div>
+            <div className="">
+                <AreaChartContainer
+                    chartType="areaChartMulti"
+                    endpointType="segmentation"
+                    urlParams={{
+                        startDate: "20240101",
+                        endDate: "20240130",
+                        eventType: eventTypeMappings.pageViewedGroupByCountry
+                    }}
+                />
+            </div>
 
-          <div className="">
-              <AreaChartContainer
-                  chartType="areaChart"
-                  endpointType="segmentation"
-                  urlParams={{
-                      startDate: "20240101",
-                      endDate: "20240130",
-                      eventType: eventTypeMappings.pageViewed
-                  }}
-              />
-          </div>
+
+            <div className="">
+                <AreaChartContainer
+                    chartType="areaChartMulti"
+                    endpointType="segmentation"
+                    urlParams={{
+                        startDate: "20240101",
+                        endDate: "20240130",
+                        eventType: eventTypeMappings.pageViewedGroupByDayOfWeek
+                    }}
+                />
+            </div>
+
+
+*/}
+
+            {/*
         <div className="">
           <HorizontalBarChartCustomAccessibility />
         </div>
         <div className="">
           <VerticalBarChartCustomAccessibilityExample />
         </div>
-      </div>
+        */}
+
+            <div className="">
+                <AreaChartContainer
+                    chartType="areaChartMulti"
+                    endpointType="segmentation"
+                    urlParams={{
+                        startDate: "20240101",
+                        endDate: "20240130",
+                        eventType: eventTypeMappings.pageViewedGroupByHourOfDay
+                    }}
+                />
+            </div>
+            <div className="">
+                <AreaChartContainer
+                    chartType="areaChartMulti"
+                    endpointType="segmentation"
+                    urlParams={{
+                        startDate: "20240309",
+                        endDate: "20240408",
+                        eventType: eventTypeMappings.pageViewedGroupByCity
+                    }}
+                />
+            </div>
+            {/* retention chart causing some small error with chunks
+            <div className="">
+                <AreaChartContainer
+                    chartType="retentionChart"
+                    endpointType="retention"
+                    urlParams={{
+                        startDate: "20240205",
+                        endDate: "20240304",
+                        eventType: eventTypeMappings.pageViewed,
+                        secondEventType: eventTypeMappings.pageViewed
+                    }}
+                />
+            </div>
+            */}
+
+            {/* <Test/> */}
+        </div>
     </div>
   );
 };

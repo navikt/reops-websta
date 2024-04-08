@@ -2,16 +2,16 @@
 
 export const eventTypeMappings = {
     pageViewed: `{"event_type":"[Amplitude] Page Viewed"}`,
+    pageViewedGroupByCountry: `{"event_type":"[Amplitude] Page Viewed","group_by":[{"type":"user","value":"country"}]}`,
+    pageViewedGroupByPagePath:`{"event_type":"[Amplitude] Page Viewed","group_by":[{"type":"event","value":"[Amplitude] Page Path"}]}`,
     pageViewedGroupByReferringDomain: `{"event_type":"[Amplitude] Page Viewed","group_by":[{"type":"user","value":"gp:referring_domain"}]}`,
     pageViewedGroupByReferrer: `{"event_type":"[Amplitude] Page Viewed","group_by":[{"type":"event","value":"referrer"}]}`,
-    pageViewedGroupByPagePath:`{"event_type":"[Amplitude] Page Viewed","group_by":[{"type":"event","value":"[Amplitude] Page Path"}]}`,
+    pageViewedGroupByDayOfWeek: `{"event_type":"[Amplitude] Page Viewed","group_by":[{"type":"day_time_prop","value":"amplitude_day_of_week","group_type":"User"}]}`,
+    pageViewedGroupByHourOfDay:`{"event_type":"[Amplitude] Page Viewed","group_by":[{"type":"day_time_prop","value":"amplitude_hour_of_day","group_type":"User"}]}`,
     pageViewedGroupByCity: `{"event_type":"[Amplitude] Page Viewed","group_by":[{"type":"user","value":"city"}]}`,
     pageViewedGroupByLanguage: `{"event_type":"[Amplitude] Page Viewed","group_by":[{"type":"user","value":"language"}]}`,
-    pageViewedGroupByCountry: `{"event_type":"[Amplitude] Page Viewed","group_by":[{"type":"user","value":"country"}]}`,
     //Filter below, not working properly at the moment
     pageViewedFilterByDomainsAndPagePath:`{"event_type":"[Amplitude] Page Viewed"}&start=20240101&end=20240130&filters=[,{"prop":"gp:referrer","op":"contains","values":["github.com%2Fnavikt", "navikt.github.io"]},{"prop":"[Amplitude] Page Path","op":"is","values":["%2Fjobbsoknad%2F"]}]&group_by=[{"type":"user", "value":"gp:referrer"}]`,
-    pageViewedGroupByHourOfDay:`{"event_type":"[Amplitude] Page Viewed","group_by":[{"type":"day_time_prop","value":"amplitude_hour_of_day","group_type":"User"}]}`,
-    pageViewedGroupByDayOfWeek: `{"event_type":"[Amplitude] Page Viewed","group_by":[{"type":"day_time_prop","value":"amplitude_day_of_week","group_type":"User"}]}`,
     // Add more predefined event types as needed
     pageViewedGroupByOS:``,
     pageViewedGroupByDeviceFamily:`{"event_type":"[Amplitude] Page Viewed","group_by":[{"type":"user","value":"country"}]}`,
@@ -27,7 +27,7 @@ const endpointMappings = {
         url: `/3/chart/e-xwordsgk/query`, // Static, no placeholders
     },
     retention:{
-        url:`/2/retention?se={"event_type":"[Amplitude] Page Viewed"}&re={"event_type":"[Amplitude] Page Viewed"}&start=20240101&end=20240130`,
+        url:`/2/retention?se={eventType}&re={secondEventType}&start={startDate}&end={endDate}`,
         defaultEventType: eventTypeMappings.pageViewed, //Default retention for reoccurring users
     },
     filter:{
@@ -51,11 +51,19 @@ export function constructEndpointUrl(type: string, params: EndpointParams = {}) 
 
     params.eventType = params.eventType || defaultEventType;
 
+    // Handle secondEventType parameter
+    const secondEventType = params.secondEventType ? `&re=${encodeURIComponent(params.secondEventType)}` : '';
+
     // Replace placeholders with actual parameter values
     Object.keys(params).forEach(key => {
-        const valueToReplace = key === 'eventType' ? params[key] : params[key]; // Removed JSON.stringify
+        const valueToReplace = key === 'eventType' || key === 'secondEventType' ? params[key] : params[key]; // Removed JSON.stringify
         endpointTemplate = endpointTemplate.replace(`{${key}}`, encodeURIComponent(valueToReplace));
     });
+
+    // Append secondEventType to the URL
+    endpointTemplate = endpointTemplate.replace('{secondEventType}', secondEventType);
+
+    console.log('Constructed endpoint URL:', endpointTemplate);
 
     return endpointTemplate;
 }
