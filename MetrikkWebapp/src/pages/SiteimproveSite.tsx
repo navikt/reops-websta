@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { fetchSiteimproveData } from '../service/SiteimproveApi';
-import { Search, Dropdown } from '@navikt/ds-react';
+import { UNSAFE_Combobox, Button  } from '@navikt/ds-react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
@@ -28,124 +28,84 @@ interface SiteScores {
 
 const SiteimproveSite = () => {
   const [sites, setSites] = useState<SiteItem[]>([]);
-  const [filteredSites, setFilteredSites] = useState<SiteItem[]>([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [isFocused, setIsFocused] = useState(false);
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [selectedSite, setSelectedSite] = useState<SiteItem | null>(null);
   const [scores, setScores] = useState<SiteScores | null>(null);
-  const [activeIndex, setActiveIndex] = useState(-1) // This is for tracking the focused item
-  const [selectedSiteId, setSelectedSiteId] = useState<number | null>(null); // New state for selected site ID
+  const [showScores, setShowScores] = useState(false); // New state for controlling display
+
+
 
 
   useEffect(() => {
-    fetchSiteimproveData('/sites?page=1&page_size=100').then(response => {
-      setSites(response?.items || []);
-      setFilteredSites(response?.items || []);
-    });
-  }, []);
+   fetchSiteimproveData('/sites?page=1&page_size=100').then(response => {
+    setSites(response?.items || []);
 
-  const handleSearchChange = (value: string) => {
-    setSearchTerm(value);
-    setFilteredSites(sites.filter(site =>
-      site.site_name.toLowerCase().includes(value.toLowerCase())
-    ));
-    setActiveIndex(-1);
-  };
+   });
 
-  const handleSuggestionClick = (siteId: number) => {
-    const site = sites.find(site => site.id === siteId)
-    if (site) { 
-    setSearchTerm(site.site_name)
-    setIsFocused(false);
-    setSelectedSiteId(siteId)
-    }
-  };
+  }, [scores]);
+  
 
-  const handleFormSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    if (selectedSiteId) {
-        fetchScores(selectedSiteId);
+  const handleSiteSelect = (event: React.SyntheticEvent<HTMLInputElement>) => {
+    console.log("Event:", event); // Check the structure of the event
+    console.log("Event Value:", event.currentTarget.value); // Directly log the value
+    const siteName = event?.currentTarget.value;
+    const site = sites.find(s => s.site_name === siteName);
+    setSelectedSite(site ?? null);
+    console.log("Selected site:", site); // Debugging line
+    
+};
+
+  const handleFetchhBtn = async () => {
+    if (selectedSite) {
+      await fetchScores(selectedSite.id);
+      setShowScores(true); // Show scores after fetching
     } else {
-
+      console.log("No site selected");
     }
-  }
-
-  useEffect(() => {
-    if (activeIndex >= 0 && activeIndex < filteredSites.length) {
-        const siteName = filteredSites[activeIndex].site_name;
-        setSearchTerm(siteName);
-    }
-  }, [activeIndex, filteredSites]);
-
-  const handleFocus = () => {
-    setIsFocused(true);
   };
-
-    const handleBlur = () => {
-    setTimeout(() => setIsFocused(false), 200);
-    };
-
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
-        setIsFocused(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [wrapperRef]);
 
   const fetchScores = async (siteId: number) => {
     try {
-      const response = await fetchSiteimproveData(`/sites/${siteId}/dci/history`);
-      if (response && response.items && response.items.length > 0) {
-        const latestScores = response.items[response.items.length - 1];
-        setScores({
-          accessibility_score: latestScores.accessibility_score,
-          dci_score: latestScores.dci_score,
-          qa_score: latestScores.qa_score,
-          seo_score: latestScores.seo_score
-        });
-      } else {
-        //If there are no scores to be shown
-        setScores(null)
-      }
+        // Ensure the URL is correctly constructed without typos
+        const endpoint = `/sites/${siteId}/dci/history?page=1&page_size=100`;
+        const response = await fetchSiteimproveData(endpoint);
+        if (response && response.items && response.items.length > 0) {
+            // Assuming the most recent scores are at the start of the array
+            const latestScores = response.items[0];
+            setScores({
+                accessibility_score: latestScores.accessibility_score,
+                dci_score: latestScores.dci_score,
+                qa_score: latestScores.qa_score,
+                seo_score: latestScores.seo_score,
+            });
+        } else {
+            // Handle the case where no scores are available
+            setScores(null);
+        }
     } catch (error) {
-      console.error("Error fetching scores:", error);
-      setScores(null);
+        console.error("Error fetching scores:", error);
+        setScores(null);
     }
-  };
+};
+
+  
 
   return (
-    <div ref={wrapperRef} className="siteimprove-container relative">
+    <div className="siteimprove-container relative">
       <h1>Siteimprove Sites</h1>
-      <form role="search" onSubmit={handleFormSubmit}>
-        <Search
-          label="Search sites"
-          variant="primary"
-          className="search-bar mb-4 w-full"
-          value={searchTerm}
-          onChange={(value) => handleSearchChange(value)}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-        />
-      </form>
-      {isFocused && filteredSites.length > 0 && (
-        <ul className="suggestions-dropdown relative z-50 w-full bg-white shadow-md mt-1 max-h-60 overflow-auto">
-          {filteredSites.map((site, index) => (
-            <li
-              key={site.id}
-              onClick={() => handleSuggestionClick(site.id)}
-              onMouseEnter={() => setActiveIndex(index)}
-              className={`px-4 py-2 hover:bg-gray-100 cursor-pointer ${index === activeIndex ? 'bg-gray-100' : ''}`}
-            >
-              {site.site_name}
-            </li>
-          ))}
-        </ul>
-      )}
+      <UNSAFE_Combobox
+        label
+        aria-label="Søk på siden"
+        options={sites.map(site => site.site_name)}
+        onSelect={handleSiteSelect} // Pass the event handler reference directly
+        shouldAutocomplete={true}
+    />
+    <Button variant="primary" onClick={handleFetchhBtn}>
+  Fetch Scores
+    </Button>
+
+
       {/* Scores Display */}
-      {scores && (
+      {showScores && scores && (
         <div className="mt-4 bg-white p-4 shadow-lg rounded-lg">
           <h2 className="text-xl font-semibold mb-2">Scores</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
