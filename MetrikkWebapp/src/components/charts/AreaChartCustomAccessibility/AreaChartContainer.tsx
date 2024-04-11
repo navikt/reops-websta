@@ -4,11 +4,24 @@ import { selectDataProcessingFunction } from "./chartDataService";
 import {useEffect, useState} from "react";
 import {constructEndpointUrl} from "../fetchUrlConstructor";
 
+interface AreaChartContainerProps {
+    chartType: string;
+    endpointType: string;
+    teamDomain:string
+    urlParams: {
+        startDate: string;
+        endDate: string;
+        eventType?: string;
+        secondEventType?: string; // Optional since it's not always used
+        // Add more properties as needed
+    };
+}
+
 
 //TODO: Legge til slik at det er mulig å ha forkjellige endepunkt, slik at vi ikke trenger en ny komponent for hver.
-const AreaChartContainer = ({ chartType, endpointType, urlParams }) => {
+const AreaChartContainer: React.FC<AreaChartContainerProps> = ({ teamDomain, chartType, endpointType, urlParams }) => {
     const [chartData, setChartData] = useState(null); // Start with null to easily check if data is loaded
-    const dimensions = { width: 500, height: 300 };
+    const dimensions = { width: 500, height: 400 };
 
 
 
@@ -17,7 +30,7 @@ const AreaChartContainer = ({ chartType, endpointType, urlParams }) => {
         const fetchData = async () => {
             try {
                 const fetchURL = constructEndpointUrl(endpointType, urlParams);
-                const response = await fetchAmplitudeData(fetchURL);
+                const response = await fetchAmplitudeData(fetchURL, teamDomain);
                 // Dynamically select the processing function based on chartType
                 const processData = selectDataProcessingFunction(chartType);
                 const processedChartData = processData(response);
@@ -29,7 +42,7 @@ const AreaChartContainer = ({ chartType, endpointType, urlParams }) => {
 
         fetchData();
         //Charttype trengs kanskje ikke, kan hende [] deps holder
-    }, [chartType]); // Re-fetch and process data if chartType changes
+    }, [chartType, teamDomain]); // Re-fetch and process data if chartType changes
 
     return chartData ? <AreaChartCustomAccessibility chartData={chartData} dimensions={dimensions} /> : <div>Loading...</div>;
 };

@@ -5,23 +5,34 @@ import { Search } from '@navikt/ds-react';
 import { Heading, VStack } from '@navikt/ds-react';
 import { Link } from 'react-router-dom';
 import { VerticalBarChartCustomAccessibilityExample } from '../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartCustomAccessibility';
-import { fetchAmplitudeData } from '../service/AmplitudeApi';
-
-import AreaChartContainer from '../components/charts/AreaChartCustomAccessibility/AreaChartContainer';
-import {eventTypeMappings} from "../components/charts/fetchUrlConstructor";
 import {Test} from "../components/charts/AreaChartCustomAccessibility/test";
 import DisplayTableChart from "../components/charts/TableChart/DisplayTableChart.tsx";
 import TableChart from "../components/charts/TableChart/TableChart.tsx";
 
-const Home = () => {
-  const simpleGuide = 'Trykk her for en enkel guide';
+import AreaChartContainer from '../components/charts/AreaChartCustomAccessibility/AreaChartContainer';
+import {eventTypeMappings} from "../components/charts/fetchUrlConstructor";
+import {SearchComponent} from "../components/SearchComponent/SearchComponent.tsx";
+import {SetStateAction, useCallback, useState} from "react";
 
-  return (
+const Home = () => {
+    const simpleGuide = 'Trykk her for en enkel guide';
+
+    // Kan hende callback blir brukt til å velge domene
+    const [selectedDomain, setSelectedDomain] = useState("100002286");
+
+    const handleDomainSelect = useCallback((domain) => {
+        setSelectedDomain(domain);
+    }, []);
+
+    console.log(`from home`,selectedDomain)
+
+    return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <h1 className="text-2xl font-bold mb-4 text-center">
         This is the homepage
       </h1>
-      <VStack className="items-center mb-3">
+      <SearchComponent onDomainSelect={handleDomainSelect}/>
+        {/*<VStack className="items-center mb-3">
         <Link to="/guide" className="text-center hover:underline">
           <Heading size="medium">{simpleGuide}</Heading>
         </Link>
@@ -34,12 +45,13 @@ const Home = () => {
           className="w-full"
         />
       </form>
+      */}
       {/*TODO: Charts er lenger til høyre når de er centered fordi centrering starter på y-axis */}
         <div className="flex flex-row justify-between items-center flex-wrap">
 
-            {/*
             <div className="">
                 <AreaChartContainer
+                    teamDomain={selectedDomain}
                     chartType="areaChartMulti"
                     endpointType="segmentation"
                     urlParams={{
@@ -53,6 +65,7 @@ const Home = () => {
 
             <div className="">
                 <AreaChartContainer
+                    teamDomain={selectedDomain}
                     chartType="areaChartMulti"
                     endpointType="segmentation"
                     urlParams={{
@@ -64,6 +77,7 @@ const Home = () => {
             </div>
             <div className="">
                 <AreaChartContainer
+                    teamDomain={selectedDomain}
                     chartType="areaChartMulti"
                     endpointType="segmentation"
                     urlParams={{
@@ -75,6 +89,7 @@ const Home = () => {
             </div>
             <div className="">
                 <AreaChartContainer
+                    teamDomain={selectedDomain}
                     chartType="areaChartMulti"
                     endpointType="segmentation"
                     urlParams={{
@@ -86,6 +101,7 @@ const Home = () => {
             </div>
             <div className="">
                 <AreaChartContainer
+                    teamDomain={selectedDomain}
                     chartType="areaChartMulti"
                     endpointType="segmentation"
                     urlParams={{
@@ -97,6 +113,7 @@ const Home = () => {
             </div>
             <div className="">
                 <AreaChartContainer
+                    teamDomain={selectedDomain}
                     chartType="areaChartMulti"
                     endpointType="segmentation"
                     urlParams={{
@@ -110,6 +127,7 @@ const Home = () => {
 
             <div className="">
                 <AreaChartContainer
+                    teamDomain={selectedDomain}
                     chartType="areaChartMulti"
                     endpointType="segmentation"
                     urlParams={{
@@ -121,7 +139,6 @@ const Home = () => {
             </div>
 
 
-*/}
 
             {/*
         <div className="">
@@ -134,6 +151,7 @@ const Home = () => {
 
             <div className="">
                 <AreaChartContainer
+                    teamDomain={selectedDomain}
                     chartType="areaChartMulti"
                     endpointType="segmentation"
                     urlParams={{
@@ -145,6 +163,7 @@ const Home = () => {
             </div>
             <div className="">
                 <AreaChartContainer
+                    teamDomain={selectedDomain}
                     chartType="areaChartMulti"
                     endpointType="segmentation"
                     urlParams={{

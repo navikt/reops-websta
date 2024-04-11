@@ -1,8 +1,13 @@
-const BASE_URL = 'http://localhost:8085/amplitude/100002286/api';
+const BASE_URL = 'http://localhost:8085/amplitude';
 
-export const fetchAmplitudeData = async (endpoint) => {
+interface Endpoint {
+    endpoint: string;
+}
+export const fetchAmplitudeData = async (endpoint:Endpoint, teamDomain:string) => {
+    const teamUrl = `/${teamDomain}/api`
+
     try {
-        const response = await fetch(`${BASE_URL}${endpoint}`);
+        const response = await fetch(`${BASE_URL}${teamUrl}${endpoint}`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }

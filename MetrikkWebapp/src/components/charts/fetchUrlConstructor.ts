@@ -63,7 +63,7 @@ export function constructEndpointUrl(type: string, params: EndpointParams = {}) 
     // Append secondEventType to the URL
     endpointTemplate = endpointTemplate.replace('{secondEventType}', secondEventType);
 
-    console.log('Constructed endpoint URL:', endpointTemplate);
+    //console.log('Constructed endpoint URL:', endpointTemplate);
 
     return endpointTemplate;
 }

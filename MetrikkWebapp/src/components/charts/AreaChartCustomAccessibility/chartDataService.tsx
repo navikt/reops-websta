@@ -1,11 +1,13 @@
 // Add a function to process the API response into the structure expected by the chart
-import {DataVizPalette} from "@fluentui/react-charting";
+import {DataVizPalette, IChartDataPoint} from "@fluentui/react-charting";
 
-export const processAreaChartDataGraph = (apiResponse)=> {
+// maybe use IChartDataPoint from official interface
+
+export const processAreaChartDataGraph = (apiResponse: { data: { series: any[]; xValues: any; }; })=> {
     const seriesData = apiResponse.data.series[0];
     const xValues = apiResponse.data.xValues;
 
-    const chartPoints = seriesData.map((item, index) => ({
+    const chartPoints = seriesData.map((item: { value: any; }, index: string | number) => ({
         x: new Date(xValues[index]),
         y: item.value,
         xAxisCalloutAccessibilityData: { ariaLabel: `Date: ${xValues[index]}` },
@@ -22,14 +24,13 @@ export const processAreaChartDataGraph = (apiResponse)=> {
     };
 }
 
-export const processAreaChartData = (apiResponse) => {
-    console.log(apiResponse)
+export const processAreaChartData = (apiResponse: { data: { xValues: any; series: any; }; }) => {
 
     const { xValues, series } = apiResponse.data;
     const seriesData = series[0]; // Assuming the first series is what we're interested in
 
     // Map through the series data to construct chart points
-    const chartPoints = seriesData.map((yValue, index) => ({
+    const chartPoints = seriesData.map((yValue: any, index: string | number) => ({
         x: new Date(xValues[index]), // Convert string date to Date object
         y: yValue, // Directly use the number as the y-value
         xAxisCalloutAccessibilityData: { ariaLabel: `Date: ${xValues[index]}` },
@@ -47,7 +48,7 @@ export const processAreaChartData = (apiResponse) => {
 };
 
 
-export const processAreaChartDataMultiple = (apiResponse) => {
+export const processAreaChartDataMultiple = (apiResponse: { data: { xValues: any; series: any; seriesLabels: any; }; }) => {
     const { xValues, series, seriesLabels } = apiResponse.data;
     //console.log(apiResponse)
     // Define a palette of colors for the chart series
@@ -68,7 +69,7 @@ export const processAreaChartDataMultiple = (apiResponse) => {
 
 
     // Array to hold the chart data for each series
-    const chartPoints = series.slice(0,9).map((currentSeries, seriesIndex) => {
+    const chartPoints = series.slice(0,9).map((currentSeries: any[], seriesIndex: number) => {
 
         const seriesLabel = seriesLabels[seriesIndex][1]; // Assuming the label is at index 1
 
@@ -83,7 +84,7 @@ export const processAreaChartDataMultiple = (apiResponse) => {
         }));
 
 
-        console.log(`points`,points);
+        //console.log(`points`,points);
         // Dynamically assign a color from the colorPalette based on seriesIndex
         const colorFromPallete = colorPalette[seriesIndex % colorPalette.length];
 
@@ -131,8 +132,8 @@ export const processRetentionChartData = (apiResponse) => {
     // Since we're dealing with a single series for retention, we only need to process one series
     const seriesLabel = "Retention Rate"; // Manually define the series label
 
-    console.log(combined)
-    console.log(reversedDatetimes)
+    //console.log(combined)
+    //console.log(reversedDatetimes)
 
 
     // Generate chart points for the retention series
@@ -233,21 +234,17 @@ export const processRetentionChartData = (apiResponse) => {
 
 
 
-export const processDataForChartWithSeriesLabels = (response) => {
-    // Processing logic here
-};
 
 // Example mapping or logic to select the processing function
 const dataProcessingFunctionMap = {
     'areaChart': processAreaChartData,
     'areaChartMulti': processAreaChartDataMultiple,
     'areaChartGraph' : processAreaChartDataGraph,
-    'seriesLabels': processDataForChartWithSeriesLabels,
     'retentionChart':processRetentionChartData,
 };
 
 
 // kanskje endre navn for bedre refleksjon av datahåndtering på charttype
-export function selectDataProcessingFunction(chartType) {
+export function selectDataProcessingFunction(chartType: string | number) {
     return dataProcessingFunctionMap[chartType] || processAreaChartData;
 }

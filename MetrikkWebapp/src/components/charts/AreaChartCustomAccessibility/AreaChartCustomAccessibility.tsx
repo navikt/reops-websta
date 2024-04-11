@@ -3,7 +3,23 @@ import * as d3 from 'd3-format';
 
 // Refactored to accept chartData and dimensions as props
 // Should also contain x and y-axis title
-const AreaChartCustomAccessibility = ({ chartData, dimensions }) => {
+// the interface breaks one chart right now
+interface AreaChartCustomAccessibilityProps {
+    chartData: {
+        chartTitle: string;
+        lineChartData: {
+            legend: string;
+            data: { x: Date; y: number; xAxisCalloutAccessibilityData: { ariaLabel: string }; callOutAccessibilityData: { ariaLabel: string } }[];
+            color: string;
+        }[];
+    };
+    dimensions: {
+        width: number;
+        height: number;
+    };
+}
+
+const AreaChartCustomAccessibility: React.FC<AreaChartCustomAccessibilityProps>  = ({ chartData, dimensions }) => {
     const rootStyle = { width: `${dimensions.width}px`, height: `${dimensions.height}px` };
 
     return (
