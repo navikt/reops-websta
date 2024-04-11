@@ -1,9 +1,8 @@
 const BASE_URL = 'http://localhost:8085/amplitude';
 
-interface Endpoint {
-    endpoint: string;
-}
-export const fetchAmplitudeData = async (endpoint:Endpoint, teamDomain:string) => {
+
+
+export const fetchAmplitudeData = async (endpoint:string, teamDomain:string) => {
     const teamUrl = `/${teamDomain}/api`
 
     try {

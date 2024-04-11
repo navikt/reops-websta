@@ -1,4 +1,4 @@
-import { AreaChart, DataVizPalette, Legends } from '@fluentui/react-charting';
+import { AreaChart } from '@fluentui/react-charting';
 import * as d3 from 'd3-format';
 
 // Refactored to accept chartData and dimensions as props

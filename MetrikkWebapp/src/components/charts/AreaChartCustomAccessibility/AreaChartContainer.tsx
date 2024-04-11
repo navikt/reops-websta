@@ -21,7 +21,7 @@ interface AreaChartContainerProps {
 //TODO: Legge til slik at det er mulig å ha forkjellige endepunkt, slik at vi ikke trenger en ny komponent for hver.
 const AreaChartContainer: React.FC<AreaChartContainerProps> = ({ teamDomain, chartType, endpointType, urlParams }) => {
     const [chartData, setChartData] = useState(null); // Start with null to easily check if data is loaded
-    const dimensions = { width: 500, height: 400 };
+    const dimensions = { width: 500, height: 350 };
 
 
 
