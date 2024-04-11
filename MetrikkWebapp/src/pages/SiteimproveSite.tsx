@@ -35,6 +35,7 @@ const SiteimproveSite = () => {
   const [scores, setScores] = useState<SiteScores | null>(null);
   const [activeIndex, setActiveIndex] = useState(-1) // This is for tracking the focused item
   const [selectedSiteId, setSelectedSiteId] = useState<number | null>(null); // New state for selected site ID
+  const [itemsRefs, setItemRefs] = useState<React.RefObject<HTMLElement>[]>([]);
 
 
   useEffect(() => {
@@ -108,6 +109,21 @@ const SiteimproveSite = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [wrapperRef]);
 
+  useEffect(() => {
+    setItemRefs(filteredSites.map(() => React.createRef<HTMLElement>()));
+  }, [filteredSites])
+
+  useEffect(() => {
+  if (activeIndex >= 0 && activeIndex < filteredSites.length && itemsRefs[activeIndex]?.current !== null) {
+    itemsRefs[activeIndex].current!.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+    });
+  }
+}, [activeIndex, itemsRefs]);
+
+
+
   const fetchScores = async (siteId: number) => {
     try {
       const response = await fetchSiteimproveData(`/sites/${siteId}/dci/history`);
@@ -150,10 +166,11 @@ const SiteimproveSite = () => {
         <ul className="suggestions-dropdown relative z-50 w-full bg-white shadow-md mt-1 max-h-60 overflow-auto">
           {filteredSites.map((site, index) => (
             <li
-              key={site.id}
-              onClick={() => handleSuggestionClick(site.id)}
-              onMouseEnter={() => setActiveIndex(index)}
-              className={`px-4 py-2 hover:bg-gray-100 cursor-pointer ${index === activeIndex ? 'bg-gray-100' : ''}`}
+            ref={itemsRefs[index]}
+            key={site.id}
+            onClick={() => handleSuggestionClick(site.id)}
+            onMouseEnter={() => setActiveIndex(index)}
+            className={`px-4 py-2 hover:bg-gray-100 cursor-pointer ${index === activeIndex ? 'bg-gray-200' : 'bg-white'}`}
             >
               {site.site_name}
             </li>
