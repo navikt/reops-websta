@@ -173,9 +173,10 @@ const Home = () => {
                     }}
                 />
             </div>
-            {/* retention chart causing some small error with chunks
+
             <div className="">
                 <AreaChartContainer
+                    teamDomain={selectedDomain}
                     chartType="retentionChart"
                     endpointType="retention"
                     urlParams={{
@@ -186,7 +187,7 @@ const Home = () => {
                     }}
                 />
             </div>
-            */}
+
 
             {/* <Test/> */}
         </div>
