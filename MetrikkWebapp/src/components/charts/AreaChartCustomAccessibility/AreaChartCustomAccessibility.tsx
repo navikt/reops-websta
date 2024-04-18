@@ -17,12 +17,19 @@ interface AreaChartCustomAccessibilityProps {
         width: number;
         height: number;
     };
+    titles:{
+        chartTitle?:string;
+        xAxisTitle?:string;
+        yAxisTitle?:string;
+    }
 }
 
-const AreaChartCustomAccessibility: React.FC<AreaChartCustomAccessibilityProps>  = ({ chartData, dimensions }) => {
+const AreaChartCustomAccessibility: React.FC<AreaChartCustomAccessibilityProps>  = ({ chartData, dimensions, titles }) => {
     const rootStyle = { width: `${dimensions.width}px`, height: `${dimensions.height}px` };
 
     return (
+        <div className="mb-12">
+            <h2 className="text-center">{titles.chartTitle}</h2>
         <div style={rootStyle}>
             <AreaChart
                 height={dimensions.height}
@@ -33,9 +40,10 @@ const AreaChartCustomAccessibility: React.FC<AreaChartCustomAccessibilityProps> 
                 enablePerfOptimization={true}
                 enabledLegendsWrapLines={true}
                 legendProps={{ allowFocusOnLegends: true,}}
-                xAxisTitle="Dato" // Title for the X-axis
-                yAxisTitle="Antall besøk" // Title for the Y-axis
+                xAxisTitle={titles.xAxisTitle} // Title for the X-axis
+                yAxisTitle={titles.yAxisTitle} // Title for the Y-axis
             />
+        </div>
         </div>
     );
 

@@ -15,13 +15,22 @@ interface AreaChartContainerProps {
         secondEventType?: string; // Optional since it's not always used
         // Add more properties as needed
     };
+    dimensions: {
+        width: number;
+        height: number;
+    }
+    titles:{
+        chartTitle?:string;
+        xAxisTitle?: string;
+        yAxisTitle?: string;
+    }
 }
 
 
 //TODO: Legge til slik at det er mulig å ha forkjellige endepunkt, slik at vi ikke trenger en ny komponent for hver.
-const AreaChartContainer: React.FC<AreaChartContainerProps> = ({ teamDomain, chartType, endpointType, urlParams }) => {
+const AreaChartContainer: React.FC<AreaChartContainerProps> = ({ teamDomain, chartType, endpointType, urlParams, dimensions, titles }) => {
     const [chartData, setChartData] = useState(null); // Start with null to easily check if data is loaded
-    const dimensions = { width: 500, height: 350 };
+    //const dimensions = { width: 500, height: 350 };
 
 
 
@@ -42,9 +51,9 @@ const AreaChartContainer: React.FC<AreaChartContainerProps> = ({ teamDomain, cha
 
         fetchData();
         //Charttype trengs kanskje ikke, kan hende [] deps holder
-    }, [chartType, teamDomain]); // Re-fetch and process data if chartType changes
+    }, [chartType, teamDomain, urlParams.startDate, urlParams.endDate]); // Re-fetch and process data if chartType changes
 
-    return chartData ? <AreaChartCustomAccessibility chartData={chartData} dimensions={dimensions} /> : <div>Loading...</div>;
+    return chartData ? <AreaChartCustomAccessibility chartData={chartData} dimensions={dimensions} titles={titles} /> : <div>Loading...</div>;
 };
 
 export default AreaChartContainer;
