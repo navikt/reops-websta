@@ -4,7 +4,6 @@ import HorizontalBarChartCustomAccessibility from '../components/charts/Horizont
 import { Search } from '@navikt/ds-react';
 import { Heading, VStack } from '@navikt/ds-react';
 import { Link } from 'react-router-dom';
-import { VerticalBarChartCustomAccessibilityExample } from '../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartCustomAccessibility';
 import {Test} from "../components/charts/AreaChartCustomAccessibility/test";
 import DisplayTableChart from "../components/charts/TableChart/DisplayTableChart.tsx";
 import TableChart from "../components/charts/TableChart/TableChart.tsx";
@@ -13,12 +12,13 @@ import AreaChartContainer from '../components/charts/AreaChartCustomAccessibilit
 import {eventTypeMappings} from "../components/charts/fetchUrlConstructor";
 import {SearchComponent} from "../components/SearchComponent/SearchComponent.tsx";
 import {SetStateAction, useCallback, useState} from "react";
+import VerticalBarChartContainer from '../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartContainer';
 
 const Home = () => {
     const simpleGuide = 'Trykk her for en enkel guide';
 
     // Kan hende callback blir brukt til å velge domene
-    const [selectedDomain, setSelectedDomain] = useState("100002286");
+    const [selectedDomain, setSelectedDomain] = useState("100004455");
 
     const handleDomainSelect = useCallback((domain) => {
         setSelectedDomain(domain);
@@ -187,9 +187,18 @@ const Home = () => {
                     }}
                 />
             </div>
-
-
-            {/* <Test/> */}
+            <div className= "">
+            <VerticalBarChartContainer
+                teamDomain={selectedDomain}
+                chartType="verticalBarChart" // Make sure this is defined correctly in your data processing functions
+                endpointType="segmentation"
+                urlParams={{
+                    startDate: "20240101",
+                    endDate: "20240130",
+                    eventType: eventTypeMappings.pageViewed // Adjust based on the data you want to show
+                }}
+            />
+            </div>
         </div>
     </div>
   );
