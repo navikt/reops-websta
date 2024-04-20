@@ -1,9 +1,9 @@
 // constructEndpointUrl.ts
 import { endpointMappings } from './EndpointMapping.ts'
-import {eventTypeMappings} from "./EventTypeMappings.ts";
+import { eventTypeMappings } from "./EventTypeMappings.ts";
 
 interface EndpointParams {
-    eventType?: string; // Make eventType optional since you provide a default
+    eventType?: string;
     secondEventType?: string;
     groupBy?: any[];
     secondGroupBy?: any[];
@@ -11,7 +11,7 @@ interface EndpointParams {
     secondFilters?: any[];
     startDate?: string;
     endDate?: string;
-    [key: string]: any; // Allow for other properties with an index signature
+    [key: string]: any;
 }
 
 export function constructEndpointUrl(type: string, params: EndpointParams = {}) {
@@ -24,48 +24,32 @@ export function constructEndpointUrl(type: string, params: EndpointParams = {}) 
     // Prepare the event configuration
     const eventConfig = {
         event_type: eventTypeConfig.eventType,
-        group_by: params.groupBy || eventTypeConfig.groupBy || [],
-        filters: params.filters || eventTypeConfig.filters || []
+        group_by: params.groupBy || [],
+        filters: params.filters || []
     };
 
     // Prepare the second event configuration
     const secondEventConfig = {
         event_type: secondEventTypeConfig.eventType,
-        group_by: params.secondGroupBy || secondEventTypeConfig.groupBy || [],
-        filters: params.secondFilters || secondEventTypeConfig.filters || []
+        group_by: params.secondGroupBy || [],
+        filters: params.secondFilters || []
     };
 
     // Apply default values for group_by and filters if not specified
-    if (eventTypeConfig.groupByDefaults) {
-        eventConfig.group_by = eventConfig.group_by.map(gb => ({
-            type: gb.type || eventTypeConfig.groupByDefaults.type,
-            value: gb.value || eventTypeConfig.groupByDefaults.value
-        }));
+    if (!params.groupBy && eventTypeConfig.groupByDefaults) {
+        eventConfig.group_by = eventTypeConfig.groupByDefaults;
     }
 
-    if (secondEventTypeConfig.groupByDefaults) {
-        secondEventConfig.group_by = secondEventConfig.group_by.map(gb => ({
-            type: gb.type || secondEventTypeConfig.groupByDefaults.type,
-            value: gb.value || secondEventTypeConfig.groupByDefaults.value
-        }));
+    if (!params.secondGroupBy && secondEventTypeConfig.groupByDefaults) {
+        secondEventConfig.group_by = secondEventTypeConfig.groupByDefaults;
     }
 
-    if (eventTypeConfig.filtersDefaults) {
-        eventConfig.filters = eventConfig.filters.map(flt => ({
-            subprop_type: flt.subprop_type || eventTypeConfig.filtersDefaults.subprop_type,
-            subprop_key: flt.subprop_key || eventTypeConfig.filtersDefaults.subprop_key,
-            subprop_op: flt.subprop_op || eventTypeConfig.filtersDefaults.subprop_op,
-            subprop_value: flt.subprop_value || eventTypeConfig.filtersDefaults.subprop_value
-        }));
+    if (!params.filters && eventTypeConfig.filtersDefaults) {
+        eventConfig.filters = eventTypeConfig.filtersDefaults;
     }
 
-    if (secondEventTypeConfig.filtersDefaults) {
-        secondEventConfig.filters = secondEventConfig.filters.map(flt => ({
-            subprop_type: flt.subprop_type || secondEventTypeConfig.filtersDefaults.subprop_type,
-            subprop_key: flt.subprop_key || secondEventTypeConfig.filtersDefaults.subprop_key,
-            subprop_op: flt.subprop_op || secondEventTypeConfig.filtersDefaults.subprop_op,
-            subprop_value: flt.subprop_value || secondEventTypeConfig.filtersDefaults.subprop_value
-        }));
+    if (!params.secondFilters && secondEventTypeConfig.filtersDefaults) {
+        secondEventConfig.filters = secondEventTypeConfig.filtersDefaults;
     }
 
     // Encode the event configurations as JSON strings and insert into the URL
@@ -77,5 +61,6 @@ export function constructEndpointUrl(type: string, params: EndpointParams = {}) 
     endpointTemplate = endpointTemplate.replace('{startDate}', encodeURIComponent(params.startDate));
     endpointTemplate = endpointTemplate.replace('{endDate}', encodeURIComponent(params.endDate));
 
+    console.log("constructed URL : ", endpointTemplate)
     return endpointTemplate;
 }

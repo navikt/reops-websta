@@ -11,7 +11,7 @@ import DisplayTableChart from "../components/charts/TableChart/DisplayTableChart
 import TableChart from "../components/charts/TableChart/TableChart.tsx";
 
 import AreaChartContainer from '../components/charts/AreaChartCustomAccessibility/AreaChartContainer';
-import {eventTypeMappings} from "../components/charts/fetchUrlConstructor";
+import {eventTypeMappings} from "../components/charts/dynamicUrlConstructor/EventTypeMappings.ts";
 import {SearchComponent} from "../components/SearchComponent/SearchComponent.tsx";
 import {SetStateAction, useCallback, useState} from "react";
 import {URLSearchComponent} from "../components/SearchComponent/URLSearchComponent.tsx";
@@ -98,7 +98,7 @@ const Home = () => {
                     urlParams={{
                         startDate:formattedStartDate,
                         endDate: formattedEndDate,
-                        eventType: eventTypeMappings.pageViewed
+                        eventType: eventTypeMappings.pageViewed.eventType
                     }}
                     dimensions={{
                             width: 500,
@@ -122,7 +122,8 @@ const Home = () => {
                     urlParams={{
                         startDate: formattedStartDate,
                         endDate: formattedEndDate,
-                        eventType: eventTypeMappings.pageViewedGroupByReferrer
+                        eventType: eventTypeMappings.pageViewedGroupByReferrer.eventType,
+                        groupBy:eventTypeMappings.pageViewedGroupByReferrer.groupBy,
                     }}
                     dimensions={{
                         width: 500,
@@ -144,7 +145,8 @@ const Home = () => {
                     urlParams={{
                         startDate: formattedStartDate,
                         endDate: formattedEndDate,
-                        eventType: eventTypeMappings.pageViewedGroupByPagePath
+                        eventType: eventTypeMappings.pageViewedGroupByPagePath.eventType,
+                        groupBy: eventTypeMappings.pageViewedGroupByPagePath.groupBy,
                     }}
                     dimensions={{
                         width: 500,
@@ -166,7 +168,8 @@ const Home = () => {
                     urlParams={{
                         startDate: formattedStartDate,
                         endDate: formattedEndDate,
-                        eventType: eventTypeMappings.pageViewedGroupByCity
+                        eventType: eventTypeMappings.pageViewedGroupByCity.eventType,
+                        groupBy: eventTypeMappings.pageViewedGroupByCity.groupBy,
                     }}
                     dimensions={{
                         width: 500,
@@ -188,7 +191,8 @@ const Home = () => {
                     urlParams={{
                         startDate: formattedStartDate,
                         endDate: formattedEndDate,
-                        eventType: eventTypeMappings.pageViewedGroupByLanguage
+                        eventType: eventTypeMappings.pageViewedGroupByLanguage.eventType,
+                        groupBy: eventTypeMappings.pageViewedGroupByLanguage.groupBy,
                     }}
                     dimensions={{
                         width: 500,
@@ -210,7 +214,8 @@ const Home = () => {
                     urlParams={{
                         startDate: formattedStartDate,
                         endDate: formattedEndDate,
-                        eventType: eventTypeMappings.pageViewedGroupByCountry
+                        eventType: eventTypeMappings.pageViewedGroupByCountry.eventType,
+                        groupBy: eventTypeMappings.pageViewedGroupByCountry.groupBy
                     }}
                     dimensions={{
                         width: 500,
@@ -233,7 +238,8 @@ const Home = () => {
                     urlParams={{
                         startDate: formattedStartDate,
                         endDate: formattedEndDate,
-                        eventType: eventTypeMappings.pageViewedGroupByDayOfWeek
+                        eventType: eventTypeMappings.pageViewedGroupByDayOfWeek.eventType,
+                        groupBy: eventTypeMappings.pageViewedGroupByDayOfWeek.groupBy,
                     }}
                     dimensions={{
                         width: 500,
@@ -266,7 +272,8 @@ const Home = () => {
                     urlParams={{
                         startDate: formattedStartDate,
                         endDate: formattedEndDate,
-                        eventType: eventTypeMappings.pageViewedGroupByHourOfDay
+                        eventType: eventTypeMappings.pageViewedGroupByHourOfDay.eventType,
+                        groupBy: eventTypeMappings.pageViewedGroupByHourOfDay.groupBy,
                     }}
                     dimensions={{
                         width: 500,
@@ -289,14 +296,16 @@ const Home = () => {
                         urlParams={{
                             startDate: formattedStartDate,
                             endDate: formattedEndDate,
-                            eventType: eventTypeMappings.pageViewedGroupByCountryFilterByPath
+                            eventType: eventTypeMappings.pageViewedGroupByCountryFilterByPath.eventType,
+                            groupBy: eventTypeMappings.pageViewedGroupByCountryFilterByPath.groupBy,
+                            filters: eventTypeMappings.pageViewedGroupByCountryFilterByPath.filters,
                         }}
                         dimensions={{
                             width: 500,
                             height: 350,
                         }}
                         titles={{
-                            chartTitle:"Antall Besøk gruppert på klokkeslett gjennom en dag",
+                            chartTitle:"Antall Besøk gruppert sidesti",
                             xAxisTitle:"Dato",
                             yAxisTitle:"Antall Besøk"
                         }}

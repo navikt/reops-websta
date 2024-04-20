@@ -2,7 +2,7 @@ import AreaChartCustomAccessibility from './AreaChartCustomAccessibility';
 import { fetchAmplitudeData } from "../../../service/AmplitudeApi";
 import { selectDataProcessingFunction } from "./chartDataService";
 import {useEffect, useState} from "react";
-import {constructEndpointUrl} from "../fetchUrlConstructor";
+import {constructEndpointUrl} from "../dynamicUrlConstructor/constructEndpointUrl.ts";
 
 interface AreaChartContainerProps {
     chartType: string;
@@ -12,6 +12,8 @@ interface AreaChartContainerProps {
         startDate: string;
         endDate: string;
         eventType?: string;
+        groupBy?: any[];
+        filters?: any[];
         secondEventType?: string; // Optional since it's not always used
         // Add more properties as needed
     };
@@ -30,13 +32,16 @@ interface AreaChartContainerProps {
 //TODO: Legge til slik at det er mulig å ha forkjellige endepunkt, slik at vi ikke trenger en ny komponent for hver.
 const AreaChartContainer: React.FC<AreaChartContainerProps> = ({ teamDomain, chartType, endpointType, urlParams, dimensions, titles }) => {
     const [chartData, setChartData] = useState(null); // Start with null to easily check if data is loaded
-    //const dimensions = { width: 500, height: 350 };
+
+    console.log(chartType, endpointType, urlParams)
 
     useEffect(() => {
         console.log('Fetching data...');
         const fetchData = async () => {
             try {
+                //const fetchURL = constructEndpointUrl(endpointType, urlParams);
                 const fetchURL = constructEndpointUrl(endpointType, urlParams);
+                //console.log(fetchURL)
                 const response = await fetchAmplitudeData(fetchURL, teamDomain);
                 // Dynamically select the processing function based on chartType
                 const processData = selectDataProcessingFunction(chartType);

@@ -44,6 +44,7 @@ export const eventTypeMappings = {
         groupBy: [{ type: "user", value: "language" }],
         filters: []
     },
+    //might need changes
     pageViewedFilterByDomainsAndPagePath: {
         eventType: `[Amplitude] Page Viewed`,
         groupBy: [{ type: "user", value: "gp:referrer" }],
