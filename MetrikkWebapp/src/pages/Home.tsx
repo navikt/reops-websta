@@ -28,7 +28,7 @@ const Home = () => {
     }, []);
 
     // Kan hende callback blir brukt til å velge domene
-    const [selecetedPath, setSelectedPath] = useState('');
+    const [selectedPath, setSelectedPath] = useState('');
 
     const handlePathSelection = useCallback((path) => {
         setSelectedPath(path);
@@ -62,7 +62,7 @@ const Home = () => {
     }, []);
 
 
-    console.log(`from home`,selectedDomain)
+    console.log(`from home`,selectedDomain, `${selectedPath}/`,)
 
     return (
     <div className="flex flex-col items-center justify-center min-h-screen">
@@ -113,7 +113,7 @@ const Home = () => {
             </div>
                 )}
 
-            {selectedDomain && formattedStartDate && formattedEndDate && (
+            {selectedDomain && formattedStartDate && formattedEndDate && selectedPath && (
             <div className="">
                 <AreaChartContainer
                     teamDomain={selectedDomain}
@@ -124,6 +124,9 @@ const Home = () => {
                         endDate: formattedEndDate,
                         eventType: eventTypeMappings.pageViewedGroupByReferrer.eventType,
                         groupBy:eventTypeMappings.pageViewedGroupByReferrer.groupBy,
+                        filters:[
+                            { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
+                        ]
                     }}
                     dimensions={{
                         width: 500,
