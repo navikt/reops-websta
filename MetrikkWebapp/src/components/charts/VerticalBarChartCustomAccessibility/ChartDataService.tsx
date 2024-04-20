@@ -1,3 +1,4 @@
+import {DataVizPalette} from "@fluentui/react-charting";
 
 
 export const processVerticalBarChartData = (apiResponse) => {
@@ -14,8 +15,12 @@ export const processVerticalBarChartData = (apiResponse) => {
         y: seriesCollapsed[index][0].value, // Use the value as y
         xAxisCalloutAccessibilityData: { ariaLabel: `Label: ${label[1]}` },
         callOutAccessibilityData: { ariaLabel: `Value: ${seriesCollapsed[index][0].value} in ${label[1]}` },
+
+
     }));
 };
+
+
 
 const dataProcessingFunctionMap = {
     'verticalBarChart': processVerticalBarChartData,

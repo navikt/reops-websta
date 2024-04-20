@@ -3,17 +3,20 @@ import { VerticalBarChart, IVerticalBarChartDataPoint } from '@fluentui/react-ch
 import { DefaultPalette } from '@fluentui/react/lib/Styling';
 import { Checkbox } from '@fluentui/react/lib/Checkbox';
 
+
 interface IVerticalBarChartProps {
     chartData: IVerticalBarChartDataPoint[];
 }
 
 const VerticalBarChartCustomAccessibilityExample = ({ chartData }) => {
+    console.log(chartData)
+
     // State hooks for checkbox and color usage
     const [isChecked, setIsChecked] = useState(true);
     const [useSingleColor, setUseSingleColor] = useState(true);
 
     // Handle change in checkbox
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
+    const handleChange = (event, checked: boolean) => {
         setIsChecked(checked);
         setUseSingleColor(checked);
     };

@@ -32,8 +32,6 @@ const AreaChartContainer: React.FC<AreaChartContainerProps> = ({ teamDomain, cha
     const [chartData, setChartData] = useState(null); // Start with null to easily check if data is loaded
     //const dimensions = { width: 500, height: 350 };
 
-
-
     useEffect(() => {
         console.log('Fetching data...');
         const fetchData = async () => {
