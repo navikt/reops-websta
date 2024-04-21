@@ -1,24 +1,57 @@
-
+import VerticalBarChartContainer from "./VerticalBarChartContainer";
+import {eventTypeMappings} from "../fetchUrlConstructor";
 
 export const processVerticalBarChartData = (apiResponse) => {
-    if (!apiResponse || !apiResponse.data) {
-        console.error("Invalid API response");
-        return []; // Return empty array for type consistency
+    if (!apiResponse || !apiResponse.data || !Array.isArray(apiResponse.data.seriesLabels) || !Array.isArray(apiResponse.data.seriesCollapsed)) {
+        console.error("Invalid or incomplete data from API", apiResponse);
+        return [];
     }
 
     const { seriesCollapsed, seriesLabels } = apiResponse.data;
 
-    // Create an array of data points and then slice to get only the top 9
-    const chartDataPoints = seriesLabels.map((label, index) => ({
-        x: label[1], // Use the label as x
-        y: seriesCollapsed[index][0].value, // Use the value as y
-        xAxisCalloutAccessibilityData: { ariaLabel: `Label: ${label[1]}` },
-        callOutAccessibilityData: { ariaLabel: `Value: ${seriesCollapsed[index][0].value} in ${label[1]}` },
-    }));
+    console.log("apiresponse", apiResponse);
+
+    const chartDataPoints = seriesLabels.map((label, index) => {
+        const xValue = label[1] ? label[1].toString() : 'Unknown';  // Using the country name from seriesLabels
+        const yValue = seriesCollapsed[index] && seriesCollapsed[index][0] ? seriesCollapsed[index][0].value || 0 : 0;
+
+        return {
+            x: xValue,
+            y: yValue,
+            xAxisCalloutAccessibilityData: { ariaLabel: `Country: ${xValue}` },
+            callOutAccessibilityData: { ariaLabel: `Value: ${yValue} in ${xValue}` },
+        };
+    });
+
+    return chartDataPoints.slice(0,9);  // max 9
+};
+
+export const processVerticalBarChartDates = (apiResponse) => {
+    if (!apiResponse || !apiResponse.data || !Array.isArray(apiResponse.data.series) || !apiResponse.data.xValues) {
+        console.error("Invalid or incomplete data from API", apiResponse);
+        return [];
+    }
+
+    const { series, xValues } = apiResponse.data;
+
+    const chartDataPoints = series[0].map((value, index) => {
+        const xValue = xValues[index];
+        const yValue = value;
+
+        return {
+            x: xValue,  // Now using dates as labels
+            y: yValue,
+            xAxisCalloutAccessibilityData: { ariaLabel: `Date: ${xValue}` },
+            callOutAccessibilityData: { ariaLabel: `Value: ${yValue} on ${xValue}` },
+        };
+    });
+
+    return chartDataPoints.slice(0,9);
 };
 
 const dataProcessingFunctionMap = {
-    'verticalBarChart': processVerticalBarChartData,
+    "verticalBarChart": processVerticalBarChartData,
+    "verticalBarChartDates": processVerticalBarChartDates,
 };
 
 export function selectDataProcessingFunction(chartType: string | number) {

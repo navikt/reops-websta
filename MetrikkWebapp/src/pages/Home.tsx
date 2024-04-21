@@ -4,7 +4,6 @@ import HorizontalBarChartCustomAccessibility from '../components/charts/Horizont
 import { Search } from '@navikt/ds-react';
 import { Heading, VStack } from '@navikt/ds-react';
 import { Link } from 'react-router-dom';
-import { VerticalBarChartCustomAccessibilityExample } from '../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartCustomAccessibility';
 import {Test} from "../components/charts/AreaChartCustomAccessibility/test";
 import DisplayTableChart from "../components/charts/TableChart/DisplayTableChart.tsx";
 import TableChart from "../components/charts/TableChart/TableChart.tsx";
@@ -13,6 +12,10 @@ import AreaChartContainer from '../components/charts/AreaChartCustomAccessibilit
 import {eventTypeMappings} from "../components/charts/fetchUrlConstructor";
 import {SearchComponent} from "../components/SearchComponent/SearchComponent.tsx";
 import {SetStateAction, useCallback, useState} from "react";
+import VerticalBarChartCustomAccessibilityExample
+    from "../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartCustomAccessibility";
+import VerticalBarChartContainer
+    from "../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartContainer";
 
 const Home = () => {
     const simpleGuide = 'Trykk her for en enkel guide';
@@ -48,6 +51,9 @@ const Home = () => {
       */}
       {/*TODO: Charts er lenger til høyre når de er centered fordi centrering starter på y-axis */}
         <div className="flex flex-row justify-between items-center flex-wrap">
+
+
+            {/*
 
             <div className="">
                 <AreaChartContainer
@@ -140,56 +146,80 @@ const Home = () => {
 
 
 
-            {/*
-        <div className="">
-          <HorizontalBarChartCustomAccessibility />
-        </div>
-        <div className="">
-          <VerticalBarChartCustomAccessibilityExample />
-        </div>
-        */}
+                /*
+            <div className="">
+              <HorizontalBarChartCustomAccessibility />
+            </div>
+            <div className="">
+              <VerticalBarChartCustomAccessibilityExample />
+            </div>
+
+                <div className="">
+                    <AreaChartContainer
+                        teamDomain={selectedDomain}
+                        chartType="areaChartMulti"
+                        endpointType="segmentation"
+                        urlParams={{
+                            startDate: "20240101",
+                            endDate: "20240130",
+                            eventType: eventTypeMappings.pageViewedGroupByHourOfDay
+                        }}
+                    />
+                </div>
+                <div className="">
+                <AreaChartContainer
+                teamDomain={selectedDomain}
+                chartType="areaChartMulti"
+                endpointType="segmentation"
+                urlParams={{
+                startDate: "20240309",
+                endDate: "20240408",
+                eventType: eventTypeMappings.pageViewedGroupByCity
+            }}
+                dimensions={}/>
+                </div>
+
+                <div className="">
+                <AreaChartContainer
+                teamDomain={selectedDomain}
+                chartType="retentionChart"
+                endpointType="retention"
+                urlParams={{
+                startDate: "20240205",
+                endDate: "20240304",
+                eventType: eventTypeMappings.pageViewed,
+                secondEventType: eventTypeMappings.pageViewed
+            }}
+                dimensions={}/>
+                </div>
+            */}
 
             <div className="">
-                <AreaChartContainer
+                <VerticalBarChartContainer
                     teamDomain={selectedDomain}
-                    chartType="areaChartMulti"
+                    chartType="verticalBarChart"
                     endpointType="segmentation"
                     urlParams={{
                         startDate: "20240101",
                         endDate: "20240130",
-                        eventType: eventTypeMappings.pageViewedGroupByHourOfDay
+                        eventType: eventTypeMappings.pageViewedGroupByCountry,
                     }}
                 />
             </div>
+
             <div className="">
-                <AreaChartContainer
+                <VerticalBarChartContainer
                     teamDomain={selectedDomain}
-                    chartType="areaChartMulti"
+                    chartType="verticalBarChartDates"
                     endpointType="segmentation"
                     urlParams={{
-                        startDate: "20240309",
-                        endDate: "20240408",
-                        eventType: eventTypeMappings.pageViewedGroupByCity
-                    }}
-                />
-            </div>
-
-            <div className="">
-                <AreaChartContainer
-                    teamDomain={selectedDomain}
-                    chartType="retentionChart"
-                    endpointType="retention"
-                    urlParams={{
-                        startDate: "20240205",
-                        endDate: "20240304",
+                        startDate: "20240101",
+                        endDate: "20240130",
                         eventType: eventTypeMappings.pageViewed,
-                        secondEventType: eventTypeMappings.pageViewed
                     }}
-                />
+                    />
             </div>
-
-
-            {/* <Test/> */}
+                    {/* <Test/> */}
         </div>
     </div>
   );
