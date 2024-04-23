@@ -1,29 +1,23 @@
-import {
-    processAreaChartData,
-    processAreaChartDataGraph,
-    processAreaChartDataMultiple, processRetentionChartData
-} from "../AreaChartCustomAccessibility/chartDataService.tsx";
+export const processSegmentationTableChart = (apiResponse) => {
+    const { series, seriesLabels } = apiResponse.data;
 
-export const processSegmentationTableChart = (
-    apiResponse: {
-        data: { xValues: string[]; series: number[][]; seriesLabels: [number, string][] };
-    }
-) => {
-    const { xValues, series, seriesLabels } = apiResponse.data;
+    // Create an object to store the sum of visitors for each country
+    const countryVisitorTotals = {};
 
-    const tableData = series.map((currentSeries: number[], seriesIndex: number) => {
-        const countryName = seriesLabels[seriesIndex][1]; // Get countryName directly
-        const singleTableEntry = currentSeries.map((value, index) => ({
-            date: new Date(xValues[index]), // Create new date for xValues
-            countryName:countryName,
-            visitorAmount: value
-        }));
+    // Sum up all the visitors for each country
+    series.forEach((currentSeries, index) => {
+        const countryName = seriesLabels[index][1]; // country name is at the second position
+        countryVisitorTotals[countryName] = countryVisitorTotals[countryName] || 0;
+        countryVisitorTotals[countryName] += currentSeries.reduce((sum, current) => sum + current, 0);
+    });
 
-        return singleTableEntry;
-    }).flat(); // Flatten the nested arrays to get a single array of table data
+    // Convert the totals object to an array suitable for table display
+    const tableData = Object.entries(countryVisitorTotals).map(([countryName, totalVisitors]) => ({
+        countryName,
+        totalVisitors
+    }));
 
-    console.log(tableData)
-    return tableData;
+    return tableData.slice(0,9);
 };
 
 const dataProcessingFunctionMap = {

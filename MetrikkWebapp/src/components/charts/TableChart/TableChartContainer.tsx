@@ -1,10 +1,10 @@
 import {useEffect, useState} from "react";
 import {constructEndpointUrl} from "../fetchUrlConstructor.ts";
 import {fetchAmplitudeData} from "../../../service/AmplitudeApi.tsx";
-import {selectDataProcessingFunction} from "../AreaChartCustomAccessibility/chartDataService.tsx";
-import TableChart from "./TableChart.tsx";
+import {selectDataProcessingFunction} from "./TableChartService"
+import TableBox from "./TableBox";
 
-interface AreaChartContainerProps {
+interface TableChartContainerProps {
     chartType: string;
     endpointType: string;
     teamDomain:string
@@ -17,7 +17,7 @@ interface AreaChartContainerProps {
     };
 }
 
-const TableChartContainer: React.FC<AreaChartContainerProps> = (
+const TableChartContainer: React.FC<TableChartContainerProps> = (
     { teamDomain, chartType, endpointType, urlParams }
 ) => {
     const [chartData, setChartData] = useState(null); // Start with null to easily check if data is loaded
@@ -27,21 +27,29 @@ const TableChartContainer: React.FC<AreaChartContainerProps> = (
         const fetchData = async () => {
             try {
                 const fetchURL = constructEndpointUrl(endpointType, urlParams);
+                console.log("fetchURL", fetchURL);
                 const response = await fetchAmplitudeData(fetchURL, teamDomain);
-                // Dynamically select the processing function based on chartType
+                console.log("response", response);
                 const processData = selectDataProcessingFunction(chartType);
+                console.log("processData", processData)
                 const processedChartData = processData(response);
-                setChartData(processedChartData);
+                console.log("processedChartData", processedChartData)
+
+                // Ensure that processedChartData is an array; otherwise set as null
+                setChartData(Array.isArray(processedChartData) ? processedChartData : null);
             } catch (error) {
                 console.error("Failed to fetch and process data:", error);
+                setChartData(null); // Set to null on error
             }
         };
+
 
         fetchData();
         //Charttype trengs kanskje ikke, kan hende [] deps holder
     }, [chartType, teamDomain]); // Re-fetch and process data if chartType changes
 
-    return chartData ? <TableChart  /> : <div>Loading...</div>;
+    console.log("TableChartData", chartData)
+    return chartData ? <TableBox   data={chartData}/> : <div>Loading...</div>;
 };
 
 export default TableChartContainer;

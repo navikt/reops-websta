@@ -16,6 +16,7 @@ import VerticalBarChartCustomAccessibilityExample
     from "../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartCustomAccessibility";
 import VerticalBarChartContainer
     from "../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartContainer";
+import TableChartContainer from "../components/charts/TableChart/TableChartContainer";
 
 const Home = () => {
     const simpleGuide = 'Trykk her for en enkel guide';
@@ -218,6 +219,19 @@ const Home = () => {
                         eventType: eventTypeMappings.pageViewed,
                     }}
                     />
+            </div>
+
+            <div className="">
+                <TableChartContainer
+                    teamDomain={selectedDomain}
+                    chartType="segmentationChartProccesing"
+                    endpointType="segmentation"
+                    urlParams={{
+                        startDate: "20240101",
+                        endDate: "20240130",
+                        eventType: eventTypeMappings.pageViewedGroupByDeviceFamily,
+                    }}
+                />
             </div>
                     {/* <Test/> */}
         </div>

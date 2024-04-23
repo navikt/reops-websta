@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { fetchAmplitudeData } from "../../../service/AmplitudeApi";
 import { constructEndpointUrl } from "../fetchUrlConstructor";
-
 import {selectDataProcessingFunction} from "./ChartDataService";
 import VerticalBarChartCustomAccessibilityExample from './VerticalBarChartCustomAccessibility';
 
