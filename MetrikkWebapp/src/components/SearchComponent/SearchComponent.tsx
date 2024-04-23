@@ -28,7 +28,7 @@ export const SearchComponent = ({onDomainSelect}) => {
     };
 
     return (
-        <div>
+        <div className="mb-8">
             <UNSAFE_Combobox
                 label="Hva er det aller beste teamet borte på NAV noensinne, helt objektivt?"
                 options={teams.map(team => team.teamName)} // Map team names for options

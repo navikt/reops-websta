@@ -16,6 +16,7 @@ export const eventTypeMappings = {
     pageViewedGroupByOS:``,
     pageViewedGroupByDeviceFamily:`{"event_type":"[Amplitude] Page Viewed","group_by":[{"type":"user","value":"country"}]}`,
     pageViewedGroupByDeviceType:``,
+    pageViewedGroupByCountryFilterByPath:`{"event_type":"[Amplitude] Page Viewed","group_by":[{"type":"user","value":"country"}],"filters":[{"subprop_type":"event","subprop_key":"[Amplitude] Page Path","subprop_op":"contains","subprop_value":["/kort-fortalt/1284/"]}]}`,
 };
 
 const endpointMappings = {

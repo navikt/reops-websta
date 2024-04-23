@@ -237,6 +237,7 @@ module.exports = {
       'purple-700': 'rgba(65, 43, 93, 1)',
       'purple-800': 'rgba(48, 31, 70, 1)',
       'purple-900': 'rgba(31, 20, 47, 1)',
+      'custom-cyan': '#CCE2F0',
     },
     screen: {
       sm: '480px',
