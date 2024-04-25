@@ -152,21 +152,25 @@ const SiteimproveSite = () => {
       <h1>Siteimprove Sites</h1>
       <form role="search" onSubmit={handleFormSubmit}>
         <Search
-          label="Search sites"
-          variant="primary"
-          className="search-bar mb-4 w-full"
-          value={searchTerm}
-          onChange={(value) => handleSearchChange(value)}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          onKeyDown={handleKeyDown}
+        aria-haspopup="listbox"
+        aria-aria-expanded={isFocused}
+        label="Search sites"
+        variant="primary"
+        className="search-bar mb-4 w-full"
+        value={searchTerm}
+        onChange={(value) => handleSearchChange(value)}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onKeyDown={handleKeyDown}
         />
       </form>
       {isFocused && filteredSites.length > 0 && (
-        <ul className="suggestions-dropdown relative z-50 w-full bg-white shadow-md mt-1 max-h-60 overflow-auto">
+        <ul className="suggestions-dropdown relative z-50 w-full bg-white shadow-md mt-1 max-h-60 overflow-auto" role="listbox">
           {filteredSites.map((site, index) => (
             <li
             ref={itemsRefs[index]}
+            role="option"
+            aria-selected={index === activeIndex}
             key={site.id}
             onClick={() => handleSuggestionClick(site.id)}
             onMouseEnter={() => setActiveIndex(index)}
