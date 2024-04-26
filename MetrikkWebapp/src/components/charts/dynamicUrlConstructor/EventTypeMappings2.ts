@@ -55,23 +55,19 @@ export const eventTypeMappings2 = {
     },
     pageViewedGroupByOS: {
         eventType: `[Amplitude] Page Viewed`,
-        groupBy: [],
+        groupBy: [{ type: "user", value: "os" }],
         filters: []
     },
     pageViewedGroupByDeviceFamily: {
         eventType: `[Amplitude] Page Viewed`,
-        groupBy: [{ type: "user", value: "country" }],
+        groupBy: [{ type: "user", value: "Device family" }],
         filters: []
     },
     pageViewedGroupByDeviceType: {
         eventType: `[Amplitude] Page Viewed`,
-        groupBy: [],
+        groupBy: [{ type: "user", value: "Device type" }],
         filters: []
     },
-    pageViewedGroupByCountryFilterByPath: {
-        eventType: `[Amplitude] Page Viewed`,
-        groupBy: [{ type: "user", value: "country" }],
-        filters: [{ subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: ["/kort-fortalt/1284/"] }]
-    },
+
     // Add more predefined event types as needed
 };

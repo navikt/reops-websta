@@ -70,14 +70,14 @@ const Home = () => {
     console.log(`from home`,selectedDomain, `${selectedPath}/`,)
 
     return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <h1 className="text-2xl font-bold mb-4 text-center">
-        This is the homepage
-      </h1>
-        {/*<SearchComponent onDomainSelect={handleDomainSelect}/>*/}
-        <RangeDatePicker onDateChange={handleDateChange}/>
-        <URLSearchComponent onDomainSelect={handleDomainSelect} onPagePath={handlePathSelection}/>
-        {/*<VStack className="items-center mb-3">
+        <div className="flex flex-col items-center justify-center min-h-screen">
+            <h1 className="text-2xl font-bold mb-4 text-center">
+                This is the homepage
+            </h1>
+            {/*<SearchComponent onDomainSelect={handleDomainSelect}/>*/}
+            <RangeDatePicker onDateChange={handleDateChange}/>
+            <URLSearchComponent onDomainSelect={handleDomainSelect} onPagePath={handlePathSelection}/>
+            {/*<VStack className="items-center mb-3">
         <Link to="/guide" className="text-center hover:underline">
           <Heading size="medium">{simpleGuide}</Heading>
         </Link>
@@ -91,198 +91,198 @@ const Home = () => {
         />
       </form>
       */}
-      {/*TODO: Charts er lenger til høyre når de er centered fordi centrering starter på y-axis */}
-        <div className="flex flex-row justify-between items-center flex-wrap">
+            {/*TODO: Charts er lenger til høyre når de er centered fordi centrering starter på y-axis */}
+            <div className="flex flex-row justify-between items-center flex-wrap">
 
-            {selectedDomain && formattedStartDate && formattedEndDate &&  (
-            <div className="">
-                <AreaChartContainer
-                    teamDomain={selectedDomain}
-                    chartType="areaChartMulti"
-                    endpointType="segmentation"
-                    urlParams={{
-                        startDate:formattedStartDate,
-                        endDate: formattedEndDate,
-                        eventType: eventTypeMappings2.pageViewed.eventType,
-                        filters:[
-                            { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
-                        ]
-                    }}
-                    dimensions={{
-                            width: 500,
-                            height: 350,
-                        }}
-                    titles={{
-                        chartTitle:"Antall Besøk",
-                        xAxisTitle:"Dato",
-                        yAxisTitle:"Antall Besøk"
-                    }}
-                />
-            </div>
+                {selectedDomain && formattedStartDate && formattedEndDate &&  (
+                    <div className="">
+                        <AreaChartContainer
+                            teamDomain={selectedDomain}
+                            chartType="areaChartMulti"
+                            endpointType="segmentation"
+                            urlParams={{
+                                startDate:formattedStartDate,
+                                endDate: formattedEndDate,
+                                eventType: eventTypeMappings2.pageViewed.eventType,
+                                filters:[
+                                    { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
+                                ]
+                            }}
+                            dimensions={{
+                                width: 500,
+                                height: 350,
+                            }}
+                            titles={{
+                                chartTitle:"Antall Besøk",
+                                xAxisTitle:"Dato",
+                                yAxisTitle:"Antall Besøk"
+                            }}
+                        />
+                    </div>
                 )}
 
-            {selectedDomain && formattedStartDate && formattedEndDate &&  (
-            <div className="">
-                <AreaChartContainer
-                    teamDomain={selectedDomain}
-                    chartType="areaChartMulti"
-                    endpointType="segmentation"
-                    urlParams={{
-                        startDate: formattedStartDate,
-                        endDate: formattedEndDate,
-                        eventType: eventTypeMappings2.pageViewedGroupByReferrer.eventType,
-                        groupBy:eventTypeMappings2.pageViewedGroupByReferrer.groupBy,
-                        filters:[
-                            { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
-                        ]
-                    }}
-                    dimensions={{
-                        width: 500,
-                        height: 350,
-                    }}
-                    titles={{
-                        chartTitle:"Antall Besøk gruppert på henvisning",
-                        xAxisTitle:"Dato",
-                        yAxisTitle:"Antall Besøk"
-                    }}
-                />
-            </div>)}
-            {selectedDomain && formattedStartDate && formattedEndDate &&  (
-            <div className="">
-                <AreaChartContainer
-                    teamDomain={selectedDomain}
-                    chartType="areaChartMulti"
-                    endpointType="segmentation"
-                    urlParams={{
-                        startDate: formattedStartDate,
-                        endDate: formattedEndDate,
-                        eventType: eventTypeMappings2.pageViewedGroupByPagePath.eventType,
-                        groupBy: eventTypeMappings2.pageViewedGroupByPagePath.groupBy,
-                        filters:[
-                            { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
-                        ]
-                    }}
-                    dimensions={{
-                        width: 500,
-                        height: 350,
-                    }}
-                    titles={{
-                        chartTitle:"Antall Besøk gruppert på sidesti",
-                        xAxisTitle:"Dato",
-                        yAxisTitle:"Antall Besøk"
-                    }}
-                />
-            </div>)}
-            {selectedDomain && formattedStartDate && formattedEndDate && (
-            <div className="">
-                <AreaChartContainer
-                    teamDomain={selectedDomain}
-                    chartType="areaChartMulti"
-                    endpointType="segmentation"
-                    urlParams={{
-                        startDate: formattedStartDate,
-                        endDate: formattedEndDate,
-                        eventType: eventTypeMappings2.pageViewedGroupByCity.eventType,
-                        groupBy: eventTypeMappings2.pageViewedGroupByCity.groupBy,
-                        filters:[
-                            { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
-                        ]
-                    }}
-                    dimensions={{
-                        width: 500,
-                        height: 350,
-                    }}
-                    titles={{
-                        chartTitle:"Antall Besøk gruppert på by",
-                        xAxisTitle:"Dato",
-                        yAxisTitle:"Antall Besøk"
-                    }}
-                />
-            </div>)}
-            {selectedDomain && formattedStartDate && formattedEndDate && (
-            <div className="">
-                <AreaChartContainer
-                    teamDomain={selectedDomain}
-                    chartType="areaChartMulti"
-                    endpointType="segmentation"
-                    urlParams={{
-                        startDate: formattedStartDate,
-                        endDate: formattedEndDate,
-                        eventType: eventTypeMappings2.pageViewedGroupByLanguage.eventType,
-                        groupBy: eventTypeMappings2.pageViewedGroupByLanguage.groupBy,
-                        filters:[
-                            { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
-                        ]
-                    }}
-                    dimensions={{
-                        width: 500,
-                        height: 350,
-                    }}
-                    titles={{
-                        chartTitle:"Antall Besøk gruppert på språk",
-                        xAxisTitle:"Dato",
-                        yAxisTitle:"Antall Besøk"
-                    }}
-                />
-            </div>)}
+                {selectedDomain && formattedStartDate && formattedEndDate &&  (
+                    <div className="">
+                        <AreaChartContainer
+                            teamDomain={selectedDomain}
+                            chartType="areaChartMulti"
+                            endpointType="segmentation"
+                            urlParams={{
+                                startDate: formattedStartDate,
+                                endDate: formattedEndDate,
+                                eventType: eventTypeMappings2.pageViewedGroupByReferrer.eventType,
+                                groupBy:eventTypeMappings2.pageViewedGroupByReferrer.groupBy,
+                                filters:[
+                                    { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
+                                ]
+                            }}
+                            dimensions={{
+                                width: 500,
+                                height: 350,
+                            }}
+                            titles={{
+                                chartTitle:"Antall Besøk gruppert på henvisning",
+                                xAxisTitle:"Dato",
+                                yAxisTitle:"Antall Besøk"
+                            }}
+                        />
+                    </div>)}
+                {selectedDomain && formattedStartDate && formattedEndDate &&  (
+                    <div className="">
+                        <AreaChartContainer
+                            teamDomain={selectedDomain}
+                            chartType="areaChartMulti"
+                            endpointType="segmentation"
+                            urlParams={{
+                                startDate: formattedStartDate,
+                                endDate: formattedEndDate,
+                                eventType: eventTypeMappings2.pageViewedGroupByPagePath.eventType,
+                                groupBy: eventTypeMappings2.pageViewedGroupByPagePath.groupBy,
+                                filters:[
+                                    { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
+                                ]
+                            }}
+                            dimensions={{
+                                width: 500,
+                                height: 350,
+                            }}
+                            titles={{
+                                chartTitle:"Antall Besøk gruppert på sidesti",
+                                xAxisTitle:"Dato",
+                                yAxisTitle:"Antall Besøk"
+                            }}
+                        />
+                    </div>)}
+                {selectedDomain && formattedStartDate && formattedEndDate && (
+                    <div className="">
+                        <AreaChartContainer
+                            teamDomain={selectedDomain}
+                            chartType="areaChartMulti"
+                            endpointType="segmentation"
+                            urlParams={{
+                                startDate: formattedStartDate,
+                                endDate: formattedEndDate,
+                                eventType: eventTypeMappings2.pageViewedGroupByCity.eventType,
+                                groupBy: eventTypeMappings2.pageViewedGroupByCity.groupBy,
+                                filters:[
+                                    { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
+                                ]
+                            }}
+                            dimensions={{
+                                width: 500,
+                                height: 350,
+                            }}
+                            titles={{
+                                chartTitle:"Antall Besøk gruppert på by",
+                                xAxisTitle:"Dato",
+                                yAxisTitle:"Antall Besøk"
+                            }}
+                        />
+                    </div>)}
+                {selectedDomain && formattedStartDate && formattedEndDate && (
+                    <div className="">
+                        <AreaChartContainer
+                            teamDomain={selectedDomain}
+                            chartType="areaChartMulti"
+                            endpointType="segmentation"
+                            urlParams={{
+                                startDate: formattedStartDate,
+                                endDate: formattedEndDate,
+                                eventType: eventTypeMappings2.pageViewedGroupByLanguage.eventType,
+                                groupBy: eventTypeMappings2.pageViewedGroupByLanguage.groupBy,
+                                filters:[
+                                    { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
+                                ]
+                            }}
+                            dimensions={{
+                                width: 500,
+                                height: 350,
+                            }}
+                            titles={{
+                                chartTitle:"Antall Besøk gruppert på språk",
+                                xAxisTitle:"Dato",
+                                yAxisTitle:"Antall Besøk"
+                            }}
+                        />
+                    </div>)}
 
-            {selectedDomain && formattedStartDate && formattedEndDate &&  (
-            <div className="">
-                <AreaChartContainer
-                    teamDomain={selectedDomain}
-                    chartType="areaChartMulti"
-                    endpointType="segmentation"
-                    urlParams={{
-                        startDate: formattedStartDate,
-                        endDate: formattedEndDate,
-                        eventType: eventTypeMappings2.pageViewedGroupByCountry.eventType,
-                        groupBy: eventTypeMappings2.pageViewedGroupByCountry.groupBy,
-                        filters:[
-                            { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
-                        ]
-                    }}
-                    dimensions={{
-                        width: 500,
-                        height: 350,
-                    }}
-                    titles={{
-                        chartTitle:"Antall Besøk gruppert på land",
-                        xAxisTitle:"Dato",
-                        yAxisTitle:"Antall Besøk"
-                    }}
-                />
-            </div>)}
+                {selectedDomain && formattedStartDate && formattedEndDate &&  (
+                    <div className="">
+                        <AreaChartContainer
+                            teamDomain={selectedDomain}
+                            chartType="areaChartMulti"
+                            endpointType="segmentation"
+                            urlParams={{
+                                startDate: formattedStartDate,
+                                endDate: formattedEndDate,
+                                eventType: eventTypeMappings2.pageViewedGroupByCountry.eventType,
+                                groupBy: eventTypeMappings2.pageViewedGroupByCountry.groupBy,
+                                filters:[
+                                    { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
+                                ]
+                            }}
+                            dimensions={{
+                                width: 500,
+                                height: 350,
+                            }}
+                            titles={{
+                                chartTitle:"Antall Besøk gruppert på land",
+                                xAxisTitle:"Dato",
+                                yAxisTitle:"Antall Besøk"
+                            }}
+                        />
+                    </div>)}
 
-            {selectedDomain && formattedStartDate && formattedEndDate && (
-            <div className="">
-                <AreaChartContainer
-                    teamDomain={selectedDomain}
-                    chartType="areaChartMulti"
-                    endpointType="segmentation"
-                    urlParams={{
-                        startDate: formattedStartDate,
-                        endDate: formattedEndDate,
-                        eventType: eventTypeMappings2.pageViewedGroupByDayOfWeek.eventType,
-                        groupBy: eventTypeMappings2.pageViewedGroupByDayOfWeek.groupBy,
-                        filters:[
-                            { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
-                        ]
-                    }}
-                    dimensions={{
-                        width: 500,
-                        height: 350,
-                    }}
-                    titles={{
-                        chartTitle:"Antall Besøk gruppert på ukedag",
-                        xAxisTitle:"Dato",
-                        yAxisTitle:"Antall Besøk"
-                    }}
-                />
-            </div>)}
+                {selectedDomain && formattedStartDate && formattedEndDate && (
+                    <div className="">
+                        <AreaChartContainer
+                            teamDomain={selectedDomain}
+                            chartType="areaChartMulti"
+                            endpointType="segmentation"
+                            urlParams={{
+                                startDate: formattedStartDate,
+                                endDate: formattedEndDate,
+                                eventType: eventTypeMappings2.pageViewedGroupByDayOfWeek.eventType,
+                                groupBy: eventTypeMappings2.pageViewedGroupByDayOfWeek.groupBy,
+                                filters:[
+                                    { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
+                                ]
+                            }}
+                            dimensions={{
+                                width: 500,
+                                height: 350,
+                            }}
+                            titles={{
+                                chartTitle:"Antall Besøk gruppert på ukedag",
+                                xAxisTitle:"Dato",
+                                yAxisTitle:"Antall Besøk"
+                            }}
+                        />
+                    </div>)}
 
 
 
-            {/*
+                {/*
         <div className="">
           <HorizontalBarChartCustomAccessibility />
         </div>
@@ -290,60 +290,34 @@ const Home = () => {
           <VerticalBarChartCustomAccessibilityExample />
         </div>
         */}
-            {selectedDomain && formattedStartDate && formattedEndDate &&  (
-            <div className="">
-                <AreaChartContainer
-                    teamDomain={selectedDomain}
-                    chartType="areaChartMulti"
-                    endpointType="segmentation"
-                    urlParams={{
-                        startDate: formattedStartDate,
-                        endDate: formattedEndDate,
-                        eventType: eventTypeMappings2.pageViewedGroupByHourOfDay.eventType,
-                        groupBy: eventTypeMappings2.pageViewedGroupByHourOfDay.groupBy,
-                        filters:[
-                            { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
-                        ]
-                    }}
-                    dimensions={{
-                        width: 500,
-                        height: 350,
-                    }}
-                    titles={{
-                        chartTitle:"Antall Besøk gruppert på klokkeslett gjennom en dag",
-                        xAxisTitle:"Dato",
-                        yAxisTitle:"Antall Besøk"
-                    }}
-                />
-            </div>)}
+                {selectedDomain && formattedStartDate && formattedEndDate &&  (
+                    <div className="">
+                        <AreaChartContainer
+                            teamDomain={selectedDomain}
+                            chartType="areaChartMulti"
+                            endpointType="segmentation"
+                            urlParams={{
+                                startDate: formattedStartDate,
+                                endDate: formattedEndDate,
+                                eventType: eventTypeMappings2.pageViewedGroupByHourOfDay.eventType,
+                                groupBy: eventTypeMappings2.pageViewedGroupByHourOfDay.groupBy,
+                                filters:[
+                                    { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
+                                ]
+                            }}
+                            dimensions={{
+                                width: 500,
+                                height: 350,
+                            }}
+                            titles={{
+                                chartTitle:"Antall Besøk gruppert på klokkeslett gjennom en dag",
+                                xAxisTitle:"Dato",
+                                yAxisTitle:"Antall Besøk"
+                            }}
+                        />
+                    </div>)}
 
-            {selectedDomain && formattedStartDate && formattedEndDate &&  (
-                <div className="">
-                    <AreaChartContainer
-                        teamDomain={selectedDomain}
-                        chartType="areaChartMulti"
-                        endpointType="segmentation"
-                        urlParams={{
-                            startDate: formattedStartDate,
-                            endDate: formattedEndDate,
-                            eventType: eventTypeMappings2.pageViewedGroupByCountryFilterByPath.eventType,
-                            groupBy: eventTypeMappings2.pageViewedGroupByCountryFilterByPath.groupBy,
-                            filters:[
-                                { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
-                            ]
-                        }}
-                        dimensions={{
-                            width: 500,
-                            height: 350,
-                        }}
-                        titles={{
-                            chartTitle:"Antall Besøk gruppert sidesti",
-                            xAxisTitle:"Dato",
-                            yAxisTitle:"Antall Besøk"
-                        }}
-                    />
-                </div>)}
-            {/*
+                {/*
             {selectedDomain && formattedStartDate && formattedEndDate && (
             <div className="">
                 <AreaChartContainer
@@ -368,45 +342,45 @@ const Home = () => {
                 </div>
             */}
 
-            {selectedDomain && formattedStartDate && formattedEndDate && (
-            <div className="">
-                <VerticalBarChartContainer
-                    teamDomain={selectedDomain}
-                    chartType="verticalBarChart"
-                    endpointType="segmentation"
-                    urlParams={{
-                        startDate: formattedStartDate,
-                        endDate: formattedEndDate,
-                        eventType: eventTypeMappings2.pageViewedGroupByCountry.eventType,
-                        groupBy: eventTypeMappings2.pageViewedGroupByCountry.groupBy,
-                        filters:[
-                            { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
-                        ]
-                    }}
-                />
-            </div>)}
+                {selectedDomain && formattedStartDate && formattedEndDate && (
+                    <div className="">
+                        <VerticalBarChartContainer
+                            teamDomain={selectedDomain}
+                            chartType="verticalBarChart"
+                            endpointType="segmentation"
+                            urlParams={{
+                                startDate: formattedStartDate,
+                                endDate: formattedEndDate,
+                                eventType: eventTypeMappings2.pageViewedGroupByCountry.eventType,
+                                groupBy: eventTypeMappings2.pageViewedGroupByCountry.groupBy,
+                                filters:[
+                                    { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
+                                ]
+                            }}
+                        />
+                    </div>)}
 
-            {selectedDomain && formattedStartDate && formattedEndDate && (
-            <div className="">
-                <TableChartContainer
-                    teamDomain={selectedDomain}
-                    chartType="segmentationChartProccesing"
-                    endpointType="segmentation"
-                    urlParams={{
-                        startDate: formattedStartDate,
-                        endDate: formattedEndDate,
-                        eventType: eventTypeMappings2.pageViewedGroupByCountry.eventType,
-                        groupBy: eventTypeMappings2.pageViewedGroupByCountry.groupBy,
-                        filters:[
-                            { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
-                        ]
-                    }}
-                />
-            </div>)}
+                {selectedDomain && formattedStartDate && formattedEndDate && (
+                    <div className="">
+                        <TableChartContainer
+                            teamDomain={selectedDomain}
+                            chartType="segmentationChartProcessing"
+                            endpointType="segmentation"
+                            urlParams={{
+                                startDate: formattedStartDate,
+                                endDate: formattedEndDate,
+                                eventType: eventTypeMappings2.pageViewedGroupByCountry.eventType,
+                                groupBy: eventTypeMappings2.pageViewedGroupByCountry.groupBy,
+                                filters:[
+                                    { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
+                                ]
+                            }}
+                        />
+                    </div>)}
 
+            </div>
         </div>
-    </div>
-  );
+    );
 };
 
 export default Home;

@@ -21,7 +21,7 @@ export const processSegmentationTableChart = (apiResponse) => {
 };
 
 const dataProcessingFunctionMap = {
-    'segmentationChartProccesing': processSegmentationTableChart,
+    'segmentationChartProcessing': processSegmentationTableChart,
 };
 
 
