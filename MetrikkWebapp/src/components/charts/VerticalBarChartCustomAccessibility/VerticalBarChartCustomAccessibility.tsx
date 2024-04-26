@@ -37,7 +37,7 @@ export class VerticalBarChartCustomAccessibilityExample extends React.Component<
         const colors = chartData.map((_, index) => colorPalette[index % colorPalette.length]);
 
         return (
-            <div style={{ width: '800px', height: '400px' }}>
+            <div style={{ width: '800px', height: '400px' }} className="mb-12">
                 <Checkbox
                     label="Use single color"
                     checked={useSingleColor}

@@ -1,50 +1,59 @@
 export const eventTypeMappings2 = {
+    //areachart *
     pageViewed: {
         eventType: `[Amplitude] Page Viewed`,
         groupBy: [],
         filters: []
     },
+    //areachart *
     pageViewedGroupByCountry: {
         eventType: `[Amplitude] Page Viewed`,
         groupBy: [{ type: "user", value: "country" }],
         filters: []
     },
+    //table *
     pageViewedGroupByPagePath: {
         eventType: `[Amplitude] Page Viewed`,
         groupBy: [{ type: "event", value: "[Amplitude] Page Path" }],
         filters: []
     },
+    //table *
     pageViewedGroupByReferringDomain: {
         eventType: `[Amplitude] Page Viewed`,
         groupBy: [{ type: "user", value: "gp:referring_domain" }],
         filters: []
     },
+    //table *
     pageViewedGroupByReferrer: {
         eventType: `[Amplitude] Page Viewed`,
         groupBy: [{ type: "event", value: "referrer" }],
         filters: []
     },
+    //vertical
     pageViewedGroupByDayOfWeek: {
         eventType: `[Amplitude] Page Viewed`,
         groupBy: [{ type: "day_time_prop", value: "amplitude_day_of_week", group_type: "User" }],
         filters: []
     },
+    //vertical
     pageViewedGroupByHourOfDay: {
         eventType: `[Amplitude] Page Viewed`,
         groupBy: [{ type: "day_time_prop", value: "amplitude_hour_of_day", group_type: "User" }],
         filters: []
     },
+    //area
     pageViewedGroupByCity: {
         eventType: `[Amplitude] Page Viewed`,
         groupBy: [{ type: "user", value: "city" }],
         filters: []
     },
+    //area
     pageViewedGroupByLanguage: {
         eventType: `[Amplitude] Page Viewed`,
         groupBy: [{ type: "user", value: "language" }],
         filters: []
     },
-    //might need changes
+    //might need to be removed
     pageViewedFilterByDomainsAndPagePath: {
         eventType: `[Amplitude] Page Viewed`,
         groupBy: [{ type: "user", value: "gp:referrer" }],
@@ -53,19 +62,22 @@ export const eventTypeMappings2 = {
             { subprop_type: "[Amplitude] Page Path", subprop_op: "is", subprop_value: ["/jobbsoknad/"] }
         ]
     },
+    //vertical
     pageViewedGroupByOS: {
         eventType: `[Amplitude] Page Viewed`,
         groupBy: [{ type: "user", value: "os" }],
         filters: []
     },
+    //vertical
     pageViewedGroupByDeviceFamily: {
         eventType: `[Amplitude] Page Viewed`,
-        groupBy: [{ type: "user", value: "Device family" }],
+        groupBy: [{ type: "user", value: "device" }],
         filters: []
     },
+    //vertical
     pageViewedGroupByDeviceType: {
         eventType: `[Amplitude] Page Viewed`,
-        groupBy: [{ type: "user", value: "Device type" }],
+        groupBy: [{ type: "user", value: "device_type" }],
         filters: []
     },
 
