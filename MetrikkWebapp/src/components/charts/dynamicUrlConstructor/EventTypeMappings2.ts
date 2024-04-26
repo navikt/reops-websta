@@ -1,4 +1,4 @@
-export const eventTypeMappings = {
+export const eventTypeMappings2 = {
     pageViewed: {
         eventType: `[Amplitude] Page Viewed`,
         groupBy: [],

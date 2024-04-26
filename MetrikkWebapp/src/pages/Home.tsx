@@ -10,7 +10,8 @@ import DisplayTableChart from "../components/charts/TableChart/DisplayTableChart
 import TableChart from "../components/charts/TableChart/TableChart.tsx";
 
 import AreaChartContainer from '../components/charts/AreaChartCustomAccessibility/AreaChartContainer';
-import {eventTypeMappings} from "../components/charts/dynamicUrlConstructor/EventTypeMappings.ts";
+import {eventTypeMappings2} from "../components/charts/dynamicUrlConstructor/EventTypeMappings2.ts";
+import {eventTypeMappings} from "../components/charts/fetchUrlConstructor.ts";
 import {SearchComponent} from "../components/SearchComponent/SearchComponent.tsx";
 import {SetStateAction, useCallback, useState} from "react";
 import {URLSearchComponent} from "../components/SearchComponent/URLSearchComponent.tsx";
@@ -102,7 +103,10 @@ const Home = () => {
                     urlParams={{
                         startDate:formattedStartDate,
                         endDate: formattedEndDate,
-                        eventType: eventTypeMappings.pageViewed.eventType
+                        eventType: eventTypeMappings2.pageViewed.eventType,
+                        filters:[
+                            { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
+                        ]
                     }}
                     dimensions={{
                             width: 500,
@@ -126,8 +130,8 @@ const Home = () => {
                     urlParams={{
                         startDate: formattedStartDate,
                         endDate: formattedEndDate,
-                        eventType: eventTypeMappings.pageViewedGroupByReferrer.eventType,
-                        groupBy:eventTypeMappings.pageViewedGroupByReferrer.groupBy,
+                        eventType: eventTypeMappings2.pageViewedGroupByReferrer.eventType,
+                        groupBy:eventTypeMappings2.pageViewedGroupByReferrer.groupBy,
                         filters:[
                             { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
                         ]
@@ -152,8 +156,11 @@ const Home = () => {
                     urlParams={{
                         startDate: formattedStartDate,
                         endDate: formattedEndDate,
-                        eventType: eventTypeMappings.pageViewedGroupByPagePath.eventType,
-                        groupBy: eventTypeMappings.pageViewedGroupByPagePath.groupBy,
+                        eventType: eventTypeMappings2.pageViewedGroupByPagePath.eventType,
+                        groupBy: eventTypeMappings2.pageViewedGroupByPagePath.groupBy,
+                        filters:[
+                            { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
+                        ]
                     }}
                     dimensions={{
                         width: 500,
@@ -175,8 +182,11 @@ const Home = () => {
                     urlParams={{
                         startDate: formattedStartDate,
                         endDate: formattedEndDate,
-                        eventType: eventTypeMappings.pageViewedGroupByCity.eventType,
-                        groupBy: eventTypeMappings.pageViewedGroupByCity.groupBy,
+                        eventType: eventTypeMappings2.pageViewedGroupByCity.eventType,
+                        groupBy: eventTypeMappings2.pageViewedGroupByCity.groupBy,
+                        filters:[
+                            { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
+                        ]
                     }}
                     dimensions={{
                         width: 500,
@@ -198,8 +208,11 @@ const Home = () => {
                     urlParams={{
                         startDate: formattedStartDate,
                         endDate: formattedEndDate,
-                        eventType: eventTypeMappings.pageViewedGroupByLanguage.eventType,
-                        groupBy: eventTypeMappings.pageViewedGroupByLanguage.groupBy,
+                        eventType: eventTypeMappings2.pageViewedGroupByLanguage.eventType,
+                        groupBy: eventTypeMappings2.pageViewedGroupByLanguage.groupBy,
+                        filters:[
+                            { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
+                        ]
                     }}
                     dimensions={{
                         width: 500,
@@ -221,8 +234,11 @@ const Home = () => {
                     urlParams={{
                         startDate: formattedStartDate,
                         endDate: formattedEndDate,
-                        eventType: eventTypeMappings.pageViewedGroupByCountry.eventType,
-                        groupBy: eventTypeMappings.pageViewedGroupByCountry.groupBy
+                        eventType: eventTypeMappings2.pageViewedGroupByCountry.eventType,
+                        groupBy: eventTypeMappings2.pageViewedGroupByCountry.groupBy,
+                        filters:[
+                            { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
+                        ]
                     }}
                     dimensions={{
                         width: 500,
@@ -245,8 +261,11 @@ const Home = () => {
                     urlParams={{
                         startDate: formattedStartDate,
                         endDate: formattedEndDate,
-                        eventType: eventTypeMappings.pageViewedGroupByDayOfWeek.eventType,
-                        groupBy: eventTypeMappings.pageViewedGroupByDayOfWeek.groupBy,
+                        eventType: eventTypeMappings2.pageViewedGroupByDayOfWeek.eventType,
+                        groupBy: eventTypeMappings2.pageViewedGroupByDayOfWeek.groupBy,
+                        filters:[
+                            { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
+                        ]
                     }}
                     dimensions={{
                         width: 500,
@@ -279,8 +298,11 @@ const Home = () => {
                     urlParams={{
                         startDate: formattedStartDate,
                         endDate: formattedEndDate,
-                        eventType: eventTypeMappings.pageViewedGroupByHourOfDay.eventType,
-                        groupBy: eventTypeMappings.pageViewedGroupByHourOfDay.groupBy,
+                        eventType: eventTypeMappings2.pageViewedGroupByHourOfDay.eventType,
+                        groupBy: eventTypeMappings2.pageViewedGroupByHourOfDay.groupBy,
+                        filters:[
+                            { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
+                        ]
                     }}
                     dimensions={{
                         width: 500,
@@ -303,9 +325,11 @@ const Home = () => {
                         urlParams={{
                             startDate: formattedStartDate,
                             endDate: formattedEndDate,
-                            eventType: eventTypeMappings.pageViewedGroupByCountryFilterByPath.eventType,
-                            groupBy: eventTypeMappings.pageViewedGroupByCountryFilterByPath.groupBy,
-                            filters: eventTypeMappings.pageViewedGroupByCountryFilterByPath.filters,
+                            eventType: eventTypeMappings2.pageViewedGroupByCountryFilterByPath.eventType,
+                            groupBy: eventTypeMappings2.pageViewedGroupByCountryFilterByPath.groupBy,
+                            filters:[
+                                { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
+                            ]
                         }}
                         dimensions={{
                             width: 500,
@@ -353,15 +377,6 @@ const Home = () => {
                         endDate: "20240130",
                         eventType: eventTypeMappings.pageViewedGroupByCountry,
                     }}
-                    dimensions={{
-                        width: 500,
-                        height: 350,
-                    }}
-                    titles={{
-                        chartTitle:"Antall gjengående besøk",
-                        xAxisTitle:"Dato",
-                        yAxisTitle:"Antall Besøk"
-                    }}
                 />
             </div>
 
@@ -389,11 +404,8 @@ const Home = () => {
                         eventType: eventTypeMappings.pageViewedGroupByDeviceFamily,
                     }}
                 />
-            </div>)}
-            */}
+            </div>
 
-
-            {/* <Test/> */}
         </div>
     </div>
   );

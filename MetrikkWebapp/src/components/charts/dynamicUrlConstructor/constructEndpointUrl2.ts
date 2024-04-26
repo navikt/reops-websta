@@ -1,6 +1,6 @@
 // constructEndpointUrl.ts
 import { endpointMappings } from './EndpointMapping.ts'
-import { eventTypeMappings } from "./EventTypeMappings.ts";
+import { eventTypeMappings2 } from "./EventTypeMappings2.ts";
 
 interface EndpointParams {
     eventType?: string;
@@ -14,12 +14,12 @@ interface EndpointParams {
     [key: string]: any;
 }
 
-export function constructEndpointUrl(type: string, params: EndpointParams = {}) {
+export function constructEndpointUrl2(type: string, params: EndpointParams = {}) {
     const mapping = endpointMappings[type] || endpointMappings.segmentation;
     let endpointTemplate = mapping.url;
 
-    const eventTypeConfig = eventTypeMappings[params.eventType] || eventTypeMappings.pageViewed;
-    const secondEventTypeConfig = eventTypeMappings[params.secondEventType] || eventTypeMappings.pageViewed;
+    const eventTypeConfig = eventTypeMappings2[params.eventType] || eventTypeMappings2.pageViewed;
+    const secondEventTypeConfig = eventTypeMappings2[params.secondEventType] || eventTypeMappings2.pageViewed;
 
     // Prepare the event configuration
     const eventConfig = {

@@ -2,7 +2,7 @@ import AreaChartCustomAccessibility from './AreaChartCustomAccessibility';
 import { fetchAmplitudeData } from "../../../service/AmplitudeApi";
 import { selectDataProcessingFunction } from "./chartDataService";
 import {useEffect, useState} from "react";
-import {constructEndpointUrl} from "../dynamicUrlConstructor/constructEndpointUrl.ts";
+import {constructEndpointUrl2} from "../dynamicUrlConstructor/constructEndpointUrl2.ts";
 
 interface AreaChartContainerProps {
     chartType: string;
@@ -40,7 +40,7 @@ const AreaChartContainer: React.FC<AreaChartContainerProps> = ({ teamDomain, cha
         const fetchData = async () => {
             try {
                 //const fetchURL = constructEndpointUrl(endpointType, urlParams);
-                const fetchURL = constructEndpointUrl(endpointType, urlParams);
+                const fetchURL = constructEndpointUrl2(endpointType, urlParams);
                 //console.log(fetchURL)
                 const response = await fetchAmplitudeData(fetchURL, teamDomain);
                 // Dynamically select the processing function based on chartType
