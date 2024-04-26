@@ -24,17 +24,12 @@ const VerticalBarChartContainer: React.FC<VerticalChartContainerProps> = ({ team
     console.log("params", chartType, endpointType, urlParams, teamDomain);
 
     useEffect(() => {
-        console.log("fkrelfe")
         const fetchData = async () => {
-            console.log("before try")
             try {
-                console.log("in try")
                 const fetchURL = constructEndpointUrl(endpointType, urlParams);
-                console.log("url", fetchURL)
                 const response = await fetchAmplitudeData(fetchURL, teamDomain);
-                console.log("resp", response)
-                const processedChartData = selectDataProcessingFunction(response);
-                console.log("pcd", processedChartData)
+                const processData = selectDataProcessingFunction(chartType);
+                const processedChartData = processData(response);
                 setChartData(processedChartData);
             } catch (error) {
                 console.log("in error")

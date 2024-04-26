@@ -5,7 +5,6 @@ import HorizontalBarChartCustomAccessibility from '../components/charts/Horizont
 import { Search } from '@navikt/ds-react';
 import { Heading, VStack } from '@navikt/ds-react';
 import { Link } from 'react-router-dom';
-import { VerticalBarChartCustomAccessibilityExample } from '../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartCustomAccessibility';
 import {Test} from "../components/charts/AreaChartCustomAccessibility/test";
 import DisplayTableChart from "../components/charts/TableChart/DisplayTableChart.tsx";
 import TableChart from "../components/charts/TableChart/TableChart.tsx";
@@ -16,6 +15,11 @@ import {SearchComponent} from "../components/SearchComponent/SearchComponent.tsx
 import {SetStateAction, useCallback, useState} from "react";
 import {URLSearchComponent} from "../components/SearchComponent/URLSearchComponent.tsx";
 import {RangeDatePicker} from "../components/DatePicker/DatePicker.tsx";
+import VerticalBarChartCustomAccessibilityExample
+    from "../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartCustomAccessibility";
+import VerticalBarChartContainer
+    from "../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartContainer";
+import TableChartContainer from "../components/charts/TableChart/TableChartContainer";
 
 const Home = () => {
     const simpleGuide = 'Trykk her for en enkel guide';
@@ -326,6 +330,28 @@ const Home = () => {
                         endDate: formattedEndDate,
                         eventType: eventTypeMappings.pageViewed,
                         secondEventType: eventTypeMappings.pageViewed
+                teamDomain={selectedDomain}
+                chartType="retentionChart"
+                endpointType="retention"
+                urlParams={{
+                startDate: "20240205",
+                endDate: "20240304",
+                eventType: eventTypeMappings.pageViewed,
+                secondEventType: eventTypeMappings.pageViewed
+            }}
+                dimensions={}/>
+                </div>
+            */}
+
+            <div className="">
+                <VerticalBarChartContainer
+                    teamDomain={selectedDomain}
+                    chartType="verticalBarChart"
+                    endpointType="segmentation"
+                    urlParams={{
+                        startDate: "20240101",
+                        endDate: "20240130",
+                        eventType: eventTypeMappings.pageViewedGroupByCountry,
                     }}
                     dimensions={{
                         width: 500,
@@ -335,6 +361,32 @@ const Home = () => {
                         chartTitle:"Antall gjengående besøk",
                         xAxisTitle:"Dato",
                         yAxisTitle:"Antall Besøk"
+                    }}
+                />
+            </div>
+
+            <div className="">
+                <VerticalBarChartContainer
+                    teamDomain={selectedDomain}
+                    chartType="verticalBarChartDates"
+                    endpointType="segmentation"
+                    urlParams={{
+                        startDate: "20240101",
+                        endDate: "20240130",
+                        eventType: eventTypeMappings.pageViewed,
+                    }}
+                    />
+            </div>
+
+            <div className="">
+                <TableChartContainer
+                    teamDomain={selectedDomain}
+                    chartType="segmentationChartProccesing"
+                    endpointType="segmentation"
+                    urlParams={{
+                        startDate: "20240101",
+                        endDate: "20240130",
+                        eventType: eventTypeMappings.pageViewedGroupByDeviceFamily,
                     }}
                 />
             </div>)}
