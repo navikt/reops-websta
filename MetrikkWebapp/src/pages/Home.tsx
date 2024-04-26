@@ -15,9 +15,9 @@ const Home = () => {
         This is the homepage
       </h1>
       <VStack className="items-center mb-3">
-        <Link to="/guide" className="text-center hover:underline">
+        {/* <Link to="/guide" className="text-center hover:underline">
          <Heading size="medium">{simpleGuide}</Heading>
-        </Link>
+        </Link> */}
         <h2 className="text-xl font-bold mb-3 text-center">Søk her:</h2>
       </VStack>
       <form className="w-full max-w-lg px-4">
