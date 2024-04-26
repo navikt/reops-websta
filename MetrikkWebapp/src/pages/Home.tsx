@@ -94,7 +94,7 @@ const Home = () => {
       {/*TODO: Charts er lenger til høyre når de er centered fordi centrering starter på y-axis */}
         <div className="flex flex-row justify-between items-center flex-wrap">
 
-            {selectedDomain && formattedStartDate && formattedEndDate && (
+            {selectedDomain && formattedStartDate && formattedEndDate &&  (
             <div className="">
                 <AreaChartContainer
                     teamDomain={selectedDomain}
@@ -121,7 +121,7 @@ const Home = () => {
             </div>
                 )}
 
-            {selectedDomain && formattedStartDate && formattedEndDate && selectedPath && (
+            {selectedDomain && formattedStartDate && formattedEndDate &&  (
             <div className="">
                 <AreaChartContainer
                     teamDomain={selectedDomain}
@@ -147,7 +147,7 @@ const Home = () => {
                     }}
                 />
             </div>)}
-            {selectedDomain && formattedStartDate && formattedEndDate && (
+            {selectedDomain && formattedStartDate && formattedEndDate &&  (
             <div className="">
                 <AreaChartContainer
                     teamDomain={selectedDomain}
@@ -225,7 +225,8 @@ const Home = () => {
                     }}
                 />
             </div>)}
-            {selectedDomain && formattedStartDate && formattedEndDate && (
+
+            {selectedDomain && formattedStartDate && formattedEndDate &&  (
             <div className="">
                 <AreaChartContainer
                     teamDomain={selectedDomain}
@@ -289,7 +290,7 @@ const Home = () => {
           <VerticalBarChartCustomAccessibilityExample />
         </div>
         */}
-            {selectedDomain && formattedStartDate && formattedEndDate && (
+            {selectedDomain && formattedStartDate && formattedEndDate &&  (
             <div className="">
                 <AreaChartContainer
                     teamDomain={selectedDomain}
@@ -316,7 +317,7 @@ const Home = () => {
                 />
             </div>)}
 
-            {selectedDomain && formattedStartDate && formattedEndDate && (
+            {selectedDomain && formattedStartDate && formattedEndDate &&  (
                 <div className="">
                     <AreaChartContainer
                         teamDomain={selectedDomain}
@@ -367,44 +368,41 @@ const Home = () => {
                 </div>
             */}
 
+            {selectedDomain && formattedStartDate && formattedEndDate && (
             <div className="">
                 <VerticalBarChartContainer
                     teamDomain={selectedDomain}
                     chartType="verticalBarChart"
                     endpointType="segmentation"
                     urlParams={{
-                        startDate: "20240101",
-                        endDate: "20240130",
-                        eventType: eventTypeMappings.pageViewedGroupByCountry,
+                        startDate: formattedStartDate,
+                        endDate: formattedEndDate,
+                        eventType: eventTypeMappings2.pageViewedGroupByCountry.eventType,
+                        groupBy: eventTypeMappings2.pageViewedGroupByCountry.groupBy,
+                        filters:[
+                            { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
+                        ]
                     }}
                 />
-            </div>
+            </div>)}
 
-            <div className="">
-                <VerticalBarChartContainer
-                    teamDomain={selectedDomain}
-                    chartType="verticalBarChartDates"
-                    endpointType="segmentation"
-                    urlParams={{
-                        startDate: "20240101",
-                        endDate: "20240130",
-                        eventType: eventTypeMappings.pageViewed,
-                    }}
-                    />
-            </div>
-
+            {selectedDomain && formattedStartDate && formattedEndDate && (
             <div className="">
                 <TableChartContainer
                     teamDomain={selectedDomain}
                     chartType="segmentationChartProccesing"
                     endpointType="segmentation"
                     urlParams={{
-                        startDate: "20240101",
-                        endDate: "20240130",
-                        eventType: eventTypeMappings.pageViewedGroupByDeviceFamily,
+                        startDate: formattedStartDate,
+                        endDate: formattedEndDate,
+                        eventType: eventTypeMappings2.pageViewedGroupByCountry.eventType,
+                        groupBy: eventTypeMappings2.pageViewedGroupByCountry.groupBy,
+                        filters:[
+                            { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
+                        ]
                     }}
                 />
-            </div>
+            </div>)}
 
         </div>
     </div>

@@ -3,6 +3,7 @@ import {constructEndpointUrl} from "../fetchUrlConstructor.ts";
 import {fetchAmplitudeData} from "../../../service/AmplitudeApi.tsx";
 import {selectDataProcessingFunction} from "./TableChartService"
 import TableBox from "./TableBox";
+import {constructEndpointUrl2} from "../dynamicUrlConstructor/constructEndpointUrl2.ts";
 
 interface TableChartContainerProps {
     chartType: string;
@@ -12,6 +13,8 @@ interface TableChartContainerProps {
         startDate: string;
         endDate: string;
         eventType?: string;
+        groupBy?: any[];
+        filters?: any[];
         secondEventType?: string; // Optional since it's not always used
         // Add more properties as needed
     };
@@ -26,7 +29,8 @@ const TableChartContainer: React.FC<TableChartContainerProps> = (
         console.log('Fetching data for TableChart...');
         const fetchData = async () => {
             try {
-                const fetchURL = constructEndpointUrl(endpointType, urlParams);
+                //const fetchURL = constructEndpointUrl(endpointType, urlParams);
+                const fetchURL = constructEndpointUrl2(endpointType, urlParams);
                 console.log("fetchURL", fetchURL);
                 const response = await fetchAmplitudeData(fetchURL, teamDomain);
                 console.log("response", response);
@@ -46,7 +50,7 @@ const TableChartContainer: React.FC<TableChartContainerProps> = (
 
         fetchData();
         //Charttype trengs kanskje ikke, kan hende [] deps holder
-    }, [chartType, teamDomain]); // Re-fetch and process data if chartType changes
+    }, [chartType, teamDomain, urlParams.startDate, urlParams.endDate, urlParams.filters]); // Re-fetch and process data if chartType changes
 
     console.log("TableChartData", chartData)
     return chartData ? <TableBox   data={chartData}/> : <div>Loading...</div>;
