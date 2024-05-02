@@ -24,7 +24,7 @@ const Home = () => {
   const simpleGuide = 'Trykk her for en enkel guide';
 
   // Kan hende callback blir brukt til å velge domene
-  const [selectedDomain, setSelectedDomain] = useState('100002286');
+  const [selectedDomain, setSelectedDomain] = useState('');
 
   const handleDomainSelect = useCallback((domain) => {
     setSelectedDomain(domain);
@@ -68,13 +68,17 @@ const Home = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-6">
-      <h1 className="text-4xl font-bold mb-6 text-center">👋 Welcome!</h1>
-      <h2 className="font-semibold">Type your URL in the search bar</h2>
+      <h1 className="text-4xl font-bold mb-6 text-center">👋 Velkommen!</h1>
+      {/* RangeDatePicker already includes labels */}
+      <div className="flex items-center justify-center w-full max-w-lg">
+        <RangeDatePicker onDateChange={handleDateChange} />
+      </div>
 
+      <h2 className="font-semibold">Skriv inn URL i Søkefeltet</h2>
       <div className="p-8 space-y-6">
         {/* Search Component */}
         <div className="flex flex-col w-full max-w-lg">
-          <label htmlFor="searchComponent" className="text-sm font-bold ">
+          <label htmlFor="searchComponent" className="text-sm font-bold text-center">
             URL
           </label>
           <div className="relative">
@@ -87,10 +91,6 @@ const Home = () => {
           </div>
         </div>
 
-        {/* RangeDatePicker already includes labels */}
-        <div className="w-full max-w-lg">
-          <RangeDatePicker onDateChange={handleDateChange} />
-        </div>
       </div>
 
       {/*<VStack className="items-center mb-3">
