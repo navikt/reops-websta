@@ -68,7 +68,7 @@ const Home = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-6">
-      <h1 className="text-4xl font-bold mb-6 text-center">👋 Velkommen!</h1>
+      <h1 className="text-4xl font-bold mb-6 text-center">👋Velkommen!</h1>
       {/* RangeDatePicker already includes labels */}
       <div className="flex items-center justify-center w-full max-w-lg">
         <RangeDatePicker onDateChange={handleDateChange} />
