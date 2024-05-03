@@ -1,18 +1,37 @@
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { Tabs } from '@navikt/ds-react';
+
 function Nav() {
-    return (
-        <nav className="siteheader simple" style={{height: "80px", borderBottom: "1px solid #ccc"}}>
-            <div className="stickyPlaceholder__QO79_">
-                <div className="stickyContainer__EulYb ">
-                    <div className="simpleHeader__Z9PQc">
-                        <div className="content__EtlfN"><a href="." style={{fontWeight: "800", fontSize: "1.7rem"}}
-                                                           className="felgen-logo navLogoLenke__JU8Z4 navLogoLenke lenkeMedSporing__hcOG_">
-                            Demo Websta
-                        </a></div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    );
+  return (
+    <nav className="siteheader simple h-20 border-b border-gray-300 flex items-center">
+      <div className="ml-4">
+        <div className="flex items-center">
+          <a href="." className="font-bold text-xl mr-4">
+            Demo Websta
+          </a>
+          <Tabs defaultValue="/" fill>
+            <Tabs.List className="flex gap-4">
+              <NavLink
+                to="/amplitude"
+                className="tab-link"
+                activeClassName="font-bold"
+              >
+                <Tabs.Tab value="amplitude" label="Amplitude" />
+              </NavLink>
+              <NavLink
+                to="/siteimprove"
+                className="tab-link"
+                activeClassName="font-bold"
+              >
+                <Tabs.Tab value="siteimprove" label="Siteimprove" />
+              </NavLink>
+            </Tabs.List>
+          </Tabs>
+        </div>
+      </div>
+    </nav>
+  );
 }
 
 export default Nav;
