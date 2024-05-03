@@ -129,7 +129,7 @@ describe('Homepage', () => {
       </HashRouter>
     );
     await waitFor(() => {
-      expect(getByText('This is the homepage')).toBeInTheDocument();
+      expect(getByText('👋Velkommen!')).toBeInTheDocument();
     });
   });
 });
