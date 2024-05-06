@@ -40,6 +40,7 @@ const Home = () => {
   //const standardStartDate = new Date(new Date().setDate(standardStartDate.getDate()-30));
   //const standardEndDate = new Date();
 
+
   const defaultStartDate = new Date(new Date().setDate(new Date(Date.now()).getDate()-30));
   const defaultEndDate = new Date(Date.now());
   const defaultFormattedStartDate = format(defaultStartDate, 'yyyyMMdd')
@@ -52,12 +53,9 @@ const Home = () => {
 
 
 
-
   const [formattedStartDate, setFormattedStartDate] = useState(defaultFormattedStartDate);
   const [formattedEndDate, setFormattedEndDate] = useState(defaultFormattedEndDate);
 
-  console.log(formattedStartDate);
-  console.log(formattedEndDate);
 
   interface range {
     from?: Date;

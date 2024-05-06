@@ -37,9 +37,10 @@ export const URLSearchComponent = ({ onDomainSelect, onPagePath }) => {
 
   const filterTeams = (searchTerm: string) => {
     const filtered = teamsData.filter(
-      (team) =>
-        team.teamName &&
-        team.teamName.toLowerCase().includes(searchTerm.toLowerCase())
+        (team) =>
+            team.teamName &&
+            searchTerm &&
+            team.teamName.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredTeams(filtered);
   };
