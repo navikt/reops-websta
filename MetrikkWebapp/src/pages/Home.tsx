@@ -37,8 +37,27 @@ const Home = () => {
     setSelectedPath(path);
   }, []);
 
-  const [formattedStartDate, setFormattedStartDate] = useState('');
-  const [formattedEndDate, setFormattedEndDate] = useState('');
+  //const standardStartDate = new Date(new Date().setDate(standardStartDate.getDate()-30));
+  //const standardEndDate = new Date();
+
+  const defaultStartDate = new Date(new Date().setDate(new Date(Date.now()).getDate()-30));
+  const defaultEndDate = new Date(Date.now());
+  const defaultFormattedStartDate = format(defaultStartDate, 'yyyyMMdd')
+  const defaultFormattedEndDate = format(defaultEndDate, 'yyyyMMdd')
+
+  console.log("date today",defaultStartDate);
+  console.log("date today minus 30",defaultEndDate);
+  console.log("date today Formatted",defaultFormattedStartDate);
+  console.log("date today minus 30 Formatted",defaultFormattedEndDate);
+
+
+
+
+  const [formattedStartDate, setFormattedStartDate] = useState(defaultFormattedStartDate);
+  const [formattedEndDate, setFormattedEndDate] = useState(defaultFormattedEndDate);
+
+  console.log(formattedStartDate);
+  console.log(formattedEndDate);
 
   interface range {
     from?: Date;
@@ -70,12 +89,9 @@ const Home = () => {
     <div className="flex flex-col items-center justify-center min-h-screen p-6">
       <h1 className="text-4xl font-bold mb-6 text-center">👋Velkommen!</h1>
       {/* RangeDatePicker already includes labels */}
-      <div className="flex items-center justify-center w-full max-w-lg">
-        <RangeDatePicker onDateChange={handleDateChange} />
-      </div>
 
       <h2 className="font-semibold">Skriv inn URL i Søkefeltet</h2>
-      <div className="p-8 space-y-6">
+      <div className="p-8 space-y-6 ">
         {/* Search Component */}
         <div className="flex flex-col w-full max-w-lg">
           <label htmlFor="searchComponent" className="text-sm font-bold text-center">
@@ -90,6 +106,10 @@ const Home = () => {
             />
           </div>
         </div>
+        {selectedDomain &&(
+      <div className="flex items-center justify-center w-full max-w-lg">
+        <RangeDatePicker onDateChange={handleDateChange} />
+      </div>)}
 
       </div>
 
