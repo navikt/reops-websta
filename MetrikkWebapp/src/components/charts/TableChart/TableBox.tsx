@@ -1,8 +1,10 @@
 import React from 'react';
 import { Table } from "@navikt/ds-react";
 
-const TableBox = ({ data }) => (
-    <Table>
+const TableBox = ({ data, title }) => (
+    <div>
+        <h2 style={{ textAlign: 'center', fontWeight: 'bold'}}>{title}</h2>
+        <Table>
         <Table.Header>
             <Table.Row>
                 <Table.HeaderCell>Value</Table.HeaderCell>
@@ -18,6 +20,7 @@ const TableBox = ({ data }) => (
             ))}
         </Table.Body>
     </Table>
+    </div>
 );
 
 

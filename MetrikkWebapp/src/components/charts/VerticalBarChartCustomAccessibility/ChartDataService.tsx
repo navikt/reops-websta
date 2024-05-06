@@ -9,8 +9,6 @@ export const processVerticalBarChartData = (apiResponse) => {
 
     const { seriesCollapsed, seriesLabels } = apiResponse.data;
 
-    console.log("apiresponse", apiResponse);
-
     const chartDataPoints = seriesLabels.map((label, index) => {
         const xValue = label[1] ? label[1].toString() : 'Unknown';  // Using the country name from seriesLabels
         const yValue = seriesCollapsed[index] && seriesCollapsed[index][0] ? seriesCollapsed[index][0].value || 0 : 0;

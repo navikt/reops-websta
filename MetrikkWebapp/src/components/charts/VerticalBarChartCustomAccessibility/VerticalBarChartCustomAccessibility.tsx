@@ -7,7 +7,16 @@ import { Checkbox } from '@fluentui/react/lib/Checkbox';
 import { DefaultPalette } from '@fluentui/react/lib/Styling';
 
 interface IVerticalBarChartProps {
-  chartData: IVerticalBarChartDataPoint[];
+  chartData: IVerticalBarChartDataPoint[]
+  titles: {
+    chartTitle?: string;
+    xAxisTitle?: string;
+    yAxisTitle?: string;
+  }
+  dimensions: {
+    width: number;
+    height: number;
+  };
 }
 
 interface IVerticalBarChartState {
@@ -15,9 +24,9 @@ interface IVerticalBarChartState {
 }
 
 export class VerticalBarChartCustomAccessibilityExample extends React.Component<
-  IVerticalBarChartProps,
-  IVerticalBarChartState
-> {
+    IVerticalBarChartProps,
+    IVerticalBarChartState
+    > {
   constructor(props: IVerticalBarChartProps) {
     super(props);
     this.state = {
@@ -26,15 +35,15 @@ export class VerticalBarChartCustomAccessibilityExample extends React.Component<
   }
 
   private _onChange = (
-    ev: React.FormEvent<HTMLInputElement>,
-    checked: boolean
+      ev: React.FormEvent<HTMLInputElement>,
+      checked: boolean
   ) => {
     this.setState({ useSingleColor: checked });
   };
 
   public render(): JSX.Element {
     const { useSingleColor } = this.state;
-    const { chartData } = this.props;
+    const { chartData, titles, dimensions } = this.props;
 
     const colorPalette = [
       '#4caf50',
@@ -60,30 +69,44 @@ export class VerticalBarChartCustomAccessibilityExample extends React.Component<
     ];
 
     const colors = chartData.map(
-      (_, index) => colorPalette[index % colorPalette.length]
+        (_, index) => colorPalette[index % colorPalette.length]
     );
 
+    const rootStyle = {
+      width: `${dimensions.width}px`,
+      height: `${dimensions.height}px`,
+      padding: '0 20px', // Adjust as needed
+    };
+
     return (
-      <div style={{ width: '100%', height: 'auto', padding: '20px' }}>
-        <Checkbox
-          label="Use single color"
-          checked={useSingleColor}
-          onChange={this._onChange}
-        />
-        <VerticalBarChart
-          chartTitle="Vertical Bar Chart"
-          data={chartData}
-          width={1000} // Increased width
-          height={500} // Increased height
-          barWidth={15} // Adjust bar width as necessary
-          colors={
-            useSingleColor ? chartData.map(() => DefaultPalette.green) : colors
-          }
-          yAxisTickCount={6}
-          hideLegend={true}
-          enableReflow={true}
-        />
-      </div>
+        <div className="mb-12">
+          <h2 className="text-center font-bold">{titles.chartTitle}</h2>
+          <div style={rootStyle}>
+          <Checkbox
+              label="Bruk én farge"
+              checked={useSingleColor}
+              onChange={this._onChange}
+          />
+            <VerticalBarChart
+                data={chartData}
+                width={dimensions.width}
+                height={dimensions.height}
+                barWidth={15}
+                colors={useSingleColor ? chartData.map(() => DefaultPalette.green) : colors}
+                yAxisTickCount={6}
+                hideLegend={true}
+                enableReflow={true}
+                xAxisOuterPadding={0}
+                xAxisPadding={0.1}
+                xAxisTitle={titles.xAxisTitle} // Now correctly referenced
+                yAxisTitle={titles.yAxisTitle} // Added y-axis title
+                styles={{
+                  root: { marginLeft: '-20px' }, // Pull the chart towards the left
+                }}
+            />
+
+          </div>
+        </div>
     );
   }
 }

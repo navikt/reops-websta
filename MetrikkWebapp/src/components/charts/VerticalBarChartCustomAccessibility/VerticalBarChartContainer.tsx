@@ -19,12 +19,18 @@ interface VerticalChartContainerProps {
         filters?: any [];
         // Add more properties as needed
     };
+    dimensions: {
+        width: number;
+        height: number;
+    }
+    titles:{
+        chartTitle?:string;
+        xAxisTitle?: string;
+        yAxisTitle?: string;
+    }
 }
-const VerticalBarChartContainer: React.FC<VerticalChartContainerProps> = ({ teamDomain, chartType, endpointType, urlParams }) => {
+const VerticalBarChartContainer: React.FC<VerticalChartContainerProps> = ({ teamDomain, chartType, endpointType, urlParams, dimensions, titles }) => {
     const [chartData, setChartData] = useState();
-
-    console.log("chartdata", chartData);
-    console.log("params", chartType, endpointType, urlParams, teamDomain);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -44,7 +50,7 @@ const VerticalBarChartContainer: React.FC<VerticalChartContainerProps> = ({ team
         fetchData();
     }, [chartType, teamDomain, urlParams.startDate, urlParams.endDate, urlParams.filters]);
 
-    return chartData ? <VerticalBarChartCustomAccessibilityExample chartData={chartData} />: <div>Loading...</div>;
+    return chartData ? <VerticalBarChartCustomAccessibilityExample chartData={chartData} dimensions={dimensions} titles={titles}/>: <div>Loading...</div>;
 };
 
 export default VerticalBarChartContainer;
