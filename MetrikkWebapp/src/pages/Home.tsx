@@ -1,27 +1,15 @@
 import '@navikt/ds-css';
 import { format } from 'date-fns';
-import AreaChartCustomAccessibility from '../components/charts/AreaChartCustomAccessibility/AreaChartCustomAccessibility';
-import HorizontalBarChartCustomAccessibility from '../components/charts/HorizontalBarChart/HorizontalBarChartCustomAccessibility';
-import { Search } from '@navikt/ds-react';
-import { Heading, VStack } from '@navikt/ds-react';
-import { Link } from 'react-router-dom';
-import { Test } from '../components/charts/AreaChartCustomAccessibility/test';
-import DisplayTableChart from '../components/charts/TableChart/DisplayTableChart.tsx';
-import TableChart from '../components/charts/TableChart/TableChart.tsx';
 
 import AreaChartContainer from '../components/charts/AreaChartCustomAccessibility/AreaChartContainer';
 import { eventTypeMappings2 } from '../components/charts/dynamicUrlConstructor/EventTypeMappings2.ts';
-import { eventTypeMappings } from '../components/charts/fetchUrlConstructor.ts';
-import { SearchComponent } from '../components/SearchComponent/SearchComponent.tsx';
-import { SetStateAction, useCallback, useState } from 'react';
+import {  useCallback, useState } from 'react';
 import { URLSearchComponent } from '../components/SearchComponent/URLSearchComponent.tsx';
 import { RangeDatePicker } from '../components/DatePicker/DatePicker.tsx';
-import VerticalBarChartCustomAccessibilityExample from '../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartCustomAccessibility';
 import VerticalBarChartContainer from '../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartContainer';
 import TableChartContainer from '../components/charts/TableChart/TableChartContainer';
 
 const Home = () => {
-  const simpleGuide = 'Trykk her for en enkel guide';
 
   // Kan hende callback blir brukt til å velge domene
   const [selectedDomain, setSelectedDomain] = useState('');
@@ -215,6 +203,7 @@ const Home = () => {
             />
           </div>
         )}
+
 
         {selectedDomain && formattedStartDate && formattedEndDate && (
           <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">

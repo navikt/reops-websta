@@ -29,6 +29,11 @@ export const eventTypeMappings2 = {
         groupBy: [{ type: "event", value: "referrer" }],
         filters: []
     },
+    pageViewedGroupByUserReferrer: {
+        eventType: `[Amplitude] Page Viewed`,
+        groupBy: [{ type: "user", value: "gp:referrer" }],
+        filters: []
+    },
     //vertical
     pageViewedGroupByDayOfWeek: {
         eventType: `[Amplitude] Page Viewed`,

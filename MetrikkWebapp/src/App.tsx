@@ -5,10 +5,12 @@ import './index.css';
 import Home from './pages/Home';
 import Guide from './pages/Guide';
 import { Footer, Nav, ScrollToTop } from './components/theme';
+import Dashboard from "./pages/Dashboard.tsx";
 
 const routes = [
   { path: '/', component: <Home /> },
   { path: '/guide', component: <Guide /> },
+  { path: '/dashboard', component: <Dashboard /> },
 ];
 
 function App() {
