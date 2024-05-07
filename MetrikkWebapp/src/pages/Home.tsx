@@ -34,6 +34,21 @@ const Home = () => {
     setSelectedPath(path);
   }, []);
 
+  const [selectedPageUrl, setSelectedPageUrl] = useState('');
+
+  const handlePageUrl = useCallback((pageUrl) => {
+    setSelectedPageUrl(pageUrl)
+  },[])
+
+  const [selectedSiteimproveDomain , setSelectedSiteimproveDomain] = useState('')
+
+  const handleSiteimproveDomain = useCallback((siteimproveDomain) => {
+    setSelectedSiteimproveDomain(siteimproveDomain)
+  },[])
+
+  console.log("this is my page url",selectedPageUrl)
+  console.log("this is my selected siteimprove domain id",selectedSiteimproveDomain)
+
   //const standardStartDate = new Date(new Date().setDate(standardStartDate.getDate()-30));
   //const standardEndDate = new Date();
 
@@ -98,9 +113,10 @@ const Home = () => {
           </label>
           <div className="relative">
             <URLSearchComponent
-              id="searchComponent"
               onDomainSelect={handleDomainSelect}
               onPagePath={handlePathSelection}
+              onSiteimproveDomain={handleSiteimproveDomain}
+              onPageUrl={handlePageUrl}
               className="border p-2 rounded"
             />
           </div>

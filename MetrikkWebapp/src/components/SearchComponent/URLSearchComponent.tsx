@@ -9,7 +9,7 @@ interface Team {
   teamSiteimproveSite: number;
 }
 
-export const URLSearchComponent = ({ onDomainSelect, onPagePath }) => {
+export const URLSearchComponent = ({ onDomainSelect, onPagePath, onPageUrl, onSiteimproveDomain }) => {
   const [searchInput, setSearchInput] = useState('');
   const [filteredTeams, setFilteredTeams] = useState<Team[]>([]);
 
@@ -51,17 +51,24 @@ export const URLSearchComponent = ({ onDomainSelect, onPagePath }) => {
       onDomainSelect(selectedTeam.teamAmplitudeDomain.toString());
       const path = extractPath(searchInput);
       onPagePath(path);
+      onPageUrl(searchInput);
+      //should be toString so we can use it the id in url
+      onSiteimproveDomain(selectedTeam.teamSiteimproveSite.toString())
+      console.log("SearchInput", searchInput)
       console.log('Selected team:', selectedTeam.teamName);
+      console.log('Selected amplitude', selectedTeam.teamAmplitudeDomain);
+      console.log('Selected siteimprove', selectedTeam.teamSiteimproveSite);
     }
   };
 
   return (
     <form role="search" onSubmit={(e) => e.preventDefault()}>
       <Search
-        label="Søk alle NAV sine sider"
+        label="Skriv inn URL her: "
         onChange={handleSearchChange}
         onSearchClick={handleSearchSubmit}
         variant="primary"
+        hideLabel={false}
         clearButton={true} // This adds a clear button that also uses the onClear prop if necessary
       />
     </form>

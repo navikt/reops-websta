@@ -10,19 +10,17 @@ function Nav() {
           <a href="." className="font-bold text-xl mr-4">
             Demo Websta
           </a>
-          <Tabs defaultValue="/" fill>
+          <Tabs defaultValue="/" >
             <Tabs.List className="flex gap-4">
               <NavLink
                 to="/amplitude"
                 className="tab-link"
-                activeClassName="font-bold"
               >
                 <Tabs.Tab value="amplitude" label="Amplitude" />
               </NavLink>
               <NavLink
                 to="/siteimprove"
                 className="tab-link"
-                activeClassName="font-bold"
               >
                 <Tabs.Tab value="siteimprove" label="Siteimprove" />
               </NavLink>
