@@ -88,6 +88,7 @@ export class VerticalBarChartCustomAccessibilityExample extends React.Component<
               onChange={this._onChange}
           />
             <VerticalBarChart
+                xAxisOuterPadding={0.1}
                 data={chartData}
                 width={dimensions.width}
                 height={dimensions.height}
@@ -96,7 +97,6 @@ export class VerticalBarChartCustomAccessibilityExample extends React.Component<
                 yAxisTickCount={6}
                 hideLegend={true}
                 enableReflow={true}
-                xAxisOuterPadding={0.1}
                 xAxisTitle={titles.xAxisTitle} // Now correctly referenced
                 yAxisTitle={titles.yAxisTitle} // Added y-axis title
                 styles={{
