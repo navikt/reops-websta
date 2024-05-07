@@ -159,7 +159,7 @@ const SiteimproveSite = () => {
         <Search
           aria-haspopup="listbox"
           aria-aria-expanded={isFocused}
-          label="Search sites"
+          label="Search for sites"
           variant="primary"
           className="search-bar mb-4 w-full"
           value={searchTerm}
@@ -167,6 +167,7 @@ const SiteimproveSite = () => {
           onFocus={handleFocus}
           onBlur={handleBlur}
           onKeyDown={handleKeyDown}
+          hideLabel={false}
         />
       </form>
       {isFocused && filteredSites.length > 0 && (
