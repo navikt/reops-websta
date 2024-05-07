@@ -5,9 +5,6 @@ import HorizontalBarChartCustomAccessibility from '../components/charts/Horizont
 import { Search } from '@navikt/ds-react';
 import { Heading, VStack } from '@navikt/ds-react';
 import { Link } from 'react-router-dom';
-import { Test } from '../components/charts/AreaChartCustomAccessibility/test';
-import DisplayTableChart from '../components/charts/TableChart/DisplayTableChart.tsx';
-import TableChart from '../components/charts/TableChart/TableChart.tsx';
 
 import AreaChartContainer from '../components/charts/AreaChartCustomAccessibility/AreaChartContainer';
 import { eventTypeMappings2 } from '../components/charts/dynamicUrlConstructor/EventTypeMappings2.ts';
@@ -37,8 +34,27 @@ const Home = () => {
     setSelectedPath(path);
   }, []);
 
-  const [formattedStartDate, setFormattedStartDate] = useState('');
-  const [formattedEndDate, setFormattedEndDate] = useState('');
+  //const standardStartDate = new Date(new Date().setDate(standardStartDate.getDate()-30));
+  //const standardEndDate = new Date();
+
+  const defaultStartDate = new Date(
+    new Date().setDate(new Date(Date.now()).getDate() - 30)
+  );
+  const defaultEndDate = new Date(Date.now());
+  const defaultFormattedStartDate = format(defaultStartDate, 'yyyyMMdd');
+  const defaultFormattedEndDate = format(defaultEndDate, 'yyyyMMdd');
+
+  console.log('date today', defaultStartDate);
+  console.log('date today minus 30', defaultEndDate);
+  console.log('date today Formatted', defaultFormattedStartDate);
+  console.log('date today minus 30 Formatted', defaultFormattedEndDate);
+
+  const [formattedStartDate, setFormattedStartDate] = useState(
+    defaultFormattedStartDate
+  );
+  const [formattedEndDate, setFormattedEndDate] = useState(
+    defaultFormattedEndDate
+  );
 
   interface range {
     from?: Date;
@@ -70,16 +86,15 @@ const Home = () => {
     <div className="flex flex-col items-center justify-center min-h-screen p-6">
       <h1 className="text-4xl font-bold mb-6 text-center">👋Velkommen!</h1>
       {/* RangeDatePicker already includes labels */}
-      <div className="flex items-center justify-center w-full max-w-lg">
-        <RangeDatePicker onDateChange={handleDateChange} />
-      </div>
 
-      <h2 className="font-semibold">Skriv inn URL i Søkefeltet</h2>
-      <div className="p-8 space-y-6">
+      <div className="p-8 space-y-6 ">
         {/* Search Component */}
         <div className="flex flex-col w-full max-w-lg">
-          <label htmlFor="searchComponent" className="text-sm font-bold text-center">
-            URL
+          <label
+            htmlFor="searchComponent"
+            className="text-sm font-bold text-center"
+          >
+            Skriv inn URL i søkefeltet
           </label>
           <div className="relative">
             <URLSearchComponent
@@ -90,7 +105,11 @@ const Home = () => {
             />
           </div>
         </div>
-
+        {selectedDomain && (
+          <div className="flex items-center justify-center w-full max-w-lg">
+            <RangeDatePicker onDateChange={handleDateChange} />
+          </div>
+        )}
       </div>
 
       {/*<VStack className="items-center mb-3">
@@ -133,9 +152,9 @@ const Home = () => {
                 height: 350,
               }}
               titles={{
-                chartTitle: 'Antall Besøk',
+                chartTitle: 'Antall besøk',
                 xAxisTitle: 'Dato',
-                yAxisTitle: 'Antall Besøk',
+                yAxisTitle: 'Antall besøk',
               }}
             />
           </div>
@@ -166,9 +185,9 @@ const Home = () => {
                 height: 350,
               }}
               titles={{
-                chartTitle: 'Antall Besøk gruppert på land',
+                chartTitle: 'Antall besøk gruppert på land',
                 xAxisTitle: 'Dato',
-                yAxisTitle: 'Antall Besøk',
+                yAxisTitle: 'Antall besøk',
               }}
             />
           </div>
@@ -194,6 +213,7 @@ const Home = () => {
                   },
                 ],
               }}
+              title="Antall besøk gruppert på henvisning"
             />
           </div>
         )}
@@ -219,6 +239,7 @@ const Home = () => {
                   },
                 ],
               }}
+              title="Antall besøk gruppert på sidesti"
             />
           </div>
         )}
@@ -245,6 +266,7 @@ const Home = () => {
                   },
                 ],
               }}
+              title="Antall besøk gruppert på henvisende domene"
             />
           </div>
         )}
@@ -270,9 +292,9 @@ const Home = () => {
                                 height: 350,
                             }}
                             titles={{
-                                chartTitle:"Antall Besøk gruppert på henvisning",
+                                chartTitle:"Antall besøk gruppert på henvisning",
                                 xAxisTitle:"Dato",
-                                yAxisTitle:"Antall Besøk"
+                                yAxisTitle:"Antall besøk"
                             }}
                         />
                     </div>)}
@@ -302,9 +324,9 @@ const Home = () => {
                 height: 350,
               }}
               titles={{
-                chartTitle: 'Antall Besøk gruppert på by',
+                chartTitle: 'Antall besøk gruppert på by',
                 xAxisTitle: 'Dato',
-                yAxisTitle: 'Antall Besøk',
+                yAxisTitle: 'Antall besøk',
               }}
             />
           </div>
@@ -335,9 +357,9 @@ const Home = () => {
                 height: 350,
               }}
               titles={{
-                chartTitle: 'Antall Besøk gruppert på språk',
+                chartTitle: 'Antall besøk gruppert på språk',
                 xAxisTitle: 'Dato',
-                yAxisTitle: 'Antall Besøk',
+                yAxisTitle: 'Antall besøk',
               }}
             />
           </div>
@@ -364,6 +386,15 @@ const Home = () => {
                   },
                 ],
               }}
+              dimensions={{
+                width: 500,
+                height: 350,
+              }}
+              titles={{
+                chartTitle: 'Antall besøk gruppert på ukedag',
+                xAxisTitle: 'Ukedag',
+                yAxisTitle: 'Antall besøk',
+              }}
             />
           </div>
         )}
@@ -389,6 +420,15 @@ const Home = () => {
                   },
                 ],
               }}
+              dimensions={{
+                width: 500,
+                height: 350,
+              }}
+              titles={{
+                chartTitle: 'Antall besøk gruppert på time i døgnet',
+                xAxisTitle: 'Time i døgnet',
+                yAxisTitle: 'Antall besøk',
+              }}
             />
           </div>
         )}
@@ -413,6 +453,15 @@ const Home = () => {
                   },
                 ],
               }}
+              dimensions={{
+                width: 500,
+                height: 350,
+              }}
+              titles={{
+                chartTitle: 'Antall besøk gruppert på operativsystem',
+                xAxisTitle: 'Operativsystem',
+                yAxisTitle: 'Antall besøk',
+              }}
             />
           </div>
         )}
@@ -436,6 +485,15 @@ const Home = () => {
                     subprop_value: [selectedPath],
                   },
                 ],
+              }}
+              dimensions={{
+                width: 500,
+                height: 350,
+              }}
+              titles={{
+                chartTitle: 'Antall besøk gruppert på enhetstype',
+                xAxisTitle: 'Enhetstype',
+                yAxisTitle: 'Antall besøk',
               }}
             />
           </div>
@@ -462,6 +520,15 @@ const Home = () => {
                     subprop_value: [selectedPath],
                   },
                 ],
+              }}
+              dimensions={{
+                width: 650,
+                height: 400,
+              }}
+              titles={{
+                chartTitle: 'Antall besøk gruppert på enhetens familie',
+                xAxisTitle: 'Enhetens familie',
+                yAxisTitle: 'Antall besøk',
               }}
             />
           </div>
