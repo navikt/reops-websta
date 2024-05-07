@@ -37,22 +37,24 @@ const Home = () => {
   //const standardStartDate = new Date(new Date().setDate(standardStartDate.getDate()-30));
   //const standardEndDate = new Date();
 
-
-  const defaultStartDate = new Date(new Date().setDate(new Date(Date.now()).getDate()-30));
+  const defaultStartDate = new Date(
+    new Date().setDate(new Date(Date.now()).getDate() - 30)
+  );
   const defaultEndDate = new Date(Date.now());
-  const defaultFormattedStartDate = format(defaultStartDate, 'yyyyMMdd')
-  const defaultFormattedEndDate = format(defaultEndDate, 'yyyyMMdd')
+  const defaultFormattedStartDate = format(defaultStartDate, 'yyyyMMdd');
+  const defaultFormattedEndDate = format(defaultEndDate, 'yyyyMMdd');
 
-  console.log("date today",defaultStartDate);
-  console.log("date today minus 30",defaultEndDate);
-  console.log("date today Formatted",defaultFormattedStartDate);
-  console.log("date today minus 30 Formatted",defaultFormattedEndDate);
+  console.log('date today', defaultStartDate);
+  console.log('date today minus 30', defaultEndDate);
+  console.log('date today Formatted', defaultFormattedStartDate);
+  console.log('date today minus 30 Formatted', defaultFormattedEndDate);
 
-
-
-  const [formattedStartDate, setFormattedStartDate] = useState(defaultFormattedStartDate);
-  const [formattedEndDate, setFormattedEndDate] = useState(defaultFormattedEndDate);
-
+  const [formattedStartDate, setFormattedStartDate] = useState(
+    defaultFormattedStartDate
+  );
+  const [formattedEndDate, setFormattedEndDate] = useState(
+    defaultFormattedEndDate
+  );
 
   interface range {
     from?: Date;
@@ -97,11 +99,11 @@ const Home = () => {
             />
           </div>
         </div>
-        {selectedDomain &&(
-      <div className="flex items-center justify-center w-full max-w-lg">
-        <RangeDatePicker onDateChange={handleDateChange} />
-      </div>)}
-
+        {selectedDomain && (
+          <div className="flex items-center justify-center w-full max-w-lg">
+            <RangeDatePicker onDateChange={handleDateChange} />
+          </div>
+        )}
       </div>
 
       {/*<VStack className="items-center mb-3">
@@ -209,7 +211,6 @@ const Home = () => {
             />
           </div>
         )}
-
         {selectedDomain && formattedStartDate && formattedEndDate && (
           <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
             <TableChartContainer
@@ -235,7 +236,6 @@ const Home = () => {
             />
           </div>
         )}
-
         {/*
                 {selectedDomain && formattedStartDate && formattedEndDate &&  (
                     <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
@@ -329,7 +329,6 @@ const Home = () => {
             />
           </div>
         )}
-
         {selectedDomain && formattedStartDate && formattedEndDate && (
           <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
             <VerticalBarChartContainer
@@ -363,7 +362,6 @@ const Home = () => {
             />
           </div>
         )}
-
         {selectedDomain && formattedStartDate && formattedEndDate && (
           <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
             <VerticalBarChartContainer
@@ -395,10 +393,8 @@ const Home = () => {
                 yAxisTitle: 'Antall besøk',
               }}
             />
-
           </div>
         )}
-
         {selectedDomain && formattedStartDate && formattedEndDate && (
           <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
             <VerticalBarChartContainer
@@ -429,7 +425,6 @@ const Home = () => {
                 yAxisTitle: 'Antall besøk',
               }}
             />
-
           </div>
         )}
         {selectedDomain && formattedStartDate && formattedEndDate && (
@@ -465,9 +460,8 @@ const Home = () => {
             />
           </div>
         )}
-
         {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
+          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg md:col-span-2">
             <VerticalBarChartContainer
               teamDomain={selectedDomain}
               chartType="verticalBarChart"
@@ -496,11 +490,10 @@ const Home = () => {
                 chartTitle: 'Antall besøk gruppert på enhetens familie',
                 xAxisTitle: 'Enhetens familie',
                 yAxisTitle: 'Antall besøk',
-
               }}
             />
           </div>
-        )}
+        )}{' '}
       </div>
     </div>
   );
