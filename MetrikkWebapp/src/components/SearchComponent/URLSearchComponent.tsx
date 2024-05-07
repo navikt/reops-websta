@@ -6,7 +6,7 @@ import teamsData from './teamsData.json';
 interface Team {
   teamName: string;
   teamAmplitudeDomain: number;
-  teamSiteimproveSite: string;
+  teamSiteimproveSite: number;
 }
 
 export const URLSearchComponent = ({ onDomainSelect, onPagePath }) => {
