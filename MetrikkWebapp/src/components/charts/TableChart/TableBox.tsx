@@ -7,14 +7,14 @@ const TableBox = ({ data, title }) => (
         <Table>
         <Table.Header>
             <Table.Row>
-                <Table.HeaderCell>Value</Table.HeaderCell>
-                <Table.HeaderCell>Total Visitors</Table.HeaderCell>
+                <Table.HeaderCell>Verdi</Table.HeaderCell>
+                <Table.HeaderCell>Antall besøkende</Table.HeaderCell>
             </Table.Row>
         </Table.Header>
         <Table.Body>
-            {data.map(({ countryName, totalVisitors }, index) => (
+            {data.map(({ value, totalVisitors }, index) => (
                 <Table.Row key={index}>
-                    <Table.DataCell>{countryName}</Table.DataCell>
+                    <Table.DataCell>{value}</Table.DataCell>
                     <Table.DataCell>{totalVisitors}</Table.DataCell>
                 </Table.Row>
             ))}

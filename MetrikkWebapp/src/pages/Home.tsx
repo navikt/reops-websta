@@ -88,9 +88,6 @@ const Home = () => {
       <div className="p-8 space-y-6 ">
         {/* Search Component */}
         <div className="flex flex-col w-full max-w-lg">
-          <label htmlFor="searchComponent" className="text-sm font-bold text-center">
-            Skriv inn URL i søkefeltet
-          </label>
           <div className="relative">
             <URLSearchComponent
               id="searchComponent"
@@ -235,33 +232,6 @@ const Home = () => {
                 ],
               }}
               title="Antall besøk gruppert på sidesti"
-            />
-          </div>
-        )}
-
-        {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
-            <TableChartContainer
-              teamDomain={selectedDomain}
-              chartType="segmentationChartProcessing"
-              endpointType="segmentation"
-              urlParams={{
-                startDate: formattedStartDate,
-                endDate: formattedEndDate,
-                eventType:
-                  eventTypeMappings2.pageViewedGroupByReferringDomain.eventType,
-                groupBy:
-                  eventTypeMappings2.pageViewedGroupByReferringDomain.groupBy,
-                filters: [
-                  {
-                    subprop_type: 'event',
-                    subprop_key: '[Amplitude] Page Path',
-                    subprop_op: 'contains',
-                    subprop_value: [selectedPath],
-                  },
-                ],
-              }}
-              title="Antall besøk gruppert på henvisende domene"
             />
           </div>
         )}
@@ -519,8 +489,8 @@ const Home = () => {
                 ],
               }}
               dimensions={{
-                width: 650,
-                height: 400,
+                width: 1200,
+                height: 350,
               }}
               titles={{
                 chartTitle: 'Antall besøk gruppert på enhetens familie',

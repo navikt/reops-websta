@@ -58,10 +58,11 @@ export const URLSearchComponent = ({ onDomainSelect, onPagePath }) => {
   return (
     <form role="search" onSubmit={(e) => e.preventDefault()}>
       <Search
-        label="Søk alle NAV sine sider"
+        label="Legg til URL i søkefeltet"
         onChange={handleSearchChange}
         onSearchClick={handleSearchSubmit}
         variant="primary"
+        hideLabel={false}
         clearButton={true} // This adds a clear button that also uses the onClear prop if necessary
       />
     </form>

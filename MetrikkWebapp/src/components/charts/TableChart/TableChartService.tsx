@@ -12,8 +12,8 @@ export const processSegmentationTableChart = (apiResponse) => {
     });
 
     // Convert the totals object to an array suitable for table display
-    const tableData = Object.entries(countryVisitorTotals).map(([countryName, totalVisitors]) => ({
-        countryName,
+    const tableData = Object.entries(countryVisitorTotals).map(([value, totalVisitors]) => ({
+        value,
         totalVisitors
     }));
 
