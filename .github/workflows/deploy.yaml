@@ -5,9 +5,6 @@ on:
   push:
     branches: [ main ]
 
-env:
-  DOCKER_IMAGE: ghcr.io/${{ github.repository }}:${{ github.sha }}
-
 jobs:
   build:
     name: Build and push Docker container
@@ -25,12 +22,13 @@ jobs:
         run: yarn install
       - name: Yarn build
         run: yarn build
-      - name: Login to docker
-        uses: docker/login-action@v3
+      - uses: nais/login@v0
+        name: get image registry
+        id: nais-login
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          team: team-researchops
+          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
       - name: Build and publish Docker image
         uses: docker/build-push-action@v5
         with:
@@ -51,4 +49,4 @@ jobs:
         env:
          CLUSTER: dev-gcp
          RESOURCE: nais.yaml
-         VAR: image=${{ env.DOCKER_IMAGE }}
+        VAR: commit=${{ github.sha }}
