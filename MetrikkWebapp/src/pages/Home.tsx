@@ -90,12 +90,6 @@ const Home = () => {
       <div className="p-8 space-y-6 ">
         {/* Search Component */}
         <div className="flex flex-col w-full max-w-lg">
-          <label
-            htmlFor="searchComponent"
-            className="text-sm font-bold text-center"
-          >
-            Skriv inn URL i søkefeltet
-          </label>
           <div className="relative">
             <URLSearchComponent
               id="searchComponent"
@@ -217,7 +211,6 @@ const Home = () => {
             />
           </div>
         )}
-
         {selectedDomain && formattedStartDate && formattedEndDate && (
           <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
             <TableChartContainer
@@ -243,7 +236,6 @@ const Home = () => {
             />
           </div>
         )}
-
         {selectedDomain && formattedStartDate && formattedEndDate && (
           <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
             <TableChartContainer
@@ -270,7 +262,6 @@ const Home = () => {
             />
           </div>
         )}
-
         {/*
                 {selectedDomain && formattedStartDate && formattedEndDate &&  (
                     <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
@@ -364,7 +355,6 @@ const Home = () => {
             />
           </div>
         )}
-
         {selectedDomain && formattedStartDate && formattedEndDate && (
           <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
             <VerticalBarChartContainer
@@ -398,7 +388,6 @@ const Home = () => {
             />
           </div>
         )}
-
         {selectedDomain && formattedStartDate && formattedEndDate && (
           <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
             <VerticalBarChartContainer
@@ -432,7 +421,6 @@ const Home = () => {
             />
           </div>
         )}
-
         {selectedDomain && formattedStartDate && formattedEndDate && (
           <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
             <VerticalBarChartContainer
@@ -498,9 +486,8 @@ const Home = () => {
             />
           </div>
         )}
-
         {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
+          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg md:col-span-2">
             <VerticalBarChartContainer
               teamDomain={selectedDomain}
               chartType="verticalBarChart"
@@ -522,8 +509,8 @@ const Home = () => {
                 ],
               }}
               dimensions={{
-                width: 650,
-                height: 400,
+                width: 1200,
+                height: 350,
               }}
               titles={{
                 chartTitle: 'Antall besøk gruppert på enhetens familie',
@@ -532,7 +519,7 @@ const Home = () => {
               }}
             />
           </div>
-        )}
+        )}{' '}
       </div>
     </div>
   );

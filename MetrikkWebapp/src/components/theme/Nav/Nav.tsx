@@ -8,22 +8,14 @@ function Nav() {
       <div className="ml-4">
         <div className="flex items-center">
           <a href="." className="font-bold text-xl mr-4">
-            Demo Websta
+            Webstapad
           </a>
-          <Tabs defaultValue="/" fill>
+          <Tabs defaultValue="/">
             <Tabs.List className="flex gap-4">
-              <NavLink
-                to="/amplitude"
-                className="tab-link"
-                activeClassName="font-bold"
-              >
+              <NavLink to="/amplitude" className="tab-link">
                 <Tabs.Tab value="amplitude" label="Amplitude" />
               </NavLink>
-              <NavLink
-                to="/siteimprove"
-                className="tab-link"
-                activeClassName="font-bold"
-              >
+              <NavLink to="/siteimprove" className="tab-link">
                 <Tabs.Tab value="siteimprove" label="Siteimprove" />
               </NavLink>
             </Tabs.List>
