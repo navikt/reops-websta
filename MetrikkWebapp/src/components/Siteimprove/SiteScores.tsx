@@ -7,9 +7,11 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain}) => {
 
     const [selectedPageId, setSelectedPageId] = useState(null)
     const [scoreOverview, setScoreOverview] =useState(null)
+    const [error, setError] = useState<string | null>(null); // Explicitly define type as string or null
 
     useEffect(() => {
         const fetchData = async () => {
+
         try {
             const selectedPageData = await fetchSiteimproveData(`/sites/${siteimproveSelectedDomain}/quality_assurance/inventory/pages?url=${pageUrl}`);
 
@@ -23,20 +25,33 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain}) => {
                     setScoreOverview(overviewData);
                     console.log("overviewData",overviewData)
                 } else {
-                    throw new Error('Required properties missing in overviewData');
+                    setError('error')
+                    throw new Error('Fant ingen data for side, sjekk om du har skrevet in URL riktig');
                 }
             } else {
-                throw new Error('No items found in response');
+                setError('error')
+                throw new Error('Fant ingen side, sjekk om du har skrevet in URL riktig');
             }
         } catch (error) {
             console.error('Error fetching data: ', error);
+            setError('Error når man skulle hente data, sjekk om du har skrevet in URL riktig ' ); // Set error state
         }
+
         };
 
         fetchData();
 
 
     }, [pageUrl, siteimproveSelectedDomain]);
+
+    if (error) {
+        return (
+            <div className="mt-4 bg-white p-4 shadow-lg rounded-lg">
+                <h2 className="text-xl font-semibold mb-2">Error</h2>
+                <p className="text-red-500">{error}</p>
+            </div>
+        );
+    }
 
     return (
         <div>
