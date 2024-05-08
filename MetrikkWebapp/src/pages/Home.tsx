@@ -236,32 +236,6 @@ const Home = () => {
             />
           </div>
         )}
-        {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
-            <TableChartContainer
-              teamDomain={selectedDomain}
-              chartType="segmentationChartProcessing"
-              endpointType="segmentation"
-              urlParams={{
-                startDate: formattedStartDate,
-                endDate: formattedEndDate,
-                eventType:
-                  eventTypeMappings2.pageViewedGroupByReferringDomain.eventType,
-                groupBy:
-                  eventTypeMappings2.pageViewedGroupByReferringDomain.groupBy,
-                filters: [
-                  {
-                    subprop_type: 'event',
-                    subprop_key: '[Amplitude] Page Path',
-                    subprop_op: 'contains',
-                    subprop_value: [selectedPath],
-                  },
-                ],
-              }}
-              title="Antall besøk gruppert på henvisende domene"
-            />
-          </div>
-        )}
         {/*
                 {selectedDomain && formattedStartDate && formattedEndDate &&  (
                     <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
