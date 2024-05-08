@@ -3,7 +3,7 @@ name: Deploy react app to prod-gcp
 on:
   workflow_dispatch:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 env:
   DOCKER_IMAGE: ghcr.io/${{ github.repository }}:${{ github.sha }}
