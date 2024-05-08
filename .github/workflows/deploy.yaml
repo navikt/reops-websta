@@ -49,4 +49,4 @@ jobs:
         env:
          CLUSTER: dev-gcp
          RESOURCE: nais.yaml
-        VAR: commit=${{ github.sha }}
+         VAR: commit=${{ github.sha }}
