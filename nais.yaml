@@ -30,4 +30,4 @@ spec:
     max: 2
     cpuThresholdPercentage: 80
   ingresses:
-    - websta.ansatt.nav.no
+    - "https://websta.ansatt.dev.nav.no"
