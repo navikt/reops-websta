@@ -1,7 +1,7 @@
 Websta
 ================
 
-Enkel app for å vise webstatistikk.
+App for å vise webstatistikk.
 
 ---
 
