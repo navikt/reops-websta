@@ -16,6 +16,7 @@ import { RangeDatePicker } from '../components/DatePicker/DatePicker.tsx';
 import VerticalBarChartCustomAccessibilityExample from '../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartCustomAccessibility';
 import VerticalBarChartContainer from '../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartContainer';
 import TableChartContainer from '../components/charts/TableChart/TableChartContainer';
+import SiteScores from "../components/Siteimprove/SiteScores.tsx";
 
 const Home = () => {
   const simpleGuide = 'Trykk her for en enkel guide';
@@ -23,26 +24,26 @@ const Home = () => {
   // Kan hende callback blir brukt til å velge domene
   const [selectedDomain, setSelectedDomain] = useState('');
 
-  const handleDomainSelect = useCallback((domain) => {
+  const handleDomainSelect = useCallback((domain:string) => {
     setSelectedDomain(domain);
   }, []);
 
   // Kan hende callback blir brukt til å velge domene
   const [selectedPath, setSelectedPath] = useState('');
 
-  const handlePathSelection = useCallback((path) => {
+  const handlePathSelection = useCallback((path:string) => {
     setSelectedPath(path);
   }, []);
 
   const [selectedPageUrl, setSelectedPageUrl] = useState('');
 
-  const handlePageUrl = useCallback((pageUrl) => {
+  const handlePageUrl = useCallback((pageUrl:string) => {
     setSelectedPageUrl(pageUrl)
   },[])
 
   const [selectedSiteimproveDomain , setSelectedSiteimproveDomain] = useState('')
 
-  const handleSiteimproveDomain = useCallback((siteimproveDomain) => {
+  const handleSiteimproveDomain = useCallback((siteimproveDomain:string) => {
     setSelectedSiteimproveDomain(siteimproveDomain)
   },[])
 
@@ -105,19 +106,13 @@ const Home = () => {
       <div className="p-8 space-y-6 ">
         {/* Search Component */}
         <div className="flex flex-col w-full max-w-lg">
-          <label
-            htmlFor="searchComponent"
-            className="text-sm font-bold text-center"
-          >
-            Skriv inn URL i søkefeltet
-          </label>
           <div className="relative">
             <URLSearchComponent
+              className="border p-2 rounded"
               onDomainSelect={handleDomainSelect}
               onPagePath={handlePathSelection}
               onSiteimproveDomain={handleSiteimproveDomain}
               onPageUrl={handlePageUrl}
-              className="border p-2 rounded"
             />
           </div>
         </div>
@@ -287,34 +282,6 @@ const Home = () => {
           </div>
         )}
 
-        {/*
-                {selectedDomain && formattedStartDate && formattedEndDate &&  (
-                    <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
-                        <AreaChartContainer
-                            teamDomain={selectedDomain}
-                            chartType="areaChartMulti"
-                            endpointType="segmentation"
-                            urlParams={{
-                                startDate: formattedStartDate,
-                                endDate: formattedEndDate,
-                                eventType: eventTypeMappings2.pageViewedGroupByReferrer.eventType,
-                                groupBy:eventTypeMappings2.pageViewedGroupByReferrer.groupBy,
-                                filters:[
-                                    { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
-                                ]
-                            }}
-                            dimensions={{
-                                width: 500,
-                                height: 350,
-                            }}
-                            titles={{
-                                chartTitle:"Antall besøk gruppert på henvisning",
-                                xAxisTitle:"Dato",
-                                yAxisTitle:"Antall besøk"
-                            }}
-                        />
-                    </div>)}
-                    */}
         {selectedDomain && formattedStartDate && formattedEndDate && (
           <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
             <AreaChartContainer
@@ -549,6 +516,13 @@ const Home = () => {
             />
           </div>
         )}
+
+        {selectedDomain &&(
+        <SiteScores
+            pageUrl={selectedPageUrl}
+            siteimproveSelectedDomain={selectedSiteimproveDomain}
+        />
+          )}
       </div>
     </div>
   );
