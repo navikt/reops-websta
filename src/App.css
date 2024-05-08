@@ -1,0 +1,182 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+} /* background: #f7f7f7; */
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.bg-deepblue-800 {
+  background-color: #003453;
+}
+
+Footer a {
+  color: #fff !important;
+}
+
+.navds-accordion--indent
+  > :where(.navds-accordion__item)
+  > :where(.navds-accordion__content) {
+  padding: var(--a-spacing-3) var(--a-spacing-3) 18px;
+}
+
+.navds-button--secondary {
+  background: white;
+}
+
+/*color: #004367;*/
+.aksel-blue-heading {
+  margin-bottom: 35px !important;
+}
+
+.felgen-logo:hover {
+  text-decoration: underline !important;
+}
+
+@media (min-width: 700px) {
+  .navds-content-container {
+    padding: 0px;
+  }
+}
+
+.content__EtlfN {
+  align-items: center;
+  display: flex;
+  height: 78px;
+  justify-content: space-between;
+  max-width: 1440px;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+@media (min-width: 1024px) {
+  .content__EtlfN {
+    padding: 0 7rem;
+  }
+}
+
+/*.navds-guide-panel__content {
+    border: 2px solid #40c1ac;
+}
+
+.navds-guide-panel .navds-guide {
+    border: 2px solid #40c1ac; s
+}*/
+
+/*.navds-guide__illustration {
+    background: #e1f2eb;
+}*/
+/*
+.navds-button--primary {
+    background-color: #8c368e;
+    border-radius: 28px;
+}
+
+.navds-button--primary:hover {
+    background-color: #fbd8e7;
+    border-color: #8c368e;
+    color: #8c368e;
+    border: 0px solid #8c368e;
+    box-shadow: inset 0 0 0 2px #8c368e;
+}
+
+.navds-button--secondary {
+    border: 0px solid #8c368e;
+    box-shadow: inset 0 0 0 2px #8c368e;
+    border-radius: 28px;
+    color:  #8c368e;
+}
+
+.navds-button--tertiary {
+    border-radius: 28px;
+}*/
+
+/*.PageHeader_navdsPageHeaderGuide__CzyB_ {
+    box-shadow: 0 -4px 0 #40c1ac inset;
+}*/
+
+.PageHeader_navdsPageHeaderGuide__CzyB_ {
+  box-shadow: 0 -4px 0 #3380a5 inset;
+}
+
+.PageHeader_navdsPageHeader__l3_NH {
+  display: flex;
+  justify-content: center;
+  background-color: var(--a-surface-default);
+  padding: 1.5rem calc((100vw - 100%) / 2);
+  margin-left: calc((100vw - 100%) / -2);
+  margin-right: calc((100vw - 100%) / -2);
+  margin-bottom: 10px;
+  padding-top: 35px !important;
+}
+
+.mobilvisning-label {
+  flex: auto;
+  align-self: center;
+  padding-bottom: 0.5rem;
+  line-height: 1.5em;
+}
+
+.mobilvisning-button {
+  display: none;
+}
+
+@media screen and (min-width: 960px) {
+  .mobilvisning-button {
+    display: inline;
+  }
+
+  .mobilvisning-label {
+    padding-bottom: 0rem;
+  }
+
+  .mobilvisning-container {
+    width: 100%;
+    display: flex;
+    margin-top: -12px;
+    margin-bottom: -4px;
+  }
+}
+
+.navds-switch__content {
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem 0 0.75rem 3.25rem;
+}
+
+.ProseMirror {
+  border: 1px solid gray;
+  min-height: 170px;
+  transition: height 0.1s ease-out;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.ProseMirror p {
+  padding-bottom: 15px;
+}
+
+.ProseMirror:focus {
+  outline: 2px solid #00347d;
+}
+
+.ProseMirror li {
+  margin: 0;
+  padding: 0;
+}
+
+.ProseMirror P {
+  line-height: 1.5em;
+}
