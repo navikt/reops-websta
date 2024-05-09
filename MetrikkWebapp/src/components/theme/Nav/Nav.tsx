@@ -1,32 +1,12 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { Tabs } from '@navikt/ds-react';
 
 function Nav() {
   return (
-    <nav className="siteheader simple h-20 border-b border-gray-300 flex items-center">
-      <div className="ml-4">
-        <div className="flex items-center">
-          <a href="." className="font-bold text-xl mr-4">
-            Demo Websta
-          </a>
-          <Tabs defaultValue="/" >
-            <Tabs.List className="flex gap-4">
-              <NavLink
-                to="/amplitude"
-                className="tab-link"
-              >
-                <Tabs.Tab value="amplitude" label="Amplitude" />
-              </NavLink>
-              <NavLink
-                to="/siteimprove"
-                className="tab-link"
-              >
-                <Tabs.Tab value="siteimprove" label="Siteimprove" />
-              </NavLink>
-            </Tabs.List>
-          </Tabs>
-        </div>
+    <nav className="fixed top-0 left-0 w-full bg-white z-10 shadow-md">
+      <div className="py-5 px-4 flex justify-between items-center">
+        <a href="." className="font-bold text-xl">
+          Websta
+        </a>
       </div>
     </nav>
   );

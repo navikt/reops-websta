@@ -11,7 +11,7 @@ function App() {
     <HashRouter>
       <div className="flex flex-col min-h-screen">
         <Nav />
-        <main className="flex-grow bg-custom-cyan">
+        <main className="flex-grow bg-custom-cyan pt-20">
           <ContentContainer>
             <Routes>
               <Route path="/" element={<Home />} />

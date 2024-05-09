@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 import AreaChartCustomAccessibility from '../components/charts/AreaChartCustomAccessibility/AreaChartCustomAccessibility';
 import HorizontalBarChartCustomAccessibility from '../components/charts/HorizontalBarChart/HorizontalBarChartCustomAccessibility';
 import { Search } from '@navikt/ds-react';
-import { Heading, VStack } from '@navikt/ds-react';
+import { Button, Heading, VStack } from '@navikt/ds-react';
 import { Link } from 'react-router-dom';
 
 import AreaChartContainer from '../components/charts/AreaChartCustomAccessibility/AreaChartContainer';
@@ -16,39 +16,41 @@ import { RangeDatePicker } from '../components/DatePicker/DatePicker.tsx';
 import VerticalBarChartCustomAccessibilityExample from '../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartCustomAccessibility';
 import VerticalBarChartContainer from '../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartContainer';
 import TableChartContainer from '../components/charts/TableChart/TableChartContainer';
-import SiteScores from "../components/Siteimprove/SiteScores.tsx";
+import SiteScores from '../components/Siteimprove/SiteScores.tsx';
 
 const Home = () => {
-  const simpleGuide = 'Trykk her for en enkel guide';
-
   // Kan hende callback blir brukt til å velge domene
   const [selectedDomain, setSelectedDomain] = useState('');
 
-  const handleDomainSelect = useCallback((domain:string) => {
+  const handleDomainSelect = useCallback((domain: string) => {
     setSelectedDomain(domain);
   }, []);
 
   // Kan hende callback blir brukt til å velge domene
   const [selectedPath, setSelectedPath] = useState('');
 
-  const handlePathSelection = useCallback((path:string) => {
+  const handlePathSelection = useCallback((path: string) => {
     setSelectedPath(path);
   }, []);
 
   const [selectedPageUrl, setSelectedPageUrl] = useState('');
 
-  const handlePageUrl = useCallback((pageUrl:string) => {
-    setSelectedPageUrl(pageUrl)
-  },[])
+  const handlePageUrl = useCallback((pageUrl: string) => {
+    setSelectedPageUrl(pageUrl);
+  }, []);
 
-  const [selectedSiteimproveDomain , setSelectedSiteimproveDomain] = useState('')
+  const [selectedSiteimproveDomain, setSelectedSiteimproveDomain] =
+    useState('');
 
-  const handleSiteimproveDomain = useCallback((siteimproveDomain:string) => {
-    setSelectedSiteimproveDomain(siteimproveDomain)
-  },[])
+  const handleSiteimproveDomain = useCallback((siteimproveDomain: string) => {
+    setSelectedSiteimproveDomain(siteimproveDomain);
+  }, []);
 
-  console.log("this is my page url",selectedPageUrl)
-  console.log("this is my selected siteimprove domain id",selectedSiteimproveDomain)
+  console.log('this is my page url', selectedPageUrl);
+  console.log(
+    'this is my selected siteimprove domain id',
+    selectedSiteimproveDomain
+  );
 
   //const standardStartDate = new Date(new Date().setDate(standardStartDate.getDate()-30));
   //const standardEndDate = new Date();
@@ -100,7 +102,7 @@ const Home = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-6">
-      <h1 className="text-4xl font-bold mb-6 text-center">👋Velkommen!</h1>
+      <h1 className="text-4xl font-bold mb-6 text-center">Webstatistikk 📊</h1>
       {/* RangeDatePicker already includes labels */}
 
       <div className="p-8 space-y-6 ">
@@ -138,9 +140,19 @@ const Home = () => {
       </form>
       */}
       {/*TODO: Charts er lenger til høyre når de er centered fordi centrering starter på y-axis */}
+
       <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
+        {selectedDomain && (
+          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg md:col-span-2">
+            <SiteScores
+              pageUrl={selectedPageUrl}
+              siteimproveSelectedDomain={selectedSiteimproveDomain}
+            />
+          </div>
+        )}
+
         {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
+          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
             <AreaChartContainer
               teamDomain={selectedDomain}
               chartType="areaChartMulti"
@@ -171,7 +183,7 @@ const Home = () => {
           </div>
         )}
         {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
+          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
             <AreaChartContainer
               teamDomain={selectedDomain}
               chartType="areaChartMulti"
@@ -204,7 +216,7 @@ const Home = () => {
           </div>
         )}
         {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
+          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
             <TableChartContainer
               teamDomain={selectedDomain}
               chartType="segmentationChartProcessing"
@@ -230,7 +242,7 @@ const Home = () => {
         )}
 
         {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
+          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
             <TableChartContainer
               teamDomain={selectedDomain}
               chartType="segmentationChartProcessing"
@@ -256,7 +268,7 @@ const Home = () => {
         )}
 
         {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
+          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
             <TableChartContainer
               teamDomain={selectedDomain}
               chartType="segmentationChartProcessing"
@@ -283,7 +295,7 @@ const Home = () => {
         )}
 
         {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
+          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
             <AreaChartContainer
               teamDomain={selectedDomain}
               chartType="areaChartMulti"
@@ -315,7 +327,7 @@ const Home = () => {
           </div>
         )}
         {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
+          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
             <AreaChartContainer
               teamDomain={selectedDomain}
               chartType="areaChartMulti"
@@ -349,7 +361,7 @@ const Home = () => {
         )}
 
         {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
+          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
             <VerticalBarChartContainer
               teamDomain={selectedDomain}
               chartType="verticalBarChart"
@@ -383,7 +395,7 @@ const Home = () => {
         )}
 
         {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
+          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
             <VerticalBarChartContainer
               teamDomain={selectedDomain}
               chartType="verticalBarChart"
@@ -417,7 +429,7 @@ const Home = () => {
         )}
 
         {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
+          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
             <VerticalBarChartContainer
               teamDomain={selectedDomain}
               chartType="verticalBarChart"
@@ -449,7 +461,7 @@ const Home = () => {
           </div>
         )}
         {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
+          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
             <VerticalBarChartContainer
               teamDomain={selectedDomain}
               chartType="verticalBarChart"
@@ -469,10 +481,7 @@ const Home = () => {
                   },
                 ],
               }}
-              dimensions={{
-                width: 500,
-                height: 350,
-              }}
+              dimensions={{}}
               titles={{
                 chartTitle: 'Antall besøk gruppert på enhetstype',
                 xAxisTitle: 'Enhetstype',
@@ -483,7 +492,7 @@ const Home = () => {
         )}
 
         {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
+          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
             <VerticalBarChartContainer
               teamDomain={selectedDomain}
               chartType="verticalBarChart"
@@ -505,8 +514,8 @@ const Home = () => {
                 ],
               }}
               dimensions={{
-                width: 650,
-                height: 400,
+                width: 500,
+                height: 350,
               }}
               titles={{
                 chartTitle: 'Antall besøk gruppert på enhetens familie',
@@ -516,13 +525,6 @@ const Home = () => {
             />
           </div>
         )}
-
-        {selectedDomain &&(
-        <SiteScores
-            pageUrl={selectedPageUrl}
-            siteimproveSelectedDomain={selectedSiteimproveDomain}
-        />
-          )}
       </div>
     </div>
   );
