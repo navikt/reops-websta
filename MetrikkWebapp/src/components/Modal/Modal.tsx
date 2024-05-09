@@ -1,15 +1,23 @@
 import {useEffect, useRef, useState} from "react";
-import {Button, Modal, TextField} from "@navikt/ds-react";
+import {Button, Modal, Select, TextField} from "@navikt/ds-react";
 import {RangeDatePicker} from "../DatePicker/DatePicker";
 import {eventTypeMappings2} from "../charts/dynamicUrlConstructor/EventTypeMappings2.ts";
 import {format} from "date-fns";
-import teamsData from "../SearchComponent/teamsData.json"; // Assuming the correct path to your URLSearchComponent
+import teamsData from "../SearchComponent/teamsData.json";
+import GroupBySelect from "../Select/GroupBySelect.tsx"; // Assuming the correct path to your URLSearchComponent
 
 interface Team {
     teamName: string;
     teamAmplitudeDomain: number;
     teamSiteimproveSite: string;
 }
+
+interface GroupBy {
+    type: string;
+    value: string;
+    group_type?: string;
+}
+
 export const SettingsModal = ({ onSubmit }) => {
     //titles
     const [chartTitle, setChartTitle] = useState("");
@@ -25,6 +33,12 @@ export const SettingsModal = ({ onSubmit }) => {
     const defaultStartDate = new Date(new Date().setDate(new Date(Date.now()).getDate()-30));
     const [startDate, setStartDate] = useState(defaultStartDate);
     const [endDate, setEndDate] = useState(defaultEndDate);
+    const [selectedGroupBy, setSelectedGroupBy] = useState<GroupBy[]>([]);
+
+
+    const handleGroupByChange = (groupObj: GroupBy[]) => {
+        setSelectedGroupBy(groupObj); // Update the selected groupBy array
+    };
 
     useEffect(() => {
         setFilteredTeams(teamsData as Team[]);
@@ -87,7 +101,7 @@ export const SettingsModal = ({ onSubmit }) => {
             endDate: format(new Date(endDate), 'yyyyMMdd'),
             //eventType er foreløpig bare pageViewed
             eventType: eventTypeMappings2.pageViewed.eventType,
-            groupBy: eventTypeMappings2.pageViewedGroupByReferrer.groupBy,
+            groupBy: selectedGroupBy,
             filters: [
                 {
                     subprop_type: "event",
@@ -133,6 +147,7 @@ export const SettingsModal = ({ onSubmit }) => {
                                    value={inputtedURL}
                                    onChange={(e) => handleSearchChange(e.target.value)}
                         />
+                        <GroupBySelect onSelectedGroupBy={handleGroupByChange}/>
                         <RangeDatePicker onDateChange={(range) => {
                             setStartDate(range.from);
                             setEndDate(range.to);
