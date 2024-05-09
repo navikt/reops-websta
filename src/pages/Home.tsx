@@ -137,6 +137,17 @@ const Home = () => {
         />
       </form>
       */}
+
+
+      {selectedDomain &&(
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 mb-6" >
+            <SiteScores
+                pageUrl={selectedPageUrl}
+                siteimproveSelectedDomain={selectedSiteimproveDomain}
+            />
+          </div>
+      )}
+
       {/*TODO: Charts er lenger til høyre når de er centered fordi centrering starter på y-axis */}
       <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
         {selectedDomain && formattedStartDate && formattedEndDate && (
@@ -517,12 +528,6 @@ const Home = () => {
           </div>
         )}
 
-        {selectedDomain &&(
-        <SiteScores
-            pageUrl={selectedPageUrl}
-            siteimproveSelectedDomain={selectedSiteimproveDomain}
-        />
-          )}
       </div>
     </div>
   );

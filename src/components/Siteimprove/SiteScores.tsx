@@ -8,7 +8,9 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain}) => {
     const [selectedPageId, setSelectedPageId] = useState(null)
     const [scoreOverview, setScoreOverview] =useState(null)
     const [error, setError] = useState<string | null>(null); // Explicitly define type as string or null
-
+    const roundToOneDecimal = (num: number) => {
+        return Math.round(num * 10) / 10;
+    };
     useEffect(() => {
         const fetchData = async () => {
 
@@ -56,32 +58,28 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain}) => {
     return (
         <div>
             <div className="mt-4 bg-white p-4 shadow-lg rounded-lg">
-                <h2 className="text-xl font-semibold mb-2">Scores</h2>
+                <h2 className="text-xl font-semibold mb-3">Poengsum (av 100)</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {scoreOverview &&  (
-                <div className="score-container">
-                    <CircularProgressbar value={scoreOverview.a11y.total} text={`${scoreOverview.a11y.total}`} />
-                    <p className="text-center mt-2">{`accessibility`}</p>
-
-                </div>)}
-            {scoreOverview &&  (
-                <div className="score-container">
-                    <CircularProgressbar value={scoreOverview.qa.total} text={`${scoreOverview.qa.total}`} />
-                    <p className="text-center mt-2">{`QA(Quality Assurance)`}</p>
-
-                </div>)}
-            {scoreOverview &&  (
-                <div className="score-container">
-                    <CircularProgressbar value={scoreOverview.seo.total} text={`${scoreOverview.seo.total}`} />
-                    <p className="text-center mt-2">{`SEO`}</p>
-
-                </div>)}
-            {scoreOverview &&  (
-                <div className="score-container">
-                    <CircularProgressbar value={scoreOverview.total} text={`${scoreOverview.total}`} />
-                    <p className="text-center mt-2">{`Total Page Score`}</p>
-
-                </div>)}
+                    {scoreOverview && (
+                        <div className="score-container">
+                            <CircularProgressbar value={scoreOverview.qa.total} text={`${roundToOneDecimal (scoreOverview.qa.total)}`}/>
+                            <p className="text-center mt-2">{`Kvalitetsikring av innhold`}</p>
+                        </div>)}
+                    {scoreOverview && (
+                        <div className="score-container">
+                            <CircularProgressbar value={scoreOverview.a11y.total} text={`${roundToOneDecimal (scoreOverview.a11y.total)}`}/>
+                            <p className="text-center mt-2">{`Universell utforming`}</p>
+                        </div>)}
+                    {scoreOverview && (
+                        <div className="score-container">
+                            <CircularProgressbar value={scoreOverview.seo.total} text={`${roundToOneDecimal (scoreOverview.seo.total)}`}/>
+                            <p className="text-center mt-2">{`Søkemotor-optimal`}</p>
+                        </div>)}
+                    {scoreOverview && (
+                        <div className="score-container">
+                            <CircularProgressbar value={scoreOverview.total} text={`${roundToOneDecimal (scoreOverview.total)}`}/>
+                            <p className="text-center mt-2">{`Totalt sett`}</p>
+                        </div>)}
                 </div>
             </div>
         </div>
