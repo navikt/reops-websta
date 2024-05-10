@@ -23,7 +23,7 @@ export const SearchComponent = ({onDomainSelect}) => {
             if(selectedTeam){
             onDomainSelect(selectedTeam.teamAmplitudeDomain.toString());
             }
-            console.log(option);
+
         }
     };
 

@@ -31,8 +31,7 @@ export const URLSearchComponent = ({ onDomainSelect, onPagePath, onPageUrl, onSi
     setSearchInput(value);
     //const domain = extractDomain(value)
     filterTeams(extractDomain(value));
-    console.log(value); // This logs every change in the input
-    //console.log(domain) //domain
+    
   };
 
   const filterTeams = (searchTerm: string) => {
@@ -54,10 +53,7 @@ export const URLSearchComponent = ({ onDomainSelect, onPagePath, onPageUrl, onSi
       onPageUrl(searchInput);
       //should be toString so we can use it the id in url
       onSiteimproveDomain(selectedTeam.teamSiteimproveSite.toString())
-      console.log("SearchInput", searchInput)
-      console.log('Selected team:', selectedTeam.teamName);
-      console.log('Selected amplitude', selectedTeam.teamAmplitudeDomain);
-      console.log('Selected siteimprove', selectedTeam.teamSiteimproveSite);
+
     }
   };
 

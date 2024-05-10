@@ -4,7 +4,7 @@ import AreaChartCustomAccessibility from '../components/charts/AreaChartCustomAc
 import HorizontalBarChartCustomAccessibility from '../components/charts/HorizontalBarChart/HorizontalBarChartCustomAccessibility';
 import { Search } from '@navikt/ds-react';
 import { Button, Heading, VStack } from '@navikt/ds-react';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 import AreaChartContainer from '../components/charts/AreaChartCustomAccessibility/AreaChartContainer';
 import { eventTypeMappings2 } from '../components/charts/dynamicUrlConstructor/EventTypeMappings2.ts';
@@ -39,6 +39,7 @@ const Home = () => {
     setSelectedPageUrl(pageUrl);
   }, []);
 
+
   const [selectedSiteimproveDomain, setSelectedSiteimproveDomain] =
     useState('');
 
@@ -46,11 +47,7 @@ const Home = () => {
     setSelectedSiteimproveDomain(siteimproveDomain);
   }, []);
 
-  console.log('this is my page url', selectedPageUrl);
-  console.log(
-    'this is my selected siteimprove domain id',
-    selectedSiteimproveDomain
-  );
+
 
   //const standardStartDate = new Date(new Date().setDate(standardStartDate.getDate()-30));
   //const standardEndDate = new Date();
@@ -62,10 +59,7 @@ const Home = () => {
   const defaultFormattedStartDate = format(defaultStartDate, 'yyyyMMdd');
   const defaultFormattedEndDate = format(defaultEndDate, 'yyyyMMdd');
 
-  console.log('date today', defaultStartDate);
-  console.log('date today minus 30', defaultEndDate);
-  console.log('date today Formatted', defaultFormattedStartDate);
-  console.log('date today minus 30 Formatted', defaultFormattedEndDate);
+
 
   const [formattedStartDate, setFormattedStartDate] = useState(
     defaultFormattedStartDate
@@ -73,6 +67,8 @@ const Home = () => {
   const [formattedEndDate, setFormattedEndDate] = useState(
     defaultFormattedEndDate
   );
+  const navigate = useNavigate();
+  navigate(`/search?input=${encodeURIComponent(selectedPageUrl)}?startDate=${formattedStartDate}?endDate=${formattedEndDate}`);
 
   interface range {
     from?: Date;
@@ -98,7 +94,7 @@ const Home = () => {
     }
   }, []);
 
-  console.log(`from home`, selectedDomain, `${selectedPath}/`);
+
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-6">

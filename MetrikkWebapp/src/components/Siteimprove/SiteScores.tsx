@@ -19,12 +19,10 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain}) => {
             if (selectedPageData && selectedPageData.items && selectedPageData.items.length > 0) {
                 const firstItemId = selectedPageData.items[0].id;
                 setSelectedPageId(firstItemId);
-                console.log("selectedPageId", firstItemId)
 
                 const overviewData = await fetchSiteimproveData(`/sites/${siteimproveSelectedDomain}/dci/overview?page_id=${firstItemId}`);
                 if (overviewData && overviewData.a11y && overviewData.qa && overviewData.seo) {
                     setScoreOverview(overviewData);
-                    console.log("overviewData",overviewData)
                 } else {
                     setError('error')
                     throw new Error('Fant ingen data for side, sjekk om du har skrevet in URL riktig');

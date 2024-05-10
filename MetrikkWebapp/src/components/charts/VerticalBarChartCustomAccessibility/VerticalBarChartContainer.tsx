@@ -49,7 +49,6 @@ const VerticalBarChartContainer: React.FC<VerticalChartContainerProps> = ({
         const processedChartData = processData(response);
         setChartData(processedChartData);
       } catch (error) {
-        console.log('in error');
         console.error('Failed to fetch and process data:', error);
       }
     };

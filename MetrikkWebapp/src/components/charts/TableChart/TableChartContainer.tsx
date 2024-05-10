@@ -14,7 +14,6 @@ const TableChartContainer = ({
   const [chartData, setChartData] = useState(null);
 
   useEffect(() => {
-    console.log('Fetching data for TableChart...');
     const fetchData = async () => {
       try {
         const fetchURL = constructEndpointUrl2(endpointType, urlParams);

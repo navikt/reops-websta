@@ -19,7 +19,6 @@ export const RangeDatePicker = ({ onDateChange }) => {
         if (onDateChange) {
           onDateChange(range);
         }
-        console.log(range);
       },
     });
 
