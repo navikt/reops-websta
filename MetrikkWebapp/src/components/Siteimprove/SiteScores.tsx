@@ -8,6 +8,7 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain}) => {
     const [selectedPageId, setSelectedPageId] = useState(null)
     const [scoreOverview, setScoreOverview] =useState(null)
     const [error, setError] = useState<string | null>(null); // Explicitly define type as string or null
+    const [reportLink, setReportLink] =useState(null)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,6 +28,11 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain}) => {
                 } else {
                     setError('error')
                     throw new Error('Fant ingen data for side, sjekk om du har skrevet in URL riktig');
+                }
+
+                const reportsHref = await fetchSiteimproveData(`/sites/${siteimproveSelectedDomain}/content/pages/${firstItemId}`)
+                if(reportsHref._siteimprove.quality_assurance.page_report.href){
+                    setReportLink(reportsHref._siteimprove.quality_assurance.page_report.href)
                 }
             } else {
                 setError('error')
@@ -61,7 +67,7 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain}) => {
             {scoreOverview &&  (
                 <div className="score-container">
                     <CircularProgressbar value={scoreOverview.a11y.total} text={`${scoreOverview.a11y.total}`} />
-                    <p className="text-center mt-2">{`accessibility`}</p>
+                    <p className="text-center mt-2">{`Accessibility`}</p>
 
                 </div>)}
             {scoreOverview &&  (
@@ -83,6 +89,12 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain}) => {
 
                 </div>)}
                 </div>
+                    {reportLink && (
+                        <div className="mt-4 bg-white p-4 shadow-lg rounded-lg">
+                            <h2 className="text-xl font-semibold mb-2">Quality Assurance Report</h2>
+                            <a href={reportLink} target="_blank" rel="noopener noreferrer">View Quality Assurance Report</a>
+                        </div>
+                    )}
             </div>
         </div>
     );
