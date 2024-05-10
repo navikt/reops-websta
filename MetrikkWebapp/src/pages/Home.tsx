@@ -143,6 +143,10 @@ const Home = () => {
 
       <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
         {selectedDomain && (
+          <h2 className="text-4xl font-semi-bold mb-1 ">Siteimprove</h2>
+        )}
+
+        {selectedDomain && (
           <div className="p-4 bg-white border border-blue-200 rounded shadow-lg md:col-span-2">
             <SiteScores
               pageUrl={selectedPageUrl}
