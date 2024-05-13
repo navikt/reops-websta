@@ -88,9 +88,9 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain}) => {
                 </div>)}
                 </div>
                     {reportLink && (
-                        <div className="mt-4 bg-white p-4 shadow-lg rounded-lg">
-                            <h2 className="text-xl font-semibold mb-2">Quality Assurance Report</h2>
-                            <a href={reportLink} target="_blank" rel="noopener noreferrer">View Quality Assurance Report</a>
+                        <div className="mt-4 bg-white p-4 shadow-lg rounded-lg justify-center items-center">
+                            <h2 className="text-xl text-center font-semibold mb-2">Quality Assurance Report</h2>
+                            <a href={reportLink} target="_blank" rel="noopener noreferrer"><p className="text-xl text-center font-semibold mb-2">Quality Assurance Report</p></a>
                         </div>
                     )}
             </div>
