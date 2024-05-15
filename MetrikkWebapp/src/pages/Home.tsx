@@ -4,20 +4,20 @@ import AreaChartCustomAccessibility from '../components/charts/AreaChartCustomAc
 import HorizontalBarChartCustomAccessibility from '../components/charts/HorizontalBarChart/HorizontalBarChartCustomAccessibility';
 import { Search } from '@navikt/ds-react';
 import { Button, Heading, VStack } from '@navikt/ds-react';
-import {Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import AreaChartContainer from '../components/charts/AreaChartCustomAccessibility/AreaChartContainer';
 import { eventTypeMappings2 } from '../components/charts/dynamicUrlConstructor/EventTypeMappings2.ts';
 import { eventTypeMappings } from '../components/charts/fetchUrlConstructor.ts';
 import { SearchComponent } from '../components/SearchComponent/SearchComponent.tsx';
-import { SetStateAction, useCallback, useState } from 'react';
+import { SetStateAction, useCallback, useState, useRef } from 'react';
 import { URLSearchComponent } from '../components/SearchComponent/URLSearchComponent.tsx';
 import { RangeDatePicker } from '../components/DatePicker/DatePicker.tsx';
 import VerticalBarChartCustomAccessibilityExample from '../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartCustomAccessibility';
 import VerticalBarChartContainer from '../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartContainer';
 import TableChartContainer from '../components/charts/TableChart/TableChartContainer';
 import SiteScores from '../components/Siteimprove/SiteScores.tsx';
-import SimpleOverviewChartBoard from "../components/Amplitude/SimpleOverviewChartBoard.tsx";
+import SimpleOverviewChartBoard from '../components/Amplitude/SimpleOverviewChartBoard.tsx';
 
 const Home = () => {
   // Kan hende callback blir brukt til å velge domene
@@ -26,6 +26,8 @@ const Home = () => {
   const handleDomainSelect = useCallback((domain: string) => {
     setSelectedDomain(domain);
   }, []);
+
+  const siteScoresRef = useRef<HTMLDivElement>(null);
 
   // Kan hende callback blir brukt til å velge domene
   const [selectedPath, setSelectedPath] = useState('');
@@ -40,15 +42,12 @@ const Home = () => {
     setSelectedPageUrl(pageUrl);
   }, []);
 
-
   const [selectedSiteimproveDomain, setSelectedSiteimproveDomain] =
     useState('');
 
   const handleSiteimproveDomain = useCallback((siteimproveDomain: string) => {
     setSelectedSiteimproveDomain(siteimproveDomain);
   }, []);
-
-
 
   //const standardStartDate = new Date(new Date().setDate(standardStartDate.getDate()-30));
   //const standardEndDate = new Date();
@@ -59,8 +58,6 @@ const Home = () => {
   const defaultEndDate = new Date(Date.now());
   const defaultFormattedStartDate = format(defaultStartDate, 'yyyyMMdd');
   const defaultFormattedEndDate = format(defaultEndDate, 'yyyyMMdd');
-
-
 
   const [formattedStartDate, setFormattedStartDate] = useState(
     defaultFormattedStartDate
@@ -95,7 +92,9 @@ const Home = () => {
     }
   }, []);
 
-
+  const scrollToSiteScores = () => {
+    siteScoresRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-6">
@@ -138,25 +137,38 @@ const Home = () => {
       */}
       {/*TODO: Charts er lenger til høyre når de er centered fordi centrering starter på y-axis */}
 
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
-        {selectedDomain && (
-          <h2 className="text-4xl font-semi-bold mb-1 ">Siteimprove</h2>
-        )}
+      {selectedDomain && (
+        <div className="mb-8">
+          <Button onClick={scrollToSiteScores}>Poengsum</Button>
+        </div>
+      )}
+      {/* {selectedDomain && (
+        <h2 className="text-4xl font-semi-bold mb-1 text-left">Amplitude</h2>
+      )} */}
 
-        {selectedDomain && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg md:col-span-2">
-            <SiteScores
-              pageUrl={selectedPageUrl}
-              siteimproveSelectedDomain={selectedSiteimproveDomain}
-            />
-          </div>
-        )}
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 ">
         <SimpleOverviewChartBoard
-            selectedDomain={selectedDomain}
-            formattedStartDate={formattedStartDate}
-            formattedEndDate={formattedEndDate}
-            selectedPath={selectedPath}/>
+          selectedDomain={selectedDomain}
+          formattedStartDate={formattedStartDate}
+          formattedEndDate={formattedEndDate}
+          selectedPath={selectedPath}
+        />
       </div>
+      {/* {selectedDomain && (
+        <h2 className="text-4xl font-semi-bold mb-1 text-left">Siteimprove</h2>
+      )} */}
+
+      {selectedDomain && (
+        <div
+          ref={siteScoresRef}
+          className="p-4 bg-white border border-blue-200 rounded shadow-lg md:col-span-2 mt-6"
+        >
+          <SiteScores
+            pageUrl={selectedPageUrl}
+            siteimproveSelectedDomain={selectedSiteimproveDomain}
+          />
+        </div>
+      )}
     </div>
   );
 };
