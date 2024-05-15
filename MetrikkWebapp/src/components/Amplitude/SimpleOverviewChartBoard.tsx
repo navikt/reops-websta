@@ -141,7 +141,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                 },
               ],
             }}
-            title="Antall besøk gruppert på sidesti"
+            title="Antall besøk hos sidesti"
           />
         </div>
       )}
@@ -306,11 +306,11 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
         </div>
       )}
 
-      {selectedDomain && formattedStartDate && formattedEndDate && !loading && (
-        <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
-          <VerticalBarChartContainer
+      {selectedDomain && formattedStartDate && formattedEndDate && (
+        <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
+          <TableChartContainer
             teamDomain={selectedDomain}
-            chartType="verticalBarChart"
+            chartType="segmentationChartProcessing"
             endpointType="segmentation"
             urlParams={{
               startDate: formattedStartDate,
@@ -330,11 +330,12 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
               width: 500,
               height: 350,
             }}
-            titles={{
-              chartTitle: 'Antall besøk gruppert på operativsystem',
-              xAxisTitle: 'Operativsystem',
-              yAxisTitle: 'Antall besøk',
-            }}
+            title="Antall besøk gruppert på nettleser"
+            /*titles={{
+                chartTitle: 'Antall besøk gruppert på nettleser',
+                xAxisTitle: 'Nettleser',
+                yAxisTitle: 'Antall besøk',
+              }}*/
           />
         </div>
       )}
