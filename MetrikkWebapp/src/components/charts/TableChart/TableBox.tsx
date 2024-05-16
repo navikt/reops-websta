@@ -7,8 +7,8 @@ const TableBox = ({ data, title }) => (
     <Table>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell>Value</Table.HeaderCell>
-          <Table.HeaderCell>Total Visitors</Table.HeaderCell>
+          <Table.HeaderCell>Verdi</Table.HeaderCell>
+          <Table.HeaderCell>Totalt antall besøkende</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>

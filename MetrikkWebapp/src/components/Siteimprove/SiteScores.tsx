@@ -1,4 +1,4 @@
-import { CircularProgressbar } from 'react-circular-progressbar';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import React, { useEffect, useState } from 'react';
 import { fetchSiteimproveData } from '../../service/SiteimproveApi.tsx';
@@ -6,7 +6,7 @@ import { fetchSiteimproveData } from '../../service/SiteimproveApi.tsx';
 const SiteScores = ({ pageUrl, siteimproveSelectedDomain }) => {
   const [selectedPageId, setSelectedPageId] = useState(null);
   const [scoreOverview, setScoreOverview] = useState(null);
-  const [error, setError] = useState<string | null>(null); // Explicitly define type as string or null
+  const [error, setError] = useState<string | null>(null);
   const [reportLink, setReportLink] = useState(null);
 
   useEffect(() => {
@@ -59,7 +59,7 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain }) => {
         console.error('Error fetching data: ', error);
         setError(
           'Error når man skulle hente data, sjekk om du har skrevet in URL riktig '
-        ); // Set error state
+        );
       }
     };
 
@@ -68,60 +68,119 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain }) => {
 
   if (error) {
     return (
-      <div className="mt-4 bg-white p-4 shadow-lg rounded-lg">
+      <div className="mt-4 bg-white p-4 rounded-lg">
         <h2 className="text-xl font-semibold mb-2">Error</h2>
         <p className="text-red-500">{error}</p>
       </div>
     );
   }
 
+  const getColor = (score) => {
+    if (score > 75) return '#4caf50';
+    if (score > 50) return '#ffeb3b';
+    if (score > 25) return '#f44336';
+    return '#ff9800';
+  };
+
   return (
-    <div>
-      <div className="mt-4 bg-white p-4 shadow-lg rounded-lg">
-        <h2 className="text-xl font-semibold mb-2">Poengsum (av 100)</h2>
+    <div className="w-full">
+      <div className="mt-4 bg-white p-4 rounded-lg">
+        <h2 className="text-xl font-semibold mb-2" style={{ color: '#000000' }}>
+          Poengsum (av 100)
+        </h2>
+        <hr className="my-4 border-t-2 border-gray-300" />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {scoreOverview && (
-            <div>
-              <CircularProgressbar
-                value={scoreOverview.qa.total}
-                text={`${scoreOverview.qa.total}`}
-              />
-              <p className="text-center">{`Kvalitetsikring av innhold`}</p>
+            <div className="flex flex-col items-center justify-center w-full p-4">
+              <div className="w-40 h-40">
+                <CircularProgressbar
+                  value={scoreOverview.qa.total}
+                  text={`${scoreOverview.qa.total}`}
+                  aria-label="Kvalitetsikring av innhold score"
+                  styles={buildStyles({
+                    pathColor: getColor(scoreOverview.qa.total),
+                    textColor: '#000000',
+                    textSize: '20px',
+                    fontWeight: 'bold',
+                  })}
+                />
+              </div>
+              <p
+                className="text-center mt-2 font-bold text-lg"
+                style={{ color: '#000000' }}
+              >{`Kvalitetsikring av innhold`}</p>
             </div>
           )}
           {scoreOverview && (
-            <div>
-              <CircularProgressbar
-                value={scoreOverview.a11y.total}
-                text={`${scoreOverview.a11y.total}`}
-              />
-              <p className="text-center">{`Universell utforming`}</p>
+            <div className="flex flex-col items-center justify-center w-full p-4">
+              <div className="w-40 h-40">
+                <CircularProgressbar
+                  value={scoreOverview.a11y.total}
+                  text={`${scoreOverview.a11y.total}`}
+                  aria-label="Universell utforming score"
+                  styles={buildStyles({
+                    pathColor: getColor(scoreOverview.a11y.total),
+                    textColor: '#000000',
+                    textSize: '20px',
+                    fontWeight: 'bold',
+                  })}
+                />
+              </div>
+              <p
+                className="text-center mt-2 font-bold text-lg"
+                style={{ color: '#000000' }}
+              >{`Universell utforming`}</p>
             </div>
           )}
           {scoreOverview && (
-            <div>
-              <CircularProgressbar
-                value={scoreOverview.seo.total}
-                text={`${scoreOverview.seo.total}`}
-              />
-              <p className="text-center">{`Søkemotor-optimal`}</p>
+            <div className="flex flex-col items-center justify-center w-full p-4">
+              <div className="w-40 h-40">
+                <CircularProgressbar
+                  value={scoreOverview.seo.total}
+                  text={`${scoreOverview.seo.total}`}
+                  aria-label="Søkemotor-optimal score"
+                  styles={buildStyles({
+                    pathColor: getColor(scoreOverview.seo.total),
+                    textColor: '#000000',
+                    textSize: '20px',
+                    fontWeight: 'bold',
+                  })}
+                />
+              </div>
+              <p
+                className="text-center mt-2 font-bold text-lg"
+                style={{ color: '#000000' }}
+              >{`Søkemotor-optimal`}</p>
             </div>
           )}
           {scoreOverview && (
-            <div>
-              <CircularProgressbar
-                value={scoreOverview.total}
-                text={`${scoreOverview.total}`}
-              />
-              <p className="text-center">{`Totalt sett`}</p>
+            <div className="flex flex-col items-center justify-center w-full p-4">
+              <div className="w-40 h-40">
+                <CircularProgressbar
+                  value={scoreOverview.total}
+                  text={`${scoreOverview.total}`}
+                  aria-label="Totalt sett score"
+                  styles={buildStyles({
+                    pathColor: getColor(scoreOverview.total),
+                    textColor: '#000000',
+                    textSize: '20px',
+                    fontWeight: 'bold',
+                  })}
+                />
+              </div>
+              <p
+                className="text-center mt-2 font-bold text-lg"
+                style={{ color: '#000000' }}
+              >{`Totalt sett`}</p>
             </div>
           )}
         </div>
+        <hr className="my-4 border-t-2 border-gray-300" />
         {reportLink && (
-          <div className="mt-4 bg-white p-4 shadow-lg rounded-lg justify-center items-center">
+          <div className="mt-4 bg-white p-4 rounded-lg justify-center items-center">
             <a href={reportLink} target="_blank" rel="noopener noreferrer">
-              <p className="text-xl text-center font-semibold mb-2">
-                Kvalitetsikring av innhold
+              <p className="text-xl text-center font-semibold mb-2 text-blue-700">
+                Detaljert poengsumrapport
               </p>
             </a>
           </div>
