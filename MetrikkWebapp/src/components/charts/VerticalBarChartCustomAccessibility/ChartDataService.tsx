@@ -22,7 +22,7 @@ export const processVerticalBarChartData = (apiResponse) => {
         };
     });
 
-    return chartDataPoints.slice(0,9);  // max 9
+    return chartDataPoints.slice(0,12);  // max 12
 };
 
 export const processVerticalBarChartDates = (apiResponse) => {
