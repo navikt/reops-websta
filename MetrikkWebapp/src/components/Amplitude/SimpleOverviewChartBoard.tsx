@@ -191,7 +191,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     height: 350,
                   }}
                   titles={{
-                    chartTitle: 'Hvilke ukedager, i angitt tidsrom, besøkes nettsiden mest?',
+                    chartTitle: 'Hvilke ukedager besøkes nettsiden mest i angitt tidsrom?',
                     xAxisTitle: 'Ukedager',
                     yAxisTitle: 'Antall besøk',
                   }}
@@ -225,7 +225,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     height: 350,
                   }}
                   titles={{
-                    chartTitle: 'Hvilket klokkeslett, i angitt tidsrom, besøkes nettsiden mest?',
+                    chartTitle: 'Hvilket klokkeslett besøkes nettsiden mest i angitt tidsrom?',
                     xAxisTitle: 'Klokkeslett',
                     yAxisTitle: 'Antall besøk',
                   }}
@@ -337,7 +337,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     width: 500,
                     height: 350,
                   }}
-                  title = "Hvilket operativsystem, mobil, PC eller nettbrett benyttes på siden?"
+                  title = "Antall besøk av operativsystem, mobil, PC og nettbrett"
               />
             </div>
         )}
