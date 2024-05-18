@@ -5,6 +5,7 @@ import {
 } from '@fluentui/react-charting';
 import { Checkbox } from '@fluentui/react/lib/Checkbox';
 import { DefaultPalette } from '@fluentui/react/lib/Styling';
+import { DataVizPalette } from "@fluentui/react-charting";
 
 interface IVerticalBarChartProps {
   chartData: IVerticalBarChartDataPoint[];

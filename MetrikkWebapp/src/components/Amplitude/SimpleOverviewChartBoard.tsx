@@ -90,7 +90,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     height: 350,
                   }}
                   titles={{
-                    chartTitle: 'Hvilket besøk gruppert på by',
+                    chartTitle: 'Hvilke byer nettsiden besøkes fra',
                     xAxisTitle: 'Dato',
                     yAxisTitle: 'Antall besøk',
                   }}
@@ -123,7 +123,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     height: 350,
                   }}
                   titles={{
-                    chartTitle: 'Hvilke land besøkes siden fra?',
+                    chartTitle: 'Hvilke land nettsiden besøkes fra',
                     xAxisTitle: 'Dato',
                     yAxisTitle: 'Antall besøk',
                   }}
@@ -156,7 +156,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     height: 350,
                   }}
                   titles={{
-                    chartTitle: 'Hvilket språk benytter brukeren seg av?',
+                    chartTitle: 'Hvilke språk brukerne benytter',
                     xAxisTitle: 'Dato',
                     yAxisTitle: 'Antall besøk',
                   }}
@@ -191,7 +191,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     height: 350,
                   }}
                   titles={{
-                    chartTitle: 'Hvilke ukedager besøkes nettsiden mest i angitt tidsrom?',
+                    chartTitle: 'Hvilke ukedager nettsiden besøkes i angitt tidsrom',
                     xAxisTitle: 'Ukedager',
                     yAxisTitle: 'Antall besøk',
                   }}
@@ -225,7 +225,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     height: 350,
                   }}
                   titles={{
-                    chartTitle: 'Hvilket klokkeslett besøkes nettsiden mest i angitt tidsrom?',
+                    chartTitle: 'Hvilke klokkeslett nettsiden besøkes i angitt tidsrom',
                     xAxisTitle: 'Klokkeslett',
                     yAxisTitle: 'Antall besøk',
                   }}
@@ -253,7 +253,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                       },
                     ],
                   }}
-                  title="Hvor kommer besøkende fra?"
+                  title="Hvor brukerne kommer fra"
               />
             </div>
         )}
@@ -308,7 +308,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     width: 500,
                     height: 350,
                   }}
-                  title="Hvilken nettleser benytter nettleser brukeren seg av?"
+                  title="Hvilke nettlesere brukerne benytter seg av"
               />
             </div>
         )}
