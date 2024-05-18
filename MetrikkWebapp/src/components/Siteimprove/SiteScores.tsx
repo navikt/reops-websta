@@ -86,102 +86,92 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain }) => {
     <div className="w-full">
       <div className="mt-4 bg-white p-4 rounded-lg">
         <h2 className="text-xl font-semibold mb-2" style={{ color: '#000000' }}>
-          Poengsum (av 100)
+          Poengsum fra siste rapport (av 100)
         </h2>
         <hr className="my-4 border-t-2 border-gray-300" />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {scoreOverview && (
             <div className="flex flex-col items-center justify-center w-full p-4">
               <div className="w-40 h-40">
-                <CircularProgressbar
+                <CircularProgressbar className="text-xl font-bold"
                   value={scoreOverview.qa.total}
                   text={`${scoreOverview.qa.total}`}
                   aria-label="Kvalitetsikring av innhold score"
                   styles={buildStyles({
                     pathColor: getColor(scoreOverview.qa.total),
                     textColor: '#000000',
-                    textSize: '20px',
-                    fontWeight: 'bold',
                   })}
                 />
               </div>
-              <p
-                className="text-center mt-2 font-bold text-lg"
-                style={{ color: '#000000' }}
-              >{`Kvalitetsikring av innhold`}</p>
+              <h3
+                className="text-center mt-2 font-bold text-xl"
+              >{`Kvalitetsikring av innhold`}</h3>
             </div>
           )}
           {scoreOverview && (
             <div className="flex flex-col items-center justify-center w-full p-4">
               <div className="w-40 h-40">
-                <CircularProgressbar
+                <CircularProgressbar className="text-xl font-bold"
                   value={scoreOverview.a11y.total}
                   text={`${scoreOverview.a11y.total}`}
                   aria-label="Universell utforming score"
                   styles={buildStyles({
                     pathColor: getColor(scoreOverview.a11y.total),
                     textColor: '#000000',
-                    textSize: '20px',
-                    fontWeight: 'bold',
                   })}
                 />
               </div>
-              <p
-                className="text-center mt-2 font-bold text-lg"
-                style={{ color: '#000000' }}
-              >{`Universell utforming`}</p>
+              <h3
+                className="text-center mt-2 font-bold text-xl"
+              >{`Universell utforming`}</h3>
             </div>
           )}
           {scoreOverview && (
             <div className="flex flex-col items-center justify-center w-full p-4">
               <div className="w-40 h-40">
-                <CircularProgressbar
+                <CircularProgressbar className="text-xl font-bold"
                   value={scoreOverview.seo.total}
                   text={`${scoreOverview.seo.total}`}
                   aria-label="Søkemotor-optimal score"
                   styles={buildStyles({
                     pathColor: getColor(scoreOverview.seo.total),
                     textColor: '#000000',
-                    textSize: '20px',
-                    fontWeight: 'bold',
                   })}
                 />
               </div>
-              <p
-                className="text-center mt-2 font-bold text-lg"
-                style={{ color: '#000000' }}
-              >{`Søkemotor-optimal`}</p>
+              <h3
+                className="text-center mt-2 font-bold text-xl"
+              >{`Søkemotor-optimal`}</h3>
             </div>
           )}
           {scoreOverview && (
             <div className="flex flex-col items-center justify-center w-full p-4">
               <div className="w-40 h-40">
-                <CircularProgressbar
+                <CircularProgressbar className="text-xl font-bold"
                   value={scoreOverview.total}
                   text={`${scoreOverview.total}`}
-                  aria-label="Totalt sett score"
+                  aria-label="Total poengsum"
                   styles={buildStyles({
                     pathColor: getColor(scoreOverview.total),
                     textColor: '#000000',
-                    textSize: '20px',
-                    fontWeight: 'bold',
                   })}
                 />
               </div>
-              <p
+              <h3
                 className="text-center mt-2 font-bold text-lg"
                 style={{ color: '#000000' }}
-              >{`Totalt sett`}</p>
+              >{`Total poengsum`}</h3>
             </div>
           )}
         </div>
         <hr className="my-4 border-t-2 border-gray-300" />
         {reportLink && (
           <div className="mt-4 bg-white p-4 rounded-lg justify-center items-center">
+            <h2 className="font-bold text-xl text-center">Lenke til rapport:</h2>
             <a href={reportLink} target="_blank" rel="noopener noreferrer">
-              <p className="text-xl text-center font-semibold mb-2 text-blue-700">
+              <h2 className="text-xl text-center font-bold underline mb-2 text-blue-700">
                 Detaljert poengsumrapport
-              </p>
+              </h2>
             </a>
           </div>
         )}
