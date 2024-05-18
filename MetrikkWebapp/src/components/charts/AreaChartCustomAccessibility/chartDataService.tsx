@@ -66,13 +66,13 @@ export const processAreaChartDataMultiple = (apiResponse: { data: { xValues: any
         // Add more colors as necessary
     ];
 
+    const defaultLabel = 'Antall Besøk';
 
 
     // Array to hold the chart data for each series
     const chartPoints = series.slice(0,9).map((currentSeries: any[], seriesIndex: number) => {
 
-        const seriesLabel = seriesLabels[seriesIndex][1]; // Assuming the label is at index 1
-
+        const seriesLabel = seriesLabels[seriesIndex][1] || defaultLabel; // Assuming the label is at index 1
 
 
         // Generate chart points for the current series
@@ -80,7 +80,7 @@ export const processAreaChartDataMultiple = (apiResponse: { data: { xValues: any
             x: new Date(xValues[index]), // making new date for xValues
             y: value,
             xAxisCalloutAccessibilityData: { ariaLabel: `Date: ${xValues[index]}` },
-            callOutAccessibilityData: { ariaLabel: `${seriesLabel}: Value ${value} on ${xValues[index]}` },
+            callOutAccessibilityData: { ariaLabel: `${seriesLabel}: Verdi ${value} på dato ${xValues[index]}` },
         }));
 
 

@@ -69,9 +69,12 @@ export class VerticalBarChartCustomAccessibilityExample extends React.Component<
       '#6200ea',
     ];
 
-    const colors = chartData.map(
-      (_, index) => colorPalette[index % colorPalette.length]
-    );
+    const coloredChartData = chartData.map((dataPoint, index) => ({
+      ...dataPoint,
+      color: useSingleColor
+        ? DefaultPalette.green
+        : colorPalette[index % colorPalette.length],
+    }));
 
     const rootStyle = {
       width: `${dimensions.width}px`,
@@ -89,15 +92,10 @@ export class VerticalBarChartCustomAccessibilityExample extends React.Component<
             onChange={this._onChange}
           />
           <VerticalBarChart
-            data={chartData}
+            data={coloredChartData}
             width={dimensions.width}
             height={dimensions.height}
             barWidth={15}
-            colors={
-              useSingleColor
-                ? chartData.map(() => DefaultPalette.green)
-                : colors
-            }
             yAxisTickCount={6}
             hideLegend={true}
             enableReflow={true}
