@@ -9,7 +9,12 @@ interface Team {
   teamSiteimproveSite: number;
 }
 
-export const URLSearchComponent = ({ onDomainSelect, onPagePath, onPageUrl, onSiteimproveDomain }) => {
+export const URLSearchComponent = ({
+  onDomainSelect,
+  onPagePath,
+  onPageUrl,
+  onSiteimproveDomain,
+}) => {
   const [searchInput, setSearchInput] = useState('');
   const [filteredTeams, setFilteredTeams] = useState<Team[]>([]);
 
@@ -31,7 +36,6 @@ export const URLSearchComponent = ({ onDomainSelect, onPagePath, onPageUrl, onSi
     setSearchInput(value);
     //const domain = extractDomain(value)
     filterTeams(extractDomain(value));
-    
   };
 
   const filterTeams = (searchTerm: string) => {
@@ -52,8 +56,7 @@ export const URLSearchComponent = ({ onDomainSelect, onPagePath, onPageUrl, onSi
       onPagePath(path);
       onPageUrl(searchInput);
       //should be toString so we can use it the id in url
-      onSiteimproveDomain(selectedTeam.teamSiteimproveSite.toString())
-
+      onSiteimproveDomain(selectedTeam.teamSiteimproveSite.toString());
     }
   };
 
