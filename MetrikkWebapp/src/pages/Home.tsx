@@ -5,40 +5,27 @@ import { URLSearchComponent } from '../components/SearchComponent/URLSearchCompo
 import { RangeDatePicker } from '../components/DatePicker/DatePicker.tsx';
 import SiteScores from '../components/Siteimprove/SiteScores.tsx';
 import SimpleOverviewChartBoard from '../components/Amplitude/SimpleOverviewChartBoard.tsx';
+import {useLocation, useNavigate} from "react-router-dom";
 
 
 const Home = () => {
-  // Kan hende callback blir brukt til å velge domene
   const [selectedDomain, setSelectedDomain] = useState('');
-
   const handleDomainSelect = useCallback((domain: string) => {
     setSelectedDomain(domain);
   }, []);
-
   const siteScoresRef = useRef<HTMLDivElement>(null);
-
-  // Kan hende callback blir brukt til å velge domene
   const [selectedPath, setSelectedPath] = useState('');
-
   const handlePathSelection = useCallback((path: string) => {
     setSelectedPath(path);
   }, []);
-
   const [selectedPageUrl, setSelectedPageUrl] = useState('');
-
   const handlePageUrl = useCallback((pageUrl: string) => {
     setSelectedPageUrl(pageUrl);
   }, []);
-
-  const [selectedSiteimproveDomain, setSelectedSiteimproveDomain] =
-    useState('');
-
+  const [selectedSiteimproveDomain, setSelectedSiteimproveDomain] = useState('');
   const handleSiteimproveDomain = useCallback((siteimproveDomain: string) => {
     setSelectedSiteimproveDomain(siteimproveDomain);
   }, []);
-
-  // const standardStartDate = new Date(new Date().setDate(standardStartDate.getDate()-30));
-  // const standardEndDate = new Date();
 
   const defaultStartDate = new Date(
     new Date().setDate(new Date(Date.now()).getDate() - 30)
@@ -46,7 +33,6 @@ const Home = () => {
   const defaultEndDate = new Date(Date.now());
   const defaultFormattedStartDate = format(defaultStartDate, 'yyyyMMdd');
   const defaultFormattedEndDate = format(defaultEndDate, 'yyyyMMdd');
-
   const [formattedStartDate, setFormattedStartDate] = useState(
     defaultFormattedStartDate
   );
@@ -54,8 +40,6 @@ const Home = () => {
     defaultFormattedEndDate
   );
 
-  // const navigate = useNavigate();
-  // navigate(`/search?input=${encodeURIComponent(selectedPageUrl)}?startDate=${formattedStartDate}?endDate=${formattedEndDate}`);
 
   interface range {
     from?: Date;
@@ -98,6 +82,51 @@ const Home = () => {
       scrollToSiteScores();
     }
   }, [isValidUrl]);
+
+  // url routing ---------------------------------------------------------------------------------------------------
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const currentUrlRef = useRef(window.location.href);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const domain = params.get('domain') || '';
+    const path = params.get('path') || '';
+    const pageUrl = params.get('url') || '';
+    const startDate = params.get('startDate') || defaultFormattedStartDate;
+    const endDate = params.get('endDate') || defaultFormattedEndDate;
+    const siteimproveDomain = params.get('siteimproveDomain') || '';
+
+    setSelectedSiteimproveDomain(siteimproveDomain);
+    setSelectedDomain(domain);
+    setSelectedPath(path);
+    setSelectedPageUrl(pageUrl);
+    setFormattedStartDate(startDate);
+    setFormattedEndDate(endDate);
+  }, [location.search]);
+
+  const updateUrl = () => {
+    const url = new URL(window.location.href);
+    const params = url.searchParams;
+
+    params.set('domain', selectedDomain);
+    params.set('path', selectedPath);
+    params.set('url', selectedPageUrl);
+    params.set('startDate', formattedStartDate);
+    params.set('endDate', formattedEndDate);
+    params.set('siteimproveDomain', selectedSiteimproveDomain);
+
+    const newUrl = `${url.pathname}?${params.toString()}`;
+    if (newUrl !== currentUrlRef.current) {
+      currentUrlRef.current = newUrl;
+      navigate(newUrl, { replace: true });
+    }
+  };
+
+  updateUrl();
+
+  //==================================================================================================================
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-6">
