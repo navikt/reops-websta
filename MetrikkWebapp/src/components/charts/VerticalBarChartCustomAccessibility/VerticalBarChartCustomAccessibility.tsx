@@ -3,9 +3,7 @@ import {
   VerticalBarChart,
   IVerticalBarChartDataPoint,
 } from '@fluentui/react-charting';
-import { Checkbox } from '@fluentui/react/lib/Checkbox';
 import { DefaultPalette } from '@fluentui/react/lib/Styling';
-import { DataVizPalette } from "@fluentui/react-charting";
 
 interface IVerticalBarChartProps {
   chartData: IVerticalBarChartDataPoint[];
@@ -20,30 +18,10 @@ interface IVerticalBarChartProps {
   };
 }
 
-interface IVerticalBarChartState {
-  useSingleColor: boolean;
-}
-
 export class VerticalBarChartCustomAccessibilityExample extends React.Component<
-  IVerticalBarChartProps,
-  IVerticalBarChartState
-> {
-  constructor(props: IVerticalBarChartProps) {
-    super(props);
-    this.state = {
-      useSingleColor: false,
-    };
-  }
-
-  private _onChange = (
-    ev: React.FormEvent<HTMLInputElement>,
-    checked: boolean
-  ) => {
-    this.setState({ useSingleColor: checked });
-  };
-
+    IVerticalBarChartProps
+    > {
   public render(): JSX.Element {
-    const { useSingleColor } = this.state;
     const { chartData, titles, dimensions } = this.props;
 
     const colorPalette = [
@@ -71,9 +49,7 @@ export class VerticalBarChartCustomAccessibilityExample extends React.Component<
 
     const coloredChartData = chartData.map((dataPoint, index) => ({
       ...dataPoint,
-      color: useSingleColor
-        ? DefaultPalette.green
-        : colorPalette[index % colorPalette.length],
+      color: colorPalette[index % colorPalette.length],
     }));
 
     const rootStyle = {
@@ -83,32 +59,27 @@ export class VerticalBarChartCustomAccessibilityExample extends React.Component<
     };
 
     return (
-      <div className="mb-12">
-        <h2 className="text-center font-bold">{titles.chartTitle}</h2>
-        <div style={rootStyle}>
-          <Checkbox
-            label="Bruk én farge"
-            checked={useSingleColor}
-            onChange={this._onChange}
-          />
-          <VerticalBarChart
-            data={coloredChartData}
-            width={dimensions.width}
-            height={dimensions.height}
-            barWidth={15}
-            yAxisTickCount={6}
-            hideLegend={true}
-            enableReflow={true}
-            xAxisOuterPadding={0}
-            xAxisPadding={0.1}
-            xAxisTitle={titles.xAxisTitle} // Now correctly referenced
-            yAxisTitle={titles.yAxisTitle} // Added y-axis title
-            styles={{
-              root: { marginLeft: '-20px' }, // Pull the chart towards the left
-            }}
-          />
+        <div className="mb-12">
+          <h2 className="text-center font-bold">{titles.chartTitle}</h2>
+          <div style={rootStyle}>
+            <VerticalBarChart
+                data={coloredChartData}
+                width={dimensions.width}
+                height={dimensions.height}
+                barWidth={15}
+                yAxisTickCount={6}
+                hideLegend={true}
+                enableReflow={true}
+                xAxisOuterPadding={0}
+                xAxisPadding={0.1}
+                xAxisTitle={titles.xAxisTitle} // Now correctly referenced
+                yAxisTitle={titles.yAxisTitle} // Added y-axis title
+                styles={{
+                  root: { marginLeft: '-20px' }, // Pull the chart towards the left
+                }}
+            />
+          </div>
         </div>
-      </div>
     );
   }
 }
