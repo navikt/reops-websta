@@ -9,15 +9,16 @@ spec:
   image: {{ image }}
   port: 8080
   liveness:
-    path: /isalive
-    port: 8080
-    initialDelay: 20
-    timeout: 60
+    path: /internal/is-alive
+    initialDelay: 10
+    timeout: 5
+    periodSeconds: 5
+    failureThreshold: 30
   readiness:
-    path: /isready
-    port: 8080
-    initialDelay: 20
-    timeout: 60
+    path: /internal/is-ready
+    initialDelay: 10
+    periodSeconds: 5
+    timeout: 5
   resources:
     limits:
       cpu: 100m
