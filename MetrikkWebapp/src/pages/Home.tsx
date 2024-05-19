@@ -5,18 +5,7 @@ import { URLSearchComponent } from '../components/SearchComponent/URLSearchCompo
 import { RangeDatePicker } from '../components/DatePicker/DatePicker.tsx';
 import SiteScores from '../components/Siteimprove/SiteScores.tsx';
 import SimpleOverviewChartBoard from '../components/Amplitude/SimpleOverviewChartBoard.tsx';
-import AreaChartCustomAccessibility from '../components/charts/AreaChartCustomAccessibility/AreaChartCustomAccessibility';
-import HorizontalBarChartCustomAccessibility from '../components/charts/HorizontalBarChart/HorizontalBarChartCustomAccessibility';
-import { Search } from '@navikt/ds-react';
-import { Button, Heading, VStack } from '@navikt/ds-react';
-import { Link, useNavigate } from 'react-router-dom';
-import AreaChartContainer from '../components/charts/AreaChartCustomAccessibility/AreaChartContainer';
-import { eventTypeMappings2 } from '../components/charts/dynamicUrlConstructor/EventTypeMappings2.ts';
-import { eventTypeMappings } from '../components/charts/fetchUrlConstructor.ts';
-import { SearchComponent } from '../components/SearchComponent/SearchComponent.tsx';
-import VerticalBarChartCustomAccessibilityExample from '../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartCustomAccessibility';
-import VerticalBarChartContainer from '../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartContainer';
-import TableChartContainer from '../components/charts/TableChart/TableChartContainer';
+
 
 const Home = () => {
   // Kan hende callback blir brukt til å velge domene
