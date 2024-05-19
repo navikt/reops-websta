@@ -21,10 +21,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20.x'
-      - name: Yarn install
-        run: yarn install
-      - name: Yarn build
-        run: yarn build
+      - name: NPM install
+        run: npm run  install
+      - name: NPM build
+        run: npm run build
       - name: Login to docker
         uses: docker/login-action@v3
         with:
