@@ -13,10 +13,10 @@ export const SearchComponent = ({onDomainSelect}) => {
     const [teams, setTeams] = useState<Team[]>([]);// Specify the type of state as Team[]
 
     useEffect(() => {
-        setTeams(teamsData as Team[]); // Assert teamsData as Team[]
+        setTeams(teamsData as unknown as Team[]); // Assert teamsData as Team[]
     }, []);
 
-    const handleToggleSelected = (option: string, isSelected: boolean, isCustomOption: boolean) => {
+    const handleToggleSelected = (option: string, isSelected: boolean) => {
 
         if (isSelected) {
             const selectedTeam= teams.find((teamName) => teamName.teamName == option)
