@@ -29,14 +29,15 @@ interface VerticalChartContainerProps {
     yAxisTitle?: string;
   };
 }
+
 const VerticalBarChartContainer: React.FC<VerticalChartContainerProps> = ({
-  teamDomain,
-  chartType,
-  endpointType,
-  urlParams,
-  dimensions,
-  titles,
-}) => {
+                                                                            teamDomain,
+                                                                            chartType,
+                                                                            endpointType,
+                                                                            urlParams,
+                                                                            dimensions,
+                                                                            titles,
+                                                                          }) => {
   const [chartData, setChartData] = useState();
 
   useEffect(() => {
@@ -63,13 +64,13 @@ const VerticalBarChartContainer: React.FC<VerticalChartContainerProps> = ({
   ]);
 
   return chartData ? (
-    <VerticalBarChartCustomAccessibilityExample
-      chartData={chartData}
-      dimensions={dimensions}
-      titles={titles}
-    />
+      <VerticalBarChartCustomAccessibilityExample
+          chartData={chartData}
+          dimensions={dimensions}
+          titles={titles}
+      />
   ) : (
-    <div>Loading...</div>
+      <div>Loading...</div>
   );
 };
 

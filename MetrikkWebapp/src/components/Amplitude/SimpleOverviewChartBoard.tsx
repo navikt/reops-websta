@@ -203,7 +203,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
             <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
               <VerticalBarChartContainer
                   teamDomain={selectedDomain}
-                  chartType="verticalBarChart"
+                  chartType="verticalBarChartHours"
                   endpointType="segmentation"
                   urlParams={{
                     startDate: formattedStartDate,
