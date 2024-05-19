@@ -1,12 +1,12 @@
 import '@navikt/ds-css';
 import { format } from 'date-fns';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { URLSearchComponent } from '../components/SearchComponent/URLSearchComponent.tsx';
 import { RangeDatePicker } from '../components/DatePicker/DatePicker.tsx';
 import SiteScores from '../components/Siteimprove/SiteScores.tsx';
 import SimpleOverviewChartBoard from '../components/Amplitude/SimpleOverviewChartBoard.tsx';
 import {useLocation, useNavigate} from "react-router-dom";
-
+import { Button } from "@navikt/ds-react";
 
 const Home = () => {
   const [selectedDomain, setSelectedDomain] = useState('');
@@ -126,6 +126,17 @@ const Home = () => {
 
   updateUrl();
 
+  const copyUrlToClipboard = () => {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url)
+        .then(() => {
+          console.log('URL copied to clipboard');
+        })
+        .catch((err) => {
+          console.error('Failed to copy URL: ', err);
+        });
+  };
+
   //=================================================================================================================
 
   return (
@@ -202,6 +213,13 @@ const Home = () => {
       {/* {selectedDomain && (
         <h2 className="text-4xl font-semi-bold mb-1 text-left">Siteimprove</h2>
       )} */}
+
+      <div className="flex justify-center items-center mt-16">
+        <Button variant="primary" onClick={copyUrlToClipboard}>
+          Copy URL
+        </Button>
+      </div>
+
     </div>
   );
 };
