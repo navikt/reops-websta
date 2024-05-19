@@ -21,7 +21,7 @@ function App() {
           </ContentContainer>
           <ScrollToTop />
         </main>
-        <Footer className="mt-auto" />
+        <Footer />
       </div>
     </HashRouter>
   );
