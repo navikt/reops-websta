@@ -1,23 +1,22 @@
 import '@navikt/ds-css';
 import { format } from 'date-fns';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { URLSearchComponent } from '../components/SearchComponent/URLSearchComponent.tsx';
+import { RangeDatePicker } from '../components/DatePicker/DatePicker.tsx';
+import SiteScores from '../components/Siteimprove/SiteScores.tsx';
+import SimpleOverviewChartBoard from '../components/Amplitude/SimpleOverviewChartBoard.tsx';
 import AreaChartCustomAccessibility from '../components/charts/AreaChartCustomAccessibility/AreaChartCustomAccessibility';
 import HorizontalBarChartCustomAccessibility from '../components/charts/HorizontalBarChart/HorizontalBarChartCustomAccessibility';
 import { Search } from '@navikt/ds-react';
 import { Button, Heading, VStack } from '@navikt/ds-react';
 import { Link, useNavigate } from 'react-router-dom';
-
 import AreaChartContainer from '../components/charts/AreaChartCustomAccessibility/AreaChartContainer';
 import { eventTypeMappings2 } from '../components/charts/dynamicUrlConstructor/EventTypeMappings2.ts';
 import { eventTypeMappings } from '../components/charts/fetchUrlConstructor.ts';
 import { SearchComponent } from '../components/SearchComponent/SearchComponent.tsx';
-import { SetStateAction, useCallback, useState, useRef } from 'react';
-import { URLSearchComponent } from '../components/SearchComponent/URLSearchComponent.tsx';
-import { RangeDatePicker } from '../components/DatePicker/DatePicker.tsx';
 import VerticalBarChartCustomAccessibilityExample from '../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartCustomAccessibility';
 import VerticalBarChartContainer from '../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartContainer';
 import TableChartContainer from '../components/charts/TableChart/TableChartContainer';
-import SiteScores from '../components/Siteimprove/SiteScores.tsx';
-import SimpleOverviewChartBoard from '../components/Amplitude/SimpleOverviewChartBoard.tsx';
 
 const Home = () => {
   // Kan hende callback blir brukt til å velge domene
@@ -49,8 +48,8 @@ const Home = () => {
     setSelectedSiteimproveDomain(siteimproveDomain);
   }, []);
 
-  //const standardStartDate = new Date(new Date().setDate(standardStartDate.getDate()-30));
-  //const standardEndDate = new Date();
+  // const standardStartDate = new Date(new Date().setDate(standardStartDate.getDate()-30));
+  // const standardEndDate = new Date();
 
   const defaultStartDate = new Date(
     new Date().setDate(new Date(Date.now()).getDate() - 30)
@@ -65,8 +64,9 @@ const Home = () => {
   const [formattedEndDate, setFormattedEndDate] = useState(
     defaultFormattedEndDate
   );
-  //const navigate = useNavigate();
-  //navigate(`/search?input=${encodeURIComponent(selectedPageUrl)}?startDate=${formattedStartDate}?endDate=${formattedEndDate}`);
+
+  // const navigate = useNavigate();
+  // navigate(`/search?input=${encodeURIComponent(selectedPageUrl)}?startDate=${formattedStartDate}?endDate=${formattedEndDate}`);
 
   interface range {
     from?: Date;
@@ -93,8 +93,22 @@ const Home = () => {
   }, []);
 
   const scrollToSiteScores = () => {
-    siteScoresRef.current?.scrollIntoView({ behavior: 'smooth' });
+    const siteScoresPosition =
+      siteScoresRef.current?.getBoundingClientRect().top + window.scrollY;
+    const offsetPosition = siteScoresPosition - window.innerHeight / 3.5;
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth',
+    });
   };
+
+  const [isValidUrl, setIsValidUrl] = useState(false);
+
+  useEffect(() => {
+    if (isValidUrl) {
+      scrollToSiteScores();
+    }
+  }, [isValidUrl]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-6">
@@ -111,6 +125,7 @@ const Home = () => {
               onPagePath={handlePathSelection}
               onSiteimproveDomain={handleSiteimproveDomain}
               onPageUrl={handlePageUrl}
+              onValidUrl={setIsValidUrl}
             />
           </div>
         </div>
@@ -121,7 +136,7 @@ const Home = () => {
         )}
       </div>
 
-      {/*<VStack className="items-center mb-3">
+      {/* <VStack className="items-center mb-3">
         <Link to="/guide" className="text-center hover:underline">
           <Heading size="medium">{simpleGuide}</Heading>
         </Link>
@@ -135,7 +150,7 @@ const Home = () => {
         />
       </form>
       */}
-      {/*TODO: Charts er lenger til høyre når de er centered fordi centrering starter på y-axis */}
+      {/* TODO: Charts er lenger til høyre når de er centered fordi centrering starter på y-axis */}
 
       {/* {selectedDomain && (
         <div className="mb-8">
