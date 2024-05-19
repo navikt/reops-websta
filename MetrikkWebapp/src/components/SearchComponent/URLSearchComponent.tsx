@@ -12,6 +12,7 @@ interface Team {
 export const URLSearchComponent = ({ onDomainSelect, onPagePath, onPageUrl, onSiteimproveDomain }) => {
   const [searchInput, setSearchInput] = useState('');
   const [filteredTeams, setFilteredTeams] = useState<Team[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     setFilteredTeams(teamsData as Team[]);
@@ -53,7 +54,9 @@ export const URLSearchComponent = ({ onDomainSelect, onPagePath, onPageUrl, onSi
       onPageUrl(searchInput);
       //should be toString so we can use it the id in url
       onSiteimproveDomain(selectedTeam.teamSiteimproveSite.toString())
-
+      setError(null); // Clear error on successful search
+    } else {
+      setError('Nettadressen er ikke et under NAV');
     }
   };
 
@@ -66,6 +69,7 @@ export const URLSearchComponent = ({ onDomainSelect, onPagePath, onPageUrl, onSi
         variant="primary"
         hideLabel={false}
         clearButton={true} // This adds a clear button that also uses the onClear prop if necessary
+        error={error}
       />
     </form>
   );
