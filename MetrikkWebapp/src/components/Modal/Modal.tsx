@@ -1,10 +1,10 @@
-import {useEffect, useRef, useState} from "react";
-import {Button, Modal, Select, TextField} from "@navikt/ds-react";
-import {RangeDatePicker} from "../DatePicker/DatePicker";
-import {eventTypeMappings2} from "../charts/dynamicUrlConstructor/EventTypeMappings2.ts";
-import {format} from "date-fns";
+import React, {useEffect, useState} from "react";
+import { Button, Modal, TextField } from "@navikt/ds-react";
+import { RangeDatePicker } from "../DatePicker/DatePicker";
+import { eventTypeMappings2 } from "../charts/dynamicUrlConstructor/EventTypeMappings2.ts";
 import teamsData from "../SearchComponent/teamsData.json";
-import GroupBySelect from "../Select/GroupBySelect.tsx"; // Assuming the correct path to your URLSearchComponent
+import GroupBySelect from "../Select/GroupBySelect.tsx";
+import { format } from "date-fns";
 
 interface Team {
     teamName: string;
@@ -18,43 +18,95 @@ interface GroupBy {
     group_type?: string;
 }
 
-export const SettingsModal = ({ onSubmit }) => {
-    //titles
-    const [chartTitle, setChartTitle] = useState("");
-    const [chartXAxisTitle, setChartXAxisTitle] = useState("Dato");
-    const [chartYAxisTitle, setchartYAxisTitle] = useState("Antall besøk");
-    const ref = useRef<HTMLDialogElement>(null);
-    const [inputtedURL, setInputtedURL] = useState("");
-    const [selectedDomain, setSelectedDomain] = useState("");
-    const [selectedPath, setSelectedPath] = useState("");
+interface SettingsModalProps {
+    onSubmit: (formData: any) => void;
+    title?:string
+    size?:string
+}
+
+  const SettingsModal: React.FC<SettingsModalProps> = ({ onSubmit, title, size }) => {
+    const initialFormData = {
+        chartTitle: "",
+        chartXAxisTitle: "Dato",
+        chartYAxisTitle: "Antall besøk",
+        inputtedURL: "",
+        selectedDomain: "",
+        selectedPath: "",
+        startDate: new Date(new Date().setDate(new Date().getDate() - 30)),
+        endDate: new Date(),
+        selectedGroupBy: [] as GroupBy[],
+    };
+
+    const [formData, setFormData] = useState(initialFormData);
     const [filteredTeams, setFilteredTeams] = useState<Team[]>([]);
-
-    const defaultEndDate = new Date(Date.now());
-    const defaultStartDate = new Date(new Date().setDate(new Date(Date.now()).getDate()-30));
-    const [startDate, setStartDate] = useState(defaultStartDate);
-    const [endDate, setEndDate] = useState(defaultEndDate);
-    const [selectedGroupBy, setSelectedGroupBy] = useState<GroupBy[]>([]);
-
+    const [modalOpen, setModalOpen] = useState(false);
 
     const handleGroupByChange = (groupObj: GroupBy[]) => {
-        setSelectedGroupBy(groupObj); // Update the selected groupBy array
+        setFormData({ ...formData, selectedGroupBy: groupObj });
     };
 
     useEffect(() => {
         setFilteredTeams(teamsData as Team[]);
     }, []);
 
-
-
-    // Function to extract domain from URL
-    const extractDomain = (url) => {
-        const match = url.match(/\/\/(?:www\.)?([^\/.]+)\./);
-        return match ? match[1] : null;
+    const handleSearchChange = (value: string) => {
+        const inputtedURL = value;
+        setFormData({
+            ...formData,
+            inputtedURL,
+            selectedDomain: extractDomain(inputtedURL),
+        });
+        filterTeams(extractDomain(inputtedURL));
     };
-    // Function to extract path from URL
-    const extractPath = (url) => {
+
+    const handleSubmit = () => {
+        const { inputtedURL, selectedGroupBy, startDate, endDate } = formData;
+        const selectedTeam = filteredTeams.find(
+            (team) => team.teamName.toLowerCase() === extractDomain(inputtedURL).toLowerCase()
+        );
+
+        const formDataToSend = {
+            title: formData.chartTitle,
+            xAxisTitle: formData.chartXAxisTitle,
+            yAxisTitle: formData.chartYAxisTitle,
+            selectedDomain: selectedTeam?.teamAmplitudeDomain.toString() || "",
+            selectedPath: extractPath(inputtedURL),
+            chartType: "areaChartMulti",
+            endpointType: "segmentation",
+            startDate: format(new Date(startDate), "yyyyMMdd"),
+            endDate: format(new Date(endDate), "yyyyMMdd"),
+            eventType: eventTypeMappings2.pageViewed.eventType,
+            groupBy: selectedGroupBy,
+            filters: [
+                {
+                    subprop_type: "event",
+                    subprop_key: "[Amplitude] Page Path",
+                    subprop_op: "contains",
+                    subprop_value: [extractPath(inputtedURL)],
+                },
+            ],
+        };
+
+        onSubmit(formDataToSend);
+        closeModal();
+    };
+
+    const openModal = () => {
+        setModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setModalOpen(false);
+    };
+
+    const extractDomain = (url: string): string => {
+        const match = url.match(/\/\/(?:www\.)?([^\/.]+)\./);
+        return match ? match[1] : "";
+    };
+
+    const extractPath = (url: string): string => {
         const match = url.match(/\/\/[^\/]+(\/[^?#]*)?/);
-        return match ? match[1] || '' : null;
+        return match ? match[1] || "" : "";
     };
 
     const filterTeams = (searchTerm: string) => {
@@ -67,100 +119,44 @@ export const SettingsModal = ({ onSubmit }) => {
         setFilteredTeams(filtered);
     };
 
-    const handleSearchChange = (value) => {
-        setInputtedURL(value); // Update the inputted URL state
-        filterTeams(extractDomain(value)); // Filter teams based on the inputted URL
-    };
-
-
-
-    const handleSubmit = () => {
-
-        let selectedTeamString = '';
-        let selectedPagePath = '';
-
-        if (filteredTeams.length > 0) {
-             const selectedTeam = filteredTeams[0];
-             selectedTeamString = selectedTeam.teamAmplitudeDomain.toString();
-             selectedPagePath = extractPath(inputtedURL);
-             console.log('Selected team:', selectedTeam.teamName);
-        }
-
-        console.log(format(new Date(startDate), 'yyyyMMdd'))
-        console.log(format(new Date(endDate), 'yyyyMMdd'))
-
-       const formData = {
-            title:chartTitle,
-            xAxisTitle:chartXAxisTitle,
-            yAxisTitle:chartYAxisTitle,
-            selectedDomain: selectedTeamString,
-            selectedPath: selectedPagePath,
-            chartType: "areaChartMulti",
-            endpointType: "segmentation",
-            startDate: format(new Date(startDate), 'yyyyMMdd'),
-            endDate: format(new Date(endDate), 'yyyyMMdd'),
-            //eventType er foreløpig bare pageViewed
-            eventType: eventTypeMappings2.pageViewed.eventType,
-            groupBy: selectedGroupBy,
-            filters: [
-                {
-                    subprop_type: "event",
-                    subprop_key: "[Amplitude] Page Path",
-                    subprop_op: "contains",
-                    subprop_value: [selectedPagePath],
-                },
-            ],
-        };
-
-        onSubmit(formData);
-        closeModal();
-    };
-
-    const openModal = () => {
-        ref.current?.showModal();
-    };
-
-    const closeModal = () => {
-        ref.current?.close();
-    };
-
     return (
         <div className="py-12">
-            <Button onClick={openModal}>Open Modal</Button>
+            <Button onClick={openModal} size={`${size}`}>{title}</Button>
 
-            <Modal ref={ref} header={{ heading: "Chart Settings" }} width={400}>
+            <Modal open={modalOpen} onClose={closeModal} header={{ heading: "Chart Settings" }} width={400}>
                 <Modal.Body>
                     <form method="dialog" id="chartSettings" onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
-                        <TextField label="Graf-Tittel"
-                                   value={chartTitle}
-                                   onChange={(e) => setChartTitle(e.target.value)}
+                        <TextField
+                            label="Graf-Tittel"
+                            value={formData.chartTitle}
+                            onChange={(e) => setFormData({ ...formData, chartTitle: e.target.value })}
                         />
-                        <TextField label="x akse tittel"
-                                   value={chartXAxisTitle}
-                                   onChange={(e) => setChartXAxisTitle(e.target.value)}
+                        <TextField
+                            label="x akse tittel"
+                            value={formData.chartXAxisTitle}
+                            onChange={(e) => setFormData({ ...formData, chartXAxisTitle: e.target.value })}
                         />
-                        <TextField label="y akse tittel"
-                                   value={chartYAxisTitle}
-                                   onChange={(e) => setchartYAxisTitle(e.target.value)}
+                        <TextField
+                            label="y akse tittel"
+                            value={formData.chartYAxisTitle}
+                            onChange={(e) => setFormData({ ...formData, chartYAxisTitle: e.target.value })}
                         />
-                        <TextField label="Skriv in URL fra nettsted for grafen du vil lage"
-                                   value={inputtedURL}
-                                   onChange={(e) => handleSearchChange(e.target.value)}
+                        <TextField
+                            label="Skriv in URL fra nettsted for grafen du vil lage"
+                            value={formData.inputtedURL}
+                            onChange={(e) => handleSearchChange(e.target.value)}
                         />
-                        <GroupBySelect onSelectedGroupBy={handleGroupByChange}/>
-                        <RangeDatePicker onDateChange={(range) => {
-                            setStartDate(range.from);
-                            setEndDate(range.to);
-                        }} />
+                        <GroupBySelect onSelectedGroupBy={handleGroupByChange} />
+                        <RangeDatePicker
+                            onDateChange={(range) => {
+                                setFormData({ ...formData, startDate: range.from, endDate: range.to });
+                            }}
+                        />
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button form="chartSettings">Apply</Button>
-                    <Button
-                        type="button"
-                        variant="secondary"
-                        onClick={closeModal}
-                    >
+                    <Button variant="secondary" onClick={closeModal}>
                         Cancel
                     </Button>
                 </Modal.Footer>
@@ -168,3 +164,5 @@ export const SettingsModal = ({ onSubmit }) => {
         </div>
     );
 };
+
+export default SettingsModal
