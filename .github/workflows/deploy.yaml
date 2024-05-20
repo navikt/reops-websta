@@ -1,16 +1,16 @@
-name: Deploy job
+name: Deploy react app to prod-gcp
 
 on:
+  workflow_dispatch:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 env:
-  IMAGE_BASE: ghcr.io/${{github.repository}}
+  DOCKER_IMAGE: ghcr.io/${{ github.repository }}:${{ github.sha }}
 
 jobs:
-  build-and-push:
-    name: Build and push
+  build:
+    name: Build and push Docker container
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -18,86 +18,39 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v4
-        name: Checkout
       - uses: actions/setup-node@v4
         with:
-          node-version: 20.x
-
-      - name: Cache dependencies
-        uses: actions/cache@v4
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: |
-            ~/.npm
-            ${{ github.workspace }}/.next/cache
-          key: ${{ runner.os }}-nextjs-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
-
+          node-version: '20.x'
       - name: Install dependencies
         run: npm ci
-
-      - name: Install dependencies
-        run: npm run build
-
-      - name: Lag tag for image
-        run: echo "TAG=$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')" >> $GITHUB_ENV
-
-      - name: Lag full image referanse
-        run: echo "IMAGE=$IMAGE_BASE:$TAG" >> $GITHUB_ENV
-
-      - name: Build app and publish Docker image
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo ${GITHUB_TOKEN} | docker login ghcr.io -u ${GITHUB_REPOSITORY} --password-stdin
-          docker build --pull --tag ${IMAGE} .
-          docker push ${IMAGE}
-
-  #  deploy-dev:
-  #    name: Deploy to nais dev
-  #    needs: build-and-push
-  #    runs-on: ubuntu-latest
-  #    steps:
-  #      - uses: actions/checkout@v1
-  #        name: Checkout
-  #
-  #      - name: Lag tag for image
-  #        run: echo "TAG=$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')" >> $GITHUB_ENV
-  #
-  #      - name: Lag full image referanse
-  #        run: echo "IMAGE=$IMAGE_BASE:$TAG" >> $GITHUB_ENV
-  #
-  #      - name: Deploy
-  #        uses: nais/deploy/actions/deploy@master
-  #        env:
-  #          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-  #          CLUSTER: dev-gcp
-  #          RESOURCE: .nais/nais.yaml
-  #          VARS: .nais/dev-gcp.yaml
-
-  deploy-prod:
-    name: Deploy to nais prod
-    #   needs: deploy-dev
-    needs: build-and-push
+          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+      - name: NPM build
+        run: npm run build
+      - name: Login to docker
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and publish Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: Dockerfile
+          push: true
+          tags: ${{ env.DOCKER_IMAGE }}
+  deploy:
+    name: Deploy to prod-gcp
+    needs: build
     runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write
     steps:
       - uses: actions/checkout@v4
-        name: Checkout
-
-      - name: Lag tag for image
-        run: echo "TAG=$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')" >> $GITHUB_ENV
-
-      - name: Lag full image referanse
-        run: echo "IMAGE=$IMAGE_BASE:$TAG" >> $GITHUB_ENV
-
-      - name: Deploy
-        uses: nais/deploy/actions/deploy@master
+      - uses: nais/deploy/actions/deploy@v2
         env:
           CLUSTER: prod-gcp
           RESOURCE: nais.yaml
-          VARS: nais.yaml
+          VAR: image=${{ env.DOCKER_IMAGE }}
