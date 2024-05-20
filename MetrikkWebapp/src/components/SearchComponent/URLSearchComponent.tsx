@@ -10,10 +10,12 @@ interface Team {
 
 export const URLSearchComponent = ({
   onDomainSelect,
+    pageUrl,
   onPagePath,
   onPageUrl,
   onSiteimproveDomain,
-  onValidUrl, // New prop
+  onValidUrl, // New proppage
+
 }) => {
   const [searchInput, setSearchInput] = useState('');
   const [filteredTeams, setFilteredTeams] = useState<Team[]>([]);
@@ -64,6 +66,12 @@ export const URLSearchComponent = ({
     }
   };
 
+  useEffect(() => {
+    setSearchInput(pageUrl);
+  }, [pageUrl]);
+
+  console.log("pageUrl: " + pageUrl);
+
   return (
     <form
       role="search"
@@ -74,6 +82,7 @@ export const URLSearchComponent = ({
     >
       <Search
         label="Skriv inn URL her: "
+        value={searchInput}
         onChange={handleSearchChange}
         onSearchClick={handleSearchSubmit}
         variant="primary"
