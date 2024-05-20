@@ -18,7 +18,7 @@ export const processVerticalBarChartData = (apiResponse) => {
         return {
             x: day,
             y: yValue,
-            xAxisCalloutAccessibilityData: { ariaLabel: `Country: ${day}` },
+            xAxisCalloutAccessibilityData: { ariaLabel: `Day: ${day}` },
             callOutAccessibilityData: { ariaLabel: `Value: ${yValue} on ${day}` },
         };
     });
@@ -35,7 +35,6 @@ export const processVerticalBarChartDataHours = (apiResponse) => {
 
     const { seriesCollapsed, seriesLabels } = apiResponse.data;
 
-    // Create an array of objects containing the label, hour, and value
     const chartDataPoints = seriesLabels.map((label, index) => {
         const hour = label[1] ? parseInt(label[1], 10) : null;  // Convert the hour to an integer
         const value = seriesCollapsed[index] && seriesCollapsed[index][0] ? seriesCollapsed[index][0].value || 0 : 0;
@@ -43,22 +42,17 @@ export const processVerticalBarChartDataHours = (apiResponse) => {
         return { hour, value };
     });
 
-    // Filter out any invalid entries (in case of null hours)
     const validChartDataPoints = chartDataPoints.filter(dataPoint => dataPoint.hour !== null);
 
-    // Sort the data points by hour (0-24)
     validChartDataPoints.sort((a, b) => a.hour - b.hour);
 
-    // Find the index where the hour switches from 5 to 6
     const splitIndex = validChartDataPoints.findIndex(dataPoint => dataPoint.hour >= 6);
 
-    // Rearrange the data points to start from 6 AM and wrap around to 5 AM the next day
     const rearrangedChartDataPoints = [
         ...validChartDataPoints.slice(splitIndex),
         ...validChartDataPoints.slice(0, splitIndex)
     ];
 
-    // Map the rearranged data points to the final format
     const sortedChartDataPoints = rearrangedChartDataPoints.map(dataPoint => {
         return {
             x: dataPoint.hour.toString(),  // Convert the hour back to a string
