@@ -15,6 +15,7 @@ jobs:
     permissions:
       packages: write
       contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v4
         name: Checkout
@@ -81,6 +82,9 @@ jobs:
     #   needs: deploy-dev
     needs: build-and-push
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v4
         name: Checkout
@@ -94,7 +98,6 @@ jobs:
       - name: Deploy
         uses: nais/deploy/actions/deploy@master
         env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: prod-gcp
           RESOURCE: nais.yaml
           VARS: nais.yaml
