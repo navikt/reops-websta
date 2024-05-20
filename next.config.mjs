@@ -8,7 +8,9 @@ const nextConfig = {
     },
     experimental: {
         esmExternals: true
-    }
+    },
+    transpilePackages: ['@fluentui/react-charting', 'd3-scale'],
 }
+
 
 export default nextConfig
