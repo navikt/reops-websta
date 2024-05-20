@@ -8,6 +8,8 @@ import SimpleOverviewChartBoard from '../components/Amplitude/SimpleOverviewChar
 import {useLocation, useNavigate} from "react-router-dom";
 import { Button } from "@navikt/ds-react";
 
+
+
 const Home = () => {
   const [selectedDomain, setSelectedDomain] = useState('');
   const handleDomainSelect = useCallback((domain: string) => {
@@ -65,10 +67,15 @@ const Home = () => {
     }
   }, []);
 
-  const scrollToSiteScores = () => {
+  function timeout(delay: number) {
+    return new Promise( res => setTimeout(res, delay) );
+  }
+
+  const scrollToSiteScores = async () => {
+    await timeout(1000);
     const siteScoresPosition =
-      siteScoresRef.current?.getBoundingClientRect().top + window.scrollY;
-    const offsetPosition = siteScoresPosition - window.innerHeight / 3.5;
+        siteScoresRef.current?.getBoundingClientRect().top + window.scrollY;
+    const offsetPosition = siteScoresPosition - window.innerHeight / 2.5;
     window.scrollTo({
       top: offsetPosition,
       behavior: 'smooth',
@@ -81,7 +88,7 @@ const Home = () => {
     if (isValidUrl) {
       scrollToSiteScores();
     }
-  }, [isValidUrl]);
+  }, [isValidUrl, selectedPath]);
 
   // url routing ---------------------------------------------------------------------------------------------------
 
@@ -213,6 +220,7 @@ const Home = () => {
       {/* {selectedDomain && (
         <h2 className="text-4xl font-semi-bold mb-1 text-left">Siteimprove</h2>
       )} */}
+
 
       <div className="flex justify-center items-center mt-16">
         <Button variant="primary" onClick={copyUrlToClipboard}>
