@@ -1,8 +1,8 @@
 {
   "/Guide": "pages/Guide.js",
   "/_app": "pages/_app.js",
+  "/SiteimproveSite": "pages/SiteimproveSite.js",
   "/_error": "pages/_error.js",
   "/Home": "pages/Home.js",
-  "/SiteimproveSite": "pages/SiteimproveSite.js",
   "/_document": "pages/_document.js"
 }
