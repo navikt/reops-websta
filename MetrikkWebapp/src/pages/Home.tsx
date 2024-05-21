@@ -215,11 +215,13 @@ const Home = () => {
         <h2 className="text-4xl font-semi-bold mb-1 text-left">Siteimprove</h2>
       )} */}
 
+      {selectedDomain && (
       <div className="flex justify-center items-center mt-16">
         <Button variant="primary" onClick={copyUrlToClipboard}>
           Copy URL
         </Button>
       </div>
+          )}
 
     </div>
   );
