@@ -38,7 +38,7 @@ const Dashboard = () => {
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen p-6">
-            <h1>HELLO FROM DASHBOARD ;D</h1>
+            <h1>Lag din egen tavle</h1>
             <SettingsModal onSubmit={handleFormSubmit} title={`Lag ny graf`} size={`medium`}  />
             <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
                 {formDataList.map((formData, index) => (
