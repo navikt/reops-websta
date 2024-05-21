@@ -25,20 +25,20 @@ export class VerticalBarChartCustomAccessibilityExample extends React.Component<
     const { chartData, titles, dimensions } = this.props;
 
     const colorPalette = [
-      '#4caf50',
-      '#2196f3',
       '#ffeb3b',
-      '#ff9800',
-      '#9c27b0',
-      '#e91e63',
+      '#2196f3',
+      '#4caf50',
       '#673ab7',
+      '#ff9800',
+      '#e91e63',
       '#3f51b5',
+      '#cddc39',
+      '#9c27b0',
       '#00bcd4',
+      '#ff5722',
+      '#ffc107',
       '#009688',
       '#8bc34a',
-      '#cddc39',
-      '#ffc107',
-      '#ff5722',
       '#795548',
       '#607d8b',
       '#f44336',
@@ -70,7 +70,7 @@ export class VerticalBarChartCustomAccessibilityExample extends React.Component<
                 yAxisTickCount={6}
                 hideLegend={true}
                 enableReflow={true}
-                xAxisOuterPadding={0}
+                xAxisOuterPadding={0.2}
                 xAxisPadding={0.1}
                 xAxisTitle={titles.xAxisTitle} // Now correctly referenced
                 yAxisTitle={titles.yAxisTitle} // Added y-axis title
