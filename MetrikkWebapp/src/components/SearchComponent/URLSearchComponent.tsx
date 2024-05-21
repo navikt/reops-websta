@@ -49,7 +49,7 @@ export const URLSearchComponent = ({
     );
     setFilteredTeams(filtered);
   };
-
+ // yo
   const handleSearchSubmit = () => {
     if (filteredTeams.length > 0) {
       const selectedTeam = filteredTeams[0]; // Assumes the first match is the desired one
