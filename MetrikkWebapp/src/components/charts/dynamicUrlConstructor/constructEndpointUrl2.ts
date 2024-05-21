@@ -61,6 +61,5 @@ export function constructEndpointUrl2(type: string, params: EndpointParams = {})
     endpointTemplate = endpointTemplate.replace('{startDate}', encodeURIComponent(params.startDate));
     endpointTemplate = endpointTemplate.replace('{endDate}', encodeURIComponent(params.endDate));
 
-    console.log("constructed URL : ", endpointTemplate)
     return endpointTemplate;
 }

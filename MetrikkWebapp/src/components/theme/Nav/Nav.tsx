@@ -1,18 +1,15 @@
+import React from 'react';
+
 function Nav() {
-    return (
-        <nav className="siteheader simple" style={{height: "80px", borderBottom: "1px solid #ccc"}}>
-            <div className="stickyPlaceholder__QO79_">
-                <div className="stickyContainer__EulYb ">
-                    <div className="simpleHeader__Z9PQc">
-                        <div className="content__EtlfN"><a href="." style={{fontWeight: "800", fontSize: "1.7rem"}}
-                                                           className="felgen-logo navLogoLenke__JU8Z4 navLogoLenke lenkeMedSporing__hcOG_">
-                            Demo Websta
-                        </a></div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    );
+  return (
+    <nav className="fixed top-0 left-0 w-full bg-white z-10 shadow-md">
+      <div className="py-5 px-4 flex justify-between items-center">
+        <a href="." className="font-bold text-xl">
+          Innblikk
+        </a>
+      </div>
+    </nav>
+  );
 }
 
 export default Nav;

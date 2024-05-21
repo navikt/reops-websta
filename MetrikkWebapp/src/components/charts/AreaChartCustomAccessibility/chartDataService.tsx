@@ -50,7 +50,7 @@ export const processAreaChartData = (apiResponse: { data: { xValues: any; series
 
 export const processAreaChartDataMultiple = (apiResponse: { data: { xValues: any; series: any; seriesLabels: any; }; }) => {
     const { xValues, series, seriesLabels } = apiResponse.data;
-    //console.log(apiResponse)
+
     // Define a palette of colors for the chart series
     // maybe differentiate colors, so it's easier to see what's what
     const colorPalette = [
@@ -66,13 +66,13 @@ export const processAreaChartDataMultiple = (apiResponse: { data: { xValues: any
         // Add more colors as necessary
     ];
 
+    const defaultLabel = 'Antall Besøk';
 
 
     // Array to hold the chart data for each series
     const chartPoints = series.slice(0,9).map((currentSeries: any[], seriesIndex: number) => {
 
-        const seriesLabel = seriesLabels[seriesIndex][1]; // Assuming the label is at index 1
-
+        const seriesLabel = seriesLabels[seriesIndex][1] || defaultLabel; // Assuming the label is at index 1
 
 
         // Generate chart points for the current series
@@ -80,11 +80,10 @@ export const processAreaChartDataMultiple = (apiResponse: { data: { xValues: any
             x: new Date(xValues[index]), // making new date for xValues
             y: value,
             xAxisCalloutAccessibilityData: { ariaLabel: `Date: ${xValues[index]}` },
-            callOutAccessibilityData: { ariaLabel: `${seriesLabel}: Value ${value} on ${xValues[index]}` },
+            callOutAccessibilityData: { ariaLabel: `${seriesLabel}: Verdi ${value} på dato ${xValues[index]}` },
         }));
 
 
-        //console.log(`points`,points);
         // Dynamically assign a color from the colorPalette based on seriesIndex
         const colorFromPallete = colorPalette[seriesIndex % colorPalette.length];
 
@@ -132,8 +131,7 @@ export const processRetentionChartData = (apiResponse) => {
     // Since we're dealing with a single series for retention, we only need to process one series
     const seriesLabel = "Retention Rate"; // Manually define the series label
 
-    //console.log(combined)
-    //console.log(reversedDatetimes)
+
 
 
     // Generate chart points for the retention series
@@ -175,59 +173,6 @@ export const processRetentionChartData = (apiResponse) => {
     return finalChartData;
 };
 
-
-/*
-//TODO: allow retentioncharts to work, might need to swap to linechart
-export const processRetentionChartData = (apiResponse) => {
-    // Initial check for the API response's validity
-    if (!apiResponse || !apiResponse.data || !apiResponse.data.series || !apiResponse.data.series[0] || !apiResponse.data.dates) {
-        //console.error('Invalid API response structure:', apiResponse);
-        return {}; // Return an empty object or any other suitable default
-    }
-
-    // The provided API response structure indicates 'dates' are directly under 'data'
-    const { dates } = apiResponse.data.series[0];
-
-    // Initialize an array to hold the chart points
-    let chartPoints = [];
-
-    // Iterate through each date in the 'dates' array
-    dates.forEach((date, dateIndex) => {
-        let totalForDate = 0;
-
-        // Iterate through each series to accumulate counts for the given date
-        apiResponse.data.series.forEach(segment => {
-            if (segment.values[date]) {
-                // Sum counts for this date across all entries in the segment for the current date
-                totalForDate += segment.values[date].reduce((total, currentValue) => total + currentValue.count, 0);
-            }
-        });
-
-        // Assuming date needs no further formatting for now
-        const formattedDate = date; // Adjust date formatting as necessary
-
-        // Create a chart point for this date
-        chartPoints.push({
-            x: formattedDate,
-            y: totalForDate,
-            xAxisCalloutAccessibilityData: { ariaLabel: `Date: ${date}` },
-            callOutAccessibilityData: { ariaLabel: `Total interactions: ${totalForDate} on ${date}` },
-        });
-    });
-
-    // Structured return for chart data
-    return {
-        chartTitle: 'User Retention Over Time',
-        lineChartData: [{
-            legend: 'Total Interactions',
-            data: chartPoints,
-            color: 'DataVizPalette.color8', // Replace with actual color code or variable
-        }],
-    };
-};
-
-
- */
 
 
 

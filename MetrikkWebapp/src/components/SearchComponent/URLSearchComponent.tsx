@@ -2,67 +2,93 @@ import { Search } from '@navikt/ds-react';
 import { useEffect, useState } from 'react';
 import teamsData from './teamsData.json';
 
-// Define interface for team data
 interface Team {
   teamName: string;
   teamAmplitudeDomain: number;
-  teamSiteimproveSite: string;
+  teamSiteimproveSite: number;
 }
 
-export const URLSearchComponent = ({ onDomainSelect, onPagePath }) => {
+export const URLSearchComponent = ({
+  onDomainSelect,
+    pageUrl,
+  onPagePath,
+  onPageUrl,
+  onSiteimproveDomain,
+  onValidUrl, // New proppage
+
+}) => {
   const [searchInput, setSearchInput] = useState('');
   const [filteredTeams, setFilteredTeams] = useState<Team[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     setFilteredTeams(teamsData as Team[]);
   }, []);
 
-  // Function to extract domain from URL
   const extractDomain = (url) => {
     const match = url.match(/\/\/(?:www\.)?([^\/.]+)\./);
     return match ? match[1] : null;
   };
-  // Function to extract path from URL
+
   const extractPath = (url) => {
     const match = url.match(/\/\/[^\/]+(\/[^?#]*)?/);
     return match ? match[1] || '' : null;
   };
+
   const handleSearchChange = (value) => {
     setSearchInput(value);
-    //const domain = extractDomain(value)
     filterTeams(extractDomain(value));
-    console.log(value); // This logs every change in the input
-    //console.log(domain) //domain
   };
 
   const filterTeams = (searchTerm: string) => {
     const filtered = teamsData.filter(
-        (team) =>
-            team.teamName &&
-            searchTerm &&
-            team.teamName.toLowerCase().includes(searchTerm.toLowerCase())
+      (team) =>
+        team.teamName &&
+        searchTerm &&
+        team.teamName.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredTeams(filtered);
   };
 
   const handleSearchSubmit = () => {
     if (filteredTeams.length > 0) {
-      const selectedTeam = filteredTeams[0]; // This assumes the first match is the desired one
+      const selectedTeam = filteredTeams[0]; // Assumes the first match is the desired one
       onDomainSelect(selectedTeam.teamAmplitudeDomain.toString());
       const path = extractPath(searchInput);
       onPagePath(path);
-      console.log('Selected team:', selectedTeam.teamName);
+      onPageUrl(searchInput);
+      onSiteimproveDomain(selectedTeam.teamSiteimproveSite.toString());
+      setError(null); // Clear error on successful search
+      onValidUrl(true); // Notify parent of valid URL
+    } else {
+      setError('Nettadressen er ikke et under NAV');
+      onValidUrl(false); // Notify parent of invalid URL
     }
   };
 
+  useEffect(() => {
+    setSearchInput(pageUrl);
+  }, [pageUrl]);
+
+  console.log("pageUrl: " + pageUrl);
+
   return (
-    <form role="search" onSubmit={(e) => e.preventDefault()}>
+    <form
+      role="search"
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSearchSubmit();
+      }}
+    >
       <Search
-        label="Søk alle NAV sine sider"
+        label="Skriv inn URL her: "
+        value={searchInput}
         onChange={handleSearchChange}
         onSearchClick={handleSearchSubmit}
         variant="primary"
-        clearButton={true} // This adds a clear button that also uses the onClear prop if necessary
+        hideLabel={false}
+        clearButton={true} // Adds a clear button that also uses the onClear prop if necessary
+        error={error}
       />
     </form>
   );

@@ -2,18 +2,18 @@ export const processSegmentationTableChart = (apiResponse) => {
     const { series, seriesLabels } = apiResponse.data;
 
     // Create an object to store the sum of visitors for each country
-    const countryVisitorTotals = {};
+    const totalVisitors = {};
 
     // Sum up all the visitors for each country
     series.forEach((currentSeries, index) => {
-        const countryName = seriesLabels[index][1]; // country name is at the second position
-        countryVisitorTotals[countryName] = countryVisitorTotals[countryName] || 0;
-        countryVisitorTotals[countryName] += currentSeries.reduce((sum, current) => sum + current, 0);
+        const value = seriesLabels[index][1]; // country name is at the second position
+        totalVisitors[value] = totalVisitors[value] || 0;
+        totalVisitors[value] += currentSeries.reduce((sum, current) => sum + current, 0);
     });
 
     // Convert the totals object to an array suitable for table display
-    const tableData = Object.entries(countryVisitorTotals).map(([countryName, totalVisitors]) => ({
-        countryName,
+    const tableData = Object.entries(totalVisitors).map(([value, totalVisitors]) => ({
+        value,
         totalVisitors
     }));
 

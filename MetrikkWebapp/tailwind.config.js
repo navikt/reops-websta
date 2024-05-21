@@ -157,6 +157,7 @@ module.exports = {
       'grayalpha-700': 'rgba(1, 11, 24, 0.68)',
       'grayalpha-800': 'rgba(3, 11, 22, 0.75)',
       'grayalpha-900': 'rgba(2, 5, 9, 0.87)',
+      'black': 'rgb(0,0,0)',
       'blue-50': 'rgba(230, 240, 255, 1)',
       'blue-100': 'rgba(204, 225, 255, 1)',
       'blue-200': 'rgba(153, 195, 255, 1)',

@@ -1,59 +1,45 @@
-import {useEffect, useState} from "react";
-import {constructEndpointUrl} from "../fetchUrlConstructor.ts";
-import {fetchAmplitudeData} from "../../../service/AmplitudeApi.tsx";
-import {selectDataProcessingFunction} from "./TableChartService"
+import React, { useEffect, useState } from "react";
+import { fetchAmplitudeData } from "../../../service/AmplitudeApi.tsx";
+import { selectDataProcessingFunction } from "./TableChartService";
 import TableBox from "./TableBox";
-import {constructEndpointUrl2} from "../dynamicUrlConstructor/constructEndpointUrl2.ts";
+import { constructEndpointUrl2 } from "../dynamicUrlConstructor/constructEndpointUrl2.ts";
 
-interface TableChartContainerProps {
-    chartType: string;
-    endpointType: string;
-    teamDomain:string
-    urlParams: {
-        startDate: string;
-        endDate: string;
-        eventType?: string;
-        groupBy?: any[];
-        filters?: any[];
-        secondEventType?: string; // Optional since it's not always used
-        // Add more properties as needed
+const TableChartContainer = ({ teamDomain, chartType, endpointType, urlParams, title }) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [chartData, setChartData] = useState(null);
+
+  useEffect(() => {
+    console.log('Fetching data for TableChart...');
+    const fetchData = async () => {
+      try {
+        const fetchURL = constructEndpointUrl2(endpointType, urlParams);
+        const response = await fetchAmplitudeData(fetchURL, teamDomain);
+        const processData = selectDataProcessingFunction(chartType);
+        const processedChartData = processData(response);
+
+        setChartData(Array.isArray(processedChartData) ? processedChartData : null);
+      } catch (error) {
+        console.error("Error during fetch:", error);
+        setError(error); // Set error state
+      } finally {
+        setIsLoading(false); // Set loading state to false regardless of success or failure
+      }
     };
-}
 
-const TableChartContainer: React.FC<TableChartContainerProps> = (
-    { teamDomain, chartType, endpointType, urlParams }
-) => {
-    const [chartData, setChartData] = useState(null); // Start with null to easily check if data is loaded
+    fetchData();
+  }, [chartType, teamDomain, urlParams]);
 
-    useEffect(() => {
-        console.log('Fetching data for TableChart...');
-        const fetchData = async () => {
-            try {
-                //const fetchURL = constructEndpointUrl(endpointType, urlParams);
-                const fetchURL = constructEndpointUrl2(endpointType, urlParams);
-                console.log("fetchURL", fetchURL);
-                const response = await fetchAmplitudeData(fetchURL, teamDomain);
-                console.log("response", response);
-                const processData = selectDataProcessingFunction(chartType);
-                console.log("processData", processData)
-                const processedChartData = processData(response);
-                console.log("processedChartData", processedChartData)
+  if (isLoading) {
+    return <div>Loading...</div>; // Render loading state
+  }
 
-                // Ensure that processedChartData is an array; otherwise set as null
-                setChartData(Array.isArray(processedChartData) ? processedChartData : null);
-            } catch (error) {
-                console.error("Failed to fetch and process data:", error);
-                setChartData(null); // Set to null on error
-            }
-        };
+  if (error) {
+    console.error("Failed to fetch and process data:", error);
+    return <div>Error: Failed to fetch data.</div>; // Render error message
+  }
 
-
-        fetchData();
-        //Charttype trengs kanskje ikke, kan hende [] deps holder
-    }, [chartType, teamDomain, urlParams.startDate, urlParams.endDate, urlParams.filters]); // Re-fetch and process data if chartType changes
-
-    console.log("TableChartData", chartData)
-    return chartData ? <TableBox   data={chartData}/> : <div>Loading...</div>;
+  return chartData ? <TableBox data={chartData} title={title} /> : <div>No data available.</div>;
 };
 
 export default TableChartContainer;

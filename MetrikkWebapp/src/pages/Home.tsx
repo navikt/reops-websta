@@ -1,49 +1,45 @@
 import '@navikt/ds-css';
 import { format } from 'date-fns';
-
-import AreaChartContainer from '../components/charts/AreaChartCustomAccessibility/AreaChartContainer';
-import { eventTypeMappings2 } from '../components/charts/dynamicUrlConstructor/EventTypeMappings2.ts';
-import {  useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { URLSearchComponent } from '../components/SearchComponent/URLSearchComponent.tsx';
 import { RangeDatePicker } from '../components/DatePicker/DatePicker.tsx';
-import VerticalBarChartContainer from '../components/charts/VerticalBarChartCustomAccessibility/VerticalBarChartContainer';
-import TableChartContainer from '../components/charts/TableChart/TableChartContainer';
+import SiteScores from '../components/Siteimprove/SiteScores.tsx';
+import SimpleOverviewChartBoard from '../components/Amplitude/SimpleOverviewChartBoard.tsx';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Button } from '@navikt/ds-react';
 
 const Home = () => {
-
-  // Kan hende callback blir brukt til å velge domene
   const [selectedDomain, setSelectedDomain] = useState('');
-
-  const handleDomainSelect = useCallback((domain) => {
+  const handleDomainSelect = useCallback((domain: string) => {
     setSelectedDomain(domain);
   }, []);
-
-  // Kan hende callback blir brukt til å velge domene
+  const siteScoresRef = useRef<HTMLDivElement>(null);
   const [selectedPath, setSelectedPath] = useState('');
-
-  const handlePathSelection = useCallback((path) => {
+  const handlePathSelection = useCallback((path: string) => {
     setSelectedPath(path);
   }, []);
+  const [selectedPageUrl, setSelectedPageUrl] = useState('');
+  const handlePageUrl = useCallback((pageUrl: string) => {
+    setSelectedPageUrl(pageUrl);
+  }, []);
+  const [selectedSiteimproveDomain, setSelectedSiteimproveDomain] =
+    useState('');
+  const handleSiteimproveDomain = useCallback((siteimproveDomain: string) => {
+    setSelectedSiteimproveDomain(siteimproveDomain);
+  }, []);
 
-  //const standardStartDate = new Date(new Date().setDate(standardStartDate.getDate()-30));
-  //const standardEndDate = new Date();
-
-
-  const defaultStartDate = new Date(new Date().setDate(new Date(Date.now()).getDate()-30));
+  const defaultStartDate = new Date(
+    new Date().setDate(new Date(Date.now()).getDate() - 30)
+  );
   const defaultEndDate = new Date(Date.now());
-  const defaultFormattedStartDate = format(defaultStartDate, 'yyyyMMdd')
-  const defaultFormattedEndDate = format(defaultEndDate, 'yyyyMMdd')
-
-  console.log("date today",defaultStartDate);
-  console.log("date today minus 30",defaultEndDate);
-  console.log("date today Formatted",defaultFormattedStartDate);
-  console.log("date today minus 30 Formatted",defaultFormattedEndDate);
-
-
-
-  const [formattedStartDate, setFormattedStartDate] = useState(defaultFormattedStartDate);
-  const [formattedEndDate, setFormattedEndDate] = useState(defaultFormattedEndDate);
-
+  const defaultFormattedStartDate = format(defaultStartDate, 'yyyyMMdd');
+  const defaultFormattedEndDate = format(defaultEndDate, 'yyyyMMdd');
+  const [formattedStartDate, setFormattedStartDate] = useState(
+    defaultFormattedStartDate
+  );
+  const [formattedEndDate, setFormattedEndDate] = useState(
+    defaultFormattedEndDate
+  );
 
   interface range {
     from?: Date;
@@ -69,37 +65,113 @@ const Home = () => {
     }
   }, []);
 
-  console.log(`from home`, selectedDomain, `${selectedPath}/`);
+  function timeout(delay: number) {
+    return new Promise((res) => setTimeout(res, delay));
+  }
+
+  const scrollToSiteScores = async () => {
+    await timeout(1000);
+    const siteScoresPosition =
+      siteScoresRef.current?.getBoundingClientRect().top + window.scrollY;
+    const offsetPosition = siteScoresPosition - window.innerHeight / 2.5;
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth',
+    });
+  };
+
+  const [isValidUrl, setIsValidUrl] = useState(false);
+
+  useEffect(() => {
+    if (isValidUrl) {
+      scrollToSiteScores();
+    }
+  }, [isValidUrl, selectedPath]);
+
+  // url routing ---------------------------------------------------------------------------------------------------
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const currentUrlRef = useRef(window.location.href);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const domain = params.get('domain') || '';
+    const path = params.get('path') || '';
+    const pageUrl = params.get('url') || '';
+    const startDate = params.get('startDate') || defaultFormattedStartDate;
+    const endDate = params.get('endDate') || defaultFormattedEndDate;
+    const siteimproveDomain = params.get('siteimproveDomain') || '';
+
+    setSelectedSiteimproveDomain(siteimproveDomain);
+    setSelectedDomain(domain);
+    setSelectedPath(path);
+    setSelectedPageUrl(pageUrl);
+    setFormattedStartDate(startDate);
+    setFormattedEndDate(endDate);
+  }, [location.search]);
+
+  const updateUrl = () => {
+    const url = new URL(window.location.href);
+    const params = url.searchParams;
+
+    params.set('domain', selectedDomain);
+    params.set('path', selectedPath);
+    params.set('url', selectedPageUrl);
+    params.set('startDate', formattedStartDate);
+    params.set('endDate', formattedEndDate);
+    params.set('siteimproveDomain', selectedSiteimproveDomain);
+
+    const newUrl = `${url.pathname}?${params.toString()}`;
+    if (newUrl !== currentUrlRef.current) {
+      currentUrlRef.current = newUrl;
+      navigate(newUrl, { replace: true });
+    }
+  };
+
+  updateUrl();
+
+  const copyUrlToClipboard = () => {
+    const url = window.location.href;
+    navigator.clipboard
+      .writeText(url)
+      .then(() => {
+        console.log('URL copied to clipboard');
+      })
+      .catch((err) => {
+        console.error('Failed to copy URL: ', err);
+      });
+  };
+
+  //=================================================================================================================
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-6">
-      <h1 className="text-4xl font-bold mb-6 text-center">👋Velkommen!</h1>
+      <h1 className="text-4xl font-bold mb-6 text-center">Webstatistikk 📊</h1>
       {/* RangeDatePicker already includes labels */}
 
-      <h2 className="font-semibold">Skriv inn URL i Søkefeltet</h2>
       <div className="p-8 space-y-6 ">
         {/* Search Component */}
         <div className="flex flex-col w-full max-w-lg">
-          <label htmlFor="searchComponent" className="text-sm font-bold text-center">
-            URL
-          </label>
           <div className="relative">
             <URLSearchComponent
-              id="searchComponent"
+              className="border p-2 rounded"
               onDomainSelect={handleDomainSelect}
               onPagePath={handlePathSelection}
-              className="border p-2 rounded"
+              onSiteimproveDomain={handleSiteimproveDomain}
+              onPageUrl={handlePageUrl}
+              onValidUrl={setIsValidUrl}
             />
           </div>
         </div>
-        {selectedDomain &&(
-      <div className="flex items-center justify-center w-full max-w-lg">
-        <RangeDatePicker onDateChange={handleDateChange} />
-      </div>)}
-
+        {selectedDomain && (
+          <div className="flex items-center justify-center w-full max-w-lg">
+            <RangeDatePicker onDateChange={handleDateChange} />
+          </div>
+        )}
       </div>
 
-      {/*<VStack className="items-center mb-3">
+      {/* <VStack className="items-center mb-3">
         <Link to="/guide" className="text-center hover:underline">
           <Heading size="medium">{simpleGuide}</Heading>
         </Link>
@@ -113,367 +185,48 @@ const Home = () => {
         />
       </form>
       */}
-      {/*TODO: Charts er lenger til høyre når de er centered fordi centrering starter på y-axis */}
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
-        {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
-            <AreaChartContainer
-              teamDomain={selectedDomain}
-              chartType="areaChartMulti"
-              endpointType="segmentation"
-              urlParams={{
-                startDate: formattedStartDate,
-                endDate: formattedEndDate,
-                eventType: eventTypeMappings2.pageViewed.eventType,
-                filters: [
-                  {
-                    subprop_type: 'event',
-                    subprop_key: '[Amplitude] Page Path',
-                    subprop_op: 'contains',
-                    subprop_value: [selectedPath],
-                  },
-                ],
-              }}
-              dimensions={{
-                width: 500,
-                height: 350,
-              }}
-              titles={{
-                chartTitle: 'Antall Besøk',
-                xAxisTitle: 'Dato',
-                yAxisTitle: 'Antall Besøk',
-              }}
-            />
-          </div>
-        )}
-        {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
-            <AreaChartContainer
-              teamDomain={selectedDomain}
-              chartType="areaChartMulti"
-              endpointType="segmentation"
-              urlParams={{
-                startDate: formattedStartDate,
-                endDate: formattedEndDate,
-                eventType:
-                  eventTypeMappings2.pageViewedGroupByCountry.eventType,
-                groupBy: eventTypeMappings2.pageViewedGroupByCountry.groupBy,
-                filters: [
-                  {
-                    subprop_type: 'event',
-                    subprop_key: '[Amplitude] Page Path',
-                    subprop_op: 'contains',
-                    subprop_value: [selectedPath],
-                  },
-                ],
-              }}
-              dimensions={{
-                width: 500,
-                height: 350,
-              }}
-              titles={{
-                chartTitle: 'Antall Besøk gruppert på land',
-                xAxisTitle: 'Dato',
-                yAxisTitle: 'Antall Besøk',
-              }}
-            />
-          </div>
-        )}
-        {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
-            <TableChartContainer
-              teamDomain={selectedDomain}
-              chartType="segmentationChartProcessing"
-              endpointType="segmentation"
-              urlParams={{
-                startDate: formattedStartDate,
-                endDate: formattedEndDate,
-                eventType:
-                  eventTypeMappings2.pageViewedGroupByReferrer.eventType,
-                groupBy: eventTypeMappings2.pageViewedGroupByReferrer.groupBy,
-                filters: [
-                  {
-                    subprop_type: 'event',
-                    subprop_key: '[Amplitude] Page Path',
-                    subprop_op: 'contains',
-                    subprop_value: [selectedPath],
-                  },
-                ],
-              }}
-            />
-          </div>
-        )}
+      {/* TODO: Charts er lenger til høyre når de er centered fordi centrering starter på y-axis */}
 
+      {/* {selectedDomain && (
+        <div className="mb-8">
+          <Button onClick={scrollToSiteScores}>Poengsum</Button>
+        </div>
+      )} */}
+      {/* {selectedDomain && (
+        <h2 className="text-4xl font-semi-bold mb-1 text-left">Amplitude</h2>
+      )} */}
 
-        {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
-            <TableChartContainer
-              teamDomain={selectedDomain}
-              chartType="segmentationChartProcessing"
-              endpointType="segmentation"
-              urlParams={{
-                startDate: formattedStartDate,
-                endDate: formattedEndDate,
-                eventType:
-                  eventTypeMappings2.pageViewedGroupByPagePath.eventType,
-                groupBy: eventTypeMappings2.pageViewedGroupByPagePath.groupBy,
-                filters: [
-                  {
-                    subprop_type: 'event',
-                    subprop_key: '[Amplitude] Page Path',
-                    subprop_op: 'contains',
-                    subprop_value: [selectedPath],
-                  },
-                ],
-              }}
-            />
-          </div>
-        )}
+      {selectedDomain && (
+        <div
+          ref={siteScoresRef}
+          className="p-4 w-full bg-white border border-blue-200 rounded shadow-lg md:col-span-2 mb-6"
+        >
+          <SiteScores
+            pageUrl={selectedPageUrl}
+            siteimproveSelectedDomain={selectedSiteimproveDomain}
+          />
+        </div>
+      )}
 
-        {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
-            <TableChartContainer
-              teamDomain={selectedDomain}
-              chartType="segmentationChartProcessing"
-              endpointType="segmentation"
-              urlParams={{
-                startDate: formattedStartDate,
-                endDate: formattedEndDate,
-                eventType:
-                  eventTypeMappings2.pageViewedGroupByReferringDomain.eventType,
-                groupBy:
-                  eventTypeMappings2.pageViewedGroupByReferringDomain.groupBy,
-                filters: [
-                  {
-                    subprop_type: 'event',
-                    subprop_key: '[Amplitude] Page Path',
-                    subprop_op: 'contains',
-                    subprop_value: [selectedPath],
-                  },
-                ],
-              }}
-            />
-          </div>
-        )}
-
-        {/*
-                {selectedDomain && formattedStartDate && formattedEndDate &&  (
-                    <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
-                        <AreaChartContainer
-                            teamDomain={selectedDomain}
-                            chartType="areaChartMulti"
-                            endpointType="segmentation"
-                            urlParams={{
-                                startDate: formattedStartDate,
-                                endDate: formattedEndDate,
-                                eventType: eventTypeMappings2.pageViewedGroupByReferrer.eventType,
-                                groupBy:eventTypeMappings2.pageViewedGroupByReferrer.groupBy,
-                                filters:[
-                                    { subprop_type: "event", subprop_key: "[Amplitude] Page Path", subprop_op: "contains", subprop_value: [selectedPath] }
-                                ]
-                            }}
-                            dimensions={{
-                                width: 500,
-                                height: 350,
-                            }}
-                            titles={{
-                                chartTitle:"Antall Besøk gruppert på henvisning",
-                                xAxisTitle:"Dato",
-                                yAxisTitle:"Antall Besøk"
-                            }}
-                        />
-                    </div>)}
-                    */}
-        {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
-            <AreaChartContainer
-              teamDomain={selectedDomain}
-              chartType="areaChartMulti"
-              endpointType="segmentation"
-              urlParams={{
-                startDate: formattedStartDate,
-                endDate: formattedEndDate,
-                eventType: eventTypeMappings2.pageViewedGroupByCity.eventType,
-                groupBy: eventTypeMappings2.pageViewedGroupByCity.groupBy,
-                filters: [
-                  {
-                    subprop_type: 'event',
-                    subprop_key: '[Amplitude] Page Path',
-                    subprop_op: 'contains',
-                    subprop_value: [selectedPath],
-                  },
-                ],
-              }}
-              dimensions={{
-                width: 500,
-                height: 350,
-              }}
-              titles={{
-                chartTitle: 'Antall Besøk gruppert på by',
-                xAxisTitle: 'Dato',
-                yAxisTitle: 'Antall Besøk',
-              }}
-            />
-          </div>
-        )}
-        {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
-            <AreaChartContainer
-              teamDomain={selectedDomain}
-              chartType="areaChartMulti"
-              endpointType="segmentation"
-              urlParams={{
-                startDate: formattedStartDate,
-                endDate: formattedEndDate,
-                eventType:
-                  eventTypeMappings2.pageViewedGroupByLanguage.eventType,
-                groupBy: eventTypeMappings2.pageViewedGroupByLanguage.groupBy,
-                filters: [
-                  {
-                    subprop_type: 'event',
-                    subprop_key: '[Amplitude] Page Path',
-                    subprop_op: 'contains',
-                    subprop_value: [selectedPath],
-                  },
-                ],
-              }}
-              dimensions={{
-                width: 500,
-                height: 350,
-              }}
-              titles={{
-                chartTitle: 'Antall Besøk gruppert på språk',
-                xAxisTitle: 'Dato',
-                yAxisTitle: 'Antall Besøk',
-              }}
-            />
-          </div>
-        )}
-
-        {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
-            <VerticalBarChartContainer
-              teamDomain={selectedDomain}
-              chartType="verticalBarChart"
-              endpointType="segmentation"
-              urlParams={{
-                startDate: formattedStartDate,
-                endDate: formattedEndDate,
-                eventType:
-                  eventTypeMappings2.pageViewedGroupByDayOfWeek.eventType,
-                groupBy: eventTypeMappings2.pageViewedGroupByDayOfWeek.groupBy,
-                filters: [
-                  {
-                    subprop_type: 'event',
-                    subprop_key: '[Amplitude] Page Path',
-                    subprop_op: 'contains',
-                    subprop_value: [selectedPath],
-                  },
-                ],
-              }}
-            />
-          </div>
-        )}
-
-        {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
-            <VerticalBarChartContainer
-              teamDomain={selectedDomain}
-              chartType="verticalBarChart"
-              endpointType="segmentation"
-              urlParams={{
-                startDate: formattedStartDate,
-                endDate: formattedEndDate,
-                eventType:
-                  eventTypeMappings2.pageViewedGroupByHourOfDay.eventType,
-                groupBy: eventTypeMappings2.pageViewedGroupByHourOfDay.groupBy,
-                filters: [
-                  {
-                    subprop_type: 'event',
-                    subprop_key: '[Amplitude] Page Path',
-                    subprop_op: 'contains',
-                    subprop_value: [selectedPath],
-                  },
-                ],
-              }}
-            />
-          </div>
-        )}
-
-        {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
-            <VerticalBarChartContainer
-              teamDomain={selectedDomain}
-              chartType="verticalBarChart"
-              endpointType="segmentation"
-              urlParams={{
-                startDate: formattedStartDate,
-                endDate: formattedEndDate,
-                eventType: eventTypeMappings2.pageViewedGroupByOS.eventType,
-                groupBy: eventTypeMappings2.pageViewedGroupByOS.groupBy,
-                filters: [
-                  {
-                    subprop_type: 'event',
-                    subprop_key: '[Amplitude] Page Path',
-                    subprop_op: 'contains',
-                    subprop_value: [selectedPath],
-                  },
-                ],
-              }}
-            />
-          </div>
-        )}
-        {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
-            <VerticalBarChartContainer
-              teamDomain={selectedDomain}
-              chartType="verticalBarChart"
-              endpointType="segmentation"
-              urlParams={{
-                startDate: formattedStartDate,
-                endDate: formattedEndDate,
-                eventType:
-                  eventTypeMappings2.pageViewedGroupByDeviceType.eventType,
-                groupBy: eventTypeMappings2.pageViewedGroupByDeviceType.groupBy,
-                filters: [
-                  {
-                    subprop_type: 'event',
-                    subprop_key: '[Amplitude] Page Path',
-                    subprop_op: 'contains',
-                    subprop_value: [selectedPath],
-                  },
-                ],
-              }}
-            />
-          </div>
-        )}
-
-        {selectedDomain && formattedStartDate && formattedEndDate && (
-          <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
-            <VerticalBarChartContainer
-              teamDomain={selectedDomain}
-              chartType="verticalBarChart"
-              endpointType="segmentation"
-              urlParams={{
-                startDate: formattedStartDate,
-                endDate: formattedEndDate,
-                eventType:
-                  eventTypeMappings2.pageViewedGroupByDeviceFamily.eventType,
-                groupBy:
-                  eventTypeMappings2.pageViewedGroupByDeviceFamily.groupBy,
-                filters: [
-                  {
-                    subprop_type: 'event',
-                    subprop_key: '[Amplitude] Page Path',
-                    subprop_op: 'contains',
-                    subprop_value: [selectedPath],
-                  },
-                ],
-              }}
-            />
-          </div>
-        )}
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 ">
+        <SimpleOverviewChartBoard
+          selectedDomain={selectedDomain}
+          formattedStartDate={formattedStartDate}
+          formattedEndDate={formattedEndDate}
+          selectedPath={selectedPath}
+        />
       </div>
+      {/* {selectedDomain && (
+        <h2 className="text-4xl font-semi-bold mb-1 text-left">Siteimprove</h2>
+      )} */}
+
+      {selectedDomain && (
+        <div className="flex justify-center items-center mt-16">
+          <Button variant="primary" onClick={copyUrlToClipboard}>
+            Kopier rapport
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

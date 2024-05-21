@@ -33,15 +33,11 @@ interface AreaChartContainerProps {
 const AreaChartContainer: React.FC<AreaChartContainerProps> = ({ teamDomain, chartType, endpointType, urlParams, dimensions, titles }) => {
     const [chartData, setChartData] = useState(null); // Start with null to easily check if data is loaded
 
-    console.log(chartType, endpointType, urlParams)
-
     useEffect(() => {
-        console.log('Fetching data...');
         const fetchData = async () => {
             try {
                 //const fetchURL = constructEndpointUrl(endpointType, urlParams);
                 const fetchURL = constructEndpointUrl2(endpointType, urlParams);
-                //console.log(fetchURL)
                 const response = await fetchAmplitudeData(fetchURL, teamDomain);
                 // Dynamically select the processing function based on chartType
                 const processData = selectDataProcessingFunction(chartType);
