@@ -126,14 +126,22 @@ const Home = () => {
 
   updateUrl();
 
+  const [toast, setToast] = useState<{ show: boolean; variant: string; message: string }>({
+    show: false,
+    variant: '',
+    message: '',
+  });
+
   const copyUrlToClipboard = () => {
     const url = window.location.href;
     navigator.clipboard.writeText(url)
         .then(() => {
           console.log('URL copied to clipboard');
+          setToast({ show: true, variant: 'success', message: 'URL copied to clipboard' });
         })
         .catch((err) => {
           console.error('Failed to copy URL: ', err);
+          setToast({ show: true, variant: 'error', message: 'Failed to copy URL' });
         });
   };
 
@@ -151,6 +159,7 @@ const Home = () => {
             <URLSearchComponent
               className="border p-2 rounded"
               onDomainSelect={handleDomainSelect}
+              pageUrl={selectedPageUrl}
               onPagePath={handlePathSelection}
               onSiteimproveDomain={handleSiteimproveDomain}
               onPageUrl={handlePageUrl}
@@ -189,6 +198,12 @@ const Home = () => {
       {/* {selectedDomain && (
         <h2 className="text-4xl font-semi-bold mb-1 text-left">Amplitude</h2>
       )} */}
+
+      {toast.show && (
+          <AlertWithCloseButton variant={toast.variant}>
+            {toast.message}
+          </AlertWithCloseButton>
+      )}
 
       {selectedDomain && (
         <div
