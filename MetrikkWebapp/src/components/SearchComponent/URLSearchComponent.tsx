@@ -10,12 +10,11 @@ interface Team {
 
 export const URLSearchComponent = ({
   onDomainSelect,
-    pageUrl,
+  pageUrl,
   onPagePath,
   onPageUrl,
   onSiteimproveDomain,
   onValidUrl, // New proppage
-
 }) => {
   const [searchInput, setSearchInput] = useState('');
   const [filteredTeams, setFilteredTeams] = useState<Team[]>([]);
@@ -61,7 +60,7 @@ export const URLSearchComponent = ({
       setError(null); // Clear error on successful search
       onValidUrl(true); // Notify parent of valid URL
     } else {
-      setError('Nettadressen er ikke et under NAV');
+      setError('Nettadressen er ikke under NAV');
       onValidUrl(false); // Notify parent of invalid URL
     }
   };
@@ -70,7 +69,7 @@ export const URLSearchComponent = ({
     setSearchInput(pageUrl);
   }, [pageUrl]);
 
-  console.log("pageUrl: " + pageUrl);
+  console.log('pageUrl: ' + pageUrl);
 
   return (
     <form
