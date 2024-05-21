@@ -5,8 +5,8 @@ import { URLSearchComponent } from '../components/SearchComponent/URLSearchCompo
 import { RangeDatePicker } from '../components/DatePicker/DatePicker.tsx';
 import SiteScores from '../components/Siteimprove/SiteScores.tsx';
 import SimpleOverviewChartBoard from '../components/Amplitude/SimpleOverviewChartBoard.tsx';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Button } from '@navikt/ds-react';
+import {useLocation, useNavigate} from "react-router-dom";
+import { Button } from "@navikt/ds-react";
 
 const Home = () => {
   const [selectedDomain, setSelectedDomain] = useState('');
@@ -22,8 +22,7 @@ const Home = () => {
   const handlePageUrl = useCallback((pageUrl: string) => {
     setSelectedPageUrl(pageUrl);
   }, []);
-  const [selectedSiteimproveDomain, setSelectedSiteimproveDomain] =
-    useState('');
+  const [selectedSiteimproveDomain, setSelectedSiteimproveDomain] = useState('');
   const handleSiteimproveDomain = useCallback((siteimproveDomain: string) => {
     setSelectedSiteimproveDomain(siteimproveDomain);
   }, []);
@@ -40,6 +39,7 @@ const Home = () => {
   const [formattedEndDate, setFormattedEndDate] = useState(
     defaultFormattedEndDate
   );
+
 
   interface range {
     from?: Date;
@@ -65,15 +65,10 @@ const Home = () => {
     }
   }, []);
 
-  function timeout(delay: number) {
-    return new Promise((res) => setTimeout(res, delay));
-  }
-
-  const scrollToSiteScores = async () => {
-    await timeout(1000);
+  const scrollToSiteScores = () => {
     const siteScoresPosition =
       siteScoresRef.current?.getBoundingClientRect().top + window.scrollY;
-    const offsetPosition = siteScoresPosition - window.innerHeight / 2.5;
+    const offsetPosition = siteScoresPosition - window.innerHeight / 3.5;
     window.scrollTo({
       top: offsetPosition,
       behavior: 'smooth',
@@ -86,7 +81,7 @@ const Home = () => {
     if (isValidUrl) {
       scrollToSiteScores();
     }
-  }, [isValidUrl, selectedPath]);
+  }, [isValidUrl]);
 
   // url routing ---------------------------------------------------------------------------------------------------
 
@@ -133,14 +128,13 @@ const Home = () => {
 
   const copyUrlToClipboard = () => {
     const url = window.location.href;
-    navigator.clipboard
-      .writeText(url)
-      .then(() => {
-        console.log('URL copied to clipboard');
-      })
-      .catch((err) => {
-        console.error('Failed to copy URL: ', err);
-      });
+    navigator.clipboard.writeText(url)
+        .then(() => {
+          console.log('URL copied to clipboard');
+        })
+        .catch((err) => {
+          console.error('Failed to copy URL: ', err);
+        });
   };
 
   //=================================================================================================================
@@ -157,6 +151,7 @@ const Home = () => {
             <URLSearchComponent
               className="border p-2 rounded"
               onDomainSelect={handleDomainSelect}
+              pageUrl={selectedPageUrl}
               onPagePath={handlePathSelection}
               onSiteimproveDomain={handleSiteimproveDomain}
               onPageUrl={handlePageUrl}
@@ -221,12 +216,13 @@ const Home = () => {
       )} */}
 
       {selectedDomain && (
-        <div className="flex justify-center items-center mt-16">
-          <Button variant="primary" onClick={copyUrlToClipboard}>
-            Kopier rapport
-          </Button>
-        </div>
-      )}
+      <div className="flex justify-center items-center mt-16">
+        <Button variant="primary" onClick={copyUrlToClipboard}>
+          Copy URL
+        </Button>
+      </div>
+          )}
+
     </div>
   );
 };
