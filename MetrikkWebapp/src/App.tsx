@@ -5,6 +5,7 @@ import './index.css';
 import Home from './pages/Home';
 import SiteimproveSite from './pages/SiteimproveSite';
 import { Footer, Nav, ScrollToTop } from './components/theme';
+import Dashboard from "./pages/Dashboard.tsx";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/amplitude" element={<Home />} />
               <Route path="/siteimprove" element={<SiteimproveSite />} />
+              <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
           </ContentContainer>
           <ScrollToTop />
