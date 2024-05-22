@@ -1,7 +1,0 @@
-{
-  "/_not-found/page": "app/_not-found/page.js",
-  "/icon.svg/route": "app/icon.svg/route.js",
-  "/internal/is-alive/route": "app/internal/is-alive/route.js",
-  "/internal/is-ready/route": "app/internal/is-ready/route.js",
-  "/[[...slug]]/page": "app/[[...slug]]/page.js"
-}
