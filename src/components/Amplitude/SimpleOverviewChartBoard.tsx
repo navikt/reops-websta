@@ -54,7 +54,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                   }}
                   dimensions={{
                     width: 500,
-                    height: 350,
+                    height: 400,
                   }}
                   titles={{
                     chartTitle: 'Totalt antall besøk',
@@ -87,7 +87,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                   }}
                   dimensions={{
                     width: 500,
-                    height: 350,
+                    height: 400,
                   }}
                   titles={{
                     chartTitle: 'Hvilke byer nettsiden besøkes fra',
@@ -120,7 +120,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                   }}
                   dimensions={{
                     width: 500,
-                    height: 350,
+                    height: 400,
                   }}
                   titles={{
                     chartTitle: 'Hvilke land nettsiden besøkes fra',
@@ -153,7 +153,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                   }}
                   dimensions={{
                     width: 500,
-                    height: 350,
+                    height: 400,
                   }}
                   titles={{
                     chartTitle: 'Hvilke språk besøkende benytter',
@@ -188,7 +188,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                   }}
                   dimensions={{
                     width: 500,
-                    height: 350,
+                    height: 400,
                   }}
                   titles={{
                     chartTitle: 'Hvilke ukedager nettsiden besøkes (i valgte datoer)',
@@ -222,7 +222,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                   }}
                   dimensions={{
                     width: 500,
-                    height: 350,
+                    height: 400,
                   }}
                   titles={{
                     chartTitle: `Hvilke klokkeslett nettsiden besøkes (i valgte datoer)`,

@@ -36,7 +36,7 @@ class RateLimiter {
         setTimeout(() => {
             this.isProcessing = false;
             this.processQueue();
-        }, 100 / this.maxRequestsPerSecond);
+        }, 0 / this.maxRequestsPerSecond);
     }
 }
 
