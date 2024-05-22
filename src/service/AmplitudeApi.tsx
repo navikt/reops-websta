@@ -1,4 +1,4 @@
-const BASE_URL = 'https://reops-proxy.intern.nav.no/amplitude';
+const BASE_URL = 'https://reops-proxy.ansatt.nav.no/amplitude';
 
 export const fetchAmplitudeData = async (endpoint:string, teamDomain:string) => {
     const teamUrl = `/${teamDomain}/api`

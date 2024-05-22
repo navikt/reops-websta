@@ -1,4 +1,4 @@
-const BASE_URL = 'https://reops-proxy.intern.nav.no/siteimprove';
+const BASE_URL = 'https://reops-proxy.ansatt.nav.no/siteimprove';
 
 export const fetchSiteimproveData = async (endpoint: string) => {
     try {
