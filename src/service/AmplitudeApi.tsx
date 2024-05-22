@@ -40,7 +40,7 @@ class RateLimiter {
     }
 }
 
-const rateLimiter = new RateLimiter(1); // 1 request per second
+const rateLimiter = new RateLimiter(10); // 1 request per second
 
 export const fetchAmplitudeData = async (endpoint: string, teamDomain: string) => {
     const teamUrl = `/${teamDomain}/api`;
