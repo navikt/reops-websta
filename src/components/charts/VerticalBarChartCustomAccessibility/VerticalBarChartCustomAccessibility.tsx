@@ -65,7 +65,7 @@ export class VerticalBarChartCustomAccessibilityExample extends React.Component<
             <VerticalBarChart
                 data={coloredChartData}
                 width={dimensions.width}
-                height={dimensions.height}
+                height={dimensions.height-20}
                 barWidth={15}
                 yAxisTickCount={6}
                 hideLegend={true}
