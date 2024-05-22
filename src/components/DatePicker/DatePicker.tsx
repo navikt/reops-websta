@@ -11,7 +11,8 @@ export const RangeDatePicker = ({ onDateChange }) => {
   const { datepickerProps, toInputProps, fromInputProps, selectedRange } =
     useRangeDatepicker({
       fromDate: new Date('Aug 23 2021'),
-      defaultSelected: {
+      toDate: defaultEndDate,
+        defaultSelected: {
         from: defaultStartDate,
         to: defaultEndDate,
       },
