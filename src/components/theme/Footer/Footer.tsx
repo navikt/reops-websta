@@ -25,7 +25,7 @@ const Footer = () => {
 function LogoBlock() {
   return (
     <div>
-      <span className="mt-4 text-2xl whitespace-nowrap">En demo app</span>
+      <span className="mt-4 text-2xl whitespace-nowrap">Innblikk</span>
       <p className="mt-3 leading-normal">&copy; {new Date().getFullYear()}</p>
     </div>
   );
