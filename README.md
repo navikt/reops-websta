@@ -1,7 +1,7 @@
 Websta
 ================
 
-App for å vise webstatistikk.
+App for å vise webstatistikk for NAV relaterte nettsider.
 
 ---
 
