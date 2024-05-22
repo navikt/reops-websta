@@ -142,7 +142,7 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain }) => {
                   })}
                 />
               </div>
-              <h3 className="text-center mt-2 font-bold text-xl">{`Søkemotor-optimal`}</h3>
+              <h3 className="text-center mt-2 font-bold text-xl">{`Søkemotoroptimalisering`}</h3>
             </div>
           )}
           {scoreOverview && (
