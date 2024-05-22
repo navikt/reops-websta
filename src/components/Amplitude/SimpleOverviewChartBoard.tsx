@@ -166,7 +166,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
 
 
         {selectedDomain && formattedStartDate && formattedEndDate && !loading && (
-            <div className="p-4 bg-white border border-blue-200 rounded shadow-lg ">
+            <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
               <VerticalBarChartContainer
                   teamDomain={selectedDomain}
                   chartType="verticalBarChart"

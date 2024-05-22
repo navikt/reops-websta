@@ -54,7 +54,7 @@ export class VerticalBarChartCustomAccessibilityExample extends React.Component<
 
     const rootStyle = {
       width: `${dimensions.width}px`,
-      height: `${dimensions.height-50}px`,
+      height: `${dimensions.height}px`,
       padding: '0 20px', // Adjust as needed
     };
 
