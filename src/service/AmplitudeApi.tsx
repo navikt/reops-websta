@@ -24,28 +24,21 @@ class RateLimiter {
         }
 
         this.isProcessing = true;
-        for (let i = 0; i < this.maxRequestsPerSecond; i++) {
-            if (this.queue.length === 0) {
-                break;
-            }
+        const { fn, resolve, reject } = this.queue.shift() as { fn: Function, resolve: Function, reject: Function };
 
-            const { fn, resolve, reject } = this.queue.shift() as { fn: Function, resolve: Function, reject: Function };
-
-            try {
-                const result = await fn();
-                resolve(result);
-            } catch (error) {
-                reject(error);
-            }
+        try {
+            const result = await fn();
+            resolve(result);
+        } catch (error) {
+            reject(error);
         }
 
         setTimeout(() => {
             this.isProcessing = false;
             this.processQueue();
-        }, 1000);
+        }, 200 / this.maxRequestsPerSecond);
     }
 }
-
 
 const rateLimiter = new RateLimiter(10); // 1 request per second
 
