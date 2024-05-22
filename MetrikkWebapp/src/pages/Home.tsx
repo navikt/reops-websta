@@ -5,7 +5,7 @@ import { URLSearchComponent } from '../components/SearchComponent/URLSearchCompo
 import { RangeDatePicker } from '../components/DatePicker/DatePicker.tsx';
 import SiteScores from '../components/Siteimprove/SiteScores.tsx';
 import SimpleOverviewChartBoard from '../components/Amplitude/SimpleOverviewChartBoard.tsx';
-import {useLocation, useNavigate} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@navikt/ds-react";
 
 const Home = () => {
@@ -28,16 +28,16 @@ const Home = () => {
   }, []);
 
   const defaultStartDate = new Date(
-    new Date().setDate(new Date(Date.now()).getDate() - 30)
+      new Date().setDate(new Date(Date.now()).getDate() - 30)
   );
   const defaultEndDate = new Date(Date.now());
   const defaultFormattedStartDate = format(defaultStartDate, 'yyyyMMdd');
   const defaultFormattedEndDate = format(defaultEndDate, 'yyyyMMdd');
   const [formattedStartDate, setFormattedStartDate] = useState(
-    defaultFormattedStartDate
+      defaultFormattedStartDate
   );
   const [formattedEndDate, setFormattedEndDate] = useState(
-    defaultFormattedEndDate
+      defaultFormattedEndDate
   );
 
 
@@ -67,7 +67,7 @@ const Home = () => {
 
   const scrollToSiteScores = () => {
     const siteScoresPosition =
-      siteScoresRef.current?.getBoundingClientRect().top + window.scrollY;
+        siteScoresRef.current?.getBoundingClientRect().top + window.scrollY;
     const offsetPosition = siteScoresPosition - window.innerHeight / 3.5;
     window.scrollTo({
       top: offsetPosition,
@@ -126,11 +126,17 @@ const Home = () => {
 
   updateUrl();
 
+  const [buttonText, setButtonText] = useState('Kopier URL');
+
   const copyUrlToClipboard = () => {
     const url = window.location.href;
     navigator.clipboard.writeText(url)
         .then(() => {
           console.log('URL copied to clipboard');
+          setButtonText('URL er kopiert! Del den med andre på teamet');
+          setTimeout(() => {
+            setButtonText('Kopier URL');
+          }, 10000);
         })
         .catch((err) => {
           console.error('Failed to copy URL: ', err);
@@ -140,33 +146,33 @@ const Home = () => {
   //=================================================================================================================
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-6">
-      <h1 className="text-4xl font-bold mb-6 text-center">Webstatistikk 📊</h1>
-      {/* RangeDatePicker already includes labels */}
+      <div className="flex flex-col items-center justify-center min-h-screen p-6">
+        <h1 className="text-4xl font-bold mb-6 text-center">Webstatistikk 📊</h1>
+        {/* RangeDatePicker already includes labels */}
 
-      <div className="p-8 space-y-6 ">
-        {/* Search Component */}
-        <div className="flex flex-col w-full max-w-lg">
-          <div className="relative">
-            <URLSearchComponent
-              className="border p-2 rounded"
-              onDomainSelect={handleDomainSelect}
-              pageUrl={selectedPageUrl}
-              onPagePath={handlePathSelection}
-              onSiteimproveDomain={handleSiteimproveDomain}
-              onPageUrl={handlePageUrl}
-              onValidUrl={setIsValidUrl}
-            />
+        <div className="p-8 space-y-6 ">
+          {/* Search Component */}
+          <div className="flex flex-col w-full max-w-lg">
+            <div className="relative">
+              <URLSearchComponent
+                  className="border p-2 rounded"
+                  onDomainSelect={handleDomainSelect}
+                  pageUrl={selectedPageUrl}
+                  onPagePath={handlePathSelection}
+                  onSiteimproveDomain={handleSiteimproveDomain}
+                  onPageUrl={handlePageUrl}
+                  onValidUrl={setIsValidUrl}
+              />
+            </div>
           </div>
+          {selectedDomain && (
+              <div className="flex items-center justify-center w-full max-w-lg">
+                <RangeDatePicker onDateChange={handleDateChange} />
+              </div>
+          )}
         </div>
-        {selectedDomain && (
-          <div className="flex items-center justify-center w-full max-w-lg">
-            <RangeDatePicker onDateChange={handleDateChange} />
-          </div>
-        )}
-      </div>
 
-      {/* <VStack className="items-center mb-3">
+        {/* <VStack className="items-center mb-3">
         <Link to="/guide" className="text-center hover:underline">
           <Heading size="medium">{simpleGuide}</Heading>
         </Link>
@@ -180,50 +186,49 @@ const Home = () => {
         />
       </form>
       */}
-      {/* TODO: Charts er lenger til høyre når de er centered fordi centrering starter på y-axis */}
+        {/* TODO: Charts er lenger til høyre når de er centered fordi centrering starter på y-axis */}
 
-      {/* {selectedDomain && (
+        {/* {selectedDomain && (
         <div className="mb-8">
           <Button onClick={scrollToSiteScores}>Poengsum</Button>
         </div>
       )} */}
-      {/* {selectedDomain && (
+        {/* {selectedDomain && (
         <h2 className="text-4xl font-semi-bold mb-1 text-left">Amplitude</h2>
       )} */}
 
-      {selectedDomain && (
-        <div
-          ref={siteScoresRef}
-          className="p-4 w-full bg-white border border-blue-200 rounded shadow-lg md:col-span-2 mb-6"
-        >
-          <SiteScores
-            pageUrl={selectedPageUrl}
-            siteimproveSelectedDomain={selectedSiteimproveDomain}
+        {selectedDomain && (
+            <div
+                ref={siteScoresRef}
+                className="p-4 w-full bg-white border border-blue-200 rounded shadow-lg md:col-span-2 mb-6"
+            >
+              <SiteScores
+                  pageUrl={selectedPageUrl}
+                  siteimproveSelectedDomain={selectedSiteimproveDomain}
+              />
+            </div>
+        )}
+
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 ">
+          <SimpleOverviewChartBoard
+              selectedDomain={selectedDomain}
+              formattedStartDate={formattedStartDate}
+              formattedEndDate={formattedEndDate}
+              selectedPath={selectedPath}
           />
         </div>
-      )}
-
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 ">
-        <SimpleOverviewChartBoard
-          selectedDomain={selectedDomain}
-          formattedStartDate={formattedStartDate}
-          formattedEndDate={formattedEndDate}
-          selectedPath={selectedPath}
-        />
-      </div>
-      {/* {selectedDomain && (
+        {/* {selectedDomain && (
         <h2 className="text-4xl font-semi-bold mb-1 text-left">Siteimprove</h2>
       )} */}
 
-      {selectedDomain && (
-      <div className="flex justify-center items-center mt-16">
-        <Button variant="primary" onClick={copyUrlToClipboard}>
-          Copy URL
-        </Button>
+        {selectedDomain && (
+            <div className="flex justify-center items-center mt-16">
+              <Button variant="primary" onClick={copyUrlToClipboard}>
+                {buttonText}
+              </Button>
+            </div>
+        )}
       </div>
-          )}
-
-    </div>
   );
 };
 
