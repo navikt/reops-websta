@@ -60,7 +60,7 @@ export const URLSearchComponent = ({
       setError(null); // Clear error on successful search
       onValidUrl(true); // Notify parent of valid URL
     } else {
-      setError('Nettadressen er ikke under NAV');
+      setError('Nettsiden er ikke lagt til enda');
       onValidUrl(false); // Notify parent of invalid URL
     }
   };
