@@ -96,7 +96,7 @@ export const eventTypeMappings2 = {
     //table *
     besøkGroupByPagePath: {
         eventType: `besøk`,
-        groupBy: [{ type: "event", value: "[Amplitude] Page Path" }],
+        groupBy: [{ type: "event", value: "pagePath" }],
         filters: []
     },
     //table *
@@ -141,7 +141,7 @@ export const eventTypeMappings2 = {
         groupBy: [{ type: "user", value: "gp:referrer" }],
         filters: [
             { subprop_type: "gp:referrer", subprop_op: "contains", subprop_value: ["github.com%2Fnavikt", "navikt.github.io"] },
-            { subprop_type: "[Amplitude] Page Path", subprop_op: "is", subprop_value: ["/jobbsoknad/"] }
+            { subprop_type: "pagePath", subprop_op: "is", subprop_value: ["/jobbsoknad/"] }
         ]
     },
     //vertical
