@@ -108,7 +108,7 @@ export const eventTypeMappings2 = {
     //table *
     besøkGroupByReferrer: {
         eventType: `besøk`,
-        groupBy: [{ type: "event", value: "referrer" }],
+        groupBy: [{ type: "event", value: "gp:referrer" }],
         filters: []
     },
     //vertical
