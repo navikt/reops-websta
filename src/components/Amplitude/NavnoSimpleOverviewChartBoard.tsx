@@ -1,5 +1,5 @@
 import AreaChartContainer from '../charts/AreaChartCustomAccessibility/AreaChartContainer.tsx';
-import { eventTypeMappings2 } from '../charts/dynamicUrlConstructor/NavnoEventTypeMappings2.ts';
+import { eventTypeMappings2 } from '../charts/dynamicUrlConstructor/EventTypeMappings2.ts';
 import TableChartContainer from '../charts/TableChart/TableChartContainer.tsx';
 import VerticalBarChartContainer from '../charts/VerticalBarChartCustomAccessibility/VerticalBarChartContainer.tsx';
 import React, { useEffect, useState } from 'react';
