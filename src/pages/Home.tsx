@@ -209,6 +209,11 @@ const Home = () => {
             </div>
         )}
 
+        {selectedDomain.includes("https://www.nav.no/") ?
+            (<>Det er NAV.no</>) :
+            (<>Ikke nav.no</>)
+        }
+
         <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 ">
           <SimpleOverviewChartBoard
               selectedDomain={selectedDomain}
