@@ -42,7 +42,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                   urlParams={{
                     startDate: formattedStartDate,
                     endDate: formattedEndDate,
-                    eventType: eventTypeMappings2.pageViewed.eventType,
+                    eventType: eventTypeMappings2.Besøk.eventType,
                     filters: [
                       {
                         subprop_type: 'event',
@@ -74,8 +74,8 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                   urlParams={{
                     startDate: formattedStartDate,
                     endDate: formattedEndDate,
-                    eventType: eventTypeMappings2.pageViewedGroupByCity.eventType,
-                    groupBy: eventTypeMappings2.pageViewedGroupByCity.groupBy,
+                    eventType: eventTypeMappings2.BesøkGroupByCity.eventType,
+                    groupBy: eventTypeMappings2.BesøkGroupByCity.groupBy,
                     filters: [
                       {
                         subprop_type: 'event',
@@ -107,8 +107,8 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                   urlParams={{
                     startDate: formattedStartDate,
                     endDate: formattedEndDate,
-                    eventType: eventTypeMappings2.pageViewedGroupByCountry.eventType,
-                    groupBy: eventTypeMappings2.pageViewedGroupByCountry.groupBy,
+                    eventType: eventTypeMappings2.BesøkGroupByCountry.eventType,
+                    groupBy: eventTypeMappings2.BesøkGroupByCountry.groupBy,
                     filters: [
                       {
                         subprop_type: 'event',
@@ -140,8 +140,8 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                   urlParams={{
                     startDate: formattedStartDate,
                     endDate: formattedEndDate,
-                    eventType: eventTypeMappings2.pageViewedGroupByLanguage.eventType,
-                    groupBy: eventTypeMappings2.pageViewedGroupByLanguage.groupBy,
+                    eventType: eventTypeMappings2.BesøkGroupByLanguage.eventType,
+                    groupBy: eventTypeMappings2.BesøkGroupByLanguage.groupBy,
                     filters: [
                       {
                         subprop_type: 'event',
@@ -175,8 +175,8 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     startDate: formattedStartDate,
                     endDate: formattedEndDate,
                     eventType:
-                    eventTypeMappings2.pageViewedGroupByDayOfWeek.eventType,
-                    groupBy: eventTypeMappings2.pageViewedGroupByDayOfWeek.groupBy,
+                    eventTypeMappings2.BesøkGroupByDayOfWeek.eventType,
+                    groupBy: eventTypeMappings2.BesøkGroupByDayOfWeek.groupBy,
                     filters: [
                       {
                         subprop_type: 'event',
@@ -209,8 +209,8 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     startDate: formattedStartDate,
                     endDate: formattedEndDate,
                     eventType:
-                    eventTypeMappings2.pageViewedGroupByHourOfDay.eventType,
-                    groupBy: eventTypeMappings2.pageViewedGroupByHourOfDay.groupBy,
+                    eventTypeMappings2.BesøkGroupByHourOfDay.eventType,
+                    groupBy: eventTypeMappings2.BesøkGroupByHourOfDay.groupBy,
                     filters: [
                       {
                         subprop_type: 'event',
@@ -242,8 +242,8 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                   urlParams={{
                     startDate: formattedStartDate,
                     endDate: formattedEndDate,
-                    eventType: eventTypeMappings2.pageViewedGroupByReferrer.eventType,
-                    groupBy: eventTypeMappings2.pageViewedGroupByReferrer.groupBy,
+                    eventType: eventTypeMappings2.BesøkGroupByReferrer.eventType,
+                    groupBy: eventTypeMappings2.BesøkGroupByReferrer.groupBy,
                     filters: [
                       {
                         subprop_type: 'event',
@@ -267,8 +267,8 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                   urlParams={{
                     startDate: formattedStartDate,
                     endDate: formattedEndDate,
-                    eventType: eventTypeMappings2.pageViewedGroupByPagePath.eventType,
-                    groupBy: eventTypeMappings2.pageViewedGroupByPagePath.groupBy,
+                    eventType: eventTypeMappings2.BesøkGroupByPagePath.eventType,
+                    groupBy: eventTypeMappings2.BesøkGroupByPagePath.groupBy,
                     filters: [
                       {
                         subprop_type: 'event',
@@ -293,8 +293,8 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                   urlParams={{
                     startDate: formattedStartDate,
                     endDate: formattedEndDate,
-                    eventType: eventTypeMappings2.pageViewedGroupByOS.eventType,
-                    groupBy: eventTypeMappings2.pageViewedGroupByOS.groupBy,
+                    eventType: eventTypeMappings2.BesøkGroupByOS.eventType,
+                    groupBy: eventTypeMappings2.BesøkGroupByOS.groupBy,
                     filters: [
                       {
                         subprop_type: 'event',
@@ -318,8 +318,8 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     startDate: formattedStartDate,
                     endDate: formattedEndDate,
                     eventType:
-                    eventTypeMappings2.pageViewedGroupByDeviceType.eventType,
-                    groupBy: eventTypeMappings2.pageViewedGroupByDeviceType.groupBy,
+                    eventTypeMappings2.BesøkGroupByDeviceType.eventType,
+                    groupBy: eventTypeMappings2.BesøkGroupByDeviceType.groupBy,
                     filters: [
                       {
                         subprop_type: 'event',
