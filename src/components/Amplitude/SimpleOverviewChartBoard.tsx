@@ -42,7 +42,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                   urlParams={{
                     startDate: formattedStartDate,
                     endDate: formattedEndDate,
-                    eventType: eventTypeMappings2.Besøk.eventType,
+                    eventType: eventTypeMappings2.pageViewed.eventType,
                     filters: [
                       {
                         subprop_type: 'event',
@@ -57,9 +57,9 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     height: 350,
                   }}
                   titles={{
-                    chartTitle: 'Totalt antall besøk',
+                    chartTitle: 'Totalt antall pageViewed',
                     xAxisTitle: 'Dato',
-                    yAxisTitle: 'Antall besøk',
+                    yAxisTitle: 'Antall pageViewed',
                   }}
               />
             </div>
@@ -74,8 +74,8 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                   urlParams={{
                     startDate: formattedStartDate,
                     endDate: formattedEndDate,
-                    eventType: eventTypeMappings2.BesøkGroupByCity.eventType,
-                    groupBy: eventTypeMappings2.BesøkGroupByCity.groupBy,
+                    eventType: eventTypeMappings2.pageViewedGroupByCity.eventType,
+                    groupBy: eventTypeMappings2.pageViewedGroupByCity.groupBy,
                     filters: [
                       {
                         subprop_type: 'event',
@@ -90,9 +90,9 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     height: 350,
                   }}
                   titles={{
-                    chartTitle: 'Hvilke byer nettsiden besøkes fra',
+                    chartTitle: 'Hvilke byer nettsiden pageViewedes fra',
                     xAxisTitle: 'Dato',
-                    yAxisTitle: 'Antall besøk',
+                    yAxisTitle: 'Antall pageViewed',
                   }}
               />
             </div>
@@ -107,8 +107,8 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                   urlParams={{
                     startDate: formattedStartDate,
                     endDate: formattedEndDate,
-                    eventType: eventTypeMappings2.BesøkGroupByCountry.eventType,
-                    groupBy: eventTypeMappings2.BesøkGroupByCountry.groupBy,
+                    eventType: eventTypeMappings2.pageViewedGroupByCountry.eventType,
+                    groupBy: eventTypeMappings2.pageViewedGroupByCountry.groupBy,
                     filters: [
                       {
                         subprop_type: 'event',
@@ -123,9 +123,9 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     height: 350,
                   }}
                   titles={{
-                    chartTitle: 'Hvilke land nettsiden besøkes fra',
+                    chartTitle: 'Hvilke land nettsiden pageViewedes fra',
                     xAxisTitle: 'Dato',
-                    yAxisTitle: 'Antall besøk',
+                    yAxisTitle: 'Antall pageViewed',
                   }}
               />
             </div>
@@ -140,8 +140,8 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                   urlParams={{
                     startDate: formattedStartDate,
                     endDate: formattedEndDate,
-                    eventType: eventTypeMappings2.BesøkGroupByLanguage.eventType,
-                    groupBy: eventTypeMappings2.BesøkGroupByLanguage.groupBy,
+                    eventType: eventTypeMappings2.pageViewedGroupByLanguage.eventType,
+                    groupBy: eventTypeMappings2.pageViewedGroupByLanguage.groupBy,
                     filters: [
                       {
                         subprop_type: 'event',
@@ -156,9 +156,9 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     height: 350,
                   }}
                   titles={{
-                    chartTitle: 'Hvilke språk besøkende benytter',
+                    chartTitle: 'Hvilke språk pageViewedende benytter',
                     xAxisTitle: 'Dato',
-                    yAxisTitle: 'Antall besøk',
+                    yAxisTitle: 'Antall pageViewed',
                   }}
               />
             </div>
@@ -175,8 +175,8 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     startDate: formattedStartDate,
                     endDate: formattedEndDate,
                     eventType:
-                    eventTypeMappings2.BesøkGroupByDayOfWeek.eventType,
-                    groupBy: eventTypeMappings2.BesøkGroupByDayOfWeek.groupBy,
+                    eventTypeMappings2.pageViewedGroupByDayOfWeek.eventType,
+                    groupBy: eventTypeMappings2.pageViewedGroupByDayOfWeek.groupBy,
                     filters: [
                       {
                         subprop_type: 'event',
@@ -191,9 +191,9 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     height: 350,
                   }}
                   titles={{
-                    chartTitle: 'Hvilke ukedager nettsiden besøkes (i valgte datoer)',
+                    chartTitle: 'Hvilke ukedager nettsiden pageViewedes (i valgte datoer)',
                     xAxisTitle: 'Ukedager',
-                    yAxisTitle: 'Antall besøk',
+                    yAxisTitle: 'Antall pageViewed',
                   }}
               />
             </div>
@@ -209,8 +209,8 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     startDate: formattedStartDate,
                     endDate: formattedEndDate,
                     eventType:
-                    eventTypeMappings2.BesøkGroupByHourOfDay.eventType,
-                    groupBy: eventTypeMappings2.BesøkGroupByHourOfDay.groupBy,
+                    eventTypeMappings2.pageViewedGroupByHourOfDay.eventType,
+                    groupBy: eventTypeMappings2.pageViewedGroupByHourOfDay.groupBy,
                     filters: [
                       {
                         subprop_type: 'event',
@@ -225,9 +225,9 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     height: 350,
                   }}
                   titles={{
-                    chartTitle: `Hvilke klokkeslett nettsiden besøkes (i valgte datoer)`,
+                    chartTitle: `Hvilke klokkeslett nettsiden pageViewedes (i valgte datoer)`,
                     xAxisTitle: 'Klokkeslett',
-                    yAxisTitle: 'Antall besøk',
+                    yAxisTitle: 'Antall pageViewed',
                   }}
               />
             </div>
@@ -242,8 +242,8 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                   urlParams={{
                     startDate: formattedStartDate,
                     endDate: formattedEndDate,
-                    eventType: eventTypeMappings2.BesøkGroupByReferrer.eventType,
-                    groupBy: eventTypeMappings2.BesøkGroupByReferrer.groupBy,
+                    eventType: eventTypeMappings2.pageViewedGroupByReferrer.eventType,
+                    groupBy: eventTypeMappings2.pageViewedGroupByReferrer.groupBy,
                     filters: [
                       {
                         subprop_type: 'event',
@@ -253,7 +253,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                       },
                     ],
                   }}
-                  title="Hvor besøkende kommer fra"
+                  title="Hvor pageViewedende kommer fra"
               />
             </div>
         )}
@@ -267,8 +267,8 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                   urlParams={{
                     startDate: formattedStartDate,
                     endDate: formattedEndDate,
-                    eventType: eventTypeMappings2.BesøkGroupByPagePath.eventType,
-                    groupBy: eventTypeMappings2.BesøkGroupByPagePath.groupBy,
+                    eventType: eventTypeMappings2.pageViewedGroupByPagePath.eventType,
+                    groupBy: eventTypeMappings2.pageViewedGroupByPagePath.groupBy,
                     filters: [
                       {
                         subprop_type: 'event',
@@ -278,7 +278,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                       },
                     ],
                   }}
-                  title="Antall besøk på nettadresse(r)"
+                  title="Antall pageViewed på nettadresse(r)"
               />
             </div>
         )}
@@ -293,8 +293,8 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                   urlParams={{
                     startDate: formattedStartDate,
                     endDate: formattedEndDate,
-                    eventType: eventTypeMappings2.BesøkGroupByOS.eventType,
-                    groupBy: eventTypeMappings2.BesøkGroupByOS.groupBy,
+                    eventType: eventTypeMappings2.pageViewedGroupByOS.eventType,
+                    groupBy: eventTypeMappings2.pageViewedGroupByOS.groupBy,
                     filters: [
                       {
                         subprop_type: 'event',
@@ -304,7 +304,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                       },
                     ],
                   }}
-                  title="Hvilke nettlesere besøkende benytter seg av"
+                  title="Hvilke nettlesere pageViewedende benytter seg av"
               />
             </div>
         )}
@@ -318,8 +318,8 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     startDate: formattedStartDate,
                     endDate: formattedEndDate,
                     eventType:
-                    eventTypeMappings2.BesøkGroupByDeviceType.eventType,
-                    groupBy: eventTypeMappings2.BesøkGroupByDeviceType.groupBy,
+                    eventTypeMappings2.pageViewedGroupByDeviceType.eventType,
+                    groupBy: eventTypeMappings2.pageViewedGroupByDeviceType.groupBy,
                     filters: [
                       {
                         subprop_type: 'event',
@@ -329,7 +329,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                       },
                     ],
                   }}
-                  title = "Antall besøk fra operativsystem, mobil, PC og nettbrett"
+                  title = "Antall pageViewed fra operativsystem, mobil, PC og nettbrett"
               />
             </div>
         )}
