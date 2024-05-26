@@ -22,6 +22,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
     const fetchCharts = async () => {
       try {
         await new Promise((resolve) => setTimeout(resolve, 100));
+        console.log(selectedDomain)
         setLoading(false);
       } catch (error) {
         console.error('Error fetching charts:', error);
