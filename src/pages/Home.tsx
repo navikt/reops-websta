@@ -209,7 +209,7 @@ const Home = () => {
             </div>
         )}
 
-        {selectedDomain.includes("www.nav.no") ?
+        {selectedDomain === "100000009" ?
             (<>Det er NAV.no:{selectedDomain}</>) :
             (<>Ikke nav.no: {selectedDomain}</>)
         }
