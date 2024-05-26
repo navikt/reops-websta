@@ -82,61 +82,61 @@ export const eventTypeMappings2 = {
     },
 
     //areachart *
-    Besøk: {
+    besøk: {
         eventType: `besøk`,
         groupBy: [],
         filters: []
     },
     //areachart *
-    BesøkGroupByCountry: {
+    besøkGroupByCountry: {
         eventType: `besøk`,
         groupBy: [{ type: "user", value: "country" }],
         filters: []
     },
     //table *
-    BesøkGroupByPagePath: {
+    besøkGroupByPagePath: {
         eventType: `besøk`,
         groupBy: [{ type: "event", value: "[Amplitude] Page Path" }],
         filters: []
     },
     //table *
-    BesøkGroupByReferringDomain: {
+    besøkGroupByReferringDomain: {
         eventType: `besøk`,
         groupBy: [{ type: "user", value: "gp:referring_domain" }],
         filters: []
     },
     //table *
-    BesøkGroupByReferrer: {
+    besøkGroupByReferrer: {
         eventType: `besøk`,
         groupBy: [{ type: "event", value: "referrer" }],
         filters: []
     },
     //vertical
-    BesøkGroupByDayOfWeek: {
+    besøkGroupByDayOfWeek: {
         eventType: `besøk`,
         groupBy: [{ type: "day_time_prop", value: "amplitude_day_of_week", group_type: "User" }],
         filters: []
     },
     //vertical
-    BesøkGroupByHourOfDay: {
+    besøkGroupByHourOfDay: {
         eventType: `besøk`,
         groupBy: [{ type: "day_time_prop", value: "amplitude_hour_of_day", group_type: "User" }],
         filters: []
     },
     //area
-    BesøkGroupByCity: {
+    besøkGroupByCity: {
         eventType: `besøk`,
         groupBy: [{ type: "user", value: "city" }],
         filters: []
     },
     //area
-    BesøkGroupByLanguage: {
+    besøkGroupByLanguage: {
         eventType: `besøk`,
         groupBy: [{ type: "user", value: "language" }],
         filters: []
     },
     //might need to be removed
-    BesøkFilterByDomainsAndPagePath: {
+    besøkFilterByDomainsAndPagePath: {
         eventType: `besøk`,
         groupBy: [{ type: "user", value: "gp:referrer" }],
         filters: [
@@ -145,19 +145,19 @@ export const eventTypeMappings2 = {
         ]
     },
     //vertical
-    BesøkGroupByOS: {
+    besøkGroupByOS: {
         eventType: `besøk`,
         groupBy: [{ type: "user", value: "os" }],
         filters: []
     },
     //vertical
-    BesøkGroupByDeviceFamily: {
+    besøkGroupByDeviceFamily: {
         eventType: `besøk`,
         groupBy: [{ type: "user", value: "device" }],
         filters: []
     },
     //vertical
-    BesøkGroupByDeviceType: {
+    besøkGroupByDeviceType: {
         eventType: `besøk`,
         groupBy: [{ type: "user", value: "device_type" }],
         filters: []
