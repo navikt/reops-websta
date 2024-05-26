@@ -23,6 +23,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
       try {
         await new Promise((resolve) => setTimeout(resolve, 100));
         setLoading(false);
+        console.log("Side: nav.no")
       } catch (error) {
         console.error('Error fetching charts:', error);
       }

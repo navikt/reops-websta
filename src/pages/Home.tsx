@@ -5,6 +5,7 @@ import { URLSearchComponent } from '../components/SearchComponent/URLSearchCompo
 import { RangeDatePicker } from '../components/DatePicker/DatePicker.tsx';
 import SiteScores from '../components/Siteimprove/SiteScores.tsx';
 import SimpleOverviewChartBoard from '../components/Amplitude/SimpleOverviewChartBoard.tsx';
+import NavnoSimpleOverviewChartBoard from '../components/Amplitude/NavnoSimpleOverviewChartBoard.tsx';
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@navikt/ds-react";
 
@@ -209,19 +210,22 @@ const Home = () => {
             </div>
         )}
 
-        {selectedDomain === "100000009" ?
-            (<>Det er NAV.no:{selectedDomain}</>) :
-            (<>Ikke nav.no: {selectedDomain}</>)
-        }
-
-
         <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 ">
-          <SimpleOverviewChartBoard
-              selectedDomain={selectedDomain}
-              formattedStartDate={formattedStartDate}
-              formattedEndDate={formattedEndDate}
-              selectedPath={selectedPath}
-          />
+          {/*Dersom nav.no viser den en egen rapport*/}
+          {selectedDomain === "100000009" ?
+              (<NavnoSimpleOverviewChartBoard
+                  selectedDomain={selectedDomain}
+                  formattedStartDate={formattedStartDate}
+                  formattedEndDate={formattedEndDate}
+                  selectedPath={selectedPath}
+              />) :
+              (<SimpleOverviewChartBoard
+                  selectedDomain={selectedDomain}
+                  formattedStartDate={formattedStartDate}
+                  formattedEndDate={formattedEndDate}
+                  selectedPath={selectedPath}
+              />)
+          }
         </div>
         {/* {selectedDomain && (
         <h2 className="text-4xl font-semi-bold mb-1 text-left">Siteimprove</h2>
