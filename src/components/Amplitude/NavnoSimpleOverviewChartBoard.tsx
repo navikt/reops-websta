@@ -47,7 +47,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     filters: [
                       {
                         subprop_type: 'event',
-                        subprop_key: '[Amplitude] Page Path',
+                        subprop_key: 'pagePath',
                         subprop_op: 'contains',
                         subprop_value: [selectedPath],
                       },
@@ -80,7 +80,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     filters: [
                       {
                         subprop_type: 'event',
-                        subprop_key: '[Amplitude] Page Path',
+                        subprop_key: 'pagePath',
                         subprop_op: 'contains',
                         subprop_value: [selectedPath],
                       },
@@ -113,7 +113,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     filters: [
                       {
                         subprop_type: 'event',
-                        subprop_key: '[Amplitude] Page Path',
+                        subprop_key: 'pagePath',
                         subprop_op: 'contains',
                         subprop_value: [selectedPath],
                       },
@@ -146,7 +146,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     filters: [
                       {
                         subprop_type: 'event',
-                        subprop_key: '[Amplitude] Page Path',
+                        subprop_key: 'pagePath',
                         subprop_op: 'contains',
                         subprop_value: [selectedPath],
                       },
@@ -181,7 +181,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     filters: [
                       {
                         subprop_type: 'event',
-                        subprop_key: '[Amplitude] Page Path',
+                        subprop_key: 'pagePath',
                         subprop_op: 'contains',
                         subprop_value: [selectedPath],
                       },
@@ -215,7 +215,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     filters: [
                       {
                         subprop_type: 'event',
-                        subprop_key: '[Amplitude] Page Path',
+                        subprop_key: 'pagePath',
                         subprop_op: 'contains',
                         subprop_value: [selectedPath],
                       },
@@ -248,7 +248,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     filters: [
                       {
                         subprop_type: 'event',
-                        subprop_key: '[Amplitude] Page Path',
+                        subprop_key: 'pagePath',
                         subprop_op: 'contains',
                         subprop_value: [selectedPath],
                       },
@@ -273,7 +273,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     filters: [
                       {
                         subprop_type: 'event',
-                        subprop_key: '[Amplitude] Page Path',
+                        subprop_key: 'pagePath',
                         subprop_op: 'contains',
                         subprop_value: [selectedPath],
                       },
@@ -299,7 +299,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     filters: [
                       {
                         subprop_type: 'event',
-                        subprop_key: '[Amplitude] Page Path',
+                        subprop_key: 'pagePath',
                         subprop_op: 'contains',
                         subprop_value: [selectedPath],
                       },
@@ -324,7 +324,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     filters: [
                       {
                         subprop_type: 'event',
-                        subprop_key: '[Amplitude] Page Path',
+                        subprop_key: 'pagePath',
                         subprop_op: 'contains',
                         subprop_value: [selectedPath],
                       },
