@@ -57,9 +57,9 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     height: 350,
                   }}
                   titles={{
-                    chartTitle: 'Totalt antall pageViewed',
+                    chartTitle: 'Totalt antall besøk',
                     xAxisTitle: 'Dato',
-                    yAxisTitle: 'Antall pageViewed',
+                    yAxisTitle: 'Antall besøk',
                   }}
               />
             </div>
@@ -90,9 +90,9 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     height: 350,
                   }}
                   titles={{
-                    chartTitle: 'Hvilke byer nettsiden pageViewedes fra',
+                    chartTitle: 'Hvilke byer nettsiden besøkes fra',
                     xAxisTitle: 'Dato',
-                    yAxisTitle: 'Antall pageViewed',
+                    yAxisTitle: 'Antall besøk',
                   }}
               />
             </div>
@@ -123,9 +123,9 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     height: 350,
                   }}
                   titles={{
-                    chartTitle: 'Hvilke land nettsiden pageViewedes fra',
+                    chartTitle: 'Hvilke land nettsiden besøkes fra',
                     xAxisTitle: 'Dato',
-                    yAxisTitle: 'Antall pageViewed',
+                    yAxisTitle: 'Antall besøk',
                   }}
               />
             </div>
@@ -158,7 +158,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                   titles={{
                     chartTitle: 'Hvilke språk besøkende benytter',
                     xAxisTitle: 'Dato',
-                    yAxisTitle: 'Antall pageViewed',
+                    yAxisTitle: 'Antall besøk',
                   }}
               />
             </div>
@@ -191,9 +191,9 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     height: 350,
                   }}
                   titles={{
-                    chartTitle: 'Hvilke ukedager nettsiden pageViewedes (i valgte datoer)',
+                    chartTitle: 'Hvilke ukedager nettsiden besøkes (i valgte datoer)',
                     xAxisTitle: 'Ukedager',
-                    yAxisTitle: 'Antall pageViewed',
+                    yAxisTitle: 'Antall besøk',
                   }}
               />
             </div>
@@ -225,9 +225,9 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     height: 350,
                   }}
                   titles={{
-                    chartTitle: `Hvilke klokkeslett nettsiden pageViewedes (i valgte datoer)`,
+                    chartTitle: `Hvilke klokkeslett nettsiden besøkes (i valgte datoer)`,
                     xAxisTitle: 'Klokkeslett',
-                    yAxisTitle: 'Antall pageViewed',
+                    yAxisTitle: 'Antall besøk',
                   }}
               />
             </div>
@@ -278,7 +278,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                       },
                     ],
                   }}
-                  title="Antall pageViewed på nettadresse(r)"
+                  title="Antall besøk på nettadresse(r)"
               />
             </div>
         )}
@@ -329,7 +329,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                       },
                     ],
                   }}
-                  title = "Antall pageViewed fra operativsystem, mobil, PC og nettbrett"
+                  title = "Antall besøk fra operativsystem, mobil, PC og nettbrett"
               />
             </div>
         )}
