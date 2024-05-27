@@ -1,5 +1,6 @@
 import { Select } from "@navikt/ds-react";
 import { eventTypeMappings2 } from "../charts/dynamicUrlConstructor/EventTypeMappings2.ts";
+import { groupBy } from "../charts/dynamicUrlConstructor/EventTypeMappings2.ts" // Assuming this is the path to your groupBy mappings
 
 interface GroupBySelectProps {
     onSelectedGroupBy: (groupObj: GroupBy[]) => void; // Update to accept an array of GroupBy objects
@@ -24,6 +25,15 @@ const GroupBySelect: React.FC<GroupBySelectProps> = ({ onSelectedGroupBy }) => {
         onSelectedGroupBy(selectedGroupBy); // Pass the selected groupBy array to the callback function
     };
 
+    const getGroupByName = (groupByValue: GroupBy) => {
+        for (const key in groupBy) {
+            if (groupBy[key].groupByValues.some(gbv => gbv.value === groupByValue.value)) {
+                return groupBy[key].name;
+            }
+        }
+        return groupByValue.value; // Fallback to value if name is not found
+    };
+
     const groupByOptions = Object.entries(eventTypeMappings2).map(([key, value]) => {
         if (value.groupBy.length === 0) {
             return (
@@ -34,7 +44,7 @@ const GroupBySelect: React.FC<GroupBySelectProps> = ({ onSelectedGroupBy }) => {
         } else {
             return (
                 <option key={key} value={key}>
-                    {value.groupBy.map(group => group.value).join(", ")}
+                    {value.groupBy.map(getGroupByName).join(", ")}
                 </option>
             );
         }
