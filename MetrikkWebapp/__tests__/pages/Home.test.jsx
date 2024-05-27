@@ -122,14 +122,14 @@ describe('Homepage', () => {
     });
      */
 
-  it('contains the header "This is the homepage"', async () => {
+  it('contains the header "Webstatistikk"', async () => {
     const { getByText } = render(
       <HashRouter>
         <Home />
       </HashRouter>
     );
     await waitFor(() => {
-      expect(getByText('This is the homepage')).toBeInTheDocument();
+      expect(getByText('Webstatistikk 📊')).toBeInTheDocument();
     });
   });
 });

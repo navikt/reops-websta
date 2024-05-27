@@ -55,7 +55,8 @@ describe('AreaChartCustomAccessibilityExample', () => {
 
     it('passes correct data to AreaChart', async () => {
         const mockDimensions = { width: 500, height: 300 };
-        render(<AreaChartCustomAccessibilityExample dimensions={mockDimensions} chartData={mockApiResponse} />);
+        const mockTitles = {chartTitle: "Graf overskrift", xAxisTitle:"x-axis tittel", yAxisTitle: "y-axis tittel"}
+        render(<AreaChartCustomAccessibilityExample dimensions={mockDimensions} chartData={mockApiResponse}  titles={mockTitles}/>);
 
         await waitFor(() => {
             console.log(vi.mocked(AreaChart).mock.calls);
@@ -67,8 +68,8 @@ describe('AreaChartCustomAccessibilityExample', () => {
             // This assertion might need to be adjusted based on the actual data structure your component constructs
             const areaChartCall = vi.mocked(AreaChart).mock.calls[0][0];
             expect(areaChartCall.data).toBeDefined();
-            expect(areaChartCall.xAxisTitle).toBe('Dato');
-            expect(areaChartCall.yAxisTitle).toBe('Antall besøk');
+            expect(areaChartCall.xAxisTitle).toBe(mockTitles.xAxisTitle);
+            expect(areaChartCall.yAxisTitle).toBe(mockTitles.yAxisTitle);
             // Further assertions can be made based on the structure of the data prop
         });
     });

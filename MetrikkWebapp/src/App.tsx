@@ -3,32 +3,27 @@ import { ContentContainer } from '@navikt/ds-react';
 import './App.css';
 import './index.css';
 import Home from './pages/Home';
-import Guide from './pages/Guide';
+import SiteimproveSite from './pages/SiteimproveSite';
 import { Footer, Nav, ScrollToTop } from './components/theme';
-
-const routes = [
-  { path: '/', component: <Home /> },
-  { path: '/guide', component: <Guide /> },
-];
 
 function App() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <Nav />
-      <main className="flex-grow">
-        <ContentContainer>
-          <HashRouter>
+    <HashRouter>
+      <div className="flex flex-col min-h-screen">
+        <Nav />
+        <main className="flex-grow bg-custom-cyan pt-20">
+          <ContentContainer>
             <Routes>
-              {routes.map(({ path, component }) => (
-                <Route key={path} path={path} element={component} />
-              ))}
+              <Route path="/" element={<Home />} />
+              <Route path="/amplitude" element={<Home />} />
+              <Route path="/siteimprove" element={<SiteimproveSite />} />
             </Routes>
-          </HashRouter>
-        </ContentContainer>
-        <ScrollToTop />
-      </main>
-      <Footer />
-    </div>
+          </ContentContainer>
+          <ScrollToTop />
+        </main>
+        <Footer className="mt-auto" />
+      </div>
+    </HashRouter>
   );
 }
 
