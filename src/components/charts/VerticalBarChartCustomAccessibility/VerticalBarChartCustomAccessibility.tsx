@@ -60,7 +60,7 @@ export class VerticalBarChartCustomAccessibilityExample extends React.Component<
 
     return (
         <div className="mb-12">
-          <h2 className="text-center font-bold py-2">{titles.chartTitle}</h2>
+          <h2 className="text-center font-bold py-3">{titles.chartTitle}</h2>
           <div style={rootStyle}>
             <VerticalBarChart
                 data={coloredChartData}

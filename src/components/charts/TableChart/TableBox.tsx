@@ -3,7 +3,7 @@ import { Table } from '@navikt/ds-react';
 
 const TableBox = ({ data, title }) => (
   <div>
-    <h2  className="py-2" style={{ textAlign: 'center', fontWeight: 'bold' }}>{title}</h2>
+    <h2  className="py-3" style={{ textAlign: 'center', fontWeight: 'bold' }}>{title}</h2>
     <Table>
       <Table.Header>
         <Table.Row>
