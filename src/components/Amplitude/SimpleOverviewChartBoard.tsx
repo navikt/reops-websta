@@ -156,7 +156,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     height: 350,
                   }}
                   titles={{
-                    chartTitle: 'Hvilke språk pageViewedende benytter',
+                    chartTitle: 'Hvilke språk besøkende benytter',
                     xAxisTitle: 'Dato',
                     yAxisTitle: 'Antall pageViewed',
                   }}
@@ -253,7 +253,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                       },
                     ],
                   }}
-                  title="Hvor pageViewedende kommer fra"
+                  title="Hvor besøkende kommer fra"
               />
             </div>
         )}
@@ -304,7 +304,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                       },
                     ],
                   }}
-                  title="Hvilke nettlesere pageViewedende benytter seg av"
+                  title="Hvilke nettlesere besøkende benytter seg av"
               />
             </div>
         )}
