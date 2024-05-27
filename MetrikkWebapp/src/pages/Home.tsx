@@ -1,12 +1,16 @@
 import '@navikt/ds-css';
 import { format } from 'date-fns';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import { URLSearchComponent } from '../components/SearchComponent/URLSearchComponent.tsx';
 import { RangeDatePicker } from '../components/DatePicker/DatePicker.tsx';
 import SiteScores from '../components/Siteimprove/SiteScores.tsx';
 import SimpleOverviewChartBoard from '../components/Amplitude/SimpleOverviewChartBoard.tsx';
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@navikt/ds-react";
+import AreaChartContainer from "../components/charts/AreaChartCustomAccessibility/AreaChartContainer.tsx";
+import {eventTypeMappings2} from "../components/charts/dynamicUrlConstructor/EventTypeMappings2.ts";
+import AreaChartCustomAccessibility
+  from "../components/charts/AreaChartCustomAccessibility/AreaChartCustomAccessibility.tsx";
 
 const Home = () => {
   const [selectedDomain, setSelectedDomain] = useState('');
@@ -145,6 +149,15 @@ const Home = () => {
 
   //=================================================================================================================
 
+  const urlFilters = useMemo(() => [
+    {
+      subprop_type: 'event',
+      subprop_key: '[Amplitude] Page Path',
+      subprop_op: 'contains',
+      subprop_value: [selectedPath],
+    },
+  ], [selectedPath]);
+
   return (
       <div className="flex flex-col items-center justify-center min-h-screen p-6">
         <h1 className="text-4xl font-bold mb-6 text-center">Webstatistikk 📊</h1>
@@ -197,6 +210,7 @@ const Home = () => {
         <h2 className="text-4xl font-semi-bold mb-1 text-left">Amplitude</h2>
       )} */}
 
+
         {selectedDomain && (
             <div
                 ref={siteScoresRef}
@@ -214,7 +228,7 @@ const Home = () => {
               selectedDomain={selectedDomain}
               formattedStartDate={formattedStartDate}
               formattedEndDate={formattedEndDate}
-              selectedPath={selectedPath}
+              urlFilters ={urlFilters}
           />
         </div>
         {/* {selectedDomain && (
