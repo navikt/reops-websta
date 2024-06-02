@@ -1,4 +1,4 @@
-import { HashRouter, Route, Routes } from 'react-router-dom';
+import {BrowserRouter, HashRouter, Route, Routes} from 'react-router-dom';
 import { ContentContainer } from '@navikt/ds-react';
 import './App.css';
 import './index.css';
@@ -8,7 +8,7 @@ import { Footer, Nav, ScrollToTop } from './components/theme';
 
 function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <div className="flex flex-col min-h-screen">
         <Nav />
         <main className="flex-grow bg-custom-cyan pt-20">
@@ -23,7 +23,7 @@ function App() {
         </main>
         <Footer className="mt-auto" />
       </div>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
