@@ -134,9 +134,9 @@ const Home = () => {
     navigator.clipboard.writeText(url)
         .then(() => {
           console.log('URL copied to clipboard');
-          setButtonText('URL er kopiert! Del den med andre på teamet');
+          setButtonText('Delingslenken er kopiert!');
           setTimeout(() => {
-            setButtonText('Kopier URL');
+            setButtonText('Kopier delingslenke');
           }, 10000);
         })
         .catch((err) => {
