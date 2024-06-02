@@ -31,7 +31,7 @@ const TableChartContainer = ({ teamDomain, chartType, endpointType, urlParams, t
   }, [chartType, teamDomain, urlParams]);
 
   if (isLoading) {
-    return <div>Loading...</div>; // Render loading state
+    return <div>Henter tabell...</div>; // Render loading state
   }
 
   if (error) {

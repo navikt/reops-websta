@@ -70,7 +70,7 @@ const VerticalBarChartContainer: React.FC<VerticalChartContainerProps> = ({
           titles={titles}
       />
   ) : (
-      <div>Loading...</div>
+      <div>Henter graf...</div>
   );
 };
 

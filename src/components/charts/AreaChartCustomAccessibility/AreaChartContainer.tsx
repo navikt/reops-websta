@@ -52,7 +52,7 @@ const AreaChartContainer: React.FC<AreaChartContainerProps> = ({ teamDomain, cha
         //Charttype trengs kanskje ikke, kan hende [] deps holder
     }, [chartType, teamDomain, urlParams.startDate, urlParams.endDate, urlParams.filters]); // Re-fetch and process data if chartType changes
 
-    return chartData ? <AreaChartCustomAccessibility chartData={chartData} dimensions={dimensions} titles={titles} /> : <div>Loading...</div>;
+    return chartData ? <AreaChartCustomAccessibility chartData={chartData} dimensions={dimensions} titles={titles} /> : <div>Henter graf...</div>;
 };
 
 export default AreaChartContainer;
