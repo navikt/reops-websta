@@ -80,7 +80,7 @@ export const URLSearchComponent = ({
       }}
     >
       <Search
-        label="Skriv inn URL her: "
+        label="Skriv eller lim inn URL-adresse"
         value={searchInput}
         onChange={handleSearchChange}
         onSearchClick={handleSearchSubmit}
