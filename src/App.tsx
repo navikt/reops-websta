@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import SiteimproveSite from './pages/SiteimproveSite';
 import UU from './pages/uu';
 import Personvern from './pages/Personvern';
+import Dashboard from './pages/Dashboard'
 import { Footer, Nav, ScrollToTop } from './components/theme';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
               <Route path="/uu" element={<UU />} />
               <Route path="/personvern" element={<Personvern />} />
               <Route path="/siteimprove" element={<SiteimproveSite />} />
+              <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
           </ContentContainer>
           <ScrollToTop />
