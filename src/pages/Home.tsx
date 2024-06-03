@@ -153,7 +153,7 @@ const Home = () => {
     params.delete('startDate');
     params.delete('endDate');
 
-    const newUrl = `${url.pathname}?${params.toString()}`;
+    const newUrl = `${window.location.origin}${url.pathname}?${params.toString()}`;
 
     navigator.clipboard.writeText(newUrl)
         .then(() => {
