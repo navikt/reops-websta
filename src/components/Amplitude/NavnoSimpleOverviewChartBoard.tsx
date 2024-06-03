@@ -305,7 +305,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                                 },
                             ],
                         }}
-                        title="Hvilke nettlesere besøkende benytter seg av"
+                        title="Nettlesere besøkende benytter seg av"
                     />
                 </div>
             )}
@@ -330,7 +330,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                                 },
                             ],
                         }}
-                        title = "Antall besøk fra operativsystem, mobil, PC og nettbrett"
+                        title = "Operativsystem besøkende benytter seg av"
                     />
                 </div>
             )}
