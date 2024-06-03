@@ -144,6 +144,31 @@ const Home = () => {
         });
   };
 
+  const copyUrlToClipboard30days = () => {
+    const url = new URL(window.location.href);
+    const params = url.searchParams;
+
+    const startDate = format(new Date(new Date().setDate(new Date(Date.now()).getDate() - 30)), 'yyyyMMdd');
+    const endDate = format(new Date(Date.now()), 'yyyyMMdd');
+
+    params.set('startDate', startDate);
+    params.set('endDate', endDate);
+
+    const newUrl = `${url.pathname}?${params.toString()}`;
+
+    navigator.clipboard.writeText(newUrl)
+        .then(() => {
+          console.log('URL copied to clipboard');
+          setButtonText('Delingslenken er kopiert!');
+          setTimeout(() => {
+            setButtonText('Kopier delingslenke');
+          }, 10000);
+        })
+        .catch((err) => {
+          console.error('Klarte ikke å kopiere delingslenken: ', err);
+        });
+  };
+
   //=================================================================================================================
 
   return (
@@ -240,9 +265,12 @@ const Home = () => {
       )} */}
 
         {selectedDomain && (
-            <div className="flex justify-center items-center mt-16">
+            <div className="flex justify-center items-center mt-16 space-x-4">
               <Button variant="primary" onClick={copyUrlToClipboard}>
-                {buttonText}
+                {buttonText} (valgte datoer)
+              </Button>
+              <Button variant="primary" onClick={copyUrlToClipboard30days}>
+                {buttonText} (siste 30 dager)
               </Button>
             </div>
         )}
