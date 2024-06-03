@@ -119,7 +119,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                                 },
                             ],
                         }}
-                        title="Hvor besøkende kommer fra"
+                        title="Sider besøkende kommer fra"
                     />
                 </div>
             )}
