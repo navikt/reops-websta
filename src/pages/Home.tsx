@@ -127,8 +127,8 @@ const Home = () => {
 
   updateUrl();
 
-  const [buttonText, setButtonText] = useState('Kopier lenke (valgte datoer)');
-  const [buttonText30, setButtonText30] = useState('Kopier lenke (siste 30 dager)');
+  const [buttonText, setButtonText] = useState('Delingslenke (valgte datoer)');
+  const [buttonText30, setButtonText30] = useState('Delingslenke (siste 30 dager)');
 
   const copyUrlToClipboard = () => {
     const url = window.location.href;
@@ -137,7 +137,7 @@ const Home = () => {
           console.log('URL copied to clipboard');
           setButtonText('Delingslenken er kopiert!');
           setTimeout(() => {
-            setButtonText('Kopier delingslenke');
+            setButtonText('Delingslenke (valgte datoer)');
           }, 10000);
         })
         .catch((err) => {
@@ -160,7 +160,7 @@ const Home = () => {
           console.log('URL copied to clipboard');
           setButtonText30('Delingslenken er kopiert!');
           setTimeout(() => {
-            setButtonText30('Kopier delingslenke');
+            setButtonText30('Delingslenke (siste 30 dager)');
           }, 10000);
         })
         .catch((err) => {
@@ -265,8 +265,8 @@ const Home = () => {
 
         {selectedDomain && (
             <>
-            <h2 className="text-xl font-bold mt-12  text-center">Delingslenker</h2>
-            <div className="flex justify-center items-center mt-16 space-x-4">
+            <h2 className="text-2xl font-bold mt-16  text-center">Delingslenker</h2>
+            <div className="flex justify-center items-center mt-12 space-x-4">
               <Button variant="primary" onClick={copyUrlToClipboard}>
                 {buttonText}
               </Button>
