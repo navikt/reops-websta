@@ -127,8 +127,8 @@ const Home = () => {
 
   updateUrl();
 
-  const [buttonText, setButtonText] = useState('Delingslenke (valgte datoer)');
-  const [buttonText30, setButtonText30] = useState('Delingslenke (siste 30 dager)');
+  const [buttonText, setButtonText] = useState('Lenke for valgte datoer');
+  const [buttonText30, setButtonText30] = useState('Lenke for siste 30 dager');
 
   const copyUrlToClipboard = () => {
     const url = window.location.href;
@@ -266,7 +266,7 @@ const Home = () => {
         {selectedDomain && (
             <>
             <h2 className="text-2xl font-bold mt-16  text-center">Delingslenker</h2>
-            <div className="flex justify-center items-center mt-12 space-x-4">
+            <div className="flex justify-center items-center mt-12 mb-4 space-x-4">
               <Button variant="primary" onClick={copyUrlToClipboard}>
                 {buttonText}
               </Button>
