@@ -1,168 +1,83 @@
-export const events = {
-    pageViewed: {
-        name: "Antall besøk",
-        value: "[Amplitude] Page Viewed"
-    },
-    pageViewedNav:{
-        name:"Antall besøk NAV",
-        value:"besøk"
-    }
-};
-
-export const groupBy = {
-    country: {
-        name: "Land",
-        groupByValues: [{
-            type: "user",
-            value: "country"
-        }]
-    },
-    pagePath: {
-        name: "Sidesti",
-        groupByValues: [{
-            type: "event",
-            value: "[Amplitude] Page Path"
-        }]
-    },
-    referringDomain: {
-        name: "Henvisende domene egendefinert",
-        groupByValues: [{
-            type: "user",
-            value: "gp:referring_domain"
-        }]
-    },
-    referrer: {
-        name: "Henvisende domene",
-        groupByValues: [{
-            type: "event",
-            value: "referrer"
-        }]
-    },
-    dayOfWeek: {
-        name: "Dag i uken",
-        groupByValues: [{
-            type: "day_time_prop",
-            value: "amplitude_day_of_week",
-            group_type: "User"
-        }]
-    },
-    hourOfDay: {
-        name: "Time på dagen",
-        groupByValues: [{
-            type: "day_time_prop",
-            value: "amplitude_hour_of_day",
-            group_type: "User"
-        }]
-    },
-    city: {
-        name: "By",
-        groupByValues: [{
-            type: "user",
-            value: "city"
-        }]
-    },
-    language: {
-        name: "Språk",
-        groupByValues: [{
-            type: "user",
-            value: "language"
-        }]
-    },
-    os: {
-        name: "Operativsystem",
-        groupByValues: [{
-            type: "user",
-            value: "os"
-        }]
-    },
-    device: {
-        name: "Enhet",
-        groupByValues: [{
-            type: "user",
-            value: "device"
-        }]
-    },
-    deviceType: {
-        name: "Enhetstype",
-        groupByValues: [{
-            type: "user",
-            value: "device_type"
-        }]
-    }
-    // Add more groupBy mappings as needed
-};
-
 export const eventTypeMappings2 = {
     //areachart *
     pageViewed: {
-        eventType: events.pageViewed.value,
+        eventType: `[Amplitude] Page Viewed`,
         groupBy: [],
         filters: []
     },
     //areachart *
     pageViewedGroupByCountry: {
-        eventType: events.pageViewed.value,
-        groupBy: groupBy.country.groupByValues,
+        eventType: `[Amplitude] Page Viewed`,
+        groupBy: [{ type: "user", value: "country" }],
         filters: []
     },
     //table *
     pageViewedGroupByPagePath: {
-        eventType: events.pageViewed.value,
-        groupBy: groupBy.pagePath.groupByValues,
+        eventType: `[Amplitude] Page Viewed`,
+        groupBy: [{ type: "event", value: "[Amplitude] Page Path" }],
         filters: []
     },
     //table *
     pageViewedGroupByReferringDomain: {
-        eventType: events.pageViewed.value,
-        groupBy: groupBy.referringDomain.groupByValues,
+        eventType: `[Amplitude] Page Viewed`,
+        groupBy: [{ type: "user", value: "gp:referring_domain" }],
         filters: []
     },
     //table *
     pageViewedGroupByReferrer: {
-        eventType: events.pageViewed.value,
-        groupBy: groupBy.referrer.groupByValues,
+        eventType: `[Amplitude] Page Viewed`,
+        groupBy: [{ type: "event", value: "referrer" }],
         filters: []
     },
     //vertical
     pageViewedGroupByDayOfWeek: {
-        eventType: events.pageViewed.value,
-        groupBy: groupBy.dayOfWeek.groupByValues,
+        eventType: `[Amplitude] Page Viewed`,
+        groupBy: [{ type: "day_time_prop", value: "amplitude_day_of_week", group_type: "User" }],
         filters: []
     },
     //vertical
     pageViewedGroupByHourOfDay: {
-        eventType: events.pageViewed.value,
-        groupBy: groupBy.hourOfDay.groupByValues,
+        eventType: `[Amplitude] Page Viewed`,
+        groupBy: [{ type: "day_time_prop", value: "amplitude_hour_of_day", group_type: "User" }],
         filters: []
     },
     //area
     pageViewedGroupByCity: {
-        eventType: events.pageViewed.value,
-        groupBy: groupBy.city.groupByValues,
+        eventType: `[Amplitude] Page Viewed`,
+        groupBy: [{ type: "user", value: "city" }],
         filters: []
     },
     //area
     pageViewedGroupByLanguage: {
-        eventType: events.pageViewed.value,
-        groupBy: groupBy.language.groupByValues,
+        eventType: `[Amplitude] Page Viewed`,
+        groupBy: [{ type: "user", value: "language" }],
         filters: []
+    },
+    //might need to be removed
+    pageViewedFilterByDomainsAndPagePath: {
+        eventType: `[Amplitude] Page Viewed`,
+        groupBy: [{ type: "user", value: "gp:referrer" }],
+        filters: [
+            { subprop_type: "gp:referrer", subprop_op: "contains", subprop_value: ["github.com%2Fnavikt", "navikt.github.io"] },
+            { subprop_type: "[Amplitude] Page Path", subprop_op: "is", subprop_value: ["/jobbsoknad/"] }
+        ]
     },
     //vertical
     pageViewedGroupByOS: {
-        eventType: events.pageViewed.value,
-        groupBy: groupBy.os.groupByValues,
+        eventType: `[Amplitude] Page Viewed`,
+        groupBy: [{ type: "user", value: "os" }],
         filters: []
     },
     //vertical
     pageViewedGroupByDeviceFamily: {
-        eventType: events.pageViewed.value,
-        groupBy: groupBy.device.groupByValues,
+        eventType: `[Amplitude] Page Viewed`,
+        groupBy: [{ type: "user", value: "device" }],
         filters: []
     },
     //vertical
     pageViewedGroupByDeviceType: {
-        eventType: events.pageViewed.value,
-        groupBy: groupBy.deviceType.groupByValues,
+        eventType: `[Amplitude] Page Viewed`,
+        groupBy: [{ type: "user", value: "device_type" }],
         filters: []
     },
 
@@ -175,67 +90,76 @@ export const eventTypeMappings2 = {
     //areachart *
     besøkGroupByCountry: {
         eventType: `besøk`,
-        groupBy: groupBy.country.groupByValues,
+        groupBy: [{ type: "user", value: "country" }],
         filters: []
     },
     //table *
     besøkGroupByPagePath: {
         eventType: `besøk`,
-        groupBy: groupBy.pagePath.groupByValues,
+        groupBy: [{ type: "event", value: "pagePath" }],
         filters: []
     },
     //table *
     besøkGroupByReferringDomain: {
         eventType: `besøk`,
-        groupBy: groupBy.referringDomain.groupByValues,
+        groupBy: [{ type: "user", value: "gp:referring_domain" }],
         filters: []
     },
     //table *
     besøkGroupByReferrer: {
         eventType: `besøk`,
-        groupBy: groupBy.referrer.groupByValues,
+        groupBy: [{ type: "user", value: "gp:referrer" }],
         filters: []
     },
     //vertical
     besøkGroupByDayOfWeek: {
         eventType: `besøk`,
-        groupBy: groupBy.dayOfWeek.groupByValues,
+        groupBy: [{ type: "day_time_prop", value: "amplitude_day_of_week", group_type: "User" }],
         filters: []
     },
     //vertical
     besøkGroupByHourOfDay: {
         eventType: `besøk`,
-        groupBy: groupBy.hourOfDay.groupByValues,
+        groupBy: [{ type: "day_time_prop", value: "amplitude_hour_of_day", group_type: "User" }],
         filters: []
     },
     //area
     besøkGroupByCity: {
         eventType: `besøk`,
-        groupBy: groupBy.city.groupByValues,
+        groupBy: [{ type: "user", value: "city" }],
         filters: []
     },
     //area
     besøkGroupByLanguage: {
         eventType: `besøk`,
-        groupBy: groupBy.language.groupByValues,
+        groupBy: [{ type: "user", value: "language" }],
         filters: []
+    },
+    //might need to be removed
+    besøkFilterByDomainsAndPagePath: {
+        eventType: `besøk`,
+        groupBy: [{ type: "user", value: "gp:referrer" }],
+        filters: [
+            { subprop_type: "gp:referrer", subprop_op: "contains", subprop_value: ["github.com%2Fnavikt", "navikt.github.io"] },
+            { subprop_type: "pagePath", subprop_op: "is", subprop_value: ["/jobbsoknad/"] }
+        ]
     },
     //vertical
     besøkGroupByOS: {
         eventType: `besøk`,
-        groupBy: groupBy.os.groupByValues,
+        groupBy: [{ type: "user", value: "os" }],
         filters: []
     },
     //vertical
     besøkGroupByDeviceFamily: {
         eventType: `besøk`,
-        groupBy: groupBy.device.groupByValues,
+        groupBy: [{ type: "user", value: "device" }],
         filters: []
     },
     //vertical
     besøkGroupByDeviceType: {
         eventType: `besøk`,
-        groupBy: groupBy.deviceType.groupByValues,
+        groupBy: [{ type: "user", value: "device_type" }],
         filters: []
     },
 
