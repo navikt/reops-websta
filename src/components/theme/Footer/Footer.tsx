@@ -39,7 +39,7 @@ function Snarveier() {
         Universell utforming
       </Heading>
       <BodyShort as="ul" className="mt-3 grid gap-3">
-        <FooterLink href="/jobbsoknad/#/tilgjengelighet">
+        <FooterLink href="/uu">
           Tilgjengelighetserklæring
         </FooterLink>
       </BodyShort>
@@ -55,7 +55,7 @@ function SideLenker() {
         Personvern
       </Heading>
       <BodyShort as="ul" className="mt-3 grid gap-3">
-        <FooterLink href="/jobbsoknad/#/personvern">
+        <FooterLink href="/personvern">
           Personvernererklæring
         </FooterLink>
       </BodyShort>
