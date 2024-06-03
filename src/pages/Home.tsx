@@ -137,7 +137,7 @@ const Home = () => {
           console.log('URL copied to clipboard');
           setButtonText('Delingslenken er kopiert!');
           setTimeout(() => {
-            setButtonText('Delingslenke (valgte datoer)');
+            setButtonText('Lenke for valgte datoer');
           }, 10000);
         })
         .catch((err) => {
@@ -160,7 +160,7 @@ const Home = () => {
           console.log('URL copied to clipboard');
           setButtonText30('Delingslenken er kopiert!');
           setTimeout(() => {
-            setButtonText30('Delingslenke (siste 30 dager)');
+            setButtonText30('Lenke for siste 30 dager');
           }, 10000);
         })
         .catch((err) => {
