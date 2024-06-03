@@ -127,7 +127,9 @@ const Home = () => {
 
   updateUrl();
 
-  const [buttonText, setButtonText] = useState('Kopier delingslenke');
+  const [buttonText, setButtonText] = useState('Kopier delingslenke for valgte datoer)');
+  const [buttonText30, setButtonText30] = useState('Kopier delingslenke for siste 30 dager');
+
 
   const copyUrlToClipboard = () => {
     const url = window.location.href;
@@ -148,11 +150,9 @@ const Home = () => {
     const url = new URL(window.location.href);
     const params = url.searchParams;
 
-    const startDate = format(new Date(new Date().setDate(new Date(Date.now()).getDate() - 30)), 'yyyyMMdd');
-    const endDate = format(new Date(Date.now()), 'yyyyMMdd');
-
-    params.set('startDate', startDate);
-    params.set('endDate', endDate);
+    // Remove startDate and endDate parameters
+    params.delete('startDate');
+    params.delete('endDate');
 
     const newUrl = `${url.pathname}?${params.toString()}`;
 
@@ -161,7 +161,7 @@ const Home = () => {
           console.log('URL copied to clipboard');
           setButtonText('Delingslenken er kopiert!');
           setTimeout(() => {
-            setButtonText('Kopier delingslenke');
+            setButtonText30('Kopier delingslenke');
           }, 10000);
         })
         .catch((err) => {
@@ -267,10 +267,10 @@ const Home = () => {
         {selectedDomain && (
             <div className="flex justify-center items-center mt-16 space-x-4">
               <Button variant="primary" onClick={copyUrlToClipboard}>
-                {buttonText} (valgte datoer)
+                {buttonText}
               </Button>
               <Button variant="primary" onClick={copyUrlToClipboard30days}>
-                {buttonText} (siste 30 dager)
+                {buttonText30}
               </Button>
             </div>
         )}
