@@ -81,7 +81,7 @@ export const URLSearchComponent = ({
     >
       <Search
         label="URL-adresse"
-        description="Lim inn lenken til siden du vil se statistikk for.
+        description="Lim inn lenken til siden du vil se statistikk for."
         value={searchInput}
         onChange={handleSearchChange}
         onSearchClick={handleSearchSubmit}
