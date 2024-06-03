@@ -127,9 +127,8 @@ const Home = () => {
 
   updateUrl();
 
-  const [buttonText, setButtonText] = useState('Kopier delingslenke for valgte datoer)');
-  const [buttonText30, setButtonText30] = useState('Kopier delingslenke for siste 30 dager');
-
+  const [buttonText, setButtonText] = useState('Kopier lenke (valgte datoer)');
+  const [buttonText30, setButtonText30] = useState('Kopier lenke (siste 30 dager)');
 
   const copyUrlToClipboard = () => {
     const url = window.location.href;
@@ -159,7 +158,7 @@ const Home = () => {
     navigator.clipboard.writeText(newUrl)
         .then(() => {
           console.log('URL copied to clipboard');
-          setButtonText('Delingslenken er kopiert!');
+          setButtonText30('Delingslenken er kopiert!');
           setTimeout(() => {
             setButtonText30('Kopier delingslenke');
           }, 10000);
@@ -265,6 +264,7 @@ const Home = () => {
       )} */}
 
         {selectedDomain && (
+            <h2 className="text-lg font-bold mb-4 text-center">Delingslenker</h2>
             <div className="flex justify-center items-center mt-16 space-x-4">
               <Button variant="primary" onClick={copyUrlToClipboard}>
                 {buttonText}
