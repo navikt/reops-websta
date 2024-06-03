@@ -8,13 +8,13 @@ interface ChartsBoardProps {
     selectedDomain: string;
     formattedStartDate: string;
     formattedEndDate: string;
-    urlFilters:any[];
+    selectedPath: string;
 }
 const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                                                                   selectedDomain,
                                                                   formattedStartDate,
                                                                   formattedEndDate,
-                                                                  urlFilters,
+                                                                  selectedPath,
                                                               }) => {
     const [loading, setLoading] = useState(true);
 
@@ -44,7 +44,14 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             startDate: formattedStartDate,
                             endDate: formattedEndDate,
                             eventType: eventTypeMappings2.besøk.eventType,
-                            filters: urlFilters,
+                            filters: [
+                                {
+                                    subprop_type: 'event',
+                                    subprop_key: 'pagePath',
+                                    subprop_op: 'contains',
+                                    subprop_value: [selectedPath],
+                                },
+                            ],
                         }}
                         dimensions={{
                             width: 500,
@@ -70,7 +77,14 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             endDate: formattedEndDate,
                             eventType: eventTypeMappings2.besøkGroupByLanguage.eventType,
                             groupBy: eventTypeMappings2.besøkGroupByLanguage.groupBy,
-                            filters: urlFilters,
+                            filters: [
+                                {
+                                    subprop_type: 'event',
+                                    subprop_key: 'pagePath',
+                                    subprop_op: 'contains',
+                                    subprop_value: [selectedPath],
+                                },
+                            ],
                         }}
                         dimensions={{
                             width: 500,
@@ -96,7 +110,14 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             endDate: formattedEndDate,
                             eventType: eventTypeMappings2.besøkGroupByCity.eventType,
                             groupBy: eventTypeMappings2.besøkGroupByCity.groupBy,
-                            filters: urlFilters,
+                            filters: [
+                                {
+                                    subprop_type: 'event',
+                                    subprop_key: 'pagePath',
+                                    subprop_op: 'contains',
+                                    subprop_value: [selectedPath],
+                                },
+                            ],
                         }}
                         dimensions={{
                             width: 500,
@@ -122,7 +143,14 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             endDate: formattedEndDate,
                             eventType: eventTypeMappings2.besøkGroupByCountry.eventType,
                             groupBy: eventTypeMappings2.besøkGroupByCountry.groupBy,
-                            filters: urlFilters,
+                            filters: [
+                                {
+                                    subprop_type: 'event',
+                                    subprop_key: 'pagePath',
+                                    subprop_op: 'contains',
+                                    subprop_value: [selectedPath],
+                                },
+                            ],
                         }}
                         dimensions={{
                             width: 500,
@@ -148,7 +176,14 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             endDate: formattedEndDate,
                             eventType: eventTypeMappings2.besøkGroupByReferrer.eventType,
                             groupBy: eventTypeMappings2.besøkGroupByReferrer.groupBy,
-                            filters:urlFilters,
+                            filters: [
+                                {
+                                    subprop_type: 'event',
+                                    subprop_key: 'pagePath',
+                                    subprop_op: 'contains',
+                                    subprop_value: [selectedPath],
+                                },
+                            ],
                         }}
                         title="Sider besøkende kommer fra"
                     />
@@ -166,7 +201,14 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             endDate: formattedEndDate,
                             eventType: eventTypeMappings2.besøkGroupByPagePath.eventType,
                             groupBy: eventTypeMappings2.besøkGroupByPagePath.groupBy,
-                            filters: urlFilters,
+                            filters: [
+                                {
+                                    subprop_type: 'event',
+                                    subprop_key: 'pagePath',
+                                    subprop_op: 'contains',
+                                    subprop_value: [selectedPath],
+                                },
+                            ],
                         }}
                         title="Antall besøk på nettadresse(r)"
                     />
@@ -185,7 +227,14 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             eventType:
                             eventTypeMappings2.besøkGroupByDayOfWeek.eventType,
                             groupBy: eventTypeMappings2.besøkGroupByDayOfWeek.groupBy,
-                            filters:urlFilters,
+                            filters: [
+                                {
+                                    subprop_type: 'event',
+                                    subprop_key: 'pagePath',
+                                    subprop_op: 'contains',
+                                    subprop_value: [selectedPath],
+                                },
+                            ],
                         }}
                         dimensions={{
                             width: 500,
@@ -212,7 +261,14 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             eventType:
                             eventTypeMappings2.besøkGroupByHourOfDay.eventType,
                             groupBy: eventTypeMappings2.besøkGroupByHourOfDay.groupBy,
-                            filters: urlFilters,
+                            filters: [
+                                {
+                                    subprop_type: 'event',
+                                    subprop_key: 'pagePath',
+                                    subprop_op: 'contains',
+                                    subprop_value: [selectedPath],
+                                },
+                            ],
                         }}
                         dimensions={{
                             width: 500,
@@ -238,7 +294,14 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             endDate: formattedEndDate,
                             eventType: eventTypeMappings2.besøkGroupByOS.eventType,
                             groupBy: eventTypeMappings2.besøkGroupByOS.groupBy,
-                            filters: urlFilters,
+                            filters: [
+                                {
+                                    subprop_type: 'event',
+                                    subprop_key: 'pagePath',
+                                    subprop_op: 'contains',
+                                    subprop_value: [selectedPath],
+                                },
+                            ],
                         }}
                         title="Nettlesere besøkende benytter seg av"
                     />
@@ -256,7 +319,14 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             eventType:
                             eventTypeMappings2.besøkGroupByDeviceType.eventType,
                             groupBy: eventTypeMappings2.besøkGroupByDeviceType.groupBy,
-                            filters: urlFilters,
+                            filters: [
+                                {
+                                    subprop_type: 'event',
+                                    subprop_key: 'pagePath',
+                                    subprop_op: 'contains',
+                                    subprop_value: [selectedPath],
+                                },
+                            ],
                         }}
                         title = "Operativsystem besøkende benytter seg av"
                     />

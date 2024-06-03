@@ -266,7 +266,7 @@ const Home = () => {
                   selectedDomain={selectedDomain}
                   formattedStartDate={formattedStartDate}
                   formattedEndDate={formattedEndDate}
-                  urlFilters={urlFilters}
+                  selectedPath={selectedPath}
               />) :
               (<SimpleOverviewChartBoard
                   selectedDomain={selectedDomain}
