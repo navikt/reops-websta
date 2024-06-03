@@ -191,8 +191,7 @@ const Home = () => {
             </div>
             {!selectedDomain && (
                 <Alert variant="info" className="mt-6">
-                  For å sikre at du ser korrekt statistikk, anbefaler vi at du kopierer og limer inn lenken. Eksempel:
-                  https://www.nav.no (forsiden).
+                  For å sikre at du ser korrekt statistikk, anbefaler vi at du kopierer og limer inn lenken heller enn å skrive den inn selv. Eksempel: https://www.nav.no (forsiden).
                 </Alert>
             )}
           </div>
