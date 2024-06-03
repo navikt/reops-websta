@@ -264,6 +264,7 @@ const Home = () => {
       )} */}
 
         {selectedDomain && (
+            <>
             <h2 className="text-lg font-bold mb-4 text-center">Delingslenker</h2>
             <div className="flex justify-center items-center mt-16 space-x-4">
               <Button variant="primary" onClick={copyUrlToClipboard}>
@@ -273,6 +274,7 @@ const Home = () => {
                 {buttonText30}
               </Button>
             </div>
+            </>
         )}
       </div>
   );
