@@ -1,6 +1,6 @@
 import '@navikt/ds-css';
 import { format } from 'date-fns';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import { URLSearchComponent } from '../components/SearchComponent/URLSearchComponent.tsx';
 import { RangeDatePicker } from '../components/DatePicker/DatePicker.tsx';
 import SiteScores from '../components/Siteimprove/SiteScores.tsx';
@@ -89,6 +89,7 @@ const Home = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const currentUrlRef = useRef(window.location.href);
+  const isInitialLoadRef = useRef(true);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -125,7 +126,7 @@ const Home = () => {
     }
   };
 
-  updateUrl();
+
 
   const [buttonText, setButtonText] = useState('Lenke for valgte datoer');
   const [buttonText30, setButtonText30] = useState('Lenke for siste 30 dager');
@@ -168,7 +169,25 @@ const Home = () => {
         });
   };
 
+  useEffect(() => {
+    if (!isInitialLoadRef.current) {
+      updateUrl();
+    } else {
+      isInitialLoadRef.current = false;
+    }
+  }, [updateUrl]);
+
   //=================================================================================================================
+
+  const urlFilters = useMemo(() => [
+    {
+      subprop_type: 'event',
+      subprop_key: '[Amplitude] Page Path',
+      subprop_op: 'contains',
+      subprop_value: [selectedPath],
+    },
+  ], [selectedPath]);
+
 
   return (
       <div className="flex flex-col items-center justify-center min-h-screen p-6">
@@ -247,13 +266,13 @@ const Home = () => {
                   selectedDomain={selectedDomain}
                   formattedStartDate={formattedStartDate}
                   formattedEndDate={formattedEndDate}
-                  selectedPath={selectedPath}
+                  urlFilters={urlFilters}
               />) :
               (<SimpleOverviewChartBoard
                   selectedDomain={selectedDomain}
                   formattedStartDate={formattedStartDate}
                   formattedEndDate={formattedEndDate}
-                  selectedPath={selectedPath}
+                  urlFilters={urlFilters}
               />)
           }
         </div>
