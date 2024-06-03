@@ -127,7 +127,7 @@ const Home = () => {
 
   updateUrl();
 
-  const [buttonText, setButtonText] = useState('Kopier URL');
+  const [buttonText, setButtonText] = useState('Kopier delingslenke');
 
   const copyUrlToClipboard = () => {
     const url = window.location.href;
@@ -140,7 +140,7 @@ const Home = () => {
           }, 10000);
         })
         .catch((err) => {
-          console.error('Failed to copy URL: ', err);
+          console.error('Klarte ikke å kopiere delingslenken: ', err);
         });
   };
 
