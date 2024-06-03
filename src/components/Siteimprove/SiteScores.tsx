@@ -169,19 +169,22 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain }) => {
         <hr className="my-4 border-t-2 border-gray-300" />
         {reportLink && (
             <div className="mt-4 bg-white p-4 rounded-lg justify-center items-center">
-              <p className="font-bold text-xl text-center">
-                Lenke til rapport:
-              </p>
-              <a href={reportLink} target="_blank" rel="noopener noreferrer">
-                <p className="text-xl text-center font-bold underline mb-2 text-blue-700">
-                  Detaljert poengsumrapport (krever Siteimprove tilgang)
-                </p>
-              </a>
-              <a href="https://jira.adeo.no/plugins/servlet/desk/portal/581/create/2641" target="_blank" rel="noopener noreferrer">
-                <p className="text-xl text-center font-bold underline mb-2 text-blue-700">
-                  Få Siteimprove tilgang
-                </p>
-              </a>
+              <h3 className="font-bold text-xl text-center">
+                Lenke til Siteimprove rapport:
+              </h3>
+              <div className="flex justify-center items-center mt-16 space-x-4">
+                <a href={reportLink} target="_blank" rel="noopener noreferrer">
+                  <p className="text-xl text-center font-bold underline mb-2 text-blue-700">
+                    Detaljert poengsumrapport (krever siteimprove tilgang)
+                  </p>
+                </a>
+                <a href="https://jira.adeo.no/plugins/servlet/desk/portal/581/create/2641" target="_blank"
+                   rel="noopener noreferrer">
+                  <p className="text-xl text-center font-bold underline mb-2 text-blue-700">
+                    Få Siteimprove tilgang
+                  </p>
+                </a>
+              </div>
             </div>
         )}
       </div>
