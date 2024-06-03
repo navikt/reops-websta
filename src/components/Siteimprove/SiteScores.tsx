@@ -172,7 +172,8 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain }) => {
               <h3 className="font-bold text-xl text-center">
                 Siteimprove rapport
               </h3>
-              <div className="flex justify-center items-center mt-6 space-x-4">
+              <div
+                  className="flex flex-col sm:flex-row justify-center items-center mt-6 space-y-4 sm:space-y-0 sm:space-x-4">
                 <a href={reportLink} target="_blank" rel="noopener noreferrer">
                   <p className="text-xl text-center font-bold underline mb-2 text-blue-700">
                     Detaljert rapport med forklaringer (🔐)
