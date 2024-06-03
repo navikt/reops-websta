@@ -1,5 +1,5 @@
-import {BrowserRouter, HashRouter, Route, Routes} from 'react-router-dom';
-import { ContentContainer } from '@navikt/ds-react';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import { Page } from '@navikt/ds-react';
 import './App.css';
 import './index.css';
 import Home from './pages/Home';
@@ -15,7 +15,8 @@ function App() {
       <div className="flex flex-col min-h-screen">
         <Nav />
         <main className="flex-grow bg-custom-cyan pt-20">
-          <ContentContainer>
+          <Page>
+            <Page.Block width="xl">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/uu" element={<UU />} />
@@ -23,7 +24,8 @@ function App() {
               <Route path="/siteimprove" element={<SiteimproveSite />} />
               <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
-          </ContentContainer>
+            </Page.Block>
+          </Page>
           <ScrollToTop />
         </main>
         <Footer className="mt-auto" />
