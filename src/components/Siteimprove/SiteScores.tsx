@@ -175,7 +175,7 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain }) => {
               <div className="flex justify-center items-center mt-16 space-x-4">
                 <a href={reportLink} target="_blank" rel="noopener noreferrer">
                   <p className="text-xl text-center font-bold underline mb-2 text-blue-700">
-                    Detaljert poengsumrapport (krever siteimprove tilgang)
+                    Detaljert poengsumrapport
                   </p>
                 </a>
                 <a href="https://jira.adeo.no/plugins/servlet/desk/portal/581/create/2641" target="_blank"
