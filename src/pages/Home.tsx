@@ -153,7 +153,7 @@ const Home = () => {
 
         <div className="p-8 space-y-6 ">
           {/* Search Component */}
-          <div className="flex flex-col w-full max-w-lg">
+          <div className="flex flex-col w-full max-w-xl">
             <div className="relative">
               <URLSearchComponent
                   className="border p-2 rounded"
@@ -165,13 +165,13 @@ const Home = () => {
                   onValidUrl={setIsValidUrl}
               />
             </div>
+            {!selectedDomain && (
+                <Alert variant="info" className="mt-6">
+                  Vi anbefaler å kopiere URL-adressen til siden du ønsker å se statistikk for direkte fra nettleseren. Dette for å sikre at du får riktig data.
+                </Alert>
+            )}
           </div>
 
-          {!selectedDomain && (
-            <Alert variant="info" className="mt-6">
-              Vi anbefaler å kopiere URL-adressen til siden du ønsker å se statistikk for direkte fra nettleseren. Dette for å sikre at du får riktig data.
-            </Alert>
-          )}
 
           {selectedDomain && (
               <div className="flex items-center justify-center w-full max-w-lg">
