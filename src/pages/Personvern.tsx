@@ -28,4 +28,4 @@ function Personvern() {
     )
 }
 
-export default Privacy
+export default Personvern
