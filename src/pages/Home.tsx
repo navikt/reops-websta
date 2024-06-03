@@ -167,7 +167,7 @@ const Home = () => {
             </div>
             {!selectedDomain && (
                 <Alert variant="info" className="mt-6">
-                  Vi anbefaler å kopiere URL-adressen til siden du ønsker å se statistikk for direkte fra nettleseren. Dette for å sikre at du får riktig data.
+                  For å sikre at du ser korrekt statistikk, anbefaler vi at du kopierer og limer inn lenken til siden du vil se statistikk for.
                 </Alert>
             )}
           </div>
