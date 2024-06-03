@@ -7,7 +7,7 @@ import SiteScores from '../components/Siteimprove/SiteScores.tsx';
 import SimpleOverviewChartBoard from '../components/Amplitude/SimpleOverviewChartBoard.tsx';
 import NavnoSimpleOverviewChartBoard from '../components/Amplitude/NavnoSimpleOverviewChartBoard.tsx';
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button } from "@navikt/ds-react";
+import { Button, Alert } from "@navikt/ds-react";
 
 const Home = () => {
   const [selectedDomain, setSelectedDomain] = useState('');
@@ -166,6 +166,13 @@ const Home = () => {
               />
             </div>
           </div>
+
+          {!selectedDomain && (
+            <Alert variant="info" className="mt-6">
+              Vi anbefaler å kopiere URL-adressen til siden du ønsker å se statistikk for direkte fra nettleseren. Dette for å sikre at du får riktig data.
+            </Alert>
+          )}
+
           {selectedDomain && (
               <div className="flex items-center justify-center w-full max-w-lg">
                 <RangeDatePicker onDateChange={handleDateChange} />
