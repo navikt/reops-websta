@@ -66,6 +66,89 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                 </div>
             )}
 
+            {selectedDomain && formattedStartDate && formattedEndDate && !loading && (
+                <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
+                    <AreaChartContainer
+                        teamDomain={selectedDomain}
+                        chartType="areaChartMulti"
+                        endpointType="segmentation"
+                        urlParams={{
+                            startDate: formattedStartDate,
+                            endDate: formattedEndDate,
+                            eventType: eventTypeMappings2.besøkGroupByLanguage.eventType,
+                            groupBy: eventTypeMappings2.besøkGroupByLanguage.groupBy,
+                            filters: [
+                                {
+                                    subprop_type: 'event',
+                                    subprop_key: 'pagePath',
+                                    subprop_op: 'contains',
+                                    subprop_value: [selectedPath],
+                                },
+                            ],
+                        }}
+                        dimensions={{
+                            width: 500,
+                            height: 350,
+                        }}
+                        titles={{
+                            chartTitle: 'Språk besøkende benytter',
+                            xAxisTitle: 'Dato',
+                            yAxisTitle: 'Antall besøk',
+                        }}
+                    />
+                </div>
+            )}
+
+            {selectedDomain && formattedStartDate && formattedEndDate && (
+                <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
+                    <TableChartContainer
+                        teamDomain={selectedDomain}
+                        chartType="segmentationChartProcessing"
+                        endpointType="segmentation"
+                        urlParams={{
+                            startDate: formattedStartDate,
+                            endDate: formattedEndDate,
+                            eventType: eventTypeMappings2.besøkGroupByReferrer.eventType,
+                            groupBy: eventTypeMappings2.besøkGroupByReferrer.groupBy,
+                            filters: [
+                                {
+                                    subprop_type: 'event',
+                                    subprop_key: 'pagePath',
+                                    subprop_op: 'contains',
+                                    subprop_value: [selectedPath],
+                                },
+                            ],
+                        }}
+                        title="Hvor besøkende kommer fra"
+                    />
+                </div>
+            )}
+
+            {selectedDomain && formattedStartDate && formattedEndDate && (
+                <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
+                    <TableChartContainer
+                        teamDomain={selectedDomain}
+                        chartType="segmentationChartProcessing"
+                        endpointType="segmentation"
+                        urlParams={{
+                            startDate: formattedStartDate,
+                            endDate: formattedEndDate,
+                            eventType: eventTypeMappings2.besøkGroupByPagePath.eventType,
+                            groupBy: eventTypeMappings2.besøkGroupByPagePath.groupBy,
+                            filters: [
+                                {
+                                    subprop_type: 'event',
+                                    subprop_key: 'pagePath',
+                                    subprop_op: 'contains',
+                                    subprop_value: [selectedPath],
+                                },
+                            ],
+                        }}
+                        title="Antall besøk på nettadresse(r)"
+                    />
+                </div>
+            )}
+
             {selectedDomain && formattedStartDate && formattedEndDate && (
                 <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
                     <AreaChartContainer
@@ -134,40 +217,6 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
 
             {selectedDomain && formattedStartDate && formattedEndDate && !loading && (
                 <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
-                    <AreaChartContainer
-                        teamDomain={selectedDomain}
-                        chartType="areaChartMulti"
-                        endpointType="segmentation"
-                        urlParams={{
-                            startDate: formattedStartDate,
-                            endDate: formattedEndDate,
-                            eventType: eventTypeMappings2.besøkGroupByLanguage.eventType,
-                            groupBy: eventTypeMappings2.besøkGroupByLanguage.groupBy,
-                            filters: [
-                                {
-                                    subprop_type: 'event',
-                                    subprop_key: 'pagePath',
-                                    subprop_op: 'contains',
-                                    subprop_value: [selectedPath],
-                                },
-                            ],
-                        }}
-                        dimensions={{
-                            width: 500,
-                            height: 350,
-                        }}
-                        titles={{
-                            chartTitle: 'Språk besøkende benytter',
-                            xAxisTitle: 'Dato',
-                            yAxisTitle: 'Antall besøk',
-                        }}
-                    />
-                </div>
-            )}
-
-
-            {selectedDomain && formattedStartDate && formattedEndDate && !loading && (
-                <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
                     <VerticalBarChartContainer
                         teamDomain={selectedDomain}
                         chartType="verticalBarChart"
@@ -233,57 +282,6 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     />
                 </div>
             )}
-
-            {selectedDomain && formattedStartDate && formattedEndDate && (
-                <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
-                    <TableChartContainer
-                        teamDomain={selectedDomain}
-                        chartType="segmentationChartProcessing"
-                        endpointType="segmentation"
-                        urlParams={{
-                            startDate: formattedStartDate,
-                            endDate: formattedEndDate,
-                            eventType: eventTypeMappings2.besøkGroupByReferrer.eventType,
-                            groupBy: eventTypeMappings2.besøkGroupByReferrer.groupBy,
-                            filters: [
-                                {
-                                    subprop_type: 'event',
-                                    subprop_key: 'pagePath',
-                                    subprop_op: 'contains',
-                                    subprop_value: [selectedPath],
-                                },
-                            ],
-                        }}
-                        title="Hvor besøkende kommer fra"
-                    />
-                </div>
-            )}
-
-            {selectedDomain && formattedStartDate && formattedEndDate && (
-                <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
-                    <TableChartContainer
-                        teamDomain={selectedDomain}
-                        chartType="segmentationChartProcessing"
-                        endpointType="segmentation"
-                        urlParams={{
-                            startDate: formattedStartDate,
-                            endDate: formattedEndDate,
-                            eventType: eventTypeMappings2.besøkGroupByPagePath.eventType,
-                            groupBy: eventTypeMappings2.besøkGroupByPagePath.groupBy,
-                            filters: [
-                                {
-                                    subprop_type: 'event',
-                                    subprop_key: 'pagePath',
-                                    subprop_op: 'contains',
-                                    subprop_value: [selectedPath],
-                                },
-                            ],
-                        }}
-                        title="Antall besøk på nettadresse(r)"
-                    />
-                </div>
-            )}
-
 
             {selectedDomain && formattedStartDate && formattedEndDate && (
                 <div className="p-4 bg-white border border-blue-200 rounded shadow-lg">
