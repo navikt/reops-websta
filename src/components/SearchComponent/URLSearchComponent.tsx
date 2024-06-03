@@ -60,7 +60,7 @@ export const URLSearchComponent = ({
       setError(null); // Clear error on successful search
       onValidUrl(true); // Notify parent of valid URL
     } else {
-      setError('Nettsiden er ikke lagt til enda');
+      setError('Nettsiden er ikke lagt til enda, eller du har skrevet inn en ugyldig URL. Vi anbefaler å lime inn URL-adressen direkte fra nettleseren');
       onValidUrl(false); // Notify parent of invalid URL
     }
   };
@@ -80,7 +80,7 @@ export const URLSearchComponent = ({
       }}
     >
       <Search
-        label="Skriv eller lim inn URL-adresse"
+        label="Lim inn URL-adresse"
         value={searchInput}
         onChange={handleSearchChange}
         onSearchClick={handleSearchSubmit}
