@@ -90,7 +90,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             height: 350,
                         }}
                         titles={{
-                            chartTitle: 'Hvilke byer nettsiden besøkes fra',
+                            chartTitle: 'Byer nettsiden besøkes fra',
                             xAxisTitle: 'Dato',
                             yAxisTitle: 'Antall besøk',
                         }}
@@ -123,7 +123,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             height: 350,
                         }}
                         titles={{
-                            chartTitle: 'Hvilke land nettsiden besøkes fra',
+                            chartTitle: 'Land nettsiden besøkes fra',
                             xAxisTitle: 'Dato',
                             yAxisTitle: 'Antall besøk',
                         }}
@@ -156,7 +156,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             height: 350,
                         }}
                         titles={{
-                            chartTitle: 'Hvilke språk besøkende benytter',
+                            chartTitle: 'Språk besøkende benytter',
                             xAxisTitle: 'Dato',
                             yAxisTitle: 'Antall besøk',
                         }}
@@ -191,7 +191,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             height: 350,
                         }}
                         titles={{
-                            chartTitle: 'Hvilke ukedager nettsiden besøkes (i valgte datoer)',
+                            chartTitle: 'Ukedager nettsiden besøkes (i valgte datoer)',
                             xAxisTitle: 'Ukedager',
                             yAxisTitle: 'Antall besøk',
                         }}
@@ -225,7 +225,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             height: 350,
                         }}
                         titles={{
-                            chartTitle: `Hvilke klokkeslett nettsiden besøkes (i valgte datoer)`,
+                            chartTitle: `Klokkeslett nettsiden besøkes (i valgte datoer)`,
                             xAxisTitle: 'Klokkeslett',
                             yAxisTitle: 'Antall besøk',
                         }}
