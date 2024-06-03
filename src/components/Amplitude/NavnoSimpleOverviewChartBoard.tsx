@@ -101,56 +101,6 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
 
             {selectedDomain && formattedStartDate && formattedEndDate && (
                 <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
-                    <TableChartContainer
-                        teamDomain={selectedDomain}
-                        chartType="segmentationChartProcessing"
-                        endpointType="segmentation"
-                        urlParams={{
-                            startDate: formattedStartDate,
-                            endDate: formattedEndDate,
-                            eventType: eventTypeMappings2.besøkGroupByReferrer.eventType,
-                            groupBy: eventTypeMappings2.besøkGroupByReferrer.groupBy,
-                            filters: [
-                                {
-                                    subprop_type: 'event',
-                                    subprop_key: 'pagePath',
-                                    subprop_op: 'contains',
-                                    subprop_value: [selectedPath],
-                                },
-                            ],
-                        }}
-                        title="Sider besøkende kommer fra"
-                    />
-                </div>
-            )}
-
-            {selectedDomain && formattedStartDate && formattedEndDate && (
-                <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
-                    <TableChartContainer
-                        teamDomain={selectedDomain}
-                        chartType="segmentationChartProcessing"
-                        endpointType="segmentation"
-                        urlParams={{
-                            startDate: formattedStartDate,
-                            endDate: formattedEndDate,
-                            eventType: eventTypeMappings2.besøkGroupByPagePath.eventType,
-                            groupBy: eventTypeMappings2.besøkGroupByPagePath.groupBy,
-                            filters: [
-                                {
-                                    subprop_type: 'event',
-                                    subprop_key: 'pagePath',
-                                    subprop_op: 'contains',
-                                    subprop_value: [selectedPath],
-                                },
-                            ],
-                        }}
-                        title="Antall besøk på nettadresse(r)"
-                    />
-                </div>
-            )}
-
-            {selectedDomain && formattedStartDate && formattedEndDate && (
-                <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
                     <AreaChartContainer
                         teamDomain={selectedDomain}
                         chartType="areaChartMulti"
@@ -211,6 +161,56 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             xAxisTitle: 'Dato',
                             yAxisTitle: 'Antall besøk',
                         }}
+                    />
+                </div>
+            )}
+
+            {selectedDomain && formattedStartDate && formattedEndDate && (
+                <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
+                    <TableChartContainer
+                        teamDomain={selectedDomain}
+                        chartType="segmentationChartProcessing"
+                        endpointType="segmentation"
+                        urlParams={{
+                            startDate: formattedStartDate,
+                            endDate: formattedEndDate,
+                            eventType: eventTypeMappings2.besøkGroupByReferrer.eventType,
+                            groupBy: eventTypeMappings2.besøkGroupByReferrer.groupBy,
+                            filters: [
+                                {
+                                    subprop_type: 'event',
+                                    subprop_key: 'pagePath',
+                                    subprop_op: 'contains',
+                                    subprop_value: [selectedPath],
+                                },
+                            ],
+                        }}
+                        title="Sider besøkende kommer fra"
+                    />
+                </div>
+            )}
+
+            {selectedDomain && formattedStartDate && formattedEndDate && (
+                <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
+                    <TableChartContainer
+                        teamDomain={selectedDomain}
+                        chartType="segmentationChartProcessing"
+                        endpointType="segmentation"
+                        urlParams={{
+                            startDate: formattedStartDate,
+                            endDate: formattedEndDate,
+                            eventType: eventTypeMappings2.besøkGroupByPagePath.eventType,
+                            groupBy: eventTypeMappings2.besøkGroupByPagePath.groupBy,
+                            filters: [
+                                {
+                                    subprop_type: 'event',
+                                    subprop_key: 'pagePath',
+                                    subprop_op: 'contains',
+                                    subprop_value: [selectedPath],
+                                },
+                            ],
+                        }}
+                        title="Antall besøk på nettadresse(r)"
                     />
                 </div>
             )}

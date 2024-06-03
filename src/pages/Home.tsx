@@ -196,7 +196,6 @@ const Home = () => {
             )}
           </div>
 
-
           {selectedDomain && (
               <div className="flex items-center justify-center w-full max-w-lg">
                 <RangeDatePicker onDateChange={handleDateChange} />
