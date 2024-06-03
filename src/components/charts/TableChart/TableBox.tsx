@@ -15,7 +15,7 @@ const TableBox = ({ data, title }) => (
         {data.map(({ value, totalVisitors }, index) => (
           <Table.Row key={index}>
             <Table.DataCell>{value}</Table.DataCell>
-            <Table.DataCell>{totalVisitors}</Table.DataCell>
+            <Table.DataCell>{totalVisitors.toLocaleString('no-NO')}</Table.DataCell>
           </Table.Row>
         ))}
       </Table.Body>
