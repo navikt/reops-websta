@@ -168,7 +168,7 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain }) => {
         </div>
         <hr className="my-4 border-t-2 border-gray-300" />
         {reportLink && (
-            <div className="mt-2 bg-white pl-0 p-4 ">
+            <div className="bg-white pl-0 p-4 ">
 {/*              <h3 className="font-bold text-xl text-center">
                 Siteimprove rapport
               </h3>*/}
@@ -181,7 +181,7 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain }) => {
                 </a>
                 <a href="https://jira.adeo.no/plugins/servlet/desk/portal/581/create/2641" target="_blank"
                    rel="noopener noreferrer">
-                  <p className="text-xl text-center font-bold underline mb-2 text-blue-700">
+                  <p className="text-xl text-center font-bold underline text-blue-700">
                     Få Siteimprove tilgang
                   </p>
                 </a>
