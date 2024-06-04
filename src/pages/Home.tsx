@@ -99,6 +99,7 @@ const Home = () => {
     const startDate = params.get('startDate') || defaultFormattedStartDate;
     const endDate = params.get('endDate') || defaultFormattedEndDate;
     const siteimproveDomain = params.get('siteimproveDomain') || '';
+    const q = params.get('q') || ''; // Extract the 'q' parameter
 
     setSelectedSiteimproveDomain(siteimproveDomain);
     setSelectedDomain(domain);
@@ -106,6 +107,7 @@ const Home = () => {
     setSelectedPageUrl(pageUrl);
     setFormattedStartDate(startDate);
     setFormattedEndDate(endDate);
+    setSearchQuery(decodeURIComponent(q)); // Decode the 'q' parameter and set it as the search query
   }, [location.search]);
 
   const updateUrl = () => {
@@ -206,6 +208,7 @@ const Home = () => {
                   onSiteimproveDomain={handleSiteimproveDomain}
                   onPageUrl={handlePageUrl}
                   onValidUrl={setIsValidUrl}
+                  searchQuery={searchQuery} // Pass the search query as a prop
               />
             </div>
             {!selectedDomain && (
