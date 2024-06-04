@@ -75,12 +75,19 @@ export const URLSearchComponent = ({
 
   useEffect(() => {
     if (searchQuery && searchQuery !== pageUrl && !formSubmittedRef.current) {
+      // Do the necessary calculations and set the parameters
+      const domain = extractDomain(searchQuery);
+      const path = extractPath(searchQuery);
+      onDomainSelect(domain);
+      onPagePath(path);
+      onPageUrl(searchQuery);
+      // Then submit the form
       handleSearchSubmit();
       formSubmittedRef.current = true;
     } else {
       formSubmittedRef.current = false;
     }
-  }, [searchQuery, pageUrl, handleSearchSubmit]);
+  }, [searchQuery, pageUrl, handleSearchSubmit, onDomainSelect, onPagePath, onPageUrl]);
 
   console.log('pageUrl: ' + pageUrl);
 
