@@ -76,12 +76,11 @@ export const URLSearchComponent = ({
   useEffect(() => {
     if (searchQuery && searchQuery !== pageUrl && !formSubmittedRef.current) {
       handleSearchChange(searchQuery);
-      handleSearchSubmit(); // Add this line
       formSubmittedRef.current = true;
     } else {
       formSubmittedRef.current = false;
     }
-  }, [searchQuery, pageUrl, handleSearchChange, handleSearchSubmit]);
+  }, [searchQuery, pageUrl, handleSearchChange]);
 
   console.log('pageUrl: ' + pageUrl);
 
