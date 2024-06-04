@@ -15,7 +15,6 @@ export const URLSearchComponent = ({
                                      onPageUrl,
                                      onSiteimproveDomain,
                                      onValidUrl, // New proppage
-                                     searchQuery, // New prop
                                    }) => {
   const [searchInput, setSearchInput] = useState('');
   const [filteredTeams, setFilteredTeams] = useState<Team[]>([]);
@@ -67,14 +66,8 @@ export const URLSearchComponent = ({
   };
 
   useEffect(() => {
-    setSearchInput(searchQuery || pageUrl); // Set the initial value of the search input
-  }, [searchQuery, pageUrl]);
-
-  useEffect(() => {
-    if (searchQuery) {
-      handleSearchSubmit(); // Automatically submit the form if the 'searchQuery' prop exists
-    }
-  }, [searchQuery]);
+    setSearchInput(pageUrl);
+  }, [pageUrl]);
 
   console.log('pageUrl: ' + pageUrl);
 
