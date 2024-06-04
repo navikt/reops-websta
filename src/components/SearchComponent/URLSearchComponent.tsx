@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { Search } from '@navikt/ds-react';
 import { useEffect, useState } from 'react';
 import teamsData from './teamsData.json';
@@ -70,9 +71,14 @@ export const URLSearchComponent = ({
     setSearchInput(searchQuery || pageUrl); // Set the initial value of the search input
   }, [searchQuery, pageUrl]);
 
+  const formSubmittedRef = useRef(false);
+
   useEffect(() => {
-    if (searchQuery && searchQuery !== pageUrl) {
-      handleSearchSubmit(); // Automatically submit the form if the 'searchQuery' prop exists and is not the same as 'pageUrl'
+    if (searchQuery && searchQuery !== pageUrl && !formSubmittedRef.current) {
+      handleSearchSubmit();
+      formSubmittedRef.current = true;
+    } else {
+      formSubmittedRef.current = false;
     }
   }, [searchQuery, pageUrl, handleSearchSubmit]);
 
