@@ -59,7 +59,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
             )}
 
 
-            {selectedDomain && formattedStartDate && formattedEndDate && !loading && (
+            {selectedDomain && formattedStartDate && formattedEndDate && (
                 <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
                     <AreaChartContainer
                         teamDomain={selectedDomain}
@@ -173,7 +173,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                 </div>
             )}
 
-            {selectedDomain && formattedStartDate && formattedEndDate && !loading && (
+            {selectedDomain && formattedStartDate && formattedEndDate && (
                 <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
                     <VerticalBarChartContainer
                         teamDomain={selectedDomain}
@@ -200,7 +200,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                 </div>
             )}
 
-            {selectedDomain && formattedStartDate && formattedEndDate && !loading && (
+            {selectedDomain && formattedStartDate && formattedEndDate && (
                 <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
                     <VerticalBarChartContainer
                         teamDomain={selectedDomain}
@@ -244,7 +244,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                     />
                 </div>
             )}
-            {selectedDomain && formattedStartDate && formattedEndDate && !loading && (
+            {selectedDomain && formattedStartDate && formattedEndDate && (
                 <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
                     <TableChartContainer
                         teamDomain={selectedDomain}
