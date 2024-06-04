@@ -71,10 +71,10 @@ export const URLSearchComponent = ({
   }, [searchQuery, pageUrl]);
 
   useEffect(() => {
-    if (searchQuery) {
-      handleSearchSubmit(); // Automatically submit the form if the 'searchQuery' prop exists
+    if (searchQuery && searchQuery !== pageUrl) {
+      handleSearchSubmit(); // Automatically submit the form if the 'searchQuery' prop exists and is not the same as 'pageUrl'
     }
-  }, [searchQuery]);
+  }, [searchQuery, pageUrl, handleSearchSubmit]);
 
   console.log('pageUrl: ' + pageUrl);
 

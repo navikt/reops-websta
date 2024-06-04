@@ -111,7 +111,7 @@ const Home = () => {
     setSearchQuery(decodeURIComponent(q)); // Decode the 'q' parameter and set it as the search query
   }, [location.search]);
 
-  const updateUrl = () => {
+  const updateUrl = useCallback(() => {
     const url = new URL(window.location.href);
     const params = url.searchParams;
 
@@ -132,7 +132,7 @@ const Home = () => {
       currentUrlRef.current = newUrl;
       navigate(newUrl, { replace: true });
     }
-  };
+  }, [selectedDomain, selectedPath, selectedPageUrl, formattedStartDate, formattedEndDate, selectedSiteimproveDomain]);
 
 
 
