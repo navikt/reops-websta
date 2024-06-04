@@ -168,12 +168,12 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain }) => {
         </div>
         <hr className="my-4 border-t-2 border-gray-300" />
         {reportLink && (
-            <div className="mt-4 bg-white pl-0 p-4 ">
+            <div className="mt-2 bg-white pl-0 p-4 ">
 {/*              <h3 className="font-bold text-xl text-center">
                 Siteimprove rapport
               </h3>*/}
               <div
-                  className="flex flex-col sm:flex-row justify-center  mt-6 space-y-4 sm:space-y-0 sm:space-x-4">
+                  className="flex flex-col sm:flex-row  mt-6 space-y-4 sm:space-y-0 sm:space-x-4">
                 <a href={reportLink} target="_blank" rel="noopener noreferrer">
                   <p className="text-xl text-center font-bold underline mb-2 text-blue-700">
                     Gå til rapport med forklaringer (🔐)
