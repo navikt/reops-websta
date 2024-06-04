@@ -82,6 +82,12 @@ export const URLSearchComponent = ({
     }
   }, [searchQuery, pageUrl, handleSearchChange]);*/
 
+  useEffect(() => {
+    if (searchQuery && searchQuery !== pageUrl) {
+      setSearchInput(searchQuery);
+    }
+  }, [searchQuery, pageUrl]);
+
   console.log('pageUrl: ' + pageUrl);
 
   return (
