@@ -122,6 +122,11 @@ const Home = () => {
     params.set('endDate', formattedEndDate);
     params.set('siteimproveDomain', selectedSiteimproveDomain);
 
+    // Remove the 'q' parameter after the search is submitted
+    if (params.has('q')) {
+      params.delete('q');
+    }
+
     const newUrl = `${url.pathname}?${params.toString()}`;
     if (newUrl !== currentUrlRef.current) {
       currentUrlRef.current = newUrl;
