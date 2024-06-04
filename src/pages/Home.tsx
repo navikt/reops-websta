@@ -11,6 +11,7 @@ import { Button, Alert } from "@navikt/ds-react";
 
 const Home = () => {
   const [selectedDomain, setSelectedDomain] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const handleDomainSelect = useCallback((domain: string) => {
     setSelectedDomain(domain);
   }, []);
