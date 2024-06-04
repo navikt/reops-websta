@@ -88,7 +88,7 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain }) => {
 
   return (
     <div className="w-full">
-      <div className="mt-4 bg-white p-4 rounded-lg">
+      <div className="mt-2 bg-white p-4 rounded-lg">
         <h2 className="text-xl font-semibold mb-2" style={{ color: '#000000' }}>
           Poengsum fra siste rapport (av 100)
         </h2>
