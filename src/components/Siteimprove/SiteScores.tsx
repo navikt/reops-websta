@@ -168,7 +168,7 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain }) => {
         </div>
         <hr className="my-4 border-t-2 border-gray-300" />
         {reportLink && (
-            <div className="mt-4 bg-white pl-0 p-4  justify-center">
+            <div className="mt-4 bg-white pl-0 p-4 ">
 {/*              <h3 className="font-bold text-xl text-center">
                 Siteimprove rapport
               </h3>*/}
