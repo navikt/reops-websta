@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import { Search } from '@navikt/ds-react';
 import { useEffect, useState } from 'react';
 import teamsData from './teamsData.json';
@@ -10,14 +9,14 @@ interface Team {
 }
 
 export const URLSearchComponent = ({
-  onDomainSelect,
-  pageUrl,
-  onPagePath,
-  onPageUrl,
-  onSiteimproveDomain,
-  onValidUrl, // New proppage
-  searchQuery, // New prop
-}) => {
+                                     onDomainSelect,
+                                     pageUrl,
+                                     onPagePath,
+                                     onPageUrl,
+                                     onSiteimproveDomain,
+                                     onValidUrl, // New proppage
+                                     searchQuery, // New prop
+                                   }) => {
   const [searchInput, setSearchInput] = useState('');
   const [filteredTeams, setFilteredTeams] = useState<Team[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -43,14 +42,14 @@ export const URLSearchComponent = ({
 
   const filterTeams = (searchTerm: string) => {
     const filtered = teamsData.filter(
-      (team) =>
-        team.teamName &&
-        searchTerm &&
-        team.teamName.toLowerCase().includes(searchTerm.toLowerCase())
+        (team) =>
+            team.teamName &&
+            searchTerm &&
+            team.teamName.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredTeams(filtered);
   };
- // yo
+  // yo
   const handleSearchSubmit = () => {
     if (filteredTeams.length > 0) {
       const selectedTeam = filteredTeams[0]; // Assumes the first match is the desired one
@@ -71,44 +70,33 @@ export const URLSearchComponent = ({
     setSearchInput(searchQuery || pageUrl); // Set the initial value of the search input
   }, [searchQuery, pageUrl]);
 
-  const formSubmittedRef = useRef(false);
-
-/*  useEffect(() => {
-    if (searchQuery && searchQuery !== pageUrl && !formSubmittedRef.current) {
-      handleSearchChange(searchQuery);
-      formSubmittedRef.current = true;
-    } else {
-      formSubmittedRef.current = false;
-    }
-  }, [searchQuery, pageUrl, handleSearchChange]);*/
-
   useEffect(() => {
-    if (searchQuery && searchQuery !== pageUrl) {
-      setSearchInput(searchQuery);
+    if (searchQuery) {
+      handleSearchSubmit(); // Automatically submit the form if the 'searchQuery' prop exists
     }
-  }, [searchQuery, pageUrl]);
+  }, [searchQuery]);
 
   console.log('pageUrl: ' + pageUrl);
 
   return (
-    <form
-      role="search"
-      onSubmit={(e) => {
-        e.preventDefault();
-        handleSearchSubmit();
-      }}
-    >
-      <Search
-        label="URL-adresse"
-        description="Kopier og lim inn lenken til siden du vil se statistikk for."
-        value={searchInput}
-        onChange={handleSearchChange}
-        onSearchClick={handleSearchSubmit}
-        variant="primary"
-        hideLabel={false}
-        clearButton={true} // Adds a clear button that also uses the onClear prop if necessary
-        error={error}
-      />
-    </form>
+      <form
+          role="search"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSearchSubmit();
+          }}
+      >
+        <Search
+            label="URL-adresse"
+            description="Kopier og lim inn lenken til siden du vil se statistikk for."
+            value={searchInput}
+            onChange={handleSearchChange}
+            onSearchClick={handleSearchSubmit}
+            variant="primary"
+            hideLabel={false}
+            clearButton={true} // Adds a clear button that also uses the onClear prop if necessary
+            error={error}
+        />
+      </form>
   );
 };

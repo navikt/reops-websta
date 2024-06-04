@@ -11,7 +11,6 @@ import { Button, Alert } from "@navikt/ds-react";
 
 const Home = () => {
   const [selectedDomain, setSelectedDomain] = useState('');
-  const [searchQuery, setSearchQuery] = useState('');
   const handleDomainSelect = useCallback((domain: string) => {
     setSelectedDomain(domain);
   }, []);
@@ -111,7 +110,7 @@ const Home = () => {
     setSearchQuery(decodeURIComponent(q)); // Decode the 'q' parameter and set it as the search query
   }, [location.search]);
 
-  const updateUrl = useCallback(() => {
+  const updateUrl = () => {
     const url = new URL(window.location.href);
     const params = url.searchParams;
 
@@ -122,17 +121,12 @@ const Home = () => {
     params.set('endDate', formattedEndDate);
     params.set('siteimproveDomain', selectedSiteimproveDomain);
 
-    // Remove the 'q' parameter after the search is submitted
-    if (params.has('q')) {
-      params.delete('q');
-    }
-
     const newUrl = `${url.pathname}?${params.toString()}`;
     if (newUrl !== currentUrlRef.current) {
       currentUrlRef.current = newUrl;
       navigate(newUrl, { replace: true });
     }
-  }, [selectedDomain, selectedPath, selectedPageUrl, formattedStartDate, formattedEndDate, selectedSiteimproveDomain]);
+  };
 
 
 
@@ -291,15 +285,15 @@ const Home = () => {
 
         {selectedDomain && (
             <>
-            <h2 className="text-2xl font-bold mt-20 text-center">Delingslenker</h2>
-            <div className="flex justify-center items-center mt-12 mb-10 space-x-4">
-              <Button variant="primary" onClick={copyUrlToClipboard}>
-                {buttonText}
-              </Button>
-              <Button variant="primary" onClick={copyUrlToClipboard30days}>
-                {buttonText30}
-              </Button>
-            </div>
+              <h2 className="text-2xl font-bold mt-20 text-center">Delingslenker</h2>
+              <div className="flex justify-center items-center mt-12 mb-10 space-x-4">
+                <Button variant="primary" onClick={copyUrlToClipboard}>
+                  {buttonText}
+                </Button>
+                <Button variant="primary" onClick={copyUrlToClipboard30days}>
+                  {buttonText30}
+                </Button>
+              </div>
             </>
         )}
       </div>
