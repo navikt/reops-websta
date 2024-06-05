@@ -92,6 +92,33 @@ const Home = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const currentUrlRef = useRef(window.location.href);
+  const isInitialLoadRef = useRef(true);
+
+  const updateUrl = useCallback(() => {
+    const url = new URL(window.location.href);
+    const params = url.searchParams;
+
+    params.set('domain', selectedDomain);
+    params.set('path', selectedPath);
+    params.set('url', selectedPageUrl);
+    params.set('startDate', formattedStartDate);
+    params.set('endDate', formattedEndDate);
+    params.set('siteimproveDomain', selectedSiteimproveDomain);
+
+    const newUrl = `${url.pathname}?${params.toString()}`;
+    if (newUrl !== currentUrlRef.current) {
+      currentUrlRef.current = newUrl;
+      navigate(newUrl, { replace: true });
+    }
+  }, [selectedDomain, selectedPath, selectedPageUrl, formattedStartDate, formattedEndDate, selectedSiteimproveDomain, navigate]);
+
+  useEffect(() => {
+    if (!isInitialLoadRef.current) {
+      updateUrl();
+    } else {
+      isInitialLoadRef.current = false;
+    }
+  }, [updateUrl]);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -110,25 +137,6 @@ const Home = () => {
     setFormattedEndDate(endDate);
   }, [location.search]);
 
-  const updateUrl = () => {
-    const url = new URL(window.location.href);
-    const params = url.searchParams;
-
-    params.set('domain', selectedDomain);
-    params.set('path', selectedPath);
-    params.set('url', selectedPageUrl);
-    params.set('startDate', formattedStartDate);
-    params.set('endDate', formattedEndDate);
-    params.set('siteimproveDomain', selectedSiteimproveDomain);
-
-    const newUrl = `${url.pathname}?${params.toString()}`;
-    if (newUrl !== currentUrlRef.current) {
-      currentUrlRef.current = newUrl;
-      navigate(newUrl, { replace: true });
-    }
-  };
-
-  updateUrl();
 
   const [buttonText, setButtonText] = useState('Kopier URL');
 

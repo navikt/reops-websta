@@ -23,7 +23,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
         const fetchCharts = async () => {
             setLoading(true);
             try {
-                await new Promise((resolve) => setTimeout(resolve, 4000));
+                await new Promise((resolve) => setTimeout(resolve, 100));
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching charts:', error);
@@ -142,7 +142,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
             )}
 
             {selectedDomain && formattedStartDate && formattedEndDate && !loading && (
-                <div className="p-4 bg-white border border-blue-200 rounded shadow-lg ">
+                <div className="p-4 bg-white border border-blue-200 rounded shadow-lg overflow-auto">
                     <VerticalBarChartContainer
                         teamDomain={selectedDomain}
                         chartType="verticalBarChart"
