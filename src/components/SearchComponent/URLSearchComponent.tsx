@@ -25,7 +25,7 @@ export const URLSearchComponent = ({
   }, []);
 
   const extractDomain = (url) => {
-    const match = url.match(/\/\/([^\/]+)\//);
+    const match = url.match(/\/\/(?:www\.)?([^\/]+)\./);
     return match ? match[1] : null;
   };
 
