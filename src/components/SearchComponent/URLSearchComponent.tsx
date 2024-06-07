@@ -25,10 +25,10 @@ export const URLSearchComponent = ({
   }, []);
 
   const extractDomain = (url) => {
-    const match = url.match(/\/\/(?:www\.)?([^\/.]+)\./);
+    const match = url.match(/\/\/(?:www\.)?([^\/]+)\./);
     return match ? match[1] : null;
   };
-
+  
   const extractPath = (url) => {
     const match = url.match(/\/\/[^\/]+(\/[^?#]*)?/);
     return match ? match[1] || '' : null;
