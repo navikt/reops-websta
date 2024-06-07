@@ -247,17 +247,21 @@ const Home = () => {
         <h2 className="text-4xl font-semi-bold mb-1 text-left">Amplitude</h2>
       )} */}
 
-        {selectedDomain && (
-            <div
-                ref={siteScoresRef}
-                className="p-4 w-full bg-white border border-blue-200 rounded shadow-lg md:col-span-2 mb-6"
-            >
-              <SiteScores
-                  pageUrl={selectedPageUrl}
-                  siteimproveSelectedDomain={selectedSiteimproveDomain}
-              />
-            </div>
-        )}
+        {selectedSiteimproveDomain != "false" && (
+            <>
+                  {selectedDomain && (
+                      <div
+                          ref={siteScoresRef}
+                          className="p-4 w-full bg-white border border-blue-200 rounded shadow-lg md:col-span-2 mb-6"
+                      >
+                        <SiteScores
+                            pageUrl={selectedPageUrl}
+                            siteimproveSelectedDomain={selectedSiteimproveDomain}
+                        />
+                      </div>
+                  )}'
+            </>
+            )}
 
         <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 ">
           {/*Dersom nav.no viser den en egen rapport*/}
