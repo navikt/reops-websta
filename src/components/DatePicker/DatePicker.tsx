@@ -24,13 +24,11 @@ export const RangeDatePicker = ({ onDateChange }) => {
     });
 
   return (
-    <div className="min-h-32">
         <DatePicker {...datepickerProps}>
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-4 mb-12">
                 <DatePicker.Input {...fromInputProps} label="Fra" className="w-full sm:w-auto" />
                 <DatePicker.Input {...toInputProps} label="Til" className="w-full sm:w-auto" />
             </div>
         </DatePicker>
-    </div>
   );
 };
