@@ -1,4 +1,4 @@
-import { Search } from '@navikt/ds-react';
+import { Search, Alert } from '@navikt/ds-react';
 import { useEffect, useState } from 'react';
 import teamsData from './teamsData.json';
 
@@ -9,16 +9,17 @@ interface Team {
 }
 
 export const URLSearchComponent = ({
-                                     onDomainSelect,
-                                     pageUrl,
-                                     onPagePath,
-                                     onPageUrl,
-                                     onSiteimproveDomain,
-                                     onValidUrl, // New proppage
-                                   }) => {
+     onDomainSelect,
+     pageUrl,
+     onPagePath,
+     onPageUrl,
+     onSiteimproveDomain,
+     onValidUrl, // New proppage
+   }) => {
   const [searchInput, setSearchInput] = useState('');
   const [filteredTeams, setFilteredTeams] = useState<Team[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [isValidUrl, setIsValidUrl] = useState(true);
 
   useEffect(() => {
     setFilteredTeams(teamsData as Team[]);
@@ -37,6 +38,12 @@ export const URLSearchComponent = ({
   const handleSearchChange = (value) => {
     setSearchInput(value);
     filterTeams(extractDomain(value));
+    setIsValidUrl(validateUrl(value));
+  };
+
+  const validateUrl = (url) => {
+    const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/
+    return urlRegex.test(url);
   };
 
   const filterTeams = (searchTerm: string) => {
@@ -48,7 +55,7 @@ export const URLSearchComponent = ({
     );
     setFilteredTeams(filtered);
   };
-  // yo
+
   const handleSearchSubmit = () => {
     if (filteredTeams.length > 0) {
       const selectedTeam = filteredTeams[0]; // Assumes the first match is the desired one
@@ -60,7 +67,7 @@ export const URLSearchComponent = ({
       setError(null); // Clear error on successful search
       onValidUrl(true); // Notify parent of valid URL
     } else {
-      setError('Nettsiden er ikke lagt til enda, eller du har skrevet inn en ugyldig URL. Vi anbefaler å lime inn URL-adressen direkte fra nettleseren');
+      setError('Nettsiden er ikke lagt til enda, eller du har skrevet inn en ugyldig URL.');
       onValidUrl(false); // Notify parent of invalid URL
     }
   };
@@ -69,7 +76,7 @@ export const URLSearchComponent = ({
     setSearchInput(pageUrl);
   }, [pageUrl]);
 
-  console.log('pageUrl: ' + pageUrl);
+  // console.log('pageUrl: ' + pageUrl);
 
   return (
       <form
@@ -88,8 +95,14 @@ export const URLSearchComponent = ({
             variant="primary"
             hideLabel={false}
             clearButton={true} // Adds a clear button that also uses the onClear prop if necessary
-            error={error}
+            error={searchInput.length >= 1 ? error : null}
+            className="w-full"
         />
+        {searchInput.length >= 1 && !isValidUrl && (
+            <Alert variant="info" className="mt-6">
+              For å sikre at du ser korrekt statistikk, anbefaler vi at du kopierer og limer inn lenken heller enn å skrive den inn selv.
+            </Alert>
+        )}
       </form>
   );
 };

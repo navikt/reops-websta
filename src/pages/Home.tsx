@@ -7,7 +7,7 @@ import SiteScores from '../components/Siteimprove/SiteScores.tsx';
 import SimpleOverviewChartBoard from '../components/Amplitude/SimpleOverviewChartBoard.tsx';
 import NavnoSimpleOverviewChartBoard from '../components/Amplitude/NavnoSimpleOverviewChartBoard.tsx';
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button, Alert } from "@navikt/ds-react";
+import { Button } from "@navikt/ds-react";
 
 const Home = () => {
   const [selectedDomain, setSelectedDomain] = useState('');
@@ -125,9 +125,7 @@ const Home = () => {
       navigate(newUrl, { replace: true });
     }
   };
-
-
-
+  
   const [buttonText, setButtonText] = useState('Lenke for valgte datoer');
   const [buttonText30, setButtonText30] = useState('Lenke for siste 30 dager');
 
@@ -194,7 +192,7 @@ const Home = () => {
         <h1 className="text-4xl font-bold mb-6 text-center">Webstatistikk 📊</h1>
         {/* RangeDatePicker already includes labels */}
 
-        <div className="p-8 space-y-6 ">
+        <div className="flex flex-col items-center justify-center p-8 space-y-6 w-full">
           {/* Search Component */}
           <div className="flex flex-col w-full max-w-xl">
             <div className="relative">
@@ -208,11 +206,6 @@ const Home = () => {
                   onValidUrl={setIsValidUrl}
               />
             </div>
-            {!selectedDomain && (
-                <Alert variant="info" className="mt-6">
-                  For å sikre at du ser korrekt statistikk, anbefaler vi at du kopierer og limer inn lenken heller enn å skrive den inn selv. Eksempel: https://www.nav.no (forsiden).
-                </Alert>
-            )}
           </div>
 
           {selectedDomain && (
@@ -259,7 +252,7 @@ const Home = () => {
                             siteimproveSelectedDomain={selectedSiteimproveDomain}
                         />
                       </div>
-                  )}'
+                  )}
             </>
             )}
 
