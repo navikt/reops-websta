@@ -39,11 +39,11 @@ const VerticalBarChartContainer: React.FC<VerticalChartContainerProps> = ({
                                                                             titles,
                                                                           }) => {
   const [chartData, setChartData] = useState();
+  const [error, setError] = useState(null); // Add an error state
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        //const fetchURL = constructEndpointUrl(endpointType, urlParams);
         const fetchURL = constructEndpointUrl2(endpointType, urlParams);
         const response = await fetchAmplitudeData(fetchURL, teamDomain);
         const processData = selectDataProcessingFunction(chartType);
@@ -51,6 +51,7 @@ const VerticalBarChartContainer: React.FC<VerticalChartContainerProps> = ({
         setChartData(processedChartData);
       } catch (error) {
         console.error('Failed to fetch and process data:', error);
+        setError(error); // Set the error state when an error occurs
       }
     };
 
@@ -63,15 +64,20 @@ const VerticalBarChartContainer: React.FC<VerticalChartContainerProps> = ({
     urlParams.filters,
   ]);
 
-  return chartData ? (
-      <VerticalBarChartCustomAccessibilityExample
-          chartData={chartData}
-          dimensions={dimensions}
-          titles={titles}
-      />
-  ) : (
-      <div>Henter graf...</div>
-  );
+  // Modify the return statement to display the error message when an error occurs
+  if (error) {
+    return <div>Klarte ikke å hente graf fra Amplitude</div>;
+  } else {
+    return chartData ? (
+        <VerticalBarChartCustomAccessibilityExample
+            chartData={chartData}
+            dimensions={dimensions}
+            titles={titles}
+        />
+    ) : (
+        <div>Henter graf...</div>
+    );
+  }
 };
 
 export default VerticalBarChartContainer;

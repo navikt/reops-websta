@@ -36,10 +36,10 @@ const TableChartContainer = ({ teamDomain, chartType, endpointType, urlParams, t
 
   if (error) {
     console.error("Failed to fetch and process data:", error);
-    return <div>Error: Failed to fetch data.</div>; // Render error message
+    return <div>Klarte ikke å hente tabell fra Amplitude.</div>; // Render error message
   }
 
-  return chartData ? <TableBox data={chartData} title={title} /> : <div>No data available.</div>;
+  return chartData ? <TableBox data={chartData} title={title} /> : <div>Ingen data tilgjengelig.</div>;
 };
 
 export default TableChartContainer;

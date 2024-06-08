@@ -32,27 +32,31 @@ interface AreaChartContainerProps {
 //TODO: Legge til slik at det er mulig å ha forkjellige endepunkt, slik at vi ikke trenger en ny komponent for hver.
 const AreaChartContainer: React.FC<AreaChartContainerProps> = ({ teamDomain, chartType, endpointType, urlParams, dimensions, titles }) => {
     const [chartData, setChartData] = useState(null); // Start with null to easily check if data is loaded
+    const [error, setError] = useState(null); // Add an error state
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                //const fetchURL = constructEndpointUrl(endpointType, urlParams);
                 const fetchURL = constructEndpointUrl2(endpointType, urlParams);
                 const response = await fetchAmplitudeData(fetchURL, teamDomain);
-                // Dynamically select the processing function based on chartType
                 const processData = selectDataProcessingFunction(chartType);
                 const processedChartData = processData(response);
                 setChartData(processedChartData);
             } catch (error) {
                 console.error("Failed to fetch and process data:", error);
+                setError(error); // Set the error state when an error occurs
             }
         };
 
         fetchData();
-        //Charttype trengs kanskje ikke, kan hende [] deps holder
-    }, [chartType, teamDomain, urlParams.startDate, urlParams.endDate, urlParams.filters]); // Re-fetch and process data if chartType changes
+    }, [chartType, teamDomain, urlParams.startDate, urlParams.endDate, urlParams.filters]);
 
-    return chartData ? <AreaChartCustomAccessibility chartData={chartData} dimensions={dimensions} titles={titles} /> : <div>Henter graf...</div>;
+    // Modify the return statement to display the error message when an error occurs
+    if (error) {
+        return <div>Klarte ikke å hente graf fra Amplitude</div>;
+    } else {
+        return chartData ? <AreaChartCustomAccessibility chartData={chartData} dimensions={dimensions} titles={titles} /> : <div>Henter graf...</div>;
+    }
 };
 
 export default AreaChartContainer;
