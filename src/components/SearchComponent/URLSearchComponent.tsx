@@ -57,6 +57,12 @@ export const URLSearchComponent = ({
   };
 
   const handleSearchSubmit = () => {
+    if (searchInput.trim() === '') {
+      setError('Du må sette inn en URL-adresse.');
+      onValidUrl(false); // Notify parent of invalid URL
+      return;
+    }
+
     if (filteredTeams.length > 0) {
       const selectedTeam = filteredTeams[0]; // Assumes the first match is the desired one
       onDomainSelect(selectedTeam.teamAmplitudeDomain.toString());
@@ -96,7 +102,7 @@ export const URLSearchComponent = ({
             variant="primary"
             hideLabel={false}
             clearButton={true} // Adds a clear button that also uses the onClear prop if necessary
-            error={searchInput.length >= 1 ? error : null}
+            error={error}
             className="w-full"
         />
         {searchInput.length >= 1 && !isValidUrl && (
