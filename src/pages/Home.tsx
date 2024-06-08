@@ -188,7 +188,7 @@ const Home = () => {
 
 
   return (
-      <div className={`flex flex-col  ${!selectedDomain ? 'items-center justify-center' : ''} min-h-screen p-6`}>
+      <div className={`flex flex-col  ${!selectedDomain ? 'items-center justify-center mt-24' : ''} p-6`}>
         <h1 className={`text-4xl font-bold mb-6 ${!selectedDomain ? 'text-center' : ''}`}>Webstatistikk 📊</h1>
         {/* RangeDatePicker already includes labels */}
 
@@ -214,31 +214,6 @@ const Home = () => {
               </div>
           )}
         </div>
-
-        {/* <VStack className="items-center mb-3">
-        <Link to="/guide" className="text-center hover:underline">
-          <Heading size="medium">{simpleGuide}</Heading>
-        </Link>
-        <h2 className="text-xl font-bold mb-3 text-center">Søk her:</h2>
-      </VStack>
-      <form className="w-full max-w-lg px-4">
-        <Search
-          label="Søk alle NAV sine sider"
-          variant="primary"
-          className="w-full"
-        />
-      </form>
-      */}
-        {/* TODO: Charts er lenger til høyre når de er centered fordi centrering starter på y-axis */}
-
-        {/* {selectedDomain && (
-        <div className="mb-8">
-          <Button onClick={scrollToSiteScores}>Poengsum</Button>
-        </div>
-      )} */}
-        {/* {selectedDomain && (
-        <h2 className="text-4xl font-semi-bold mb-1 text-left">Amplitude</h2>
-      )} */}
 
         {selectedSiteimproveDomain != "false" && (
             <>
