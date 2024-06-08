@@ -189,8 +189,7 @@ const Home = () => {
 
   return (
       <div className={`flex flex-col  ${!selectedDomain ? 'items-center justify-center mt-24' : ''} p-6`}>
-        <h1 className={`text-4xl font-bold mb-6 ${!selectedDomain ? 'text-center' : ''}`}>Webstatistikk 📊</h1>
-        {/* RangeDatePicker already includes labels */}
+        <h1 className={`text-4xl font-bold mb-6`}>Webstatistikk 📊</h1>
 
         <div className={`flex flex-col ${!selectedDomain ? 'items-center justify-center' : ''} pt-8 pb-5 space-y-6 w-full`}>
           {/* Search Component */}
@@ -209,7 +208,7 @@ const Home = () => {
           </div>
 
           {selectedDomain && (
-              <div className={`flex ${!selectedDomain ? 'items-center justify-center' : ''} w-full max-w-lg`}>
+              <div className={`flex w-full max-w-lg`}>
                 <RangeDatePicker onDateChange={handleDateChange}/>
               </div>
           )}

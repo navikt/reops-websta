@@ -62,7 +62,7 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain }) => {
       } catch (error) {
         console.error('Error fetching data: ', error);
         setError(
-          'Error når man skulle hente data, sjekk om du har skrevet in URL riktig '
+          'Klarte ikke å hente data fra Siteimprove, sjekk om du har skrevet in URL riktig. '
         );
       }
     };
@@ -73,7 +73,7 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain }) => {
   if (error) {
     return (
       <div className="mt-4 bg-white p-4 rounded-lg">
-        <h2 className="text-xl font-semibold mb-2">Error</h2>
+        <h2 className="text-xl font-semibold mb-2">Feil med Siteimprove</h2>
         <p className="text-red-500">{error}</p>
       </div>
     );
