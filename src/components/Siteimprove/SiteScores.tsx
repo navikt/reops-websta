@@ -175,13 +175,13 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain }) => {
               <div
                   className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
                 <a href={reportLink} target="_blank" rel="noopener noreferrer">
-                  <p className="text-xl text-center font-bold underline mb-2 text-blue-700">
-                    Gå til rapport med forklaringer (🔐)
+                  <p className="text-xl font-bold underline mb-2 text-blue-700">
+                    Rapport med forklaringer (🔐)
                   </p>
                 </a>
                 <a href="https://jira.adeo.no/plugins/servlet/desk/portal/581/create/2641" target="_blank"
                    rel="noopener noreferrer">
-                  <p className="text-xl text-center font-bold underline text-blue-700">
+                  <p className="text-xl  font-bold underline text-blue-700">
                     Få Siteimprove tilgang
                   </p>
                 </a>
