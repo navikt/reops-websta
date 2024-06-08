@@ -188,11 +188,11 @@ const Home = () => {
 
 
   return (
-      <div className="flex flex-col items-center justify-center min-h-screen p-6">
-        <h1 className="text-4xl font-bold mb-6 text-center">Webstatistikk 📊</h1>
+      <div className={`flex flex-col  ${!selectedDomain ? 'items-center justify-center' : ''} min-h-screen p-6`}>
+        <h1 className={`text-4xl font-bold mb-6 ${!selectedDomain ? 'text-center' : ''}`}>Webstatistikk 📊</h1>
         {/* RangeDatePicker already includes labels */}
 
-        <div className="flex flex-col items-center justify-center p-8 space-y-6 w-full">
+        <div className={`flex flex-col ${!selectedDomain ? 'items-center justify-center' : ''} pt-8 pb-5 space-y-6 w-full`}>
           {/* Search Component */}
           <div className="flex flex-col w-full max-w-xl">
             <div className="relative">
@@ -209,8 +209,8 @@ const Home = () => {
           </div>
 
           {selectedDomain && (
-              <div className="flex items-center justify-center w-full max-w-lg">
-                <RangeDatePicker onDateChange={handleDateChange} />
+              <div className={`flex ${!selectedDomain ? 'items-center justify-center' : ''} w-full max-w-lg`}>
+                <RangeDatePicker onDateChange={handleDateChange}/>
               </div>
           )}
         </div>
@@ -242,19 +242,19 @@ const Home = () => {
 
         {selectedSiteimproveDomain != "false" && (
             <>
-                  {selectedDomain && (
-                      <div
-                          ref={siteScoresRef}
-                          className="p-4 w-full bg-white border border-blue-200 rounded shadow-lg md:col-span-2 mb-6"
-                      >
-                        <SiteScores
-                            pageUrl={selectedPageUrl}
-                            siteimproveSelectedDomain={selectedSiteimproveDomain}
-                        />
-                      </div>
-                  )}
+              {selectedDomain && (
+                  <div
+                      ref={siteScoresRef}
+                      className="p-4 w-full bg-white border border-blue-200 rounded shadow-lg md:col-span-2 mb-6"
+                  >
+                    <SiteScores
+                        pageUrl={selectedPageUrl}
+                        siteimproveSelectedDomain={selectedSiteimproveDomain}
+                    />
+                  </div>
+              )}
             </>
-            )}
+        )}
 
         <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 ">
           {/*Dersom nav.no viser den en egen rapport*/}
@@ -279,12 +279,12 @@ const Home = () => {
 
         {selectedDomain && (
             <>
-              <h2 className="text-2xl font-bold mt-20 text-center">Delingslenker</h2>
-              <div className="flex justify-center items-center mt-12 mb-10 space-x-4">
-                <Button variant="primary" onClick={copyUrlToClipboard}>
+              <h2 className="text-2xl font-bold mt-24">Delingslenker</h2>
+              <div className="flex flex-col sm:flex-row mt-6 mb-10 space-y-4 sm:space-y-0 sm:space-x-4">
+                <Button variant="primary" onClick={copyUrlToClipboard} className="max-w-xs sm:max-w-none">
                   {buttonText}
                 </Button>
-                <Button variant="primary" onClick={copyUrlToClipboard30days}>
+                <Button variant="primary" onClick={copyUrlToClipboard30days} className="max-w-xs sm:max-w-none">
                   {buttonText30}
                 </Button>
               </div>
