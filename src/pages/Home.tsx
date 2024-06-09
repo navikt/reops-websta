@@ -125,8 +125,8 @@ const Home = () => {
         }
     };
 
-    const [buttonText, setButtonText] = useState('Lenke for valgte datoer');
-    const [buttonText30, setButtonText30] = useState('Lenke for siste 30 dager');
+    const [buttonText, setButtonText] = useState('Kopier lenke');
+    const [buttonText30, setButtonText30] = useState(' Kopier 30-dagers lenke');
 
     const copyUrlToClipboard = () => {
         const url = window.location.href;
@@ -249,15 +249,16 @@ const Home = () => {
 
             {selectedDomain && (
                 <>
-                    <h2 className="text-2xl font-bold mt-24">Delingslenker</h2>
-                    <div className="flex flex-col sm:flex-row mt-6 mb-10 space-y-4 sm:space-y-0 sm:space-x-4">
-                        <Button variant="primary" onClick={copyUrlToClipboard} className="max-w-xs sm:max-w-none">
-                            {buttonText}
-                        </Button>
-                        <Button variant="primary" onClick={copyUrlToClipboard30days} className="max-w-xs sm:max-w-none">
-                            {buttonText30}
-                        </Button>
-                    </div>
+                  <h2 className="text-2xl font-bold mt-16">Delingslenker</h2>
+                  <div className="flex flex-col sm:flex-row mt-6 mb-4 space-y-4 sm:space-y-0 sm:space-x-4">
+                    <Button variant="primary" onClick={copyUrlToClipboard} className="max-w-xs sm:max-w-none">
+                      {buttonText}
+                    </Button>
+                    <Button variant="primary" onClick={copyUrlToClipboard30days} className="max-w-xs sm:max-w-none">
+                      {buttonText30}
+                    </Button>
+                  </div>
+                  <p className="py-2">30-dagers lenke: Gir deg statistikk for de siste 30 dagene, selv om du har valgt andre datoer. </p>
                 </>
             )}
         </div>
