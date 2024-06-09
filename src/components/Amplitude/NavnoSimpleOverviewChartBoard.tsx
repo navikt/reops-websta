@@ -124,7 +124,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             height: 350,
                         }}
                         titles={{
-                            chartTitle: 'Byer nettsiden besøkes fra',
+                            chartTitle: 'Byer siden besøkes fra',
                             xAxisTitle: 'Dato',
                             yAxisTitle: 'Antall besøk',
                         }}
@@ -157,7 +157,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             height: 350,
                         }}
                         titles={{
-                            chartTitle: 'Land nettsiden besøkes fra',
+                            chartTitle: 'Land siden besøkes fra',
                             xAxisTitle: 'Dato',
                             yAxisTitle: 'Antall besøk',
                         }}
@@ -241,7 +241,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             height: 350,
                         }}
                         titles={{
-                            chartTitle: 'Ukedager nettsiden besøkes (i valgte datoer)',
+                            chartTitle: 'Ukedager siden besøkes (i valgte datoer)',
                             xAxisTitle: 'Ukedager',
                             yAxisTitle: 'Antall besøk',
                         }}
@@ -275,7 +275,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             height: 350,
                         }}
                         titles={{
-                            chartTitle: `Klokkeslett nettsiden besøkes (i valgte datoer)`,
+                            chartTitle: `Klokkeslett siden besøkes (i valgte datoer)`,
                             xAxisTitle: 'Klokkeslett',
                             yAxisTitle: 'Antall besøk',
                         }}
@@ -303,7 +303,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                                 },
                             ],
                         }}
-                        title="Nettlesere besøkende benytter seg av"
+                        title="Nettlesere besøkende benytter"
                     />
                 </div>
             )}
@@ -328,7 +328,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                                 },
                             ],
                         }}
-                        title = "Operativsystem besøkende benytter seg av"
+                        title = "Operativsystem besøkende benytter"
                     />
                 </div>
             )}

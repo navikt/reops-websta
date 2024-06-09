@@ -93,7 +93,7 @@ export const URLSearchComponent = ({
           }}
       >
         <Search
-            label="Kopier og lim inn lenken til siden du vil se statistikk for"
+            label="Lim inn URL for å se statistikk"
             autoFocus={true}
             value={searchInput}
             onChange={handleSearchChange}
