@@ -58,9 +58,9 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             height: 350,
                         }}
                         titles={{
-                            chartTitle: 'Totalt antall besøk',
+                            chartTitle: 'Antall unike besøkende',
                             xAxisTitle: 'Dato',
-                            yAxisTitle: 'Antall besøk',
+                            yAxisTitle: 'Unike besøkende',
                         }}
                     />
                 </div>
