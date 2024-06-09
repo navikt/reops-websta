@@ -108,7 +108,7 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain }) => {
                   })}
                 />
               </div>
-              <h3 className="text-center mt-2 font-bold text-xl">{`Kvalitetsikring av innhold`}</h3>
+              <h3 className="text-center mt-3 font-bold text-xl">{`Kvalitetsikring av innhold`}</h3>
             </div>
           )}
           {scoreOverview && (
@@ -125,7 +125,7 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain }) => {
                   })}
                 />
               </div>
-              <h3 className="text-center mt-2 font-bold text-xl">{`Universell utforming`}</h3>
+              <h3 className="text-center mt-3 font-bold text-xl">{`Universell utforming`}</h3>
             </div>
           )}
           {scoreOverview && (
@@ -142,7 +142,7 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain }) => {
                   })}
                 />
               </div>
-              <h3 className="text-center mt-2 font-bold text-xl">{`Søkemotoroptimalisering`}</h3>
+              <h3 className="text-center mt-3 font-bold text-xl">{`Søkemotoroptimalisering`}</h3>
             </div>
           )}
           {scoreOverview && (
@@ -160,7 +160,7 @@ const SiteScores = ({ pageUrl, siteimproveSelectedDomain }) => {
                 />
               </div>
               <h3
-                className="text-center mt-2 font-bold text-lg"
+                className="text-center mt-3 font-bold text-lg"
                 style={{ color: '#000000' }}
               >{`Snittpoeng`}</h3>
             </div>
