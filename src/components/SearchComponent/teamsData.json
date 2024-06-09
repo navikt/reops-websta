@@ -1,10 +1,5 @@
 [
   {
-    "teamName": "MetrikkArkitektene",
-    "teamAmplitudeDomain": 100004455,
-    "teamSiteimproveSite": 30141243932
-  },
-  {
     "teamName": "Memu",
     "teamAmplitudeDomain": 100002286,
     "teamSiteimproveSite": 25048207726
@@ -73,10 +68,5 @@
     "teamName": "navno",
     "teamAmplitudeDomain": 100002261,
     "teamSiteimproveSite": false
-  },
-  {
-    "teamName": "Team C",
-    "teamAmplitudeDomain": 100004455,
-    "teamSiteimproveSite": 23998335848
   }
 ]
