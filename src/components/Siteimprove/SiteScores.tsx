@@ -195,9 +195,9 @@ const SiteScores = ({pageUrl, siteimproveSelectedDomain}) => {
                         </div>
                     </div>
                 </>
+            )};
+        </>
+    )
+};
 
-            );
-                </>
-            };
-
-            export default SiteScores;
+export default SiteScores;
