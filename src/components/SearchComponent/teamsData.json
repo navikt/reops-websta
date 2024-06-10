@@ -65,6 +65,16 @@
     "teamSiteimproveSite": 33711348311
   },
   {
+    "teamName": "felgen",
+    "teamAmplitudeDomain": 100004171,
+    "teamSiteimproveSite": false
+  },
+  {
+    "teamName": "navikt",
+    "teamAmplitudeDomain": 100004171,
+    "teamSiteimproveSite": false
+  },
+  {
     "teamName": "navno",
     "teamAmplitudeDomain": 100002261,
     "teamSiteimproveSite": false
