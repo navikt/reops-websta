@@ -8,6 +8,7 @@ import UU from './pages/uu';
 import Personvern from './pages/Personvern';
 import Dashboard from './pages/Dashboard'
 import { Footer, Nav, ScrollToTop } from './components/theme';
+import AmplitudeContextProvider from './context/AmplitudeContext';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <div className="flex flex-col min-h-screen">
         <Nav />
         <main className="flex-grow bg-custom-cyan pt-20">
+          <AmplitudeContextProvider>
           <Page>
             <Page.Block width="xl">
             <Routes>
@@ -27,6 +29,7 @@ function App() {
             </Page.Block>
           </Page>
           <ScrollToTop />
+          </AmplitudeContextProvider>
         </main>
         <Footer className="mt-auto" />
       </div>
