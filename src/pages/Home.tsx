@@ -218,7 +218,6 @@ const Home = () => {
                     {selectedDomain && (
                         <div
                             ref={siteScoresRef}
-                            className="p-4 w-full bg-white border border-blue-200 rounded shadow-lg md:col-span-2 mb-6"
                         >
                             <SiteScores
                                 pageUrl={selectedPageUrl}
