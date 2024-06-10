@@ -12,7 +12,7 @@ const AmplitudeContextProvider = ({ children }) => {
   useEffect(() => {
     if (window.location.hostname !== "localhost") {
       amplitude.add(uaPlugin);
-      init("ec8dc3f478fa51ae60f453dde7e749b3", undefined, {
+      init("1fe4740f82b4a986e81df1ead9b84ed5", undefined, {
         serverUrl: "https://amplitude.nav.no/collect",
         serverZone: "EU",
         defaultTracking: {
