@@ -34,7 +34,7 @@ export const RangeDatePicker = ({ onDateChange }: { onDateChange: (range: any) =
             // Hide the Alert after 10 seconds
             setTimeout(() => {
                 setShowAlert(false);
-            }, 10000);
+            }, 7000);
         }
     };
 
@@ -44,9 +44,9 @@ export const RangeDatePicker = ({ onDateChange }: { onDateChange: (range: any) =
                 <div className="flex flex-wrap justify-center gap-4 mb-12">
                     <DatePicker.Input {...fromInputProps} label="Fra" className="w-full sm:w-auto" />
                     <DatePicker.Input {...toInputProps} label="Til" className="w-full sm:w-auto" />
-                    <Button onClick={handleUpdateClick} variant="primary">Oppdater</Button>
+                    <Button onClick={handleUpdateClick} variant="primary"  style={{ height: 'auto' }}>Oppdater</Button>
                     {showAlert && (
-                        <Alert variant="success">
+                        <Alert variant="success" style={{ height: 'auto' }}>
                             Oppdatert!
                         </Alert>
                     )}
