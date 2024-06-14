@@ -41,13 +41,13 @@ export const RangeDatePicker = ({ onDateChange }: { onDateChange: (range: any) =
     return (
         <>
             <DatePicker {...datepickerProps}>
-                <div className="flex items-center">
+                <div className="flex items-baseline space-x-4">
                     <DatePicker.Input {...fromInputProps} label="Fra" className="w-full sm:w-auto"/>
                     <DatePicker.Input {...toInputProps} label="Til" className="w-full sm:w-auto"/>
                     <div style={{height: 'auto'}}>
-                        <Button onClick={handleUpdateClick} variant="primary">Oppdater</Button>
+                        <Button onClick={handleUpdateClick} variant="primary" className="mt-2 sm:mt-0">Oppdater</Button>
                         {showAlert && (
-                            <Alert variant="success">
+                            <Alert variant="success" className="mt-2 sm:mt-0">
                                 Oppdatert!
                             </Alert>
                         )}
