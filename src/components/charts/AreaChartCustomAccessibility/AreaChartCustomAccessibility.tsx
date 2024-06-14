@@ -42,19 +42,19 @@ const AreaChartCustomAccessibility: React.FC<
       <h2 className="text-center font-bold py-3">{titles.chartTitle}</h2>
       <div style={rootStyle}>
         <AreaChart
-          height={dimensions.height}
-          width={dimensions.width}
-          data={chartData}
-          legendsOverflowText={'Overflow Items'}
-          yAxisTickFormat={d3.format('')}
-          enablePerfOptimization={true}
-          enabledLegendsWrapLines={true}
-          legendProps={{ allowFocusOnLegends: true }}
-          xAxisTitle={titles.xAxisTitle} // Title for the X-axis
-          yAxisTitle={titles.yAxisTitle} // Title for the Y-axis
+            height={dimensions.height}
+            width={dimensions.width}
+            data={chartData}
+            legendsOverflowText={'Overflow Items'}
+            yAxisTickFormat={d3.format('')}
+            enablePerfOptimization={true}
+            enabledLegendsWrapLines={true}
+            legendProps={{allowFocusOnLegends: true}}
+            xAxisTitle={titles.xAxisTitle} // Title for the X-axis
+            yAxisTitle={titles.yAxisTitle} // Title for the Y-axis
         />
+        <p className="mt-4 text-right">Kilde: Amplitude</p>
       </div>
-      <p className="mt-4 text-align-right">Kile: Amplitude</p>
     </div>
   );
 };
