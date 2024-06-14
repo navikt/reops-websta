@@ -38,7 +38,7 @@ const AreaChartCustomAccessibility: React.FC<
   };
 
   return (
-      <div className="mb-12">
+      <>
         <h2 className="text-center font-bold py-3">{titles.chartTitle}</h2>
         <div style={rootStyle}>
           <AreaChart
@@ -54,8 +54,8 @@ const AreaChartCustomAccessibility: React.FC<
               yAxisTitle={titles.yAxisTitle} // Title for the Y-axis
           />
         </div>
-        <p className="text-right mr-4">Kilde: Amplitude</p>
-      </div>
+        <p className="text-right mr-4 mt-2">Kilde: Amplitude</p>
+      </>
   );
 };
 
