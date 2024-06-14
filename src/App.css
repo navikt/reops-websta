@@ -17,6 +17,10 @@ code {
   background-color: #003453;
 }
 
+.oppdater > .navds-alert > svg.navds-alert__icon {
+  align-self: auto !important;
+}
+
 .navds-page {
   background-color: transparent !important;
 }
