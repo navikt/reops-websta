@@ -44,11 +44,11 @@ export const RangeDatePicker = ({ onDateChange }: { onDateChange: (range: any) =
                 <DatePicker.Input {...fromInputProps} label="Fra" className="w-full sm:w-auto"/>
                 <DatePicker.Input {...toInputProps} label="Til" className="w-full sm:w-auto"/>
                 <Button onClick={handleUpdateClick} variant="primary" className="mt-2 sm:mt-0">Oppdater</Button>
-
+                {showAlert && (
                     <Alert variant="success">
                         Oppdatert!
                     </Alert>
-     
+                )}
             </div>
         </DatePicker>
     );
