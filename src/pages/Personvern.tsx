@@ -4,7 +4,7 @@ function Personvern() {
     return (
         <div className="App">
             <main>
-                <div style={{maxWidth: "600px", marginLeft: "auto", marginRight: "auto"}}>
+                <div className="mt-12 px-4" style={{maxWidth: "600px", marginLeft: "auto", marginRight: "auto"}}>
                     <Heading style={{color: "rgb(7, 63, 100)"}} spacing level="1" size="large">Personvern</Heading>
                     <div className="mb-12 mt-5 max-w-2xl font-serif">
                         <h2 className="pb-4 text-2xl">Personvern og sikkerhet på innblikk.ansatt.nav.no</h2>
