@@ -1,4 +1,4 @@
-const BASE_URL = 'https://reops-proxy.ansatt.nav.no/amplitude';
+const BASE_URL = window.location.hostname === 'localhost' ? 'https://reops-proxy.intern.nav.no/amplitude' : 'https://reops-proxy.ansatt.nav.no/amplitude';
 
 class RateLimiter {
     private maxRequestsPerSecond: number;

@@ -54,6 +54,7 @@ const AreaChartCustomAccessibility: React.FC<
           yAxisTitle={titles.yAxisTitle} // Title for the Y-axis
         />
       </div>
+      <p className="mt-4 text-align-right">Kile: Amplitude</p>
     </div>
   );
 };
