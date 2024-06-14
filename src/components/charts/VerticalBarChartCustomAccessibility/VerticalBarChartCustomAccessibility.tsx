@@ -59,7 +59,7 @@ export class VerticalBarChartCustomAccessibilityExample extends React.Component<
     };
 
     return (
-        <div className="mb-12">
+        <>
           <h2 className="text-center font-bold py-3">{titles.chartTitle}</h2>
           <div style={rootStyle}>
             <VerticalBarChart
@@ -75,11 +75,12 @@ export class VerticalBarChartCustomAccessibilityExample extends React.Component<
                 xAxisTitle={titles.xAxisTitle} // Now correctly referenced
                 yAxisTitle={titles.yAxisTitle} // Added y-axis title
                 styles={{
-                  root: { marginLeft: '-20px' }, // Pull the chart towards the left
+                  root: {marginLeft: '-20px'}, // Pull the chart towards the left
                 }}
             />
           </div>
-        </div>
+          <p className="text-right mr-4 mt-2 mb-2">Kilde: Amplitude</p>
+        </>
     );
   }
 }
