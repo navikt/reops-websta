@@ -38,24 +38,24 @@ const AreaChartCustomAccessibility: React.FC<
   };
 
   return (
-    <div className="mb-12">
-      <h2 className="text-center font-bold py-3">{titles.chartTitle}</h2>
-      <div style={rootStyle}>
-        <AreaChart
-            height={dimensions.height}
-            width={dimensions.width}
-            data={chartData}
-            legendsOverflowText={'Overflow Items'}
-            yAxisTickFormat={d3.format('')}
-            enablePerfOptimization={true}
-            enabledLegendsWrapLines={true}
-            legendProps={{allowFocusOnLegends: true}}
-            xAxisTitle={titles.xAxisTitle} // Title for the X-axis
-            yAxisTitle={titles.yAxisTitle} // Title for the Y-axis
-        />
-        <p className="mt-4 text-right">Kilde: Amplitude</p>
+      <div className="mb-12">
+        <h2 className="text-center font-bold py-3">{titles.chartTitle}</h2>
+        <div style={rootStyle}>
+          <AreaChart
+              height={dimensions.height}
+              width={dimensions.width}
+              data={chartData}
+              legendsOverflowText={'Overflow Items'}
+              yAxisTickFormat={d3.format('')}
+              enablePerfOptimization={true}
+              enabledLegendsWrapLines={true}
+              legendProps={{allowFocusOnLegends: true}}
+              xAxisTitle={titles.xAxisTitle} // Title for the X-axis
+              yAxisTitle={titles.yAxisTitle} // Title for the Y-axis
+          />
+        </div>
+        <p className="text-right mr-4">Kilde: Amplitude</p>
       </div>
-    </div>
   );
 };
 
