@@ -88,7 +88,7 @@ const SiteScores = ({pageUrl, siteimproveSelectedDomain}) => {
                     <div className="w-full">
                         <div className="mt-2 bg-white p-4 rounded-lg">
                             <h2 className="text-xl font-semibold mb-2" style={{color: '#000000'}}>
-                                Poengsum (av 100)
+                                Poengsum (av 100) fra Siteimprove
                             </h2>
                             <hr className="my-4 border-t-2 border-gray-300"/>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
