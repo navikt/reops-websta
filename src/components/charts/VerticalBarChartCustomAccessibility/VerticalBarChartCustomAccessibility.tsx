@@ -79,7 +79,7 @@ export class VerticalBarChartCustomAccessibilityExample extends React.Component<
                 }}
             />
           </div>
-          <p className="text-right mr-4 mt-2 mb-2">Kilde: Amplitude</p>
+          <p className="text-right mr-4 mt-4 mb-2">Kilde: Amplitude</p>
         </>
     );
   }

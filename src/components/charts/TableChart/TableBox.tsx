@@ -20,7 +20,7 @@ const TableBox = ({ data, title }) => (
                 ))}
             </Table.Body>
         </Table>
-        <p className="text-right mr-4 mt-4 mb-2">Kilde: Amplitude</p>
+        <p className="text-right mr-4 mt-6 mb-2">Kilde: Amplitude</p>
     </div>
 );
 
