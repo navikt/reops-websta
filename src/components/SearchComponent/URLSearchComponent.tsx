@@ -105,7 +105,7 @@ export const URLSearchComponent = ({
             className="w-full"
         />
         {searchInput.length >= 1 && !isValidUrl && (
-            <Alert variant="info" className="mt-6">
+            <Alert variant="warning" className="mt-6">
               For å sikre at du ser korrekt statistikk, anbefaler vi at du kopierer og limer inn lenken heller enn å skrive den inn selv.
             </Alert>
         )}

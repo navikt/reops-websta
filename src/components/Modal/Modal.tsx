@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import { Button, Modal, TextField } from "@navikt/ds-react";
-import { RangeDatePicker } from "../DatePicker/DatePicker";
+import { RangeDatePicker } from "../DatePicker/DatePickerModal";
 import { eventTypeMappings2 } from "../charts/dynamicUrlConstructor/EventTypeMappings2.ts";
 import teamsData from "../SearchComponent/teamsData.json";
 import GroupBySelect from "../Select/GroupBySelect.tsx";
@@ -127,7 +127,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ onSubmit, title, size }) 
                 <Modal.Body>
                     <form method="dialog" id="chartSettings" onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
                         <TextField
-                            label="Tittel på graf"
+                            label="Graftittel"
                             value={formData.chartTitle}
                             onChange={(e) => setFormData({ ...formData, chartTitle: e.target.value })}
                         />
@@ -142,7 +142,8 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ onSubmit, title, size }) 
                             onChange={(e) => setFormData({ ...formData, chartYAxisTitle: e.target.value })}
                         />*/}
                         <TextField
-                            label="Lim inn URL til siden du vil lage graf for"
+                            label="URL til siden du vil lage graf for"
+                            className="mt-4"
                             value={formData.inputtedURL}
                             onChange={(e) => handleSearchChange(e.target.value)}
                         />
@@ -155,7 +156,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ onSubmit, title, size }) 
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button form="chartSettings">Lagre</Button>
+                    <Button form="chartSettings">Opprett graf</Button>
                     <Button variant="secondary" onClick={closeModal}>
                         Avbryt
                     </Button>
