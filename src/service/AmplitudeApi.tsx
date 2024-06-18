@@ -1,4 +1,4 @@
-const BASE_URL = window.location.hostname === 'localhost' ? 'https://reops-proxy.intern.nav.no/amplitude' : 'https://reops-proxy.ansatt.nav.no/amplitude';
+const BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:8081/amplitude' : 'https://reops-proxy.ansatt.nav.no/amplitude';
 
 class RateLimiter {
     private maxRequestsPerSecond: number;
@@ -47,7 +47,7 @@ export const fetchAmplitudeData = async (endpoint: string, teamDomain: string) =
 
     const fetchFunction = async () => {
         const response = await fetch(`${BASE_URL}${teamUrl}${endpoint}`, {
-            credentials: 'include',
+            credentials: window.location.hostname === 'localhost' ? 'omit' : 'include',
         });
         if (!response.ok) {
             throw new Error('Network response was not ok');
