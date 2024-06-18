@@ -123,15 +123,15 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ onSubmit, title, size }) 
         <div className="py-12">
             <Button onClick={openModal} size={`${size}`}>{title}</Button>
 
-            <Modal open={modalOpen} onClose={closeModal} header={{ heading: "Chart Settings" }} width={400}>
+            <Modal open={modalOpen} onClose={closeModal} header={{ heading: "Lag en graf" }} width={450}>
                 <Modal.Body>
                     <form method="dialog" id="chartSettings" onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
                         <TextField
-                            label="Graf-Tittel"
+                            label="Tittel på graf"
                             value={formData.chartTitle}
                             onChange={(e) => setFormData({ ...formData, chartTitle: e.target.value })}
                         />
-                        <TextField
+{/*                        <TextField
                             label="x akse tittel"
                             value={formData.chartXAxisTitle}
                             onChange={(e) => setFormData({ ...formData, chartXAxisTitle: e.target.value })}
@@ -140,9 +140,9 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ onSubmit, title, size }) 
                             label="y akse tittel"
                             value={formData.chartYAxisTitle}
                             onChange={(e) => setFormData({ ...formData, chartYAxisTitle: e.target.value })}
-                        />
+                        />*/}
                         <TextField
-                            label="Skriv in URL fra nettsted for grafen du vil lage"
+                            label="Lim inn URL til siden du vil lage graf for"
                             value={formData.inputtedURL}
                             onChange={(e) => handleSearchChange(e.target.value)}
                         />
@@ -155,9 +155,9 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ onSubmit, title, size }) 
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button form="chartSettings">Apply</Button>
+                    <Button form="chartSettings">Lagre</Button>
                     <Button variant="secondary" onClick={closeModal}>
-                        Cancel
+                        Avbryt
                     </Button>
                 </Modal.Footer>
             </Modal>

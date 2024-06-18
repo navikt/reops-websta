@@ -41,7 +41,7 @@ const GroupBySelect: React.FC<GroupBySelectProps> = ({ onSelectedGroupBy }) => {
     });
 
     return (
-        <Select label="Group By" onChange={handleGroupByChange}>
+        <Select label="Gruppering" onChange={handleGroupByChange}>
             <option value="">Select Group By</option>
             {groupByOptions}
         </Select>
