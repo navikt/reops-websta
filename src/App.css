@@ -29,6 +29,19 @@ Footer a {
   color: #fff !important;
 }
 
+Header button {
+  background-color: transparent !important;
+}
+
+Header .logo a {
+  color: #fff !important;
+  text-decoration: none;
+}
+
+Header .logo a:hover {
+  text-decoration: underline;
+}
+
 .navds-accordion--indent
   > :where(.navds-accordion__item)
   > :where(.navds-accordion__content) {

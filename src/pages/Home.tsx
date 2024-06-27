@@ -7,7 +7,7 @@ import SiteScores from '../components/Siteimprove/SiteScores.tsx';
 import SimpleOverviewChartBoard from '../components/Amplitude/SimpleOverviewChartBoard.tsx';
 import NavnoSimpleOverviewChartBoard from '../components/Amplitude/NavnoSimpleOverviewChartBoard.tsx';
 import {useLocation, useNavigate} from "react-router-dom";
-import {Button} from "@navikt/ds-react";
+import {Button, Heading} from "@navikt/ds-react";
 
 const Home = () => {
     const [selectedDomain, setSelectedDomain] = useState('');
@@ -187,7 +187,7 @@ const Home = () => {
 
     return (
         <div className={`flex flex-col  ${!selectedDomain ? 'items-center justify-center mt-24' : ''} p-6`}>
-            <h1 className={`text-4xl font-bold mb-6`}>Webstatistikk 📊</h1>
+            <Heading style={{color: "rgb(7, 63, 100)"}} level="1" size="xlarge">Webstatistikk</Heading>
 
             <div
                 className={`flex flex-col ${!selectedDomain ? 'items-center justify-center' : ''} pt-8 pb-5 space-y-6 w-full`}>
