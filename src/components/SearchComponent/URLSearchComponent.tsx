@@ -1,4 +1,4 @@
-import { Search, Alert } from '@navikt/ds-react';
+import { Search, Alert, ReadMore } from '@navikt/ds-react';
 import { useEffect, useState } from 'react';
 import teamsData from './teamsData.json';
 
@@ -109,6 +109,23 @@ export const URLSearchComponent = ({
               For å sikre at du ser korrekt statistikk, anbefaler vi at du kopierer og limer inn lenken heller enn å skrive den inn selv.
             </Alert>
         )}
+        <ReadMore className="mt-3" header="Hvilke nettsider støttes?">
+          <ul className="list-disc pl-5">
+            <li>nav.no</li>
+            <li>Navet (Sharepoint)</li>
+            <li>arbeidsplassen.nav.no</li>
+            <li>aksel.nav.no</li>
+            <li>arbeidogvelferd.nav.no</li>
+            <li>etterlevelse.ansatt.nav.no</li>
+            <li>felgen.ansatt.nav.no</li>
+            <li>finnhjelpemiddel.nav.no</li>
+            <li>idebanken.org</li>
+            <li>mangfoldimai.no</li>
+            <li>memu.no</li>
+            <li>kunnskapsbanken.net</li>
+            <li>workinnorway.no</li>
+          </ul>
+        </ReadMore>
       </form>
   );
 };

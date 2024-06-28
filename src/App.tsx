@@ -18,7 +18,7 @@ function App() {
           <div style={{background: "rgba(19,17,54)"}}>
             <Header/>
           </div>
-          <main className="flex-grow pt-20">
+          <main className="flex-grow pt-12">
             <AmplitudeContextProvider>
               <Page>
                 <Page.Block width="xl">

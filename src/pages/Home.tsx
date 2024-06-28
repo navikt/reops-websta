@@ -186,8 +186,8 @@ const Home = () => {
     ], [selectedPath]);
 
     return (
-        <div className={`flex flex-col  ${!selectedDomain ? 'items-center justify-center mt-24' : ''} p-6`}>
-            <Heading style={{color: "rgb(7, 63, 100)"}} level="1" size="xlarge">Webstatistikk</Heading>
+        <div className={`flex flex-col  ${!selectedDomain ? 'items-center justify-center mt-36' : ''} px-6`}>
+            <Heading style={{color: "rgb(7, 63, 100)"}} level="1" size="xlarge">NAV Webstatistikk</Heading>
 
             <div
                 className={`flex flex-col ${!selectedDomain ? 'items-center justify-center' : ''} pt-8 pb-5 space-y-6 w-full`}>
@@ -195,7 +195,7 @@ const Home = () => {
                 <div className="flex flex-col w-full max-w-xl">
                     <div className="relative">
                         <URLSearchComponent
-                            className="border p-2 rounded"
+                            className="border py-2 rounded"
                             onDomainSelect={handleDomainSelect}
                             pageUrl={selectedPageUrl}
                             onPagePath={handlePathSelection}
@@ -207,7 +207,7 @@ const Home = () => {
                 </div>
 
                 {selectedDomain && (
-                    <div className={`flex w-full max-w-lg`}>
+                    <div id="datepickerbox" className={`className="flex w-full max-w-lg`}>
                         <RangeDatePicker onDateChange={handleDateChange}/>
                     </div>
                 )}

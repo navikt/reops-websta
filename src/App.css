@@ -8,6 +8,10 @@ body {
   overflow-x: hidden;
 } /* background: #f7f7f7; */
 
+#datepickerbox {
+  margin-top: 1rem
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
