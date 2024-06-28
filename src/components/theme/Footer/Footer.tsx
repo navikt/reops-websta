@@ -24,25 +24,29 @@ const Footer = () => {
 
 function LogoBlock() {
   return (
-    <div>
-      <span className="mt-4 text-2xl whitespace-nowrap">Innblikk</span>
-      <p className="mt-3 leading-normal">&copy; {new Date().getFullYear()}</p>
-    </div>
+      <div>
+          <span className="mt-4 text-2xl whitespace-nowrap">Innblikk</span>
+          <p className="mt-3 leading-normal">&copy; {new Date().getFullYear()} NAV</p>
+          <p className="leading-normal mt-2">Arbeids- og velferdsetaten</p>
+      </div>
   );
 }
 
 // TODO: må endre lenker
 function Snarveier() {
-  return (
+    return (
     <div>
-      <Heading level="2" size="xsmall">
-        Universell utforming
-      </Heading>
-      <BodyShort as="ul" className="mt-3 grid gap-3">
-        <FooterLink href="/uu">
-          Tilgjengelighetserklæring
-        </FooterLink>
-      </BodyShort>
+        <Heading className="pb-4" level="2" size="xsmall">
+            Erkløringer
+        </Heading>
+        <BodyShort as="ul" className="mt-3 grid gap-3">
+            <FooterLink href="/uu">
+                Tilgjengelighetserklæring
+            </FooterLink>
+            <FooterLink href="/personvern">
+                Personvernererklæring
+            </FooterLink>
+        </BodyShort>
     </div>
   );
 }
@@ -51,12 +55,15 @@ function Snarveier() {
 function SideLenker() {
   return (
     <div>
-      <Heading level="2" size="xsmall">
-        Personvern
+      <Heading className="pb-4" level="2" size="xsmall">
+        Snarveier
       </Heading>
       <BodyShort as="ul" className="mt-3 grid gap-3">
-        <FooterLink href="/personvern">
-          Personvernererklæring
+          <FooterLink href="https://innblikk.ansatt.nav.no/?domain=100006162&path=%2F&url=https%3A%2F%2Finnblikk.ansatt.nav.no%2F&siteimproveDomain=false">
+              Statistikk for bruk av Innblikk
+          </FooterLink>
+        <FooterLink href="https://forms.office.com/e/jrfBQDze4d">
+          Send innspill til Innblikk
         </FooterLink>
       </BodyShort>
     </div>
@@ -66,10 +73,13 @@ function SideLenker() {
 function Kontakt() {
   return (
     <div>
-      <Heading level="2" size="xsmall">
-        Åpen kildekode
+      <Heading className="pb-4" level="2" size="xsmall">
+        Finn oss
       </Heading>
       <BodyShort as="ul" className="mt-3 grid gap-3">
+          <FooterLink href="https://teamkatalog.nav.no/team/26dba481-fd96-40a8-b47d-b1ad0002bc74">
+              Teamkatalogen
+          </FooterLink>
         <FooterLink href="https://github.com/navikt/reops-websta#readme">
           <svg
             className="align-top"
