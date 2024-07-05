@@ -10,14 +10,14 @@
     "teamSiteimproveSite": 30048105178
   },
   {
-    "teamName": "Nav",
-    "teamAmplitudeDomain": 100000009,
-    "teamSiteimproveSite": 21766831756
-  },
-  {
     "teamName": "Etterlevelse",
     "teamAmplitudeDomain": 100000009,
     "teamSiteimproveSite": false
+  },
+  {
+    "teamName": "Nav",
+    "teamAmplitudeDomain": 100000009,
+    "teamSiteimproveSite": 21766831756
   },
   {
     "teamName": "Mangfoldimai",
