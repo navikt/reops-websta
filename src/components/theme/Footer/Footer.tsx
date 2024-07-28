@@ -37,7 +37,7 @@ function Snarveier() {
     return (
     <div>
         <Heading className="pb-4" level="2" size="xsmall">
-            Erkløringer
+            Erklæringer
         </Heading>
         <BodyShort as="ul" className="mt-3 grid gap-3">
             <FooterLink href="/uu">
