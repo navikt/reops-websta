@@ -187,7 +187,7 @@ const Home = () => {
 
     return (
         <div className={`flex flex-col  ${!selectedDomain ? 'items-center justify-center mt-36' : ''} px-6`}>
-            <Heading style={{color: "rgb(7, 63, 100)"}} level="1" size="xlarge">NAV Webstatistikk</Heading>
+            <Heading style={{color: "rgb(7, 63, 100)"}} level="1" size="xlarge">Nav Webstatistikk</Heading>
 
             <div
                 className={`flex flex-col ${!selectedDomain ? 'items-center justify-center' : ''} pt-8 pb-5 space-y-6 w-full`}>
