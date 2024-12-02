@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM gcr.io/distroless/nodejs22-debian12
 
 COPY . .
 
