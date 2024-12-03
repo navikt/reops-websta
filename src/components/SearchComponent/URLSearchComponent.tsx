@@ -116,7 +116,6 @@ export const URLSearchComponent = ({
             <li>arbeidsplassen.nav.no</li>
             <li>aksel.nav.no</li>
             <li>arbeidogvelferd.nav.no</li>
-            <li>felgen.ansatt.nav.no</li>
             <li>finnhjelpemiddel.nav.no</li>
             <li>idebanken.org</li>
             <li>mangfoldimai.no</li>
