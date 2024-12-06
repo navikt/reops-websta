@@ -56,27 +56,32 @@ export const URLSearchComponent = ({
     setFilteredTeams(filtered);
   };
 
-  const handleSearchSubmit = () => {
-    if (searchInput.trim() === '') {
-      setError('Du må sette inn en URL-adresse.');
-      onValidUrl(false); // Notify parent of invalid URL
-      return;
-    }
+const handleSearchSubmit = () => {
+  if (searchInput.trim() === '') {
+    setError('Du må sette inn en URL-adresse.');
+    onValidUrl(false); // Notify parent of invalid URL
+    return;
+  }
 
-    if (filteredTeams.length > 0) {
-      const selectedTeam = filteredTeams[0]; // Assumes the first match is the desired one
-      onDomainSelect(selectedTeam.teamAmplitudeDomain.toString());
-      const path = extractPath(searchInput);
-      onPagePath(path);
-      onPageUrl(searchInput);
-      onSiteimproveDomain(selectedTeam.teamSiteimproveSite.toString());
-      setError(null); // Clear error on successful search
-      onValidUrl(true); // Notify parent of valid URL
-    } else {
-      setError('Nettsiden er ikke lagt til enda, eller du har skrevet inn en ugyldig URL.');
-      onValidUrl(false); // Notify parent of invalid URL
-    }
-  };
+  let url = searchInput.trim();
+  if (!url.startsWith('http://') && !url.startsWith('https://')) {
+    url = `https://${url}`;
+  }
+
+  if (filteredTeams.length > 0) {
+    const selectedTeam = filteredTeams[0]; // Assumes the first match is the desired one
+    onDomainSelect(selectedTeam.teamAmplitudeDomain.toString());
+    const path = extractPath(url);
+    onPagePath(path);
+    onPageUrl(url);
+    onSiteimproveDomain(selectedTeam.teamSiteimproveSite.toString());
+    setError(null); // Clear error on successful search
+    onValidUrl(true); // Notify parent of valid URL
+  } else {
+    setError('Nettsiden er ikke lagt til enda, eller du har skrevet inn en ugyldig URL.');
+    onValidUrl(false); // Notify parent of invalid URL
+  }
+};
 
   useEffect(() => {
     setSearchInput(pageUrl);
