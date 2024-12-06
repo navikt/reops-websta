@@ -7,7 +7,7 @@ import SiteScores from '../components/Siteimprove/SiteScores.tsx';
 import SimpleOverviewChartBoard from '../components/Amplitude/SimpleOverviewChartBoard.tsx';
 import NavnoSimpleOverviewChartBoard from '../components/Amplitude/NavnoSimpleOverviewChartBoard.tsx';
 import {useLocation, useNavigate} from "react-router-dom";
-import {Button, Heading} from "@navikt/ds-react";
+import {Alert, Button, Heading, Link} from "@navikt/ds-react";
 
 const Home = () => {
     const [selectedDomain, setSelectedDomain] = useState('');
@@ -203,6 +203,9 @@ const Home = () => {
                             onPageUrl={handlePageUrl}
                             onValidUrl={setIsValidUrl}
                         />
+                        {!selectedDomain && (
+                            <Alert className="mt-12" variant="info">Likte du Innblikk, men savner flere grafer og bedre filtreringsmuligheter? Da bør du sjekke ut Umami! <br /><br />Les mer på <Link href="https://startumami.ansatt.nav.no">startumami.ansatt.nav.no</Link></Alert>
+                        )}
                     </div>
                 </div>
 
