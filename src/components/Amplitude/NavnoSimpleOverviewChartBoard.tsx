@@ -47,7 +47,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             filters: [
                                 {
                                     subprop_type: 'event',
-                                    subprop_key: 'pagePath',
+                                    subprop_key: 'platform',
                                     subprop_op: 'contains',
                                     subprop_value: [selectedPath],
                                 },
@@ -80,7 +80,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             filters: [
                                 {
                                     subprop_type: 'event',
-                                    subprop_key: 'pagePath',
+                                    subprop_key: 'platform',
                                     subprop_op: 'contains',
                                     subprop_value: [selectedPath],
                                 },
@@ -113,7 +113,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             filters: [
                                 {
                                     subprop_type: 'event',
-                                    subprop_key: 'pagePath',
+                                    subprop_key: 'platform',
                                     subprop_op: 'contains',
                                     subprop_value: [selectedPath],
                                 },
@@ -146,7 +146,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             filters: [
                                 {
                                     subprop_type: 'event',
-                                    subprop_key: 'pagePath',
+                                    subprop_key: 'platform',
                                     subprop_op: 'contains',
                                     subprop_value: [selectedPath],
                                 },
@@ -179,7 +179,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             filters: [
                                 {
                                     subprop_type: 'event',
-                                    subprop_key: 'pagePath',
+                                    subprop_key: 'platform',
                                     subprop_op: 'contains',
                                     subprop_value: [selectedPath],
                                 },
@@ -204,7 +204,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             filters: [
                                 {
                                     subprop_type: 'event',
-                                    subprop_key: 'pagePath',
+                                    subprop_key: 'platform',
                                     subprop_op: 'contains',
                                     subprop_value: [selectedPath],
                                 },
@@ -230,7 +230,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             filters: [
                                 {
                                     subprop_type: 'event',
-                                    subprop_key: 'pagePath',
+                                    subprop_key: 'platform',
                                     subprop_op: 'contains',
                                     subprop_value: [selectedPath],
                                 },
@@ -264,7 +264,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             filters: [
                                 {
                                     subprop_type: 'event',
-                                    subprop_key: 'pagePath',
+                                    subprop_key: 'platform',
                                     subprop_op: 'contains',
                                     subprop_value: [selectedPath],
                                 },
@@ -297,7 +297,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             filters: [
                                 {
                                     subprop_type: 'event',
-                                    subprop_key: 'pagePath',
+                                    subprop_key: 'platform',
                                     subprop_op: 'contains',
                                     subprop_value: [selectedPath],
                                 },
@@ -322,7 +322,7 @@ const SimpleOverviewChartBoard: React.FC<ChartsBoardProps> = ({
                             filters: [
                                 {
                                     subprop_type: 'event',
-                                    subprop_key: 'pagePath',
+                                    subprop_key: 'platform',
                                     subprop_op: 'contains',
                                     subprop_value: [selectedPath],
                                 },

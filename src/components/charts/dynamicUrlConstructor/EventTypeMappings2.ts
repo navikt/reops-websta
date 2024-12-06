@@ -96,7 +96,7 @@ export const eventTypeMappings2 = {
     //table *
     besøkGroupByPagePath: {
         eventType: `besøk`,
-        groupBy: [{ type: "event", value: "pagePath" }],
+        groupBy: [{ type: "event", value: "platform" }],
         filters: []
     },
     //table *
