@@ -9,13 +9,13 @@ interface Team {
 }
 
 export const URLSearchComponent = ({
-     onDomainSelect,
-     pageUrl,
-     onPagePath,
-     onPageUrl,
-     onSiteimproveDomain,
-     onValidUrl, // New proppage
-   }) => {
+                                     onDomainSelect,
+                                     pageUrl,
+                                     onPagePath,
+                                     onPageUrl,
+                                     onSiteimproveDomain,
+                                     onValidUrl,
+                                   }) => {
   const [searchInput, setSearchInput] = useState('');
   const [filteredTeams, setFilteredTeams] = useState<Team[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -24,6 +24,23 @@ export const URLSearchComponent = ({
   useEffect(() => {
     setFilteredTeams(teamsData as Team[]);
   }, []);
+
+  const normalizeUrl = (url: string): string => {
+  // Remove any whitespace
+  url = url.trim();
+
+  // Special handling for nav.no domains
+  if (url.includes('nav.no') && !url.includes('.') && !url.startsWith('www.')) {
+    url = `www.${url}`;
+  }
+
+  // Add https:// if no protocol is present
+  if (!url.match(/^[a-zA-Z]+:\/\//)) {
+    url = `https://${url}`;
+  }
+
+  return url;
+};
 
   const extractDomain = (url) => {
     const match = url.match(/\/\/(?:www\.)?([^\/.]+)\./);
@@ -36,9 +53,10 @@ export const URLSearchComponent = ({
   };
 
   const handleSearchChange = (value) => {
-    setSearchInput(value);
-    filterTeams(extractDomain(value));
-    setIsValidUrl(validateUrl(value));
+    const normalizedUrl = normalizeUrl(value);
+    setSearchInput(normalizedUrl);
+    filterTeams(extractDomain(normalizedUrl));
+    setIsValidUrl(validateUrl(normalizedUrl));
   };
 
   const validateUrl = (url) => {
@@ -56,38 +74,39 @@ export const URLSearchComponent = ({
     setFilteredTeams(filtered);
   };
 
-const handleSearchSubmit = () => {
-  if (searchInput.trim() === '') {
-    setError('Du må sette inn en URL-adresse.');
-    onValidUrl(false); // Notify parent of invalid URL
-    return;
-  }
+  const handleSearchSubmit = () => {
+    const normalizedUrl = normalizeUrl(searchInput);
 
-  let url = searchInput.trim();
-  if (!url.startsWith('http://') && !url.startsWith('https://')) {
-    url = `https://${url}`;
-  }
+    if (normalizedUrl.trim() === '') {
+      setError('Du må sette inn en URL-adresse.');
+      onValidUrl(false);
+      return;
+    }
 
-  if (filteredTeams.length > 0) {
-    const selectedTeam = filteredTeams[0]; // Assumes the first match is the desired one
-    onDomainSelect(selectedTeam.teamAmplitudeDomain.toString());
-    const path = extractPath(url);
-    onPagePath(path);
-    onPageUrl(url);
-    onSiteimproveDomain(selectedTeam.teamSiteimproveSite.toString());
-    setError(null); // Clear error on successful search
-    onValidUrl(true); // Notify parent of valid URL
-  } else {
-    setError('Nettsiden er ikke lagt til enda, eller du har skrevet inn en ugyldig URL.');
-    onValidUrl(false); // Notify parent of invalid URL
-  }
-};
+    if (!validateUrl(normalizedUrl)) {
+      setError('Ugyldig URL-format.');
+      onValidUrl(false);
+      return;
+    }
+
+    if (filteredTeams.length > 0) {
+      const selectedTeam = filteredTeams[0];
+      onDomainSelect(selectedTeam.teamAmplitudeDomain.toString());
+      const path = extractPath(normalizedUrl);
+      onPagePath(path);
+      onPageUrl(normalizedUrl);
+      onSiteimproveDomain(selectedTeam.teamSiteimproveSite.toString());
+      setError(null);
+      onValidUrl(true);
+    } else {
+      setError('Nettsiden er ikke lagt til enda, eller du har skrevet inn en ugyldig URL.');
+      onValidUrl(false);
+    }
+  };
 
   useEffect(() => {
     setSearchInput(pageUrl);
   }, [pageUrl]);
-
-  // console.log('pageUrl: ' + pageUrl);
 
   return (
       <form
@@ -105,7 +124,7 @@ const handleSearchSubmit = () => {
             onSearchClick={handleSearchSubmit}
             variant="primary"
             hideLabel={false}
-            clearButton={true} // Adds a clear button that also uses the onClear prop if necessary
+            clearButton={true}
             error={error}
             className="w-full"
         />
@@ -114,7 +133,7 @@ const handleSearchSubmit = () => {
               For å sikre at du ser korrekt statistikk, anbefaler vi at du kopierer og limer inn lenken heller enn å skrive den inn selv.
             </Alert>
         )}
-        <ReadMore className="mt-3" header="Hvilke nettsider støttes?">
+        <ReadMore className="mt-3" header="Hvilke nettsider støttes">
           <ul className="list-disc pl-5">
             <li>nav.no</li>
             <li>Navet (Sharepoint)</li>
