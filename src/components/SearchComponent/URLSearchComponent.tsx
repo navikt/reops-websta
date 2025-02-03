@@ -136,12 +136,10 @@ export const URLSearchComponent = ({
         <ReadMore className="mt-3" header="Hvilke nettsider støttes">
           <ul className="list-disc pl-5">
             <li>nav.no</li>
-            <li>Navet (Sharepoint)</li>
             <li>arbeidsplassen.nav.no</li>
             <li>aksel.nav.no</li>
             <li>arbeidogvelferd.nav.no</li>
             <li>finnhjelpemiddel.nav.no</li>
-            <li>idebanken.org</li>
             <li>mangfoldimai.no</li>
             <li>memu.no</li>
             <li>kunnskapsbanken.net</li>
