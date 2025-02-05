@@ -203,9 +203,9 @@ const Home = () => {
                             onPageUrl={handlePageUrl}
                             onValidUrl={setIsValidUrl}
                         />
-                        {!selectedDomain && (
+{/*                        {!selectedDomain && (
                             <Alert className="mt-12" variant="info">Likte du Innblikk, men savner flere grafer og bedre filtreringsmuligheter? Da bør du sjekke ut Umami! <br /><br />Les mer på <Link href="https://startumami.ansatt.nav.no">startumami.ansatt.nav.no</Link></Alert>
-                        )}
+                        )}*/}
                     </div>
                 </div>
 

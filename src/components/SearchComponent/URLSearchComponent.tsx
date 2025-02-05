@@ -140,10 +140,8 @@ export const URLSearchComponent = ({
             <li>aksel.nav.no</li>
             <li>arbeidogvelferd.nav.no</li>
             <li>finnhjelpemiddel.nav.no</li>
-            <li>mangfoldimai.no</li>
             <li>memu.no</li>
             <li>kunnskapsbanken.net</li>
-            <li>workinnorway.no</li>
           </ul>
         </ReadMore>
       </form>
