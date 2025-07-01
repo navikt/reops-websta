@@ -1,4 +1,4 @@
-import { Search, Alert, ReadMore } from '@navikt/ds-react';
+import { Search, Alert, RadioGroup, Stack, Radio} from '@navikt/ds-react';
 import { useEffect, useState } from 'react';
 import teamsData from './teamsData.json';
 
@@ -20,6 +20,8 @@ export const URLSearchComponent = ({
   const [filteredTeams, setFilteredTeams] = useState<Team[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isValidUrl, setIsValidUrl] = useState(true);
+  const [selectedAnalytics, setSelectedAnalytics] = useState("1"); // "1" = Umami, "2" = Amplitude
+  const [hasSearched, setHasSearched] = useState(false);
 
   useEffect(() => {
     setFilteredTeams(teamsData as Team[]);
@@ -55,8 +57,13 @@ export const URLSearchComponent = ({
   const handleSearchChange = (value) => {
     const normalizedUrl = normalizeUrl(value);
     setSearchInput(normalizedUrl);
-    filterTeams(extractDomain(normalizedUrl));
     setIsValidUrl(validateUrl(normalizedUrl));
+    // Only filter teams if Amplitude is selected
+    if (selectedAnalytics === "2") {
+      filterTeams(extractDomain(normalizedUrl));
+    } else {
+      setFilteredTeams(teamsData as Team[]);
+    }
   };
 
   const validateUrl = (url) => {
@@ -89,6 +96,15 @@ export const URLSearchComponent = ({
       return;
     }
 
+    if (selectedAnalytics === "1") {
+      // Umami: redirect to felgen with encoded URL as q param in the same tab
+      const felgenUrl = `https://felgen.ansatt.nav.no/?q=${encodeURIComponent(normalizedUrl)}`;
+      window.location.assign(felgenUrl);
+      return;
+    }
+
+    // Amplitude: existing behavior
+    filterTeams(extractDomain(normalizedUrl));
     if (filteredTeams.length > 0) {
       const selectedTeam = filteredTeams[0];
       onDomainSelect(selectedTeam.teamAmplitudeDomain.toString());
@@ -98,6 +114,7 @@ export const URLSearchComponent = ({
       onSiteimproveDomain(selectedTeam.teamSiteimproveSite.toString());
       setError(null);
       onValidUrl(true);
+      setHasSearched(true); // Hide radio after amplitude search
     } else {
       setError('Nettsiden er ikke lagt til enda, eller du har skrevet inn en ugyldig URL.');
       onValidUrl(false);
@@ -106,6 +123,7 @@ export const URLSearchComponent = ({
 
   useEffect(() => {
     setSearchInput(pageUrl);
+    setHasSearched(false); // Reset on pageUrl change
   }, [pageUrl]);
 
   return (
@@ -128,22 +146,28 @@ export const URLSearchComponent = ({
             error={error}
             className="w-full"
         />
+        <RadioGroup
+          legend=""
+          value={selectedAnalytics}
+          onChange={value => {
+            setSelectedAnalytics(value);
+            if (value === "2") {
+              filterTeams(extractDomain(searchInput));
+            } else {
+              setFilteredTeams(teamsData as Team[]);
+            }
+          }}
+        >
+          <Stack gap="0 6" direction={{ xs: "column", sm: "row" }} wrap={false}>
+            <Radio value="1">Umami</Radio>
+            <Radio value="2">Amplitude</Radio>
+          </Stack>
+        </RadioGroup>
         {searchInput.length >= 1 && !isValidUrl && (
             <Alert variant="warning" className="mt-6">
               For å sikre at du ser korrekt statistikk, anbefaler vi at du kopierer og limer inn lenken heller enn å skrive den inn selv.
             </Alert>
         )}
-        <ReadMore className="mt-3" header="Hvilke nettsider støttes">
-          <ul className="list-disc pl-5">
-            <li>nav.no</li>
-            <li>arbeidsplassen.nav.no</li>
-            <li>aksel.nav.no</li>
-            <li>arbeidogvelferd.nav.no</li>
-            <li>finnhjelpemiddel.nav.no</li>
-            <li>memu.no</li>
-            <li>kunnskapsbanken.net</li>
-          </ul>
-        </ReadMore>
       </form>
   );
 };
