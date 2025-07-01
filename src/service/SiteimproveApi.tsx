@@ -1,4 +1,4 @@
-const BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:8081/siteimprove' : 'https://reops-proxy.ansatt.nav.no/siteimprove';
+const BASE_URL = window.location.hostname === 'localhost' ? 'https://reops-proxy.intern.nav.no/siteimprove' : 'https://reops-proxy.ansatt.nav.no/siteimprove';
 
 export const fetchSiteimproveData = async (endpoint: string) => {
     try {
