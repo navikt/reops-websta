@@ -1,71 +1,85 @@
 [
   {
     "teamName": "Memu",
+    "teamDomain": "https://memu.no",
     "teamAmplitudeDomain": 100002286,
     "teamSiteimproveSite": 25048207726
   },
   {
     "teamName": "Aksel",
+    "teamDomain": "https://aksel.nav.no",
     "teamAmplitudeDomain": 100002016,
     "teamSiteimproveSite": 30048105178
   },
   {
     "teamName": "Nav",
+    "teamDomain": "https://www.nav.no",
     "teamAmplitudeDomain": 100000009,
     "teamSiteimproveSite": 21766831756
   },
   {
     "teamName": "Mangfoldimai",
+    "teamDomain": "https://mangfoldimai.no",
     "teamAmplitudeDomain": 100002287,
     "teamSiteimproveSite": 30141243932
   },
   {
     "teamName": "Arbeidsplassen",
+    "teamDomain": "https://arbeidsplassen.nav.no",
     "teamAmplitudeDomain": 100000244,
     "teamSiteimproveSite": 23679828077
   },
   {
     "teamName": "Workinnorway",
+    "teamDomain": "https://workinnorway.no",
     "teamAmplitudeDomain": 100002233,
     "teamSiteimproveSite": 25550852482
   },
   {
     "teamName": "Kunnskapsbanken",
+    "teamDomain": "https://kunnskapsbanken.net",
     "teamAmplitudeDomain": 100001607,
     "teamSiteimproveSite": 24837355879
   },
   {
     "teamName": "arbeidogvelferd",
+    "teamDomain": "https://arbeidogvelferd.nav.no",
     "teamAmplitudeDomain": 100004122,
     "teamSiteimproveSite": 28929754463
   },
   {
     "teamName": "detsombetyrnoe",
+    "teamDomain": "https://detsombetyrnoe.no",
     "teamAmplitudeDomain": 100000251,
     "teamSiteimproveSite": 24075344668
   },
   {
     "teamName": "finnhjelpemiddel",
+    "teamDomain": "https://finnhjelpemiddel.nav.no",
     "teamAmplitudeDomain": 100000965,
     "teamSiteimproveSite": 33711348311
   },
   {
     "teamName": "felgen",
+    "teamDomain": "https://felgen.nav.no",
     "teamAmplitudeDomain": 100004171,
     "teamSiteimproveSite": false
   },
   {
     "teamName": "skup",
+    "teamDomain": "https://skup.nav.no",
     "teamAmplitudeDomain": 100004171,
     "teamSiteimproveSite": false
   },
   {
     "teamName": "innblikk",
+    "teamDomain": "https://innblikk.nav.no",
     "teamAmplitudeDomain": 100006162,
     "teamSiteimproveSite": false
   },
   {
     "teamName": "navno",
+    "teamDomain": "https://navno.sharepoint.com",
     "teamAmplitudeDomain": 100002261,
     "teamSiteimproveSite": false
   }
