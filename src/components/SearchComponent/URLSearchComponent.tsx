@@ -146,8 +146,9 @@ export const URLSearchComponent = ({
             error={error}
             className="w-full"
         />
+        <div className="pt-6">
         <RadioGroup
-          legend=""
+          legend="Datakilde"
           value={selectedAnalytics}
           onChange={value => {
             setSelectedAnalytics(value);
@@ -163,6 +164,7 @@ export const URLSearchComponent = ({
             <Radio value="2">Amplitude</Radio>
           </Stack>
         </RadioGroup>
+        </div>
         {searchInput.length >= 1 && !isValidUrl && (
             <Alert variant="warning" className="mt-6">
               For å sikre at du ser korrekt statistikk, anbefaler vi at du kopierer og limer inn lenken heller enn å skrive den inn selv.
