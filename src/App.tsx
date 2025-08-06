@@ -9,7 +9,6 @@ import Personvern from './pages/Personvern';
 import Dashboard from './pages/Dashboard'
 // @ts-ignore
 import { Footer, Header, ScrollToTop } from './components/theme';
-import AmplitudeContextProvider from './context/AmplitudeContext';
 
 function App() {
   return (
@@ -19,7 +18,6 @@ function App() {
             <Header/>
           </div>
           <main className="flex-grow pt-12">
-            <AmplitudeContextProvider>
               <Page>
                 <Page.Block width="xl">
                   <Routes>
@@ -32,7 +30,6 @@ function App() {
                 </Page.Block>
               </Page>
               <ScrollToTop/>
-            </AmplitudeContextProvider>
           </main>
           <Footer className="mt-auto"/>
         </div>

@@ -59,9 +59,6 @@ function SideLenker() {
         Snarveier
       </Heading>
       <BodyShort as="ul" className="mt-3 grid gap-3">
-          <FooterLink href="https://innblikk.ansatt.nav.no/?domain=100006162&path=%2F&url=https%3A%2F%2Finnblikk.ansatt.nav.no%2F&siteimproveDomain=false">
-              Statistikk for bruk av Innblikk
-          </FooterLink>
         <FooterLink href="https://forms.office.com/e/jrfBQDze4d">
           Send innspill til Innblikk
         </FooterLink>
